@@ -20,22 +20,25 @@
 
 \begin{document}
 %frontmatter
-\pagestyle{empty} %disable headers and footers
-\pagenumbering{roman} %use roman page numbering in the frontmatter
-\input{sections/frontpage.tex}
-\input{sections/titlepages.tex}
-\cleardoublepage
-\pdfbookmark[0]{Contents}{label:contents}
-\pagestyle{fancy} %enable headers and footers again
-\tableofcontents
-\listoftodos
-\input{sections/preface.tex}
-\cleardoublepage
-%mainmatter
-\pagenumbering{arabic} %use arabic page numbering in the mainmatter
-\input{sections/introduction.tex}
-\input{sections/chapters/chapterindex.tex}
-\input{sections/conclusion.tex}
+\input{setup/init.tex}
+
+% Introduction
+\input{sections/introduction/introduction.tex}
+
+% Sprint 1
+\input{sections/sprint1/sprint1index.tex}
+
+% Sprint 2
+\input{sections/sprint2/sprint2index.tex}
+
+% Blah...
+
+% Summary
+\chapter{Summary}
+\include{sections/summary/evaluation.tex}
+\include{sections/summary/conclusion.tex}
+\include{sections/summary/futurework.tex}
+
 \printbibliography[heading=bibintoc]
 \label{bib:mybiblio}
 \appendix
