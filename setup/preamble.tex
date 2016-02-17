@@ -88,12 +88,15 @@
 % Modify how \chapter, \section, etc. look
 % The titlesec package is very configureable
 \usepackage{titlesec}
-\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat*{\section}{\normalfont\Large\bfseries}
 \titleformat*{\subsection}{\normalfont\large\bfseries}
 \titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 %\titleformat*{\paragraph}{\normalfont\normalsize\bfseries}
 %\titleformat*{\subparagraph}{\normalfont\normalsize\bfseries}
+
+% Title spacing/margins {left}{top}{bottom}
+\titlespacing{\chapter}{0pt}{-20pt}{10pt}  
 
 % Clear empty pages between chapters
 \let\origdoublepage\cleardoublepage
@@ -110,13 +113,16 @@
 \renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
 \fancyhead[RE]{\small\nouppercase\leftmark} %even page - chapter title
 \fancyhead[LO]{\small\nouppercase\rightmark} %uneven page - section title
-\fancyhead[LE,RO]{\thepage} %page number on all pages
+\fancyfoot[C]{\thepage} %page number on all pages
 % Do not stretch the content of a page. Instead,
 % insert white space at the bottom of the page
 \raggedbottom
 % Enable arithmetics with length. Useful when
 % typesetting the layout.
 \usepackage{calc}
+
+% Table of Contents depth: 0=chapter, 1=section...
+\setcounter{tocdepth}{1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
