@@ -88,12 +88,15 @@
 % Modify how \chapter, \section, etc. look
 % The titlesec package is very configureable
 \usepackage{titlesec}
-\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titleformat*{\section}{\normalfont\Large\bfseries}
 \titleformat*{\subsection}{\normalfont\large\bfseries}
 \titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
 %\titleformat*{\paragraph}{\normalfont\normalsize\bfseries}
 %\titleformat*{\subparagraph}{\normalfont\normalsize\bfseries}
+
+% Title spacing/margins {left}{top}{bottom}
+\titlespacing{\chapter}{0pt}{-20pt}{10pt}  
 
 % Clear empty pages between chapters
 \let\origdoublepage\cleardoublepage
