@@ -1,6 +1,6 @@
 \section{Requirement Specification}
 % Metatext
-To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the solution. The requirements are divided into two main categories: functional and nonfunctional requirements. The requirements are sorted in the MoSCoW structure, enabling the project group to solve the highest prioritized requirements first, hence developing a solution that at least fulfills the core purpose.
+To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the solution. The requirements are divided into two main categories: functional and nonfunctional requirements. The requirements are sorted in the MoSCoW structure, enabling the project group to solve the highest prioritized requirements first, hence developing a solution that fulfills the core purpose before adding additional funcionality.
 
 
 % original requirements
@@ -18,23 +18,43 @@ To provide a clear direction of the solution and to state the success criteria, 
 
 % Requirements
 \subsection{Functional requirements}
-The functional requirements for the solution are stated here.
+Functional requirement are requirements directly related to the developed application. These requirements will serve as a requirement specification which must be implemented.
 
 \textbf{Must-have requirements}\\
 These are the requirements the solution must fulfill to be acceptable.
+
 \begin{itemize}
 	\item Graphical user interface
+\end{itemize}
+The android application must have a graphical user interface(GUI), as user must be able to operate the application them selves. The GUI must be intuitively and straight forward to use, as user may have difference familiarity with using mobile applications.
+
+\begin{itemize}
 	\item User accounts, including login and registration
+\end{itemize}
+Unique user accounts is required as it serve as a identifier for each user, using the system. With user accounts, store personal information, and compare user based on the data. It will also provide function for displaying user to other users.
+
+\begin{itemize}
 	\item Communication with the aSTEP core
+\end{itemize}
+As the project is a part of the bigger system aSTEP, there mush be a relation to the developed platform. The communication would be storing data in the aSTEP database and using user management also implemented on the platform.
+
+\begin{itemize}
 	\item User location tracking and storage
+\end{itemize}
+As the application must track users as they move around, GPS locations is needed. The application should track users whenever they are in a vehicle, and store the data in the aSTEP database. 
+
+\begin{itemize}
 	\item Automatic ride sharing recommendations
 \end{itemize}
+The application must collect data about each user automatically. A automatically comparison with other users commutes must be computed. When two commutes are found similar, each user must be notified of such, whiteout any user actions.
+
 
 \textbf{Should-have requirements}\\
 The requirements in this subsection are requirements that are important, but not regarded as highly critical.
 \begin{itemize}
-	\item something
+	\item Give the user option to specify wherever they have a car or not
 \end{itemize}
+Some users might not have a car, and that should be considered as people whiteout car would need to be treated differently from those who have.
 
 \textbf{Could-have requirements}\\
 These are could-have requirements
