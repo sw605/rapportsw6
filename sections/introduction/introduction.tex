@@ -1,20 +1,48 @@
 \chapter{Introduction}\label{ch:introduction}
 %Structure
 % Introduction
-% Problem domain
+% Problem domain & environment
+%	- Semester project, cooperation with other groups
 % Intention of the solution
-%	- Advantages of such solution
-% Definitions and scope
-%	- Semester project
-%	- Cooperation with other groups
-%	- Backend focus, not GUI
+%	- Scope
+%	- Backend focus, not GUI and aesthetics
+%	- Advantages of such a solution
 % Transition to problem statement
 
-% Introduction - awesome first sentence
-It is a known fact that commuters are causing traffic jams in dense areas, and this semester project embarks the task of informing the individual commuters of other commuters traveling a similar path, so that they could share transportation. 
-%Since employers usually are located in the same area, and commuters could live in the same area, there should be a possibility for the commuters  potentially share cars and thereby reduce traffic.
-%There are many apps\todo{source and define 'app'} that allow users to request and give rides\todo{define}, but they require active participation of the users to do so. 
-An automatic solution that provides ride suggestions to both drivers and passengers, would be beneficial for the users. 
 
-% A paragraph leading to the problem statement
-Transition to the problem statement.
+% Introduction - awesome first sentence
+It is a known fact that commuters are causing traffic jams in dense areas, and this project embarks the task of informing the individual commuters of other commuters traveling a similar path, so that they could share transportation. 
+
+
+\section{Project environment}
+% Problem domain and environment
+This project\todo{give name?} is part of a collaboration project, aSTEP, of the SW6F16 semester. The semester goal is to develop a location based service with accompanying applications that utilizes the service. 
+
+% Semester project environment
+The aSTEP project is developed in 10 teams in the span of 4 sprints. The sprints are synchronization points of the project groups, and this report will contain documentation of each sprint chronologically\todo{move to reading instructions?}. The 10 project groups are assigned to their respective tasks, with 7 project groups developing the core aSTEP service, while the remaining 3 are developing applications utilizing the service.
+
+
+\section{Problem domain}
+% Solution scope and definition
+The problem domain of this project is to develop an application that utilizes outdoor navigation and the aSTEP service. The solution goal is to provide ride sharing suggestions to the users of the solution. 
+
+% Intention of the solution
+The solution intention is to generate matches of ride sharing companions, and notify the respective drivers and passengers of the match, enabling them to contact each other and share rides. The matches should be custom made for each user, i.e. proposing appropriate \todo{reasonable, rational, practical, sensible?} candidates for ride sharing.
+
+The project focus is to develop an algorithm that can be utilized to assess a score of a match, hence enabling the solution to propose the appropriate candidates. The graphical user interface is not prioritized, but is developed to be functional enough for test and practical purposes.
+
+% Solution contributions/advantages
+A solution that automatically provides ride suggestions to both drivers and passengers, could be beneficial for the users in several ways. There could be environmental and economical savings, as the number of polluting cars driven is reduced\todo{source?}. The app could cause less traffic jam, thereby also being time-saving, and causing less frustration for the drivers.
+
+There are some potential social benefits, as the app allows people meet each other. Future work could implement the algorithm for autonomous cars.
+
+% Temp. shit
+\iffalse
+Since employers usually are located in the same area, and commuters could live in the same area, there should be a possibility for the commuters  potentially share cars and thereby reduce traffic.
+There are many apps\todo{source and define 'app'} that allow users to request and give rides\todo{define}, but they require active participation of the users to do so. 
+\fi
+
+
+
+% Transition to problem statement
+To define the actual problem, as to initiate the research and development, a concrete formulation is made.
