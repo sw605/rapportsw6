@@ -1,72 +1,77 @@
 \section{Requirement Specification}
 % Metatext
-To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the solution. The requirements are divided into two main categories: functional and nonfunctional requirements. The requirements are sorted in the MoSCoW structure, enabling the project group to solve the highest prioritized requirements first, hence developing a solution that fulfills the core purpose before adding additional funcionality.
-
-
-% original requirements
-\iffalse
-\begin{itemize}
-	\item Opret brugere, og bestem disposition af bil
-	\item Registrere all selv kørte strækninger
-	\item Sammenlign med andre med (ca) samme start og sluts position
-	\item Udregn strækning mellem sammenligningerne. 
-	\item Automatisk forslag om ridesharing mellem pendlere, som tit rejser fra og til samme område på samme tid, hvor tid og penge kunne spares.
-	\item Reservation af køre [fra, til, klokkeslet] (normal carpool)
-\end{itemize}
-\fi
+To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the solution. The requirements are divided into two main categories: functional and nonfunctional requirements. The requirements are sorted in the MoSCoW structure, enabling the project group to solve the highest prioritized requirements first, hence developing a solution that fulfills the core purpose before adding additional functionality.
 
 
 % Requirements
 \subsection{Functional requirements}
 Functional requirement are requirements directly related to the developed application. These requirements will serve as a requirement specification which must be implemented.
 
-\textbf{Must-have requirements}\\
+\textbf{Must-have requirements}
 These are the requirements the solution must fulfill to be acceptable.
 
 \begin{itemize}
-	\item Graphical user interface
+	\item Graphical user interface.
 \end{itemize}
 The android application must have a graphical user interface(GUI), as user must be able to operate the application them selves. The GUI must be intuitively and straight forward to use, as user may have difference familiarity with using mobile applications.
 
 \begin{itemize}
-	\item User accounts, including login and registration
+	\item User accounts, including login and registration.
 \end{itemize}
 Unique user accounts is required as it serve as a identifier for each user, using the system. With user accounts, store personal information, and compare user based on the data. It will also provide function for displaying user to other users.
 
 \begin{itemize}
-	\item Communication with the aSTEP core
+	\item Communication with the aSTEP core.
 \end{itemize}
 As the project is a part of the bigger system aSTEP, there mush be a relation to the developed platform. The communication would be storing data in the aSTEP database and using user management also implemented on the platform.
 
 \begin{itemize}
-	\item User location tracking and storage
+	\item User location tracking and storage.
 \end{itemize}
 As the application must track users as they move around, GPS locations is needed. The application should track users whenever they are in a vehicle, and store the data in the aSTEP database. 
 
 \begin{itemize}
-	\item Automatic ride sharing recommendations
+	\item Automatically determine regular routes.
 \end{itemize}
-The application must collect data about each user automatically. A automatically comparison with other users commutes must be computed. When two commutes are found similar, each user must be notified of such, whiteout any user actions.
+Automatically determine regular routes the user take. Regular routes should be saved for later comparison. Discarding routes that are not used often.
+
+\begin{itemize}
+	\item Automatic ride sharing recommendations.
+\end{itemize}
+A automatically comparison with other users routes must be computed. When two regular routes are found similar, each user must be notified of such, whiteout any user input.
 
 
 \textbf{Should-have requirements}\\
 The requirements in this subsection are requirements that are important, but not regarded as highly critical.
 \begin{itemize}
-	\item Give the user option to specify wherever they have a car or not
+	\item Give the user option to specify wherever they have a car or not.
 \end{itemize}
 Some users might not have a car, and that should be considered as people whiteout car would need to be treated differently from those who have.
 
+\begin{itemize}
+	\item Enable user to blacklist other users.
+\end{itemize}
+Giving they are frequent users of the application, and have a bad experience with either a driver or passenger, they should be able to blacklist them.
+
+\begin{itemize}
+	\item Suggest rides with user who only drives a subset of the way from A to B.
+\end{itemize}
+Giving users the option to drive with people who do not have the same source and destination, will increase the pool of which users to suggest, as user can \"tag along\" part of the ride.
+
+
 \textbf{Could-have requirements}\\
-These are could-have requirements
+These are the lowest realistic requirements. 
 \begin{itemize}
 	\item Ride reservation or request from, to, time.
 \end{itemize}
+Reserve rides with other users. This includes both regular commutes and commutes users would do rarely.
 
 \textbf{Would-have requirements}\\
-The following requirements are only attacked when all other requirements are satisfied, but initially regarded as tasks to be solved in future projects.
+The following requirements are only considered when all other requirements are satisfied, but initially regarded as tasks to be solved in future projects.
 \begin{itemize}
-	\item Inform users of their environmental and economical savings due to their use of the solution
+	\item Inform users of their environmental and economical savings due to their use of the solution.
 \end{itemize}
+Provide detailed information of how much fuel users save, how much money saved based on fuel prices, and how much CO2 that is not released into the environment. 
 
 \subsection{Non-functional requirements}
 The nonfunctional requirements for the solution are stated here.
@@ -77,21 +82,23 @@ These are the requirements the solution must fulfill to be acceptable.
 	\item Development cooperation with the other aSTEP project groups.
 	\item User privacy
 \end{itemize}
+The application must have cooperation with other groups also working on the aSTEP project. Such as, database storage, user management and other android developers.
 
 \textbf{Should-have requirements}\\
 The requirements in this subsection are requirements that are important, but not regarded as highly critical.
 \begin{itemize}
 	\item Aesthetics matching other aSTEP project applications
 \end{itemize}
+The application must be of the same design and guidelines as the other applications developed for aSTEP.
 
 \textbf{Could-have requirements}\\
-These are could-have requirements
+These are the lowest realistic requirements. 
 \begin{itemize}
 	\item Placeholder
 \end{itemize}
 
 \textbf{Would-have requirements}\\
-The following requirements are only attacked when all other requirements are satisfied, but initially regarded as tasks to be solved in future projects.
+The following requirements are only considered when all other requirements are satisfied, but initially regarded as tasks to be solved in future projects.
 \begin{itemize}
-	\item Inform users of their environmental and economical savings due to their use of the solution
+	\item Placeholder
 \end{itemize}
