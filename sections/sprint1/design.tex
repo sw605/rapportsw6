@@ -5,34 +5,71 @@
 
 
 \subsection{User Interface Design}
+% General Introduction to UI - what + why
 This section will document the design of the graphical user interface.
 The user interface (UI) provides interaction methods between the user and the app\todo{solution/product? + source}.
 
-The UI is designed to mostly comply with the Google material design guidelines \cite{materialDesign}. The material design is "\textit{bold, graphic, intentional}", according to the guidelines \cite{materialDesign}. Following the material design guidelines makes the app have a similar aesthetic and usage method as other apps on Google Play Store. The design is clean and simple in regards to colors, and the
+\subsubsection{Design language}
+% Paragraph regarding selection of design?
+Using the material design guidelines makes the app achieve a similar aesthetic and usage method as other apps on Google Play Store. The design is clean and simple in regards to colors and input methods. 
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.25\textwidth]{figures/GUI-front.png}
-	\caption{Front page with login.}
+% Material design
+The UI is designed to mostly comply with the Google material design guidelines \cite{materialDesign}, being "\textit{bold, graphic, intentional}". Some of the properties are stated in the following list, compiled of citations from the Google design guidelines \cite{materialProperties}:
+
+\begin{enumerate}
+	\item Material has varying x \& y dimensions (measured in dp) and a uniform thickness (1dp).
+	\item Material casts shadows. Shadows result naturally from the relative elevation (z-position) between material elements.
+	\item Content is displayed on material, in any shape and color. Content does not add thickness to material.
+	\item Input events cannot pass through material.
+	\item Material cannot pass through other material. For example, one sheet of material cannot pass through another sheet of material when changing elevation.
+	\item Material grows and shrinks only along its plane.
+	\item Material never bends or folds.
+	\item Material can be spontaneously generated or destroyed anywhere in the environment.
+\end{enumerate} 
+
+
+\subsubsection{User interface}
+% Actions in UI and design thereof
+The design drafts in Figure \ref{fig:GUI-firstrun} reflect the necessary functions and the previously described design language. 
+
+% Login and registering pages design
+As the user needs a user profile in the aSTEP system to use the app, the users must be able to login if they already have a user profile, or create a new user profile.
+
+\begin{figure}[h!]
+	 \centering
+	 \begin{subfigure}[b]{0.3\textwidth}
+	 	\includegraphics[width=\textwidth]{figures/GUI-front.png}
+	 	\caption{Login page}
+	 	\label{fig:GUI-front}
+	 \end{subfigure}
+	 ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	 %(or a blank line to force the subfigure onto a new line)
+	 \begin{subfigure}[b]{0.3\textwidth}
+	 	\includegraphics[width=\textwidth]{figures/GUI-register.png}
+	 	\caption{Register page}
+	 	\label{fig:GUI-register}
+	 \end{subfigure}
+	 \caption{Draft of the login and registering pages of the app.}\label{fig:GUI-firstrun}
 \end{figure}
 
-\begin{figure}
+% In-app pages design
+Several interfaces are necessary to support the different parts of the app. The app needs a user interface for login, registering, presentation of matches, and a settings page, as can be seen in the figures in Figure \ref{fig:GUI-in-app}.
+
+\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.25\textwidth]{figures/GUI-register.png}
-	\caption{Front page with login.}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{figures/GUI-main.png}
+		\caption{Main page}
+		\label{fig:GUI-main}
+	\end{subfigure}
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{figures/GUI-settings.png}
+		\caption{Settings page}
+		\label{fig:GUI-settings}
+	\end{subfigure}
+	\caption{Draft of the in-app pages of the app.}\label{fig:GUI-in-app}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.25\textwidth]{figures/GUI-main.png}
-	\caption{Front page with login.}
-\end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.25\textwidth]{figures/GUI-settings.png}
-	\caption{Front page with login.}
-\end{figure}
-\todo{structure in table somehow}
-
-Several interfaces are necessary to support the different parts of the app. The app needs a user interface for login, registering, presentation of matches, and a settings page, as can be seen in the figures.
