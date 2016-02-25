@@ -16,3 +16,6 @@ fast: master.tex
 	pdflatex --synctex=1 -interaction batchmode master.tex
 	pdflatex --synctex=1 -interaction batchmode master.tex
 	pdflatex --synctex=1 -interaction batchmode master.tex
+
+live: clean
+	latexmk -pvc -pdflatex='pdflatex -file-line-error -synctex=1' -pdf master.tex
