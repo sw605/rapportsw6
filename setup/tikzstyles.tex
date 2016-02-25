@@ -1,0 +1,30 @@
+\tikzset{
+	class/.style = {
+		draw, rectangle split, rectangle split parts=3, fill=white, font=\footnotesize
+	}
+}
+\tikzset{
+	interface/.style = {
+		class, rectangle split parts=2
+	}
+}
+\tikzset{
+	association/.style = {
+		-angle 60
+	}
+}
+\tikzset{
+	generalization/.style = {
+		association, -open triangle 60
+	}
+}
+\tikzset{
+	aggregation/.style = {
+		association, diamond-angle 60
+	}
+}
+\tikzset{
+	label/.style = {
+		font=\scriptsize
+	}
+}

@@ -32,3 +32,5 @@ master-blx.bib
 *.run.xml
 
 *.thm
+master.fdb_latexmk
+master.fls
