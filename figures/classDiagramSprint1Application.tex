@@ -1,0 +1,38 @@
+\begin{tikzpicture}[auto]
+	\node[class](LoginActivity){LoginActivity
+		\nodepart[align=left, text width=2.7cm]{two}
+			-username : String\\
+			-password : String
+		\nodepart[align=left, text width=2.7cm]{three}
+			+submit()};
+	\node[class, below left=1 and -1 of LoginActivity](RegisterActivity){RegisterActivity
+		\nodepart[align=left, text width=2.7cm]{two}
+			-username : String\\
+			-password : String
+		\nodepart[align=left, text width=2.7cm]{three}
+			+submit()};
+	\node[class, below right=1 and -1 of LoginActivity](MainActivity){MainActivity
+		\nodepart[align=left, text width=4cm]{two}
+			-currentUser : UserInfo
+		\nodepart[align=left, text width=4cm]{three}
+			+MainActivity(user : UserInfo)\\
+			+fetchSuggestedRoutes()};
+	\node[interface, right=of MainActivity](ISuggestedRoute){
+		\nodepart[align=center, text width=2.8cm]{one}
+			<<interface>>\\
+			ISuggestedRoute
+		\nodepart[align=left, text width=2.8cm]{two}
+			-getRoute() : Route};
+	\node[class, below=of ISuggestedRoute](SuggestedRoute){SuggestedRoute
+		\nodepart[align=left, text width=2.8cm]{two}
+			-getRoute() : Route};
+		
+	\draw[association, dashed] (LoginActivity) -| (MainActivity);
+	\draw[association, dashed] (LoginActivity) -| (RegisterActivity);
+	\draw[association, dashed] (RegisterActivity) -- (MainActivity);
+	\draw[generalization, dashed] (SuggestedRoute) -- node[label] {<<realize>>} (ISuggestedRoute);
+	\draw[aggregation](MainActivity)--(ISuggestedRoute);
+	
+	\node[draw, fit=(MainActivity) (LoginActivity) (RegisterActivity)](PackageBody){};
+	\node[draw, above right] at(PackageBody.north west){activities};
+\end{tikzpicture}

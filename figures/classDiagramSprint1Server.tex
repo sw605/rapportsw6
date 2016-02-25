@@ -1,0 +1,53 @@
+\begin{tikzpicture}[auto]
+	\node[class](Route){Route 
+		\nodepart[align=left, text width=6.3cm]{two}
+			-id : Integer\\
+			-user : UserInfo\\
+			-points : Location[]
+		\nodepart[align=left, text width=6.3cm]{three}
+			+Route(user : UserInfo, points : Location[])\\
+			+getUser() : UserInfo\\
+			+getPoint(index : Integer) : Location};
+	\node[class, below=of Route](StableRoute){StableRoute
+		\nodepart[align=left, text width=6.3cm]{two}
+			-days : WeekDays\\
+			-departureTime : Time\\
+			-arrivalTime : Time
+		\nodepart[align=left, text width=6.7cm]{three}
+			+StableRoute(route : Route, days : WeekDays)\\
+			+getArrivalTime() : Time\\
+			+getDepartureTime() : Time};
+	\node[class, below=of StableRoute](RouteStabilityAnalyser){RouteStabilityAnalyser
+		\nodepart[align=left, text width=4.6cm]{two}
+			-isStable : Boolean\\
+			-currentRoute : Route
+		\nodepart[align=left, text width=4.6cm]{three}
+			+getStableRoute() : StableRoute\\
+			+analyse(route : Route)};
+	\node[class, right=of StableRoute](RouteAnalyser){\textit{RouteAnalyser}
+		\nodepart[align=left, text width=3.4cm]{two}
+			-id : Integer
+		\nodepart[align=left, text width=3.4cm]{three}
+			+analyse(route : Route)};
+	\node[class, right=of RouteStabilityAnalyser](RouteSimilarityAnalyser){RouteSimilarityAnalyser
+		\nodepart[align=left, text width=3.4cm]{three}
+			+analyse(route : Route)};
+	\node[interface, below=5 cm of RouteAnalyser](RouteComparer){
+		\nodepart[align=center, text width=4cm]{one}
+		<<interface>>\\
+		IRouteComparer
+		\nodepart[align=left, text width=5.9cm]{two}
+			+compare(x : Route, y : Route) : Integer};
+	\node[class, below=of RouteComparer](TimeDistanceComparer){TimeDistanceComparer
+		\nodepart[align=left, text width=5.9cm]{three}
+			+compare(x : Route, y : Route) : Integer};
+	
+	\draw[aggregation,transform canvas={xshift=1.3cm}] (RouteAnalyser) -- (RouteComparer);
+	\draw[association, dashed,transform canvas={xshift=-1.3cm}] (RouteStabilityAnalyser) -- node[label]{<<build>>} (StableRoute);
+	
+	\draw[generalization] (StableRoute) -- (Route);
+	\draw[generalization] (RouteStabilityAnalyser.north) -- ++(0,0.5) -| (RouteAnalyser);
+	\draw[generalization] (RouteSimilarityAnalyser.north) -| (RouteAnalyser);
+	\draw[generalization, dashed] (TimeDistanceComparer) -- node[label]{<<realize>>} (RouteComparer);
+	\draw[association] (RouteAnalyser) |- node[label, at end, xshift=0.3cm]{0..*} (Route.east);
+\end{tikzpicture}

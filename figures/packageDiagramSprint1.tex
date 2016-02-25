@@ -1,0 +1,7 @@
+\begin{tikzpicture}[auto]
+	\node[draw, minimum height=2em](Server){aSTEP Server};
+	\node[draw, cylinder, shape border rotate=90, aspect=0.25, right=of Server](Data){Data};
+	\node[draw, minimum height=2em, left=of Server](App){Application};
+	
+	\draw[->] (App) edge (Server) (Server) edge (Data);
+\end{tikzpicture}
