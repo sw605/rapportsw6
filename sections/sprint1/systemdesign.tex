@@ -6,11 +6,7 @@ This includes the route class itself and a way to promote the class to a stable 
 A StableRoute is a route which occurs on a regular basis, i.e. the probability of the user takeing that specific route after a predetermined time is high.
 Currently, the app is focused on commuters that travels on a weekly basis.
 
-\begin{tikzpicture}[auto,
-	class/.style = {draw, rectangle split, rectangle split parts=3, drop shadow, fill=white, font=\footnotesize},
-	interface/.style = {class, rectangle split parts=2},
-	generalization/.style = {-open triangle 60}
-]
+\begin{tikzpicture}[auto]
 	\node[class](Route){Route 
 		\nodepart[align=left, text width=6.3cm]{two}
 			-id : Integer\\
@@ -44,18 +40,81 @@ Currently, the app is focused on commuters that travels on a weekly basis.
 	\node[class, right=of RouteStabilityAnalyser](RouteSimilarityAnalyser){RouteSimilarityAnalyser
 		\nodepart[align=left, text width=3.4cm]{three}
 			+analyse(route : Route)};
-	\node[interface, below=5 cm of RouteAnalyser](RouteComparator){
+	\node[interface, below=5 cm of RouteAnalyser](RouteComparer){
 		\nodepart[align=center, text width=4cm]{one}
 		<<interface>>\\
-		RouteComparator
+		IRouteComparer
 		\nodepart[align=left, text width=5.9cm]{two}
 			+compare(x : Route, y : Route) : Integer};
-	\node[class, below=of RouteComparator](TimeDistanceComparer){TimeDistanceComparer
+	\node[class, below=of RouteComparer](TimeDistanceComparer){TimeDistanceComparer
 		\nodepart[align=left, text width=5.9cm]{three}
 			+compare(x : Route, y : Route) : Integer};
 	
+	\draw[aggregation,transform canvas={xshift=1.3cm}] (RouteAnalyser) -- (RouteComparer);
+	\draw[association, dashed,transform canvas={xshift=-1.3cm}] (RouteStabilityAnalyser) -- node[label]{<<build>>} (StableRoute);
+	
 	\draw[generalization] (StableRoute) -- (Route);
-	\draw[generalization] (RouteStabilityAnalyser) -- (RouteAnalyser);
-	\draw[generalization] (RouteSimilarityAnalyser) -- (RouteAnalyser);
-	\draw[generalization, dashed] (TimeDistanceComparer) -- node[font=\scriptsize]{<<realize>>} (RouteComparator);
+	\draw[generalization] (RouteStabilityAnalyser.north) -- ++(0,0.5) -| (RouteAnalyser);
+	\draw[generalization] (RouteSimilarityAnalyser.north) -| (RouteAnalyser);
+	\draw[generalization, dashed] (TimeDistanceComparer) -- node[label]{<<realize>>} (RouteComparer);
+	\draw[association] (RouteAnalyser) |- node[label, at end, xshift=0.3cm]{0..*} (Route.east);
 \end{tikzpicture}
+
+\begin{tikzpicture}[auto]
+	\node[class](Observer){Observer
+		\nodepart[align=left, text width=4.1cm]{two}
+		-currentActivity : Integer
+		\nodepart[align=left, text width=4.1cm]{three}
+		+observerActivity() : Integer};
+	\node[class, below=of Observer](RouteBuilder){RouteBuilder
+		\nodepart[align=left, text width=4.9cm]{two}
+		-locations : Location[]\\
+		-user : UserInfo
+		\nodepart[align=left, text width=4.9cm]{three}
+		+RouteBuilder(user : UserInfo)\\
+		+addLocation(location : Location)\\
+		+buildRoute() : Route};
+	\draw[aggregation] (Observer) -- (RouteBuilder);
+\end{tikzpicture}
+
+\begin{tikzpicture}[auto]
+	\node[class](LoginActivity){LoginActivity
+		\nodepart[align=left, text width=2.7cm]{two}
+			-username : String\\
+			-password : String
+		\nodepart[align=left, text width=2.7cm]{three}
+			+submit()};
+	\node[class, below left=1 and -1 of LoginActivity](RegisterActivity){RegisterActivity
+		\nodepart[align=left, text width=2.7cm]{two}
+			-username : String\\
+			-password : String
+		\nodepart[align=left, text width=2.7cm]{three}
+			+submit()};
+	\node[class, below right=1 and -1 of LoginActivity](MainActivity){MainActivity
+		\nodepart[align=left, text width=4cm]{two}
+			-currentUser : UserInfo
+		\nodepart[align=left, text width=4cm]{three}
+			+MainActivity(user : UserInfo)\\
+			+fetchSuggestedRoutes()};
+	\node[interface, right=of MainActivity](ISuggestedRoute){
+		\nodepart[align=center, text width=2.8cm]{one}
+			<<interface>>\\
+			ISuggestedRoute
+		\nodepart[align=left, text width=2.8cm]{two}
+			-getRoute() : Route};
+	\node[class, below=of ISuggestedRoute](SuggestedRoute){SuggestedRoute
+		\nodepart[align=left, text width=2.8cm]{two}
+			-getRoute() : Route};
+		
+	\draw[association, dashed] (LoginActivity) -| (MainActivity);
+	\draw[association, dashed] (LoginActivity) -| (RegisterActivity);
+	\draw[association, dashed] (RegisterActivity) -- (MainActivity);
+	\draw[generalization, dashed] (SuggestedRoute) -- node[label] {<<realize>>} (ISuggestedRoute);
+	\draw[aggregation](MainActivity)--(ISuggestedRoute);
+	
+	\node[draw, fit=(MainActivity) (LoginActivity) (RegisterActivity)](PackageBody){};
+	\node[draw, above right] at(PackageBody.north west){activities};
+\end{tikzpicture}
+
+
+
