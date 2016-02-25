@@ -1,120 +1,173 @@
 % Divided into structual & behavioal design
 \subsubsection{Structual Design}
-In the server, we need some way of manipulating and analysing routes.
-This includes the route class itself and a way to promote the class to a stable route.
+The application requires much processing power to analyse all the possible combinations of routes.
+Using a heuristic rule to filter the routes before analysing them reduces this problem.
+But, it is still helpful to handle the analysis away from the smartphone due to battery and privacy concerns.
+So a lot of the analysis must take place on the central server.
 
-A StableRoute is a route which occurs on a regular basis, i.e. the probability of the user takeing that specific route after a predetermined time is high.
-Currently, the app is focused on commuters that travels on a weekly basis.
-
-\begin{tikzpicture}[auto]
-	\node[class](Route){Route 
-		\nodepart[align=left, text width=6.3cm]{two}
-			-id : Integer\\
-			-user : UserInfo\\
-			-points : Location[]
-		\nodepart[align=left, text width=6.3cm]{three}
-			+Route(user : UserInfo, points : Location[])\\
-			+getUser() : UserInfo\\
-			+getPoint(index : Integer) : Location};
-	\node[class, below=of Route](StableRoute){StableRoute
-		\nodepart[align=left, text width=6.3cm]{two}
-			-days : WeekDays\\
-			-departureTime : Time\\
-			-arrivalTime : Time
-		\nodepart[align=left, text width=6.7cm]{three}
-			+StableRoute(route : Route, days : WeekDays)\\
-			+getArrivalTime() : Time\\
-			+getDepartureTime() : Time};
-	\node[class, below=of StableRoute](RouteStabilityAnalyser){RouteStabilityAnalyser
-		\nodepart[align=left, text width=4.6cm]{two}
-			-isStable : Boolean\\
-			-currentRoute : Route
-		\nodepart[align=left, text width=4.6cm]{three}
-			+getStableRoute() : StableRoute\\
-			+analyse(route : Route)};
-	\node[class, right=of StableRoute](RouteAnalyser){\textit{RouteAnalyser}
-		\nodepart[align=left, text width=3.4cm]{two}
-			-id : Integer
-		\nodepart[align=left, text width=3.4cm]{three}
-			+analyse(route : Route)};
-	\node[class, right=of RouteStabilityAnalyser](RouteSimilarityAnalyser){RouteSimilarityAnalyser
-		\nodepart[align=left, text width=3.4cm]{three}
-			+analyse(route : Route)};
-	\node[interface, below=5 cm of RouteAnalyser](RouteComparer){
-		\nodepart[align=center, text width=4cm]{one}
-		<<interface>>\\
-		IRouteComparer
-		\nodepart[align=left, text width=5.9cm]{two}
-			+compare(x : Route, y : Route) : Integer};
-	\node[class, below=of RouteComparer](TimeDistanceComparer){TimeDistanceComparer
-		\nodepart[align=left, text width=5.9cm]{three}
-			+compare(x : Route, y : Route) : Integer};
-	
-	\draw[aggregation,transform canvas={xshift=1.3cm}] (RouteAnalyser) -- (RouteComparer);
-	\draw[association, dashed,transform canvas={xshift=-1.3cm}] (RouteStabilityAnalyser) -- node[label]{<<build>>} (StableRoute);
-	
-	\draw[generalization] (StableRoute) -- (Route);
-	\draw[generalization] (RouteStabilityAnalyser.north) -- ++(0,0.5) -| (RouteAnalyser);
-	\draw[generalization] (RouteSimilarityAnalyser.north) -| (RouteAnalyser);
-	\draw[generalization, dashed] (TimeDistanceComparer) -- node[label]{<<realize>>} (RouteComparer);
-	\draw[association] (RouteAnalyser) |- node[label, at end, xshift=0.3cm]{0..*} (Route.east);
-\end{tikzpicture}
-
-\begin{tikzpicture}[auto]
-	\node[class](Observer){Observer
-		\nodepart[align=left, text width=4.1cm]{two}
-		-currentActivity : Integer
-		\nodepart[align=left, text width=4.1cm]{three}
-		+observerActivity() : Integer};
-	\node[class, below=of Observer](RouteBuilder){RouteBuilder
-		\nodepart[align=left, text width=4.9cm]{two}
-		-locations : Location[]\\
-		-user : UserInfo
-		\nodepart[align=left, text width=4.9cm]{three}
-		+RouteBuilder(user : UserInfo)\\
-		+addLocation(location : Location)\\
-		+buildRoute() : Route};
-	\draw[aggregation] (Observer) -- (RouteBuilder);
-\end{tikzpicture}
-
-\begin{tikzpicture}[auto]
-	\node[class](LoginActivity){LoginActivity
-		\nodepart[align=left, text width=2.7cm]{two}
-			-username : String\\
-			-password : String
-		\nodepart[align=left, text width=2.7cm]{three}
-			+submit()};
-	\node[class, below left=1 and -1 of LoginActivity](RegisterActivity){RegisterActivity
-		\nodepart[align=left, text width=2.7cm]{two}
-			-username : String\\
-			-password : String
-		\nodepart[align=left, text width=2.7cm]{three}
-			+submit()};
-	\node[class, below right=1 and -1 of LoginActivity](MainActivity){MainActivity
-		\nodepart[align=left, text width=4cm]{two}
-			-currentUser : UserInfo
-		\nodepart[align=left, text width=4cm]{three}
-			+MainActivity(user : UserInfo)\\
-			+fetchSuggestedRoutes()};
-	\node[interface, right=of MainActivity](ISuggestedRoute){
-		\nodepart[align=center, text width=2.8cm]{one}
-			<<interface>>\\
-			ISuggestedRoute
-		\nodepart[align=left, text width=2.8cm]{two}
-			-getRoute() : Route};
-	\node[class, below=of ISuggestedRoute](SuggestedRoute){SuggestedRoute
-		\nodepart[align=left, text width=2.8cm]{two}
-			-getRoute() : Route};
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[auto]
+		\node[draw, minimum height=2em](Server){aSTEP Server};
+		\node[draw, cylinder, shape border rotate=90, aspect=0.25, right=of Server](Data){Data};
+		\node[draw, minimum height=2em, left=of Server](App){Application};
 		
-	\draw[association, dashed] (LoginActivity) -| (MainActivity);
-	\draw[association, dashed] (LoginActivity) -| (RegisterActivity);
-	\draw[association, dashed] (RegisterActivity) -- (MainActivity);
-	\draw[generalization, dashed] (SuggestedRoute) -- node[label] {<<realize>>} (ISuggestedRoute);
-	\draw[aggregation](MainActivity)--(ISuggestedRoute);
-	
-	\node[draw, fit=(MainActivity) (LoginActivity) (RegisterActivity)](PackageBody){};
-	\node[draw, above right] at(PackageBody.north west){activities};
-\end{tikzpicture}
+		\draw[->] (App) edge (Server) (Server) edge (Data);
+	\end{tikzpicture}
+	\caption{The over all stucture.}
+	\label{fig:packageDiagram}
+\end{figure}
 
+If we assume that this central server can handle the analysis of the routes, the application need only to supply the server with routes which to analyse.
+A small process which runs in the background of the device does this.
+As seen in Figure \ref{fig:classDiagramSprint1Observer} the Observer class' main goal is to observe what activity the user is currently doing.
+If the activity is driving then it starts to store the locations with the RouteBuilder class.
+When the Observer detects that the user stopped driving, the Observer sends the route to the server.
 
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[auto]
+		\node[class](Observer){Observer
+			\nodepart[align=left, text width=4.1cm]{two}
+			-currentActivity : Integer
+			\nodepart[align=left, text width=4.1cm]{three}
+			+observerActivity() : Integer};
+		\node[class, below=of Observer](RouteBuilder){RouteBuilder
+			\nodepart[align=left, text width=4.9cm]{two}
+			-locations : Location[]\\
+			-user : UserInfo
+			\nodepart[align=left, text width=4.9cm]{three}
+			+RouteBuilder(user : UserInfo)\\
+			+addLocation(location : Location)\\
+			+buildRoute() : Route};
+		\draw[aggregation] (Observer) -- (RouteBuilder);
+	\end{tikzpicture}
+	\caption{The small process which should run at all time to build the routes.}
+	\label{fig:classDiagramSprint1Observer}
+\end{figure}
 
+On the server, the route is stored in the database and forwarded to the RouteStabilityAnalyser.
+This analyser takes in the route and compares it to other routes by the same user, to determine whether this route is a regular occurrence.
+
+If the RouteStabilityAnalyser determines that the route is stable.
+Then this information gets stored in the database together with when this route occurs.
+The server then uses the RouteSimilarityAnalyser to find good matches for the new StableRoute.
+The matches get stored and new matches are then sent to the device next time they have contact.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[auto]
+		\node[class](Route){Route 
+			\nodepart[align=left, text width=6.3cm]{two}
+				-id : Integer\\
+				-user : UserInfo\\
+				-points : Location[]
+			\nodepart[align=left, text width=6.3cm]{three}
+				+Route(user : UserInfo, points : Location[])\\
+				+getUser() : UserInfo\\
+				+getPoint(index : Integer) : Location};
+		\node[class, below=of Route](StableRoute){StableRoute
+			\nodepart[align=left, text width=6.3cm]{two}
+				-days : WeekDays\\
+				-departureTime : Time\\
+				-arrivalTime : Time
+			\nodepart[align=left, text width=6.7cm]{three}
+				+StableRoute(route : Route, days : WeekDays)\\
+				+getArrivalTime() : Time\\
+				+getDepartureTime() : Time};
+		\node[class, below=of StableRoute](RouteStabilityAnalyser){RouteStabilityAnalyser
+			\nodepart[align=left, text width=4.6cm]{two}
+				-isStable : Boolean\\
+				-currentRoute : Route
+			\nodepart[align=left, text width=4.6cm]{three}
+				+getStableRoute() : StableRoute\\
+				+analyse(route : Route)};
+		\node[class, right=of StableRoute](RouteAnalyser){\textit{RouteAnalyser}
+			\nodepart[align=left, text width=3.4cm]{two}
+				-id : Integer
+			\nodepart[align=left, text width=3.4cm]{three}
+				+analyse(route : Route)};
+		\node[class, right=of RouteStabilityAnalyser](RouteSimilarityAnalyser){RouteSimilarityAnalyser
+			\nodepart[align=left, text width=3.4cm]{three}
+				+analyse(route : Route)};
+		\node[interface, below=5 cm of RouteAnalyser](RouteComparer){
+			\nodepart[align=center, text width=4cm]{one}
+			<<interface>>\\
+			IRouteComparer
+			\nodepart[align=left, text width=5.9cm]{two}
+				+compare(x : Route, y : Route) : Integer};
+		\node[class, below=of RouteComparer](TimeDistanceComparer){TimeDistanceComparer
+			\nodepart[align=left, text width=5.9cm]{three}
+				+compare(x : Route, y : Route) : Integer};
+		
+		\draw[aggregation,transform canvas={xshift=1.3cm}] (RouteAnalyser) -- (RouteComparer);
+		\draw[association, dashed,transform canvas={xshift=-1.3cm}] (RouteStabilityAnalyser) -- node[label]{<<build>>} (StableRoute);
+		
+		\draw[generalization] (StableRoute) -- (Route);
+		\draw[generalization] (RouteStabilityAnalyser.north) -- ++(0,0.5) -| (RouteAnalyser);
+		\draw[generalization] (RouteSimilarityAnalyser.north) -| (RouteAnalyser);
+		\draw[generalization, dashed] (TimeDistanceComparer) -- node[label]{<<realize>>} (RouteComparer);
+		\draw[association] (RouteAnalyser) |- node[label, at end, xshift=0.3cm]{0..*} (Route.east);
+	\end{tikzpicture}
+	\caption{The structure of the system inside the server. This package should be an isolated system within the server.}
+	\label{fig:classDiagramSprint1Server}
+\end{figure}
+
+The application acts as an interface to the background process for the user.
+This is where the user logs in and can see an overview of candidates for car pooling.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[auto]
+		\node[class](LoginActivity){LoginActivity
+			\nodepart[align=left, text width=2.7cm]{two}
+				-username : String\\
+				-password : String
+			\nodepart[align=left, text width=2.7cm]{three}
+				+submit()};
+		\node[class, below left=1 and -1 of LoginActivity](RegisterActivity){RegisterActivity
+			\nodepart[align=left, text width=2.7cm]{two}
+				-username : String\\
+				-password : String
+			\nodepart[align=left, text width=2.7cm]{three}
+				+submit()};
+		\node[class, below right=1 and -1 of LoginActivity](MainActivity){MainActivity
+			\nodepart[align=left, text width=4cm]{two}
+				-currentUser : UserInfo
+			\nodepart[align=left, text width=4cm]{three}
+				+MainActivity(user : UserInfo)\\
+				+fetchSuggestedRoutes()};
+		\node[interface, right=of MainActivity](ISuggestedRoute){
+			\nodepart[align=center, text width=2.8cm]{one}
+				<<interface>>\\
+				ISuggestedRoute
+			\nodepart[align=left, text width=2.8cm]{two}
+				-getRoute() : Route};
+		\node[class, below=of ISuggestedRoute](SuggestedRoute){SuggestedRoute
+			\nodepart[align=left, text width=2.8cm]{two}
+				-getRoute() : Route};
+			
+		\draw[association, dashed] (LoginActivity) -| (MainActivity);
+		\draw[association, dashed] (LoginActivity) -| (RegisterActivity);
+		\draw[association, dashed] (RegisterActivity) -- (MainActivity);
+		\draw[generalization, dashed] (SuggestedRoute) -- node[label] {<<realize>>} (ISuggestedRoute);
+		\draw[aggregation](MainActivity)--(ISuggestedRoute);
+		
+		\node[draw, fit=(MainActivity) (LoginActivity) (RegisterActivity)](PackageBody){};
+		\node[draw, above right] at(PackageBody.north west){activities};
+	\end{tikzpicture}
+	\caption{The structure of the application it self.}
+	\label{fig:classDiagramSprint1Application}
+\end{figure}
+
+This is the start of a project that will be further developed and expanded in the future.
+So reuse is important to reduce unused server resources.
+By isolating parts which were specific to the rideshare app, most of the system would be reusable.
+The best example of this is the RouteAnalyser from Figure \ref{fig:classDiagramSprint1Server}.
+This analyser filter routes according to its concrete implementation.
+After the filter, the RouteAnalyser uses the strategy pattern to determine how to compare the routes.
+This enables other projects to develop their own filters and comparers in later projects.
+
+To reduce the search space, a weekly stability was decided. 
+This means that the RouteStabilityAnalyser can limit itself to analysing a month or two of data.
+Later on this needs to be tested and evaluated upon.
