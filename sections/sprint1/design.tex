@@ -6,15 +6,33 @@
 
 \subsection{User Interface Design}
 % General Introduction to UI - what + why
-This section will document the design of the graphical user interface.
+This section will document the initial design of the graphical user interface.
 The user interface (UI) provides interaction methods between the user and the app\todo{solution/product? + source}.
+As the priority of this project is functionality with regards to data collection and route generation and comparison, the UI will not be developed together with users, nor allocated much resources. 
+The UI is developed for practical purposes, like testing, and to lay the basis for further development. 
 
 \subsubsection{Design language}
-% Paragraph regarding selection of design?
-Using the material design guidelines makes the app achieve a similar aesthetic and usage method as other apps on Google Play Store. The design is clean and simple in regards to colors and input methods. 
+% Definition
+The design language is the general look and appearance of the app.
+This is the foundation for the impressions and feels of the user, and affects the user experience.
+The design language is selected in collaboration with another aSTEP project group, SW6XX. \todo{find friendfinder group number}
+
+% Goals
+The user interface is designed to achieve the following usability characteristics: \todo{source: DEB}
+\begin{itemize}
+	\item Learnability
+	\item Utility
+	\item Safety
+	\item Effectiveness
+\end{itemize}
+
+% Paragraph regarding selection of material
+Using the material design guidelines makes the app achieve a similar aesthetic and usage method as other apps on Google Play Store. 
+The design is clean and simple, regarding colors and input methods. 
 
 % Material design
-The UI is designed to mostly comply with the Google material design guidelines \cite{materialDesign}, being "\textit{bold, graphic, intentional}". Some of the properties are stated in the following list, compiled of citations from the Google design guidelines \cite{materialProperties}:
+The UI is designed to mostly comply with the Google material design guidelines \cite{materialDesign}, being "\textit{bold, graphic, intentional}". 
+Some of the material design properties are stated in the following list, compiled of citations from the Google design guidelines \cite{materialProperties}:
 
 \begin{enumerate}
 	\item Material has varying x \& y dimensions (measured in dp) and a uniform thickness (1dp).
@@ -33,7 +51,7 @@ The UI is designed to mostly comply with the Google material design guidelines \
 The design drafts in Figure \ref{fig:GUI-firstrun} reflect the necessary functions and the previously described design language. 
 
 % Login and registering pages design
-As the user needs a user profile in the aSTEP system to use the app, the users must be able to login if they already have a user profile, or create a new user profile.
+As the user needs a user profile in the aSTEP system\todo{framework?} to use the app, the users must be able to login if they already have a user profile, or create a new user profile.
 
 \begin{figure}[h!]
 	 \centering
@@ -53,7 +71,8 @@ As the user needs a user profile in the aSTEP system to use the app, the users m
 \end{figure}
 
 % In-app pages design
-Several interfaces are necessary to support the different parts of the app. The app needs a user interface for login, registering, presentation of matches, and a settings page, as can be seen in the figures in Figure \ref{fig:GUI-in-app}.
+Several interfaces are necessary to support the different parts of the app. 
+The app needs a user interface for login, registering, presentation of matches, and a settings page, as can be seen in the figures in Figure \ref{fig:GUI-in-app}.
 
 \begin{figure}[h!]
 	\centering
