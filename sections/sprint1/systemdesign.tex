@@ -1,7 +1,7 @@
 % Divided into structual & behavioal design
 \subsubsection{Structual Design}
-The application requires much processing power to analyse all the possible combinations of routes.
-Using a heuristic rule to filter the routes before analysing them reduces this problem.
+The application requires much processing power to analyze all the possible combinations of routes.
+Using a heuristic rule to filter the routes before analyzing them reduces this problem.
 But, it is still helpful to handle the analysis away from the smartphone due to battery and privacy concerns.
 So a lot of the analysis must take place on the central server.
 
@@ -12,7 +12,7 @@ So a lot of the analysis must take place on the central server.
 	\label{fig:packageDiagramSprint1}
 \end{figure}
 
-If we assume that this central server can handle the analysis of the routes, the application need only to supply the server with routes which to analyse.
+If we assume that this central server can handle the analysis of the routes, the application need only to supply the server with routes which to analyze.
 A small process which runs in the background of the device does this.
 As seen in Figure \ref{fig:classDiagramSprint1Observer} the Observer class' main goal is to observe what activity the user is currently doing.
 If the activity is driving then it starts to store the locations with the RouteBuilder class.
@@ -26,7 +26,7 @@ When the Observer detects that the user stopped driving, the Observer sends the 
 \end{figure}
 
 On the server, the route is stored in the database and forwarded to the RouteStabilityAnalyser.
-This analyser takes in the route and compares it to other routes by the same user, to determine whether this route is a regular occurrence.
+This analyzer takes in the route and compares it to other routes by the same user, to determine whether this route is a regular occurrence.
 
 If the RouteStabilityAnalyser determines that the route is stable.
 Then this information gets stored in the database together with when this route occurs.
@@ -54,10 +54,10 @@ This is the start of a project that will be further developed and expanded in th
 So reuse is important to reduce unused server resources.
 By isolating parts which were specific to the rideshare app, most of the system would be reusable.
 The best example of this is the RouteAnalyser from Figure \ref{fig:classDiagramSprint1Server}.
-This analyser filter routes according to its concrete implementation.
+This analyzer filter routes according to its concrete implementation.
 After the filter, the RouteAnalyser uses the strategy pattern to determine how to compare the routes.
 This enables other projects to develop their own filters and comparers in later projects.
 
 To reduce the search space, a weekly stability was decided. 
-This means that the RouteStabilityAnalyser can limit itself to analysing a month or two of data.
+This means that the RouteStabilityAnalyser can limit itself to analysis a month or two of data.
 Later on this needs to be tested and evaluated upon.
