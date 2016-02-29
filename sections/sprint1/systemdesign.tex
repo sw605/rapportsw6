@@ -1,0 +1,81 @@
+% Metatext
+This section contains documentation of the system design, consisting of the structural and behavioral design.
+\todo{add metatext}
+
+% Divided into structual & behavioral design
+\subsubsection{Structual Design}
+% overall system design intro
+The overall structural design of the system is based on the analysis of the first iteration.
+
+To exploit availability of sensors on the mobile phone and computational power of the server, the system is developed in two parts: the phone application and an extension of the route system in the aSTEP system which handles the analysis and comparison of routes.
+The two parts have their own delegated responsibilities, and will perform the necessary tasks, enabling the system to deliver the service\todo{define solution service in analysis/problem?}.
+
+% The app
+The application, hereafter referenced as the app, is the program executed on a mobile device, and will gather location data and serve as the user interface. 
+
+% device limitations -> app abilities
+The solution is assumed to require much processing power and access to all location data to analyze the possible combinations of routes.
+Computing the route combinations in an app would require that all users has a copy of every other users routes.
+%Data transfer is slow and costly on a mobile phone.\todo{add source}
+This is a serious privacy concern as this would enable other applications to leach on to the aSTEP system a gather data about when people are home and where they live.
+Other concerns include, for calculating the best routes a lot of processing is required draining the battery and producing heat.
+
+When under the assumption that a central server can handle the analysis of the routes, the application need only to supply the server with location data to analyze.
+
+\begin{figure}[h]
+	\centering
+	\input{figures/packageDiagramSprint1.tex}
+	\caption{The overall structure.}
+	\label{fig:packageDiagramSprint1}
+\end{figure}
+
+A background service would enable the location data sampling and transfer to a server.
+As seen in Figure \ref{fig:classDiagramSprint1Observer} the Observer class' main goal is to observe what activity the user is currently doing.
+In Google's API for android applications this is already a feature, so this will be used.
+If the activity is driving, the background service starts to store the locations with the RouteBuilder class.
+Locations are also a part of Google's API and includes longtitude, latitude and a time stamp.
+When the Observer detects that the user stops driving, the Observer sends the route to the server.
+
+\begin{figure}[h]
+	\centering
+	\input{figures/classDiagramSprint1Observer.tex}
+	\caption{The small process which should run at all time to build the routes.}
+	\label{fig:classDiagramSprint1Observer}
+\end{figure}
+
+
+% The aSTEP core
+On the server, the route is stored in a database and accessed by the RouteStabilityAnalyser.
+This analyzer takes the route and compares it to other routes by the same user, to determine whether this route is a regular occurrence, and hence a stable route.
+
+If the RouteStabilityAnalyser determines that the route is stable, the information is stored in the database with when this route is expected to occur.
+The server then uses the RouteSimilarityAnalyser to find matches for the new \todo{does not need to be a new stable route??} StableRoute.
+The matches are stored and new matches are transmitted to the appropriate devices to inform the users of a new match.
+
+\begin{figure}[h]
+	\centering
+	\input{figures/classDiagramSprint1Server.tex}
+	\caption{The structure of the system inside the server. This package should be an isolated system within the server.}
+	\label{fig:classDiagramSprint1Server}
+\end{figure}
+
+The application acts as an interface to the background process for the user.
+This is where the user logs in and can see an overview of candidates for car pooling.
+
+\begin{figure}[h]
+	\centering
+	\input{figures/classDiagramSprint1Application.tex}
+	\caption{The class structure of the application.}
+	\label{fig:classDiagramSprint1Application}
+\end{figure}
+
+This is the start of a project that will be further developed and expanded in the future, emphasizing the importance of reuse in the server, to reduce the amount of specialized server resources.
+By isolating parts that are specific to the rideshare app on the server, most of this system would be reusable.
+The best example of this is the RouteAnalyser from Figure \ref{fig:classDiagramSprint1Server}.
+The RouteAnalyzer filter routes according to its concrete implementation.
+After the filtering, the RouteAnalyser uses the strategy pattern to determine how to compare the routes.
+This enables other projects to develop their own filters and comparison functions in later projects.
+
+To reduce the search space, a weekly stability was decided upon. \todo{did we?}
+This means that the RouteStabilityAnalyser can be limited to analyze one to two months of data.
+This will be further tested and evaluated in another chapter. \todo{reference to test and evaluation}
