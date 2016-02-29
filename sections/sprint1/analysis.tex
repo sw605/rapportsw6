@@ -1,7 +1,7 @@
 \section{Analysis}
 Ridesharing is an activity which has had phases of popularity in recent history according to \citet{doi:10.1080/01441647.2011.621557}.
 They describe the current phase as the technology-enabled ridematching phase which started in 2004.
-In this phase, the intergration of the internet, mobile phones, and social media has into ridesharing services, reduces the barrier to entry for new potential passengers and drivers.
+In this phase, the integration of the internet, mobile phones, and social media into ridesharing services reduces the barrier to entry for new potential passengers and drivers.
 \citet{doi:10.1080/01441647.2011.621557} also list incentives for ridesharing in the current phase, which are as follows 
 
 \begin{itemize}
@@ -13,47 +13,48 @@ In this phase, the intergration of the internet, mobile phones, and social media
 \end{itemize}
 
 This presents a broad overview of why ridesharing became popular again after 2004.
-Because technologies play a vital role in the current phase a selection of popular commercial services will be examined a long with some scientific papers to get a comprehension of the state of the art in the field.
+Because technologies play a vital role in the current phase, a selection of popular commercial services will be examined a long with some scientific papers to get a comprehension of the state of the art in the field.
 %The following section documents the analysis of both academic papers, as well as corporate and community products, to get a comprehension of the state of the art in the ridesharing field.
-The main focus will be on real-time or dynamic ridesharing which \citet{amey2011real} defined as ``rideshare service relying heavily on mobile phone technologies''.
+The main focus of this project will be on real-time and dynamic ridesharing which \citet{amey2011real} defined as ``rideshare service relying heavily on mobile phone technologies''.
 
 \subsection{Scientific Papers}
-The problem of automating ridesharing through modern technology has already been studied by multiple scientists \todo{what?} with different approaches.
-The following sections account for some of which we found the most interesting and relevant to the problem statement. 
+The problems of automating ridesharing through modern technology has already been studied with different approaches.
+The following sections account for some of which the project group found the most interesting and relevant to the problem statement. 
 
 \citet{doi:10.1080/01441647.2011.621557, amey2011real} sees technology as one of the most important factors in the present and future of dynamic ridesharing.
 
-\citet{ShuoMa2013} developed an algorthm for taxi services which improved throghput of passengers by 25\% and reduced the distance a single taxi had to drive by 13\% when there where there were six requests for rides per taxi. %  picking up many passengers throughout a ride is developed and presented, seeking to increase the passenger throughput as well as lowering the distance traveled per passenger served.
-Especially interesting in their paper is an approach which suggests a grid representation of a road network, this is to avoid shortest path calculations between points on a map, and instead approximate distance represented by cells in the grid.
-The paper also uses	 the user's smartphone to collect location data and act as a user interface.
+\citet{ShuoMa2013} developed an algorithm for taxi services and improved throughput of passengers by 25\% and reduced the distance a single taxi had to drive by 13\%, at six requests for rides per taxi. %  picking up many passengers throughout a ride is developed and presented, seeking to increase the passenger throughput as well as lowering the distance traveled per passenger served.
+Especially interesting in their paper, is the approach of a grid representation of a road network, to avoid shortest path calculations between points on a map, and instead approximate distance based on cells in the grid.
+The paper states that the solution also utilizes the user's smartphone to collect location data and act as a user interface.
 
-\citet{ghoseiri2011real} researched what might matter when matching driver and passengers.
-They focused on preferences which influence whether you want to drive with a person, this can be everything from gender to pet friendliness.
-They developed functions which assesses whether a passenger and driver match, based on location, preferences, passenger and/or driver detour as the most important factors \cite{ghoseiri2011real}.
+\citet{ghoseiri2011real} researched what properties might matter when matching driver and passengers.
+They focused on preferences which influence whether you want to drive with a person or not. The preferences can be properties such as gender or pet friendliness.
+They developed functions that can assess if a passenger and driver match, based on location, preferences, passenger and/or driver detour as the most important factors \cite{ghoseiri2011real}.
 This algorithm might be useful in this project solution.
 
 Actual choices and influences regarding algorithm design for ridematching will be addressed in the design phase. 
 
 \subsection{Commercial Solutions}
-Corporate and community solutions are quite different from the academic field.
-The main focus seems to be centered around taxi alternatives.
-The two biggest international services in this field as of 2016 is Uber and Lyft\todo{source}.
+Corporate and community solutions are quite different from the academic field solutions.
+The main focus seems to be centered more around taxi alternatives.
+The two biggest international services in this field as of 2016 are Uber and Lyft\todo{source}.
 There are also several services with some or all of their focus in Denmark, most notable is services like Haxi and Drivr\todo{source}.
-These services work in a similar way: 
+These services work mostly in a similar way: 
 
 \begin{enumerate}
 	\item A customer request a ride through an smartphone app or a web interface
 	\item The backend of the service sends the request to one or more appropriate drivers
+	\item A driver accepts the request, and dispatches
 \end{enumerate}
 
-Since the mentioned services are commercial and closed-source, actual information about the services design or architecture is not available.
-Drivr has two interesting feature in comparison to their opponents, that is a web system for fleet management and business which provides administration and expense control of employee taxi travels.
+Since the mentioned services are commercial and closed-source, actual information about the service's design or architecture is not available.
+Drivr has two interesting feature in comparison to their opponents, that is a web interface for fleet management and business which provides administration and expense control of employee taxi travels.
 
-Besides these taxi like services, there also exist services which focus on traditional ridesharing between private people where money is not earned.
-Again, here exist both local and international services. 
+Besides these taxi-like services, there also exist services that focus on traditional ridesharing between private people, where money is not earned.
+Here exist both local and international services. 
 These services give the opportunity to either offer a lift, request a ride and the possibility to connect drivers and passengers.
 These services are usually free, but some of them charge a small fee when connecting people.
 Some of the more notable are GoMore and iRideshare.\todo{source}
 
-The smartphones have automatized much of the labor concerning organizing ridesharing and act as a central component in all the analyzed systems\todo{what?}.
-However, we still see an opportunity to use the smartphone even further in a service that arranges rides between users, thus decreasing the required labor.
+The smartphones have automatized much of the labor concerning organizing ridesharing and act as a central component in the analyzed systems.
+However, we still see an opportunity to utilize the smartphone even further in a service that arranges rides between users, thus decreasing the actual required user actions.
