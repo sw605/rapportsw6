@@ -1,22 +1,22 @@
 % Metatext
-This section contains documentation of the system design, consisting of the structural and behavioural design.
+This section contains documentation of the system design, consisting of the structural and behavioral design.
 \todo{add metatext}
 
 % Divided into structual & behavioral design
 \subsubsection{Structual Design}
 % overall system design intro
-The overall structural design of the system is based on the analysis of the first sprint\todo{iteration?}.
+The overall structural design of the system is based on the analysis of the first iteration.
 
-To exploit availability of sensors and computational power, the system is developed to consist of two parts: the phone application and the aSTEP core\todo{system?}.
+To exploit availability of sensors and computational power, the system is developed to consist of two parts: the phone application and the aSTEP system.
 The two parts have their own delegated responsibilities, and will perform the necessary tasks, enabling the system to deliver the service\todo{define solution service in analysis/problem?}.
 
 % The app
-The application, hereafter referenced as the app, is the program executed on a mobile device, and will gather location data and service as the GUI. 
+The application, hereafter referenced as the app, is the program executed on a mobile device, and will gather location data and serve as the GUI. 
 
 % device limitations -> app abilities
 The solution is assumed to require much processing power and access to all location data to analyze the possible combinations of routes.
-Computing the route combinations in an app would require a big\todo{find 'true' synonym} amount of data transfer, to be able to compare the local user's data to all the other user's data.
-Data transfer is slow and costly on a mobile device.\todo{just say phone?}
+Computing the route combinations in an app would require an amount of data transfer, to be able to compare the local user's data to all the other user's data.
+Data transfer is slow and costly on a mobile device.\todo{just say phone? add source}
 Additionally, there are privacy concerns regarding storage of every other user of the solution on a device, as the device could be tampered with, enabling a malicious user to gather data about other users. \todo{name battery concerns as well?}
 
 Under the assumption that a central server can handle the analysis of the routes, the application need only to supply the server with location data to analyze.
