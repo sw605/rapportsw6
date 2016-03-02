@@ -1,2 +1,18 @@
 \section{Analysis}
-Sprint 2. 
+meta text/intro here
+\subsection{Android Development Platform}
+When developing Android applications one of the first choices to consider is which API levels to target \cite{usesSDK}.
+The manifest\todo{elaborate} requires to specify the API level\todo{elaborate} for three definitions: minimum, target and maximum. \todo{connect API level and SDK version}
+
+The target and max versions requires few consideration to choose.
+The "targetSdkVersion" reflects the version to which the app is developed and tested against, without enabling compatibility behaviors.
+The "maxSdkVersion" reflects the highest API level that an app is designed to run.
+Both of these are set to the highest API level available during the start of the development, which is API version 23.
+
+The last API level which needs to be specified is the "minSdkVersion".
+This entry specifies the lowest API level which an app supports.
+A cause of this is that every device with an API level lower than the specified minSdkVersion will not be compatible with the app.
+Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
+For this project we choose to target a higher API level for to simplify the development process.
+At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 is 35,3\%.
+API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time for user interface, as API level 21 added support for Android's new material design style \cite{android5API}. Refraining from further backwards compatibility allows the project focus to be on the functionality of the app. 
