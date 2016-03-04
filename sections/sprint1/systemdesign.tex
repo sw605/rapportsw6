@@ -14,11 +14,11 @@ The two parts have their own delegated responsibilities, and will perform the ne
 The application, hereafter referenced as the app, is the program executed on a mobile device, and will gather location data and serve as the user interface. 
 
 % device limitations -> app abilities
-The solution is assumed to require much processing power and access to all location data to analyze the possible combinations of routes.
-Computing the route combinations in an app would require that all users has a copy of every other users routes.
-%Data transfer is slow and costly on a mobile phone.\todo{add source}
+The solution is assumed to require much processing power and to access location data to analyze the possible combinations of routes.
+Computing the route combinations in an app would require that each user has a copy of every other users' routes.
 This is a serious privacy concern as this would enable other applications to leach on to the aSTEP system a gather data about when people are home and where they live.
-Other concerns include, for calculating the best routes a lot of processing is required draining the battery and producing heat.
+Other concerns include, for calculating the best routes a lot of processing is required draining the battery and producing heat.\todo{clean up battery and privacy references}
+%Data transfer is slow and costly on a mobile phone.\todo{add source}
 
 When under the assumption that a central server can handle the analysis of the routes, the application need only to supply the server with location data to analyze.
 
@@ -57,7 +57,7 @@ The matches are stored and new matches are transmitted to the appropriate device
 	\input{figures/classDiagramSprint1Server.tex}
 	\caption{The structure of the system inside the server. This package should be an isolated system within the server.}
 	\label{fig:classDiagramSprint1Server}
-\end{figure}
+\end{figure}\todo{fix: "This package should be an isolated system within the server."}
 
 The application acts as an interface to the background process for the user.
 This is where the user logs in and can see an overview of candidates for car pooling.
@@ -69,7 +69,7 @@ This is where the user logs in and can see an overview of candidates for car poo
 	\label{fig:classDiagramSprint1Application}
 \end{figure}
 
-This is the start of a project that will be further developed and expanded in the future, emphasizing the importance of reuse in the server, to reduce the amount of specialized server resources.
+This is the start of a project that will be further developed upon and expanded in the future, emphasizing the importance of reusing the server, to reduce the amount of specialized server resources.
 By isolating parts that are specific to the rideshare app on the server, most of this system would be reusable.
 The best example of this is the RouteAnalyser from Figure \ref{fig:classDiagramSprint1Server}.
 The RouteAnalyzer filter routes according to its concrete implementation.
@@ -78,4 +78,4 @@ This enables other projects to develop their own filters and comparison function
 
 To reduce the search space, a weekly stability was decided upon. \todo{did we?}
 This means that the RouteStabilityAnalyser can be limited to analyze one to two months of data.
-This will be further tested and evaluated in another chapter. \todo{reference to test and evaluation}
+This will be further tested and evaluated in another chapter. \todo{reference to test and evaluation}\todo{add arguments}
