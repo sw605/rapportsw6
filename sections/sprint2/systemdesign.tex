@@ -11,7 +11,7 @@ This section contains descriptions of the different parts, and a definition of t
 	\label{fig:s2systemdesign}
 \end{figure}
 
-% Definition of app responsibilities
+% Definition of APP responsibilities
 The app...
 Fetch route matches
 
@@ -24,12 +24,13 @@ Provide aSTEP system with location data directly.
 
 
 
-% Definition of RideShare(TM) server responsibilities
+% Definition of RIDESHARE(TM) server responsibilities
 RideShare server..
 
 % user management responsibilities
 Relay login request from app, save and relay the token.
-Store contact information. 
+Because the user management in aSTEP does not provide anything but username and password, the contact information and other data is stored on the RideShare server.
+
 
 % location responsibilities
 Fetch route matches for each user and store.
