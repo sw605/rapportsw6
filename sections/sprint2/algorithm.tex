@@ -1,5 +1,5 @@
 \todo{This is a draft}
-
+\todo{Algorithm structure: Idea, "toy example", pseudocode: top-down}
 $\mathbb{L}$ is the set of all possible locations.
 
 \begin{algorithm}
@@ -20,7 +20,7 @@ $\mathbb{L}$ is the set of all possible locations.
 \end{algorithm}
 
 Analysing the function Time Analyser we can see that on line 2 it should iterate over all locations in $r$ to make sure that $r_g$ is the closest possible point.
-The complexity of this operation should be $\Theta(|r|)$ where $|r|$ is the number of locations in $r$.
+The complexity of this operation should be $\Theta(|r|)$ where $|r|$ is the number of locations in $r$.\todo{fix thetas to O's}
 Moving on to line 3 we have some basic arithmetic operations and the function call $time$.
 A possible heuristic algorithm for time would be to find the distance between the two points and multiply it with the time it takes to travel one distance unit. 
 This is an optimistic approach since it assumes that there is a path directly from $r_g$ to $g$.
@@ -67,7 +67,7 @@ Making this functions complexity $\Theta(|r|)$.
 			\State $d\gets$\Call{DistanceAnalyser}{$r, s, g$}
 			\State $t\gets$\Call{TimeAnalyser}{$r, g$}
 			
-			\If{$d > 1 \vee t > 1$}
+			\If{$d < 1 \vee t < 1$}
 				\State $score\gets 1-\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$
 				\Comment $score \in [0, 1]$
 				\State \Return $100\times score$
