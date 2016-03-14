@@ -1,0 +1,111 @@
+\todo{This is a draft}
+\todo{Algorithm structure: Idea, "toy example", pseudocode: top-down}
+$\mathbb{L}$ is the set of all possible locations.
+
+\begin{algorithm}
+	\caption{The Time Analyser pseudocode}
+	\begin{algorithmic}[1]
+		\Require 
+		\Statex $\delta\in \mathbb{R}_{>0}$ : the acceptable time difference
+		\Statex $\gamma\in\mathbb{R}_{>0}$ : the translation from distance to time
+		\Statex $dist : l_1,l_2 \in \mathbb{L} \rightarrow \mathbb{R}_{\geq 0}$ : the distance between $l_1$ and $l_2$
+		\Statex $time : l_1,l_2 \in \mathbb{L} \rightarrow \mathbb{R}_{\geq 0}$ : the time difference between $l_1$ and $l_2$
+		\Statex 
+		\Function{TimeAnalyser}{$r, g$}
+			\State $r_g \in r$ is the closest point to $g$
+			\State $t_\delta\gets time(r_g, g) - 2\times dist(r,g)\times\gamma$;
+			\State\Return $\frac{t_\delta}{\delta}$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+Analysing the function Time Analyser we can see that on line 2 it should iterate over all locations in $r$ to make sure that $r_g$ is the closest possible point.
+The complexity of this operation should be $\Theta(|r|)$ where $|r|$ is the number of locations in $r$.\todo{fix thetas to O's}
+Moving on to line 3 we have some basic arithmetic operations and the function call $time$.
+A possible heuristic algorithm for time would be to find the distance between the two points and multiply it with the time it takes to travel one distance unit. 
+This is an optimistic approach since it assumes that there is a path directly from $r_g$ to $g$.
+
+In order to make this work for both stability and similarity
+
+If this heuristic approach is used then the complexity of line 3 would be $\Theta(1)$.
+Because line 4 is only using basic arithmetic operations then this line is also $\Theta(1)$ making the complexity of this function $\Theta(|r|)$.
+
+ \begin{algorithm}
+	\caption{The Distance Analyser pseudocode}
+	\begin{algorithmic}[1]
+		\Require 
+		\Statex $\beta \in \mathbb{R}_{>0}$ : the acceptable detour length
+		\Statex $dist : l_1,l_2 \in \mathbb{L} \rightarrow \mathbb{R}_{\geq 0}$ : the distance between $l_1$ and $l_2$
+		\Statex 
+		\Function{DistanceAnalyser}{$r, s, g$}
+			\State $r_s \in r$ : the closest point to $s$
+			\State $r_g \in r$ : the closest point to $g$
+			\State $d_s\gets 2\times dist(r_s, s)$\Comment Pickup detour distance
+			\State $d_g\gets 2\times dist(r_g, g)$\Comment Set off detour distance
+			\State\Return $\frac{d_s + d_g}{\beta}$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+The Distance Analyser uses a distance function.
+This only need to be guiding so a heuristic function should be sufficient.
+A possible implementation is to find the direct distance between the locations.
+This would be a $\Theta(1)$ time function.
+The function it self finds the closest points on route $r$ to the endpoints $g$ and $s$ in line 2 and 3.
+This is done in $\Theta(|r|)$ time.
+Line 4 and 5 uses the distance function which we earlier said was $\Theta(1)$, and line 6 uses basic arithmetic operations so the complexity of that is also $\Theta(1)$.
+Making this functions complexity $\Theta(|r|)$.
+
+\begin{algorithm}
+	\caption{The Time Distance Analyser pseudocode}
+	\begin{algorithmic}
+		\Require 
+		\Statex $d_\gamma\in \mathbb{R}_{>0}$ : the modifier for distance
+		\Statex $t_\gamma\in\mathbb{R}_{>0}$ : the modifier for time
+		\Statex 
+		\Function{TimeDistanceAnalyser}{$r, s, g$}
+			\State $d\gets$\Call{DistanceAnalyser}{$r, s, g$}
+			\State $t\gets$\Call{TimeAnalyser}{$r, g$}
+			
+			\If{$d < 1 \vee t < 1$}
+				\State $score\gets 1-\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$
+				\Comment $score \in [0, 1]$
+				\State \Return $100\times score$
+			\Else
+				\State\Return 0
+			\EndIf
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+The Time Distance Analyser uses the Time Analyser and Distance Analyser function which were defined as being $\Theta(|r|)$.
+And then does a check and some arithmetic operations.
+The limiting factor is the called functions so the complexity of this function must still be $\Theta(|r|)$.
+
+\begin{algorithm}
+	\caption{The Analyse Route pseudocode}
+	\begin{algorithmic}
+		\Require
+		\Statex $scores(r, r') \rightarrow \mathbb{Z}$ : a matrix of scores between two routes
+		\Statex
+		\Procedure{AnalyseRoute}{$r, R$}
+			\State $r_s\in r$ : the start point of route $r$
+			\State $r_g\in r$ : the end point of route $r$
+			\ForAll{$r'\in R$}
+				\State $r'_s\in r'$ : the start point of route $r'$
+				\State $r'_g\in r'$ : the end point of route $r'$
+				\State $score(r', r)\gets$\Call{TimeDistanceAnalyser}{$r', r_s, r_g$}
+				\State $score(r, r')\gets$\Call{TimeDistanceAnalyser}{$r, r'_s, r'_g$}
+			\EndFor
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+The final procedure takes in a route and a set of routes and calls the Time Distance Analyser two times for each route in $R$.
+If we consider $\langle R \rangle$ to be the average length of all routes in $R$ and $|R|$ to be the number of routes in $R$.
+Then the complexity would be $\Theta(|R|\times(\langle R\rangle + |r|))$.
+$|r|$ could be represented within the average.
+So the reduced complexity is $\Theta(|R|\times\langle R\rangle)$.
+As the number of routes get greater the average route length gets harder to change between calculations and approaches therefore a constant value.
+This means that as the set gets larger we approach this complexity $\Theta(|R|)$.
+
