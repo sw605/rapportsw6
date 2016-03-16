@@ -84,3 +84,16 @@
 }{%
 		\end{exa}
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Support for custom acronyms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% add acronym in setup/hyphenations.tex and use with \gls{}
+\renewcommand*{\CustomAcronymFields}{
+  name={\the\glsshorttok},% name is abbreviated form
+  description={\the\glslongtok},% description is long form
+  first={\noexpand\textbf{\the\glslongtok\space(\the\glsshorttok)}},%
+  firstplural={\noexpand\textbf{\the\glslongtok\noexpand\acrpluralsuffix\space(\the\glsshorttok)}},%
+  text={\the\glsshorttok},%
+  plural={\the\glsshorttok\noexpand\acrpluralsuffix}%
+}
