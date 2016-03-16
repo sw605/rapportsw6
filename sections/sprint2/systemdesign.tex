@@ -1,9 +1,11 @@
 \subsection{System design}
 % metatext
-The rideshare solution is designed to consist of multiple parts.
+The \gls{rs} system is designed to consist of multiple parts.
 This section contains descriptions of the different parts, and a definition of their responsibilities.
 
-% Description of the solution
+\gls{rs} utilizes the \gls{astep} system which can save locations and route history which the \gls{rs} will collect, however the application will need additional data storage to fulfill the set system requirements, therefore, as can be seen on \ref{fig:s2systemdesign}, the application will require a additional database which stores this information.
+The \gls{rs} server has two main purposes, firstly it should store additional information about the systems users and secondly it should store the score for already calculated scores between given stable routes.
+
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/SystemDesign.png}
@@ -11,11 +13,6 @@ This section contains descriptions of the different parts, and a definition of t
 	\label{fig:s2systemdesign}
 \end{figure}
 
-% Definition of APP responsibilities
-The ridesharing service documented in this report utilizes the aSTEP system.
-The aSTEP system can save locations and route history which the the rideshare application will collect, however the application will need additional data storage to fulfill the set system requirements, therefore as can be seen on \ref{fig:s2systemdesign}, the application will require a additional server which stores this information.
-The rideshare server has two main purposes, firstly it should store additional information about the systems users and secondly it should store the score for already calculated scores between given stable routes.
-Fetch route matches
 
 % user management responsibilities
 User interface for logging in, registering a new user, edit contact information.
