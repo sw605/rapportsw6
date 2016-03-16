@@ -5,6 +5,7 @@ This section contains descriptions of the different parts, and a definition of t
 
 \gls{rs} utilizes the \gls{astep} system which can save locations and route history which the \gls{rs} will collect, however the application will need additional data storage to fulfill the set system requirements, therefore, as can be seen on \ref{fig:s2systemdesign}, the application will require a additional database which stores this information.
 The \gls{rs} server has two main purposes, firstly it should store additional information about the systems users and secondly it should store the score for already calculated scores between given stable routes.
+The different purposes and responsibilities of the parts pictured in \ref{fig:s2systemdesign} will be further accounted for in the following text.
 
 \begin{figure}[!h]
 	\centering
@@ -13,8 +14,14 @@ The \gls{rs} server has two main purposes, firstly it should store additional in
 	\label{fig:s2systemdesign}
 \end{figure}
 
+% APP RESPONSIBILITY
+The \gls{rs} application is responsible for the interaction with the user as well as collecting the location data needed to track routes and recommend ride partners.
+The app should communicate with both the \gls{rs} and \gls{astep} server though their respective APIs.
 
 % user management responsibilities
+The API and server associated with the \gls{astep} system will be responsible for saving and retrieving location and route data for each user in the system.
+The \gls{astep} system is also responsible for the basic user profile, these include an userID and a password.
+The user profiles is used to premissions and id!! ADD StuFF HERE
 User interface for logging in, registering a new user, edit contact information.
 Through RideShare server.
 
