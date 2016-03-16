@@ -12,8 +12,9 @@ This section contains descriptions of the different parts, and a definition of t
 \end{figure}
 
 % Definition of APP responsibilities
-The ridesharing service which is documented in this report utilizes the aSTEP system.
-The aSTEP system can save the locations and route history which the will collect, however the application will need additional data storage to fullfill the set system requirements, therefore as can be seen on \ref{fig:s2systemdesign}, the application will require a additional server which stores this information.
+The ridesharing service documented in this report utilizes the aSTEP system.
+The aSTEP system can save locations and route history which the the rideshare application will collect, however the application will need additional data storage to fulfill the set system requirements, therefore as can be seen on \ref{fig:s2systemdesign}, the application will require a additional server which stores this information.
+The rideshare server has two main purposes, firstly it should store additional information about the systems users and secondly it should store the score for already calculated scores between given stable routes.
 Fetch route matches
 
 % user management responsibilities
@@ -30,7 +31,7 @@ RideShare server..
 
 % user management responsibilities
 Relay login request from app, save and relay the token.
-Because the user management in aSTEP does not provide anything but username and password, the contact information and other data is stored on the RideShare server.
+Because the user management system in aSTEP does only provide anything but username and password, the contact information and other data is stored on the RideShare server.
 
 
 % location responsibilities
