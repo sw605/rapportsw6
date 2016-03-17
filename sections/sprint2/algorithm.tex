@@ -1,31 +1,31 @@
-For determining whether a route is a good fit, the system uses an algotihm.
+For determining whether a route is a good fit, the system uses an algorithm.
 This algorithm is based on a simplified version of how \citet{ghoseiri2011real} determines a match.
-In the paper they take many aspects into account when determining matches, such as smoking, gender and age preferences.
-These are all valid but the aspects that this algorithm focuses on are time and distance.
+In the paper, they take many aspects into account when determining matches, such as smoking, gender and age preferences.
+These are all valid but only the aspects that this algorithm focuses on are time and distance.
 
 \subsubsection{The main algorithm}
-Lets say we want to determine wheter or not person $A$ could pickup person $B$ on his way through route $r$ when person $B$ wants to go from his start position $s$ to his goal position $g$.
-If $A$ could pickup $B$ then we want to know how good a match it is.
+Let us say we want to determine whether $A$ could pickup person $B$ on his way through route $r$ when person $B$ wants to go from his start position $s$ to his goal position $g$.
+If $A$ could pick up $B$ then we want to know how good a match it is.
 
-This result could be expressed as a value from 0 to 1 which tells how close the match is where 0 is not a match and 1 is when it is litteraly \emph{on} the way there.
+The algorithm should express this as a value from 0 to 1 which tells how close the match is where 0 is not a match and 1 is when it is literally \emph{on} the way there.
 
-To summerize we have an algortihm which takes in a route $r$ and two positions $s$ and $g$, and returns a value between 0 and 1.
+To summarize we have an algorithm  which takes in a route $r$ and two positions $s$ and $g$, and returns a value between 0 and 1.
 
-In the algorthm there are two aspects which needs to be evaluated: Time and distance.
+In the algorithm, there are two aspects which need to be evaluated: Time and distance.
 If we imagine that these have already been solved with a similar interface, where they take a route and two points as input and return a value from 0 to 1 depending on how close they match, but only considering one of the aspects.
 
 If one of the aspects is deemed unacceptable by giving it a score of 0 then the whole match is unacceptable and is given the same final score.
-From the scores the average score could be expressed as $\frac{d+t}{2}$ where $d$ is the distance score and $t$ is the time score.
+From the scores, the average score could be expressed as $\frac{d+t}{2}$ where $d$ is the distance score and $t$ is the time score.
 But to increase flexibility of the algorithm two constants are introduced $d_\gamma$ and $t_\gamma$.
-These constant enables us to weight the time and distance score independant of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
+These constant enables us to weight the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
 
 \begin{algorithm}
 	\caption{The Time Distance Analyser pseudocode}
 	\label{alg:timedistanalyser}
 	\begin{algorithmic}[1]
 		\Require 
-		\Statex $d_\gamma\in \mathbb{R}_{>0}$ : the modifier for distance
-		\Statex $t_\gamma\in\mathbb{R}_{>0}$ : the modifier for time
+		\Statex let $d_\gamma$ be the modifier for distance in $\mathbb{R}_{>0}$
+		\Statex let $t_\gamma$ be the modifier for time in $\mathbb{R}_{>0}$
 		\Statex 
 		\Function{TimeDistanceAnalyser}{$r, s, g$}
 			\State $d\gets$\Call{DistanceAnalyser}{$r, s, g$}
@@ -53,10 +53,9 @@ To do this we need to define how long the longest acceptable detour should be.
 We also need a way of figuring out the distance between two disconnected locations. 
 For this the function for euclidian distances would work since it only gets significantly inaccurate on larger scales.
 This means that we have the following function.
-
 \begin{align*}
 	dist : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
-	a, b &\mapsto \sqrt{(a_x - b_x)^2 + (a_y - b_y)^2}
+	a, b &\mapsto \sqrt{(a_{latitude} - b_{latitude})^2 + (a_{longtitude} - b_{longtitude})^2}
 \end{align*}
 
 In the function the symbol $\mathbb{L}$ is used to denote the set of all possible locations.
@@ -67,11 +66,11 @@ In the function the symbol $\mathbb{L}$ is used to denote the set of all possibl
 	\label{alg:distanalyser}
 	\begin{algorithmic}[1]
 		\Require 
-		\Statex $\beta \in \mathbb{R}_{>0}$ : the largest acceptable detour length
+		\Statex let $\beta$ be the largest acceptable detour length in $\mathbb{R}_{>0}$ 
 		\Statex 
 		\Function{DistanceAnalyser}{$r, s, g$}
-			\State $r_s \in r$ : the closest point to $s$
-			\State $r_g \in r$ : the closest point to $g$
+			\State let $r_s$ be the closest point to $s$ in $r$
+			\State let $r_g$ be the closest point to $g$ in $r$
 			\State $d_s\gets 2\times dist(r_s, s)$\Comment Pickup detour distance
 			\State $d_g\gets 2\times dist(r_g, g)$\Comment Set off detour distance
 			\State\Return $1-\frac{d_s + d_g}{\beta}$
@@ -81,81 +80,80 @@ In the function the symbol $\mathbb{L}$ is used to denote the set of all possibl
 
 The distance analyser algorithm, as seen in Algorithm \ref{alg:distanalyser}, finds the points on the route that are closest to the start and end points.
 From those points the algorithm approximates the detour required to take by the driver to pick up the passenger.
+The approximation is very rough as it assumes that the driver wants to drive back to the original road and that a direct path from the route to the start and goal point exists.
+This makes the final score for the distance a pessimistic evaulation of the detour needed.
 
+The final score for the distance analyser is calculated by taking the total detour and dividing it by the length of the largest acceptable detour.
+This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
+We remember that Algorithm \ref{alg:timedistanalyser} expected a value that less than zero when it was deemed unacceptable, so the value is inverted by substracting it from one.
 
-\newpage
+Because of line 2 and 3, where the whole route should be iterated through, the complexity of the algorthim is $O(|r|)$ where $|r|$ is the number of points in $r$.
+Line 4 to 6 perform arithmetic operations which run in constant time so they can safely ignored.
 
-\todo{This is a draft}
-\todo{Algorithm structure: Idea, "toy example", pseudocode: top-down}
-$\mathbb{L}$ is the set of all possible locations.
+\subsubsection{Time analyser}
+
+The time analyser works in a similar way to the distance analyser. 
+It also takes two points and a route and returns a score when only the time differences are considered.
+
+When determining time difference two things should be taken into consideration: the time the detour takes and the existing differences in time.
+The time the detour takes can be approximated by taking the time it takes to travel a distance unit and multiplying that with the distance of the detour.
+
+Each point in the route has some information about when this point was visited.
+We can use this to determine the relative time distance between two points by using the following function.
+\begin{align*}
+	time : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
+	a, b &\mapsto | a_{time} - b_{time} |
+\end{align*}
+
+Now that we have the detour time and the relative time difference we can figure out how much of an inconvinience it is for on of the participants in this potential match.
+From the drivers perspective (s)he has to start driving at normal time minus the detour to still make it on time.
+This makes the detour the only inconvinience.
+If the other participant has to arrive earlier than (s)he would otherwise arrive then the driver would also have to take that into consideration making the inconvinience not only the detour but also the relative time.
+
+From the passengers perspective the opposite is true when it comes to the relative time. 
+It is only an inconvinience when the driver must set them off before they need to arrive.
+
+It is also worth noting that if the realative time is the same as the time it takes to take the detour.
+Then the only inconvinience for the driver is the detour.
+
+This makes the formular for inconvinience when taking both paticipants into account is defined as following.
+
+\[ |d - t| + d \]
+
+where $d$ is the detour and $t$ is the relative time.
+
+Lets take into account the way back.
+The situration is now that the driver and passenger wants to go home, but they want to leave at a specific time.
+The algortihm already solves this becayse if a specific arrival time is defined a specific departure time must also be defined.
+And the differences in time must be the same.
 
 \begin{algorithm}
 	\caption{The Time Analyser pseudocode}
+	\label{alg:timeanalyser}
 	\begin{algorithmic}[1]
 		\Require 
-		\Statex $\delta\in \mathbb{R}_{>0}$ : the acceptable time difference
-		\Statex $\gamma\in\mathbb{R}_{>0}$ : the translation from distance to time
-		\Statex $dist : l_1,l_2 \in \mathbb{L} \rightarrow \mathbb{R}_{\geq 0}$ : the distance between $l_1$ and $l_2$
-		\Statex $time : l_1,l_2 \in \mathbb{L} \rightarrow \mathbb{R}_{\geq 0}$ : the time difference between $l_1$ and $l_2$
+		\Statex let $\delta$ be the acceptable time difference in $\mathbb{R}_{>0}$
+		\Statex let $\gamma$ be the translation from distance to time in $\mathbb{R}_{>0}$ 
 		\Statex 
-		\Function{TimeAnalyser}{$r, g$}
-			\State $r_g \in r$ is the closest point to $g$
-			\State $t_\delta\gets time(r_g, g) - 2\times dist(r,g)\times\gamma$;
-			\State\Return $\frac{t_\delta}{\delta}$
+		\Function{TimeAnalyser}{$r, s, g$}
+			\State let $r_s$ be the closest point to $s$ in $r$
+			\State let $r_g$ be the closest point to $g$ in $r$
+			\State $d \gets (2\times dist(r_s,s) + 2\times dist(r_g,g))\times\gamma$\Comment{The total detour time}
+			\State $t \gets max(time(r_s, s), time(r_g, g))$\Comment{The largest time difference}
+			\State\Return $1-\frac{|d - t| + d}{\delta}$
 		\EndFunction
 	\end{algorithmic}
 \end{algorithm}
 
-Analysing the function Time Analyser we can see that on line 2 it should iterate over all locations in $r$ to make sure that $r_g$ is the closest possible point.
-The complexity of this operation should be $\Theta(|r|)$ where $|r|$ is the number of locations in $r$.\todo{fix thetas to O's}
-Moving on to line 3 we have some basic arithmetic operations and the function call $time$.
-A possible heuristic algorithm for time would be to find the distance between the two points and multiply it with the time it takes to travel one distance unit. 
-This is an optimistic approach since it assumes that there is a path directly from $r_g$ to $g$.
+Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser.
+Line 2 to 4 is very reminisent of line 2 to 5 in Algoritm \ref{alg:distanalyser} with the difference that it sums the detours and multiplies the result with the distance to time translation.
+Line 5 takes the greatest time difference between the closest points.
+The reason for takeing the greates value is the pressimistic approach again, and the delay will not be worse than that.
 
-In order to make this work for both stability and similarity
+The complexity is the same as in Algorithm \ref{alg:distanalyser} because of the similarity of the first few lines and the last lines are simple aritmetic operations. 
+The exceptions are $dist$, $time$, and $max$. 
+$time$ and $dist$ has already been described in detail in this and previous section and are considered to be $O(1)$ operations.
+$max$ takes in two values compares them and returns the largest of the two.
+This is also a constant operation and with that we can determine that the time analyser algorihm is $O(|r|)$.
 
-If this heuristic approach is used then the complexity of line 3 would be $\Theta(1)$.
-Because line 4 is only using basic arithmetic operations then this line is also $\Theta(1)$ making the complexity of this function $\Theta(|r|)$.
-
-The Distance Analyser uses a distance function.
-This only need to be guiding so a heuristic function should be sufficient.
-A possible implementation is to find the direct distance between the locations.
-This would be a $\Theta(1)$ time function.
-The function it self finds the closest points on route $r$ to the endpoints $g$ and $s$ in line 2 and 3.
-This is done in $\Theta(|r|)$ time.
-When determining 
-
-Line 4 and 5 uses the distance function which we earlier said was $\Theta(1)$, and line 6 uses basic arithmetic operations so the complexity of that is also $\Theta(1)$.
-Making this functions complexity $\Theta(|r|)$.
-
-The Time Distance Analyser uses the Time Analyser and Distance Analyser function which were defined as being $\Theta(|r|)$.
-And then does a check and some arithmetic operations.
-The limiting factor is the called functions so the complexity of this function must still be $\Theta(|r|)$.
-
-\begin{algorithm}
-	\caption{The Analyse Route pseudocode}
-	\begin{algorithmic}
-		\Require
-		\Statex $scores(r, r') \rightarrow \mathbb{Z}$ : a matrix of scores between two routes
-		\Statex
-		\Procedure{AnalyseRoute}{$r, R$}
-			\State $r_s\in r$ : the start point of route $r$
-			\State $r_g\in r$ : the end point of route $r$
-			\ForAll{$r'\in R$}
-				\State $r'_s\in r'$ : the start point of route $r'$
-				\State $r'_g\in r'$ : the end point of route $r'$
-				\State $score(r', r)\gets$\Call{TimeDistanceAnalyser}{$r', r_s, r_g$}
-				\State $score(r, r')\gets$\Call{TimeDistanceAnalyser}{$r, r'_s, r'_g$}
-			\EndFor
-		\EndProcedure
-	\end{algorithmic}
-\end{algorithm}
-
-The final procedure takes in a route and a set of routes and calls the Time Distance Analyser two times for each route in $R$.
-If we consider $\langle R \rangle$ to be the average length of all routes in $R$ and $|R|$ to be the number of routes in $R$.
-Then the complexity would be $\Theta(|R|\times(\langle R\rangle + |r|))$.
-$|r|$ could be represented within the average.
-So the reduced complexity is $\Theta(|R|\times\langle R\rangle)$.
-As the number of routes get greater the average route length gets harder to change between calculations and approaches therefore a constant value.
-This means that as the set gets larger we approach this complexity $\Theta(|R|)$.
-
+This means that the main algorihm is also $O(|r|)$ which is eqviliant to $O(n)$.
