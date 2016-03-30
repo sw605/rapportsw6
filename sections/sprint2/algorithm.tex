@@ -1,23 +1,23 @@
-For determining whether a route is a good fit, the system uses an algorithm.
-This algorithm is based on a simplified version of how \citet{ghoseiri2011real} determines a match.
-In the paper, they take many aspects into account when determining matches, such as smoking, gender and age preferences.
-These are all valid but only the aspects that this algorithm focuses on are time and distance.
+The system uses an algorithm to determine whether two routes are a good fit.
+This algorithm is developed as a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
+In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
+The criteria are practical to some extent, but the focus of the developed algorithm are the time and distance criteria.
+A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
+A route is a chronological list of positions.
 
 \subsubsection{The main algorithm}
-Let us say we want to determine whether $A$ could pickup person $B$ on his way through route $r$ when person $B$ wants to go from his start position $s$ to his goal position $g$.
-If $A$ could pick up $B$ then we want to know how good a match it is.
+To serve as an example, the algorithm should assess the score of person $A$, on the way through route $r$, picking up person $B$, when person $B$ wants to go from the start position $s$ to the goal position $g$. 
+The score represents the match of the routes of person $A$ and person $B$, and should express this as a decimal value from 0 to 1 which tells how good the match is, where 0 represents a bad match, a major detour, and 1 represents a perfect match, and requires no detour.
+To enhance the flexibility of the algorithm, the input is based on one route that is going to be traversed, and two locations, that possibly are part of the route.
+To summarize, the algorithm takes a route $r$ and two positions $s$ and $g$ as arguments, and returns a decimal value between 0 and 1.
 
-The algorithm should express this as a value from 0 to 1 which tells how close the match is where 0 is not a match and 1 is when it is literally \emph{on} the way there.
+In the algorithm, there are two aspects to be evaluated: Time and distance.
+Assuming these can be solved with a similar algorithm that takes a route and two points as input and return a value from 0 to 1 depending on how closely they match, but only considering either one of the aspects.
 
-To summarize we have an algorithm  which takes in a route $r$ and two positions $s$ and $g$, and returns a value between 0 and 1.
-
-In the algorithm, there are two aspects which need to be evaluated: Time and distance.
-If we imagine that these have already been solved with a similar interface, where they take a route and two points as input and return a value from 0 to 1 depending on how close they match, but only considering one of the aspects.
-
-If one of the aspects is deemed unacceptable by giving it a score of 0 then the whole match is unacceptable and is given the same final score.
-From the scores, the average score could be expressed as $\frac{d+t}{2}$ where $d$ is the distance score and $t$ is the time score.
-But to increase flexibility of the algorithm two constants are introduced $d_\gamma$ and $t_\gamma$.
-These constant enables us to weight the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
+If an aspect is deemed unacceptable by being assessed a score of 0, the whole match is unacceptable and hence given the same final score.
+From the scores, the average score could be expressed as $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
+To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
+These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
 
 \begin{algorithm}
 	\caption{The Time Distance Analyser pseudocode}
@@ -41,25 +41,22 @@ These constant enables us to weight the time and distance score independent of e
 \end{algorithm}
 
 The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
-Line 2 and 3 is the calls to the algorithms that solve the subproblems and line 4 to 8 is the logic that was explained in the previous paragraph.
-The complexity of the algorithm is dependent on the two calls on line 2 and 3 because the rest of the algorithm is input independant and, therefore, $O(1)$ if we ignore line 2 and 3.
+Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic that was explained in the previous paragraph.
+The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
+
+The following sections will cover the subproblems of the algorithm.
+First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
 
 \subsubsection{Distance analyser}
+This algorithm takes a route and two end points and assesses the score for the detour when only considering the distance.
+To do this, it is required to define how long the longest acceptable detour should be.
+The algorithm also needs a way of calculating the distance between two discrete locations, which can be performed by the function for euclidean distances.
+This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to denote the set of all possible locations:
 
-Lets take a look at the sub problems.
-
-First, we have the distance analyser, this algorithm takes a route and two end points and figures out the score for the detour when only considering the distance.
-To do this we need to define how long the longest acceptable detour should be.
-We also need a way of figuring out the distance between two disconnected locations. 
-For this, the function for euclidian distances would work since it only gets significantly inaccurate on larger scales.
-This means that we have the following function.
 \begin{align*}
 	dist : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
 	a, b &\mapsto \sqrt{(a_{latitude} - b_{latitude})^2 + (a_{longitude} - b_{longitude})^2}
 \end{align*}
-
-In the function the symbol $\mathbb{L}$ is used to denote the set of all possible locations.
-
 
 \begin{algorithm}
 	\caption{The Distance Analyser pseudocode}
@@ -91,39 +88,37 @@ Because of line 2 and 3, where the whole route should be iterated through, the c
 Line 4 to 6 perform arithmetic operations which run in constant time so they can be ignored.
 
 \subsubsection{Time analyser}
-
 The time analyser works in a similar way to the distance analyser. 
 It also takes two points and a route and returns a score when only the time differences are considered.
 
 When determining time difference two things should be taken into consideration: the time the detour takes and the existing differences in time.
-The time the detour takes can be approximated by taking the time it takes to travel a distance unit and multiplying that with the distance of the detour.
+The time the detour takes can be approximated by multiplying the distance of the detour with the time it takes to travel a distance unit.
 
-Each point in the route has some information about when this point was visited.
-We can use this to determine the relative time distance between two points by using the following function.
+Each position in the route has information about when the location was visited.
+This can be used to determine the relative time distance between two points by using the following function:
 \begin{align*}
 	time : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
 	a, b &\mapsto | a_{time} - b_{time} |
 \end{align*}
 
 Now that we have the detour time and the relative time difference we can figure out how much of an inconvenience it is for on of the participants in this potential match.
-From the driver's perspective (s)he has to start driving at the normal time minus the detour to still make it on time.
+From the driver's perspective, the route starts at the normal time minus the detour time to still make it on time.
 This makes the detour the only inconvenience.
-If the other participant has to arrive earlier than (s)he would otherwise arrive then the driver would also have to take that into consideration making the inconvenience not only the detour but also the relative time.
+If the passenger has to arrive earlier than (s)he would otherwise arrive then the driver would also have to take that into consideration making the inconvenience not only the detour but also the relative time.
 
 From the passenger's perspective, the opposite is true when it comes to the relative time. 
 It is only an inconvenience when the driver must set them off before they need to arrive.
 
-It is also worth noting that if the relative time is the same as the time it takes to take the detour.
-Then the only inconvenience for the driver is the detour.
+It is also worth noting that if the relative time is the same as the time it takes to take the detour, the only inconvenience for the driver is the detour.
 
-This makes the formula for the total inconvenience when taking both participants into account is defined as follows.
+This makes the formula for the total inconvenience when taking both participants into account is defined as follows:
 
 \[ |d - t| + d \]
 
 where $d$ is the detour and $t$ is the relative time.
 
-Now, let us consider what would happen on the way back.
-The situation is now that the driver and passenger want to go home, but they want to leave at a specific time.
+Now, let us consider what would happen on the return route.
+The situation is now that the driver and passenger want to return to their original locations, but they want to leave at a specific time.
 The algorithm already solves this because if a specific arrival time is defined a specific departure time must also be defined.
 And the differences in time must be the same.
 
