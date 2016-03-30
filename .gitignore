@@ -34,3 +34,5 @@ master-blx.bib
 *.thm
 master.fdb_latexmk
 master.fls
+master.glo
+master.ist
