@@ -1,4 +1,4 @@
-The system uses an algorithm to determine whether two routes are a good fit.
+The system uses a custom developed algorithm to determine whether two routes are a good fit.
 This algorithm is developed as a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
 In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
 The criteria are practical to some extent, but the focus of the developed algorithm are the time and distance criteria.
@@ -12,10 +12,10 @@ To enhance the flexibility of the algorithm, the input is based on one route tha
 To summarize, the algorithm takes a route $r$ and two positions $s$ and $g$ as arguments, and returns a decimal value between 0 and 1.
 
 In the algorithm, there are two aspects to be evaluated: Time and distance.
-Assuming these can be solved with a similar algorithm that takes a route and two points as input and return a value from 0 to 1 depending on how closely they match, but only considering either one of the aspects.
+These are assumed to be evaluated by an algorithm that takes a route and two points as input and return a value from 0 to 1 depending on how closely they match, but only considering either one of the aspects.
 
 If an aspect is deemed unacceptable by being assessed a score of 0, the whole match is unacceptable and hence given the same final score.
-From the scores, the average score could be expressed as $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
+From the scores, the final score could be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
 To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
 These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
 
@@ -41,14 +41,14 @@ These constants enables weighting of the time and distance score independent of 
 \end{algorithm}
 
 The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
-Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic that was explained in the previous paragraph.
+Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic described in the previous paragraph.
 The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
 
 The following sections will cover the subproblems of the algorithm.
 First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
 
 \subsubsection{Distance analyser}
-This algorithm takes a route and two end points and assesses the score for the detour when only considering the distance.
+The distance analyser algorithm takes a route and two end points and assesses the score for the detour when only considering the distance.
 To do this, it is required to define how long the longest acceptable detour should be.
 The algorithm also needs a way of calculating the distance between two discrete locations, which can be performed by the function for euclidean distances.
 This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to denote the set of all possible locations:
@@ -77,22 +77,22 @@ This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to 
 
 The distance analyser algorithm, as seen in Algorithm \ref{alg:distanalyser}, finds the points on the route that are closest to the start and end points.
 From those points, the algorithm approximates the detour required to take by the driver to pick up the passenger.
-The approximation is rough as it assumes that the driver wants to drive back to the original road and that a direct path from the route to the start and goal point exists.
-This makes the final score for the distance a pessimistic evaluation  of the detour needed.
+The approximation is rough as it assumes that the driver continues on the original route and that a direct path from the route to the start and goal point exists.
+This makes the final score for the distance a pessimistic evaluation of the detour needed.
 
-The final score for the distance analyser is calculated by taking the total detour and dividing it by the length of the largest acceptable detour.
+The final score for the distance analyser is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
 This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
 We remember that Algorithm \ref{alg:timedistanalyser} expected a value that less than zero when it was deemed unacceptable, so the value is inverted by subtracting it from one.
 
-Because of line 2 and 3, where the whole route should be iterated through, the complexity of the algorithm is $O(|r|)$ where $|r|$ is the number of points in $r$.
-Line 4 to 6 perform arithmetic operations which run in constant time so they can be ignored.
+Because of line 2 and 3, where the whole route should be iterated through, the complexity of the algorithm is $O(|r|)$ where $|r|$ is the number of positions in route $r$.
+Line 4 to 6 perform arithmetic operations that run in constant time, and can be ignored when describing the asymptotic notation.
 
 \subsubsection{Time analyser}
-The time analyser works in a similar way to the distance analyser. 
-It also takes two points and a route and returns a score when only the time differences are considered.
+The time analyser algorithm works similarly as the distance analyser algorithm. 
+It is also designed to take two points and a route as input and to return a score of only the time differences.
 
-When determining time difference two things should be taken into consideration: the time the detour takes and the existing differences in time.
-The time the detour takes can be approximated by multiplying the distance of the detour with the time it takes to travel a distance unit.
+When determining time difference two things should be taken into consideration: the detour duration and the existing differences in time.
+The detour duration can be approximated by multiplying the detour distance with the time it takes to travel a distance unit.
 
 Each position in the route has information about when the location was visited.
 This can be used to determine the relative time distance between two points by using the following function:
@@ -101,26 +101,28 @@ This can be used to determine the relative time distance between two points by u
 	a, b &\mapsto | a_{time} - b_{time} |
 \end{align*}
 
-Now that we have the detour time and the relative time difference we can figure out how much of an inconvenience it is for on of the participants in this potential match.
-From the driver's perspective, the route starts at the normal time minus the detour time to still make it on time.
-This makes the detour the only inconvenience.
-If the passenger has to arrive earlier than (s)he would otherwise arrive then the driver would also have to take that into consideration making the inconvenience not only the detour but also the relative time.
+The calculated detour time and relative time difference enables the approximation of the inconvenience the ridesharing is for the participants in the potential match.
+From the driver's perspective, the route starts at the normal time minus the detour duration to still make it on the usual time.
+This makes the detour the only inconvenience, in regards to time.
+If the passenger has to arrive earlier than otherwise, the driver would also have to take that into consideration making the inconvenience not only the detour but also the relative time.
 
 From the passenger's perspective, the opposite is true when it comes to the relative time. 
 It is only an inconvenience when the driver must set them off before they need to arrive.
 
-It is also worth noting that if the relative time is the same as the time it takes to take the detour, the only inconvenience for the driver is the detour.
+It is also worth noting that if the relative time is the same as the detour time, the only inconvenience for the driver is the detour.
 
-This makes the formula for the total inconvenience when taking both participants into account is defined as follows:
+The formula for the total inconvenience when taking both participants into account is then defined as the following:
 
 \[ |d - t| + d \]
 
 where $d$ is the detour and $t$ is the relative time.
 
+\iffalse
 Now, let us consider what would happen on the return route.
 The situation is now that the driver and passenger want to return to their original locations, but they want to leave at a specific time.
 The algorithm already solves this because if a specific arrival time is defined a specific departure time must also be defined.
 And the differences in time must be the same.
+\fi
 
 \begin{algorithm}
 	\caption{The Time Analyser pseudocode}
@@ -140,15 +142,15 @@ And the differences in time must be the same.
 	\end{algorithmic}
 \end{algorithm}
 
-Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser.
+Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser algorithm.
 Line 2 to 4 is reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that it sums the detours and multiplies the result with the distance to time translation.
 Line 5 takes the greatest time difference between the closest points.
-The reason for taking the greates value is the pessimistic approach again, and the delay will not be worse than that.
+The reason for choosing the greatest value again is the pessimistic approach, so that the delay will not be worse than that.
 
 The complexity is the same as in Algorithm \ref{alg:distanalyser} because of the similarity of the first few lines and the last lines are simple arithmetic operations. 
 The exceptions are $dist$, $time$, and $max$. 
 $time$ and $dist$ have already been described in detail in this and previous section and are considered to be $O(1)$ operations.
 $max$ takes in two values compares them and returns the largest of the two.
-This is also a constant operation and with that, we can determine that the time analyser algorihm is $O(|r|)$.
+This is also a constant operation and with that, we can determine that the time analyser algorithm is $O(|r|)$.
 
-This means that the main algorihm is also $O(|r|)$ which is eqviliant to $O(n)$.
+This means that the main algorithm is $O(|r|)$, the number of locations in a route, which is equivalent to $O(n)$.\todo{what is n?}
