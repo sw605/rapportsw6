@@ -1,0 +1,70 @@
+\subsection{Location Gathering}
+% metatext
+To get the user location in the background service\todo{describe BGS before this}, the Google Play Services is utilized.
+The Google Play Services can provide necessary information, due to the integration on the platform.
+
+% permissions
+First, to retrieve location information, the \texttt{manifest.xml} file must be edited as to acquire permissions to the course and fine location.
+When the manifest is set up correctly, the actual location retrieving can be performed.
+This is done by adding the following lines to the manifest:
+\begin{lstlisting}[language=XML]
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+\end{lstlisting}
+
+% gathering overview
+The location is retrieved by utilizing the \texttt{GoogleApiClient}, then converted to an \textit{aSTEP} location format, and finally stored on the device.
+
+
+% googleApiClient
+\textbf{Google API Client}\\
+Therefore, the \texttt{GoogleApiClient} is built and connected to when the \texttt{JobService} is created, hence performed in the \texttt{onCreate()} method, as the \texttt{JobService} thread only exists for the execution time of the contents.
+The \texttt{GoogleApiClient} is disconnected \texttt{onDestroy()} for the same reason.
+
+\begin{lstlisting}[language=Java]
+@Override
+public void onCreate() {
+	// Set the current Context to this
+	context = this;
+	// Builds the Google API Client to enable location
+	buildGoogleApiClient();
+	// Connects the Google API Client. It broadcasts to onConnect() when connected.
+	connectApi();
+	//Toast.makeText(this, "Background Service Created", Toast.LENGTH_LONG).show();
+}
+\end{lstlisting}
+
+% onConnected()
+The onConnected method.. blah...
+When the Android Location stored in \texttt{} is returned to the \texttt{onConnected(Bundle bundle)} method, the location is stored 
+
+
+% getCurrentLocation()
+\textbf{Get Location}\\
+To get the location of the device, the \texttt{getCurrentGLocation()} is called when the \texttt{onConnected(Bundle bundle)} receives the broadcast signal\todo{what?}.
+The \texttt{getCurrentGLocation()} returns the last known location, according to the \texttt{googleApiClient}, in the Android Location format.
+
+\begin{lstlisting}[language=Java]
+private Location getCurrentGLocation(){
+	Location tempGLocation = null;
+	
+	// Support Android M type permission handling
+	try {
+		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+		ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			Log.d("BGS-LOC", "pass permission test");
+			tempGLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+		}
+		
+		// Get the current googleApiClient/LocationServices location
+		tempGLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+		
+	}catch (Exception ex){
+	}
+
+return tempGLocation;
+}
+\end{lstlisting}
+
+
+
