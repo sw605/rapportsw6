@@ -1,3 +1,26 @@
+To show how the algorithm should work for different routes we introduce an example which can be seen on figure \ref{fig:algEx1}.
+\begin{figure}
+    \centering
+\input{figures/algorithmEx1.tex}
+    \caption{Alice, Bob, Carol and Eve.}
+    \label{fig:algEx1}
+\end{figure}
+The example introduces four user, each with one stable route in this example, in addition to the location of their routes, we also have their departure and arrival times, this can be seen in table \ref{timetable}.
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{User} & \textbf{Departure} & \textbf{Arrival} \\ \midrule
+Alice         & 07:20                   & 07:55                 \\
+Bob           & 07:35                   & 07:50                 \\
+Carol         & 08:05                   & 08:30                 \\
+Eve           & 07:30                   & 07:50                 \\ \bottomrule
+\end{tabular}
+\caption{The four users departure and arrival times}
+\label{timetable}
+\end{table}
+
+
 The system uses an algorithm to determine whether two routes are a good fit.
 This algorithm is developed as a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
 In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
