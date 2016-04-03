@@ -14,7 +14,7 @@ The \gls{rs} solution will need additional data storage to fulfill the defined s
 
 % btw, an RSS can be used for more! Match scores, etc.
 The \gls{astep} system is supposed to be kept as generalized and modular as possible, and when combined with the lacking user information storage, app specific data could also be stored together with the user information.
-The app specific data is information, such as match scores between routes and \todo{what else?}.
+The app specific data is information, such as match scores between routes and previous matched routes with a high score.
 
 
 % solution alternatives
@@ -25,9 +25,6 @@ The \gls{rs} server could store the extra user data and connect the user to the 
 % instanciate RSS (RideShare Server)
 The \gls{rs} server has two main purposes.
 Firstly, to store additional information about the system users, and secondly store the score for previously assessed scores between given stable routes.
-
-
-% actual design
 The different purposes and responsibilities of the parts depicted in Figure \ref{fig:s2systemdesign} will be elaborated in the following text.
 
 
@@ -42,8 +39,6 @@ The \gls{astep} system is also responsible for the basic user profile, consistin
 A user profile is used to identify location data, and to store other users' permissions to access the actual user's location data.
 The \gls{rs} server will be used to store additional information regarding users and routes.
 The user information that will be stored, is the additional contact information.
-The route information stored on the \gls{rs} server is the assessed ride share score for the routes. 
-
 
 \begin{figure}[!h]
 	\centering
