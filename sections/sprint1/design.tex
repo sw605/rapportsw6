@@ -72,7 +72,14 @@ As the user needs a user profile in the aSTEP system to use the app, the users m
 
 % In-app pages design
 Several screens are necessary to support the different parts of the app. 
-The app needs a screen for login, registering, presentation of matches, and a settings page, as can be seen in the figures in Figure \ref{fig:GUI-in-app}.
+The app needs a screen for login, registering, presentation of matches, and a settings screen, as can be seen in the figures in Figure \ref{fig:GUI-in-app}.
+
+As the application must have communication to the aSTEP server, which have an requirement of registration of users, it is necessary to have a register and login screen in the application. The username will be used as a identifier for the user, and it will be used both for the aSTEP server, but also for the application it self. It will be the identifier to differ between each user, and ensure users are matched up with other users correctly when comparing routes.
+
+The application must have a main screen, and it is chosen that should be the route match list. On this screen the user will be presented a list of other users, which most likely is a good match. The users listed should be in an descending order, with the highest rated match at the top. A short description about the users and match should be displayed, such as the users full name, phone number, the match score, and what day of the week the user drive the relevant route.
+
+A settings screen is needed because the users should have the option to change there initial information from when they registered. The settings screen also server as a screen where users can specify their preferences. Such information is, wherever the users have a car with X amout of seats and if the users is looking for, or giving a lift.
+In addition should there exist a navigation drawer from where the user can navigate around the application.
 
 \begin{figure}[h!]
 	\centering
@@ -90,5 +97,4 @@ The app needs a screen for login, registering, presentation of matches, and a se
 	\end{subfigure}
 	\caption{Draft of the in-app pages of the app.}\label{fig:GUI-in-app}
 \end{figure}
-
 
