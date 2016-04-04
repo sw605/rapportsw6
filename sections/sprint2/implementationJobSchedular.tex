@@ -1,13 +1,13 @@
-\subsection{JobSchedular}
+\subsection{JobScheduler}
 
-The JobSchedular works by getting a PendingIntent which contains information about what the user wants to happen and in what context.
-This is to ensure that any permission given is still available when the job is executed.
+A JobScheduler works by getting a PendingIntent which contains information about what the user wants to happen and in what context.\todo{what is the intention/contents of this sentence?}
+This is performed to ensure that any permission given is still available when the job is executed.\todo{source}
 
-When a job is handed to the JobSchedular, information about the nature of the scheduling is also provided.
+When a job\todo{what is a job?} is handed to the JobScheduler, information about the nature of the scheduling is also provided.
 This includes requirements that needs to be fulfilled before the job can run, how often the job should be executed, and how precise the timing of the job should be.
 
-The job itself can tell the schedular how sucessful the job was, and if the job was unsuccesful and should be rescheduled.
+The job itself can tell the scheduler how successful the job was, and if the job was unsuccessful and should be rescheduled.\todo{relevant?}
 
-In the app the job is implemented as an extention to the JobService class which provides the required interface for the JobSchedular called RideShareService.
-The class reroutes the call by the JobSchedular to a Handler class which handles the extention of the task in a seperate thread.
+In the app, the job is implemented as an extension to the JobService class which provides the required interface for the JobScheduler called RideShareService.
+The class reroutes the call by the JobScheduler to a Handler\todo{what is this?} class which handles the extension of the task in a separate thread.
 The contents of this handler will be further explained later. \todo{Check that this line is correct.}
