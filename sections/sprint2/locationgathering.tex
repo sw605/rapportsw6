@@ -1,7 +1,7 @@
 \subsection{Location Gathering}
 % metatext
 To get the user location in the background service\todo{describe BGS before this}, the Google Play Services is utilized.
-The Google Play Services can provide necessary information, due to the integration on the platform.
+The Google Play Services provides necessary location data, due to the integration on the platform.
 
 % permissions
 First, to retrieve location information, the \texttt{manifest.xml} file must be edited as to acquire permissions to the course and fine location.
@@ -13,16 +13,17 @@ This is done by adding the following lines to the manifest:
 \end{lstlisting}
 
 % gathering overview
-The location is retrieved by utilizing the \texttt{GoogleApiClient}, then converted to an \textit{aSTEP}\todo{agree on aSTEP writing} location format.
+The location is retrieved by utilizing the \texttt{GoogleApiClient}, then converted to an \gls{astep} location format.\todo{ensure this is documented}
 This prepares the location data to be sent to the aSTEP system.
 
 
 % googleApiClient
 \textbf{Google API Client}\\
 The \texttt{GoogleApiClient} is built and connected to when the \texttt{JobService} is created, hence performed in the \texttt{onCreate()} method, as the \texttt{JobService} thread only exists for the execution time of the contents.
-The \texttt{GoogleApiClient} is disconnected \texttt{onDestroy()} for the same reason.
+The \texttt{GoogleApiClient} is disconnected in the method \texttt{onDestroy()} when the thread is terminated.
 
-\begin{lstlisting}[language=Java]
+\iffalse
+\begin{lstlisting}[caption={onCreate()},label={lst:oncreate},language=Java]
 @Override
 public void onCreate() {
 	// Set the current Context to this
@@ -33,13 +34,16 @@ public void onCreate() {
 	connectApi();
 }
 \end{lstlisting}
+\fi
+
+
 
 % onConnected()
 The \texttt{onConnected(Bundle bundle)} method is called when the Google API Client is ready.
-When the client is ready, the \texttt{getCurrentGLocation()} is called, and the returned Android Location is stored in \texttt{currentGLocation}. 
+When the client is ready, the \texttt{getCurrentGLocation()}, which can be seen in \ref{lst:onconnected}, is called, and the returned Android Location is stored in \texttt{currentGLocation}. 
 The current Google location can then be stored in an aSTEP object, that later can be transmitted to the aSTEP system.
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[caption={onConnected()},label={lst:onconnected},language=Java]
 @Override
 public void onConnected(Bundle bundle) {
 	currentGLocation = getCurrentGLocation();
@@ -57,10 +61,10 @@ public void onConnected(Bundle bundle) {
 %To get the location of the device, the \texttt{getCurrentGLocation()} is called when the \texttt{onConnected(Bundle bundle)} receives the broadcast signal\todo{what?}.
 The \texttt{getCurrentGLocation()} returns the last known location, according to the \texttt{googleApiClient}, in the Android Location format.
 Before the location is gathered, because the target API is 23, the method needs to confirm the permissions required to acquire location data.
-This is performed in line 6 and 7.
+This is performed on line 6 and 7 seen on \ref{lst:getCurrentLocation}.
 The device location is gathered through the \texttt{FusedLocationApi.getLastLocation()} method, using the \texttt{googleApiClient} as argument.
 
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[caption={getCurrentLocation},label={lst:getCurrentLocation},language=Java]
 private Location getCurrentGLocation(){
 	Location tempGLocation = null;
 	
@@ -85,10 +89,9 @@ return tempGLocation;
 % aSTEP location
 \textbf{Convert to aSTEP location}\\
 The aSTEP location format contains the essential location information: latitude, longitude, accuracy, and a timestamp.
+The \ref{lst:asteplocation} takes an Android location format data, creates an aSTEP location instance based on the argument location, and returns the aSTEP location.
 
-The \texttt{convertToAstepLocation(Location gLocation)} takes an Android location format data, creates an aSTEP location instance based on the argument location, and returns the aSTEP location.
-
-\begin{lstlisting}[language=Java]
+\begin{lstlisting}[caption={ASTEPLocation()},label={lst:asteplocation},language=Java]
 private ASTEPLocation convertToAstepLocation(Location gLocation) {
 	Log.d("BGS-LOC", "convertToAstepLocation");
 	ASTEPLocation aLocation = new ASTEPLocation(gLocation.getLatitude(),
