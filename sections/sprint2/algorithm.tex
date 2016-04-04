@@ -30,17 +30,19 @@ Eve           & 07:30                   & 07:50                 \\ \bottomrule
 
 For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$.
 
-\subsubsection{The main algorithm}
+\subsubsection{Time Distance Analyser algorithm}
 To serve as an example, the algorithm should assess the score of Alice, on the way through route $r$, picking up person Bob, Carol or Eve, for each of their routes.
-The score represents the match of the routes of person $A$ and person $B$, and should express this as a decimal value from 0 to 1 which tells how good the match is, where 0 represents a bad match, a major detour, and 1 represents a perfect match, and requires no detour.
-To enhance the flexibility of the algorithm, the input is based on one route that is going to be traversed, and two locations, that possibly are part of the route.
-To summarize, the algorithm takes a route $r$ and two positions $s$ and $g$ as arguments, and returns a decimal value between 0 and 1.
+The score represents the match of the routes of Alice and each of the other, and should be expressed as a decimal value from 0 to 1 which tells how good the match is.
+0 represents a bad match, a major detour or times not compatible, and 1 represents a perfect match, and requires no detour.
+To enhance the flexibility of the algorithm, a comparison will both be made for a $r_1$ against $r_2$.
+To summarize, the algorithm takes a route $r$ and two positions to compare against; start ($s$), and goal ($g$) as arguments
+The algorithm then returns a decimal value between 0 and 1.
 
 In the algorithm, there are two aspects to be evaluated: Time and distance.
-These are assumed to be evaluated by an algorithm that takes a route and two points as input and return a value from 0 to 1 depending on how closely they match, but only considering either one of the aspects.
+These are assumed to be evaluated by two sub algorithms that both takes the route and two points as input and return a value from 0 to 1 depending on how closely they match..
 
-If an aspect is deemed unacceptable by being assessed a score of 0, the whole match is unacceptable and hence given the same final score.
-From the scores, the final score could be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
+If either time or distance is deemed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
+From the scores of the sub algorithms, the final score can be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
 To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
 These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
 
@@ -67,7 +69,7 @@ These constants enables weighting of the time and distance score independent of 
 
 The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
 Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic described in the previous paragraph.
-The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
+%%The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
 
 The following sections will cover the subproblems of the algorithm.
 First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
@@ -109,7 +111,7 @@ The final score for the distance analyser is calculated by taking the total deto
 This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
 We remember that Algorithm \ref{alg:timedistanalyser} expected a value that less than zero when it was deemed unacceptable, so the value is inverted by subtracting it from one.
 
-Because of line 2 and 3, where the whole route should be iterated through, the complexity of the algorithm is $O(|r|)$ where $|r|$ is the number of positions in route $r$.
+%Because of line 2 and 3, where the whole route should be iterated through, the complexity of the algorithm is $O(|r|)$ where $|r|$ is the number of positions in route $r$.
 Line 4 to 6 perform arithmetic operations that run in constant time, and can be ignored when describing the asymptotic notation.
 
 \subsubsection{Time analyser}
@@ -172,10 +174,12 @@ Line 2 to 4 is reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} wi
 Line 5 takes the greatest time difference between the closest points.
 The reason for choosing the greatest value again is the pessimistic approach, so that the delay will not be worse than that.
 
-The complexity is the same as in Algorithm \ref{alg:distanalyser} because of the similarity of the first few lines and the last lines are simple arithmetic operations. 
-The exceptions are $dist$, $time$, and $max$. 
-$time$ and $dist$ have already been described in detail in this and previous section and are considered to be $O(1)$ operations.
-$max$ takes in two values compares them and returns the largest of the two.
-This is also a constant operation and with that, we can determine that the time analyser algorithm is $O(|r|)$.
 
-This means that the main algorithm is $O(|r|)$, the number of locations in a route, which is equivalent to $O(n)$.\todo{what is n?}
+\todo{maybe fix/check up on complexty}
+%The complexity is the same as in Algorithm \ref{alg:distanalyser} because of the similarity of the first few lines and the last lines are simple arithmetic operations. 
+%The exceptions are $dist$, $time$, and $max$. 
+%$time$ and $dist$ have already been described in detail in this and previous section and are considered to be $O(1)$ operations.
+%$max$ takes in two values compares them and returns the largest of the two.
+%This is also a constant operation and with that, we can determine that the time analyser algorithm is $O(|r|)$.
+
+%This means that the main algorithm is $O(|r|)$, the number of locations in a route, which is equivalent to $O(n)$.\todo{what is n?}
