@@ -1,0 +1,13 @@
+\subsection{JobSchedular}
+
+The JobSchedular works by getting a PendingIntent which contains information about what the user wants to happen and in what context.
+This is to ensure that any permission given is still available when the job is executed.
+
+When a job is handed to the JobSchedular, information about the nature of the scheduling is also provided.
+This includes requirements that needs to be fulfilled before the job can run, how often the job should be executed, and how precise the timing of the job should be.
+
+The job itself can tell the schedular how sucessful the job was, and if the job was unsuccesful and should be rescheduled.
+
+In the app the job is implemented as an extention to the JobService class which provides the required interface for the JobSchedular called RideShareService.
+The class reroutes the call by the JobSchedular to a Handler class which handles the extention of the task in a seperate thread.
+The contents of this handler will be further explained later. \todo{Check that this line is correct.}
