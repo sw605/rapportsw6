@@ -49,3 +49,5 @@ At the current stage of the development of aSTEP, the following API functions ar
 	\label{tab:sprint2-api}
 \end{table}
 \todo{reference this table. Add information about the functions.}
+
+When using the aSTEP API a wide range of POST and GET will be available for us developers to user. One of the things to keep in mind when working with POST and GET is how the call should be executed. The API will provide a POST called "Update" which is the method to use when sending location data to the aSTEP core. When using this POST it is important to ensure the correct parameters is used. The call will accept location data as an GPS coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
