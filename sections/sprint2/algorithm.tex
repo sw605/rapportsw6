@@ -27,7 +27,7 @@ Eve           & 07:30                   & 07:50                 \\ \bottomrule
 \caption{The four users departure and arrival times}
 \label{timetable}
 \end{table}
-
+\todo{define length of routes}
 For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$.
 
 \subsubsection{Time Distance Analyser algorithm}
@@ -44,7 +44,7 @@ These are assumed to be evaluated by two sub algorithms that both takes the rout
 If either time or distance is deemed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
 From the scores of the sub algorithms, the final score can be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
 To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
-These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
+These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$. 
 
 \begin{algorithm}
 	\caption{The Time Distance Analyser pseudocode}
@@ -70,8 +70,9 @@ These constants enables weighting of the time and distance score independent of 
 The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
 Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic described in the previous paragraph.
 %%The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
+For our example we set $d_\gamma$ and $t_\gamma$ to respectively X and X, to . \todo{more here}
 
-The following sections will cover the subproblems of the algorithm.
+The following sections will cover the subproblems.
 First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
 
 \subsubsection{Distance analyser}
@@ -108,6 +109,7 @@ The approximation is rough as it assumes that the driver continues on the origin
 This makes the final score for the distance a pessimistic evaluation of the detour needed.
 
 The final score for the distance analyser is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
+For the example introduced in the beginning of this chapter we set the longest detour to be 20\% of Alice's total commute. \todo{more here}
 This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
 We remember that Algorithm \ref{alg:timedistanalyser} expected a value that less than zero when it was deemed unacceptable, so the value is inverted by subtracting it from one.
 
