@@ -1,5 +1,13 @@
+\subsection{Algorithm}
+The system uses a custom developed algorithm to determine whether two routes are a good fit.
+This algorithm is loosely based on a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
+In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
+The criteria are practical to some extent, but the focus of the \gls{rs} system are the time and distance criteria.
+A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
+A route is a chronological list of positions.
+
 To show how the algorithm should work for different routes we introduce an example which can be seen on figure \ref{fig:algEx1}.
-\begin{figure}
+\begin{figure}[!ht]
     \centering
 \input{figures/algorithmEx1.tex}
     \caption{Alice, Bob, Carol and Eve.}
@@ -20,17 +28,10 @@ Eve           & 07:30                   & 07:50                 \\ \bottomrule
 \label{timetable}
 \end{table}
 
-
-
-The system uses a custom developed algorithm to determine whether two routes are a good fit.
-This algorithm is developed as a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
-In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
-The criteria are practical to some extent, but the focus of the developed algorithm are the time and distance criteria.
-A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
-A route is a chronological list of positions.
+For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$.
 
 \subsubsection{The main algorithm}
-To serve as an example, the algorithm should assess the score of person $A$, on the way through route $r$, picking up person $B$, when person $B$ wants to go from the start position $s$ to the goal position $g$. 
+To serve as an example, the algorithm should assess the score of Alice, on the way through route $r$, picking up person Bob, Carol or Eve, for each of their routes.
 The score represents the match of the routes of person $A$ and person $B$, and should express this as a decimal value from 0 to 1 which tells how good the match is, where 0 represents a bad match, a major detour, and 1 represents a perfect match, and requires no detour.
 To enhance the flexibility of the algorithm, the input is based on one route that is going to be traversed, and two locations, that possibly are part of the route.
 To summarize, the algorithm takes a route $r$ and two positions $s$ and $g$ as arguments, and returns a decimal value between 0 and 1.
