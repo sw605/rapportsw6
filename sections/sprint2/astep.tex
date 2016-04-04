@@ -31,7 +31,7 @@ Accordingly, the communication is performed by requests to aSTEP.
 
 
 % api functions
-At the current stage of the development of aSTEP, the following API functions are available for user management and location services:
+At the current stage of the development of aSTEP, the following API functions are available form user management and location services:
 
 
 \begin{table}[]
@@ -50,4 +50,7 @@ At the current stage of the development of aSTEP, the following API functions ar
 \end{table}
 \todo{reference this table. Add information about the functions.}
 
-When using the aSTEP API a wide range of POST and GET will be available for us developers to user. One of the things to keep in mind when working with POST and GET is how the call should be executed. The API will provide a POST called "Update" which is the method to use when sending location data to the aSTEP core. When using this POST it is important to ensure the correct parameters is used. The call will accept location data as an GPS coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
+When using the aSTEP API it should be ensure to use the correct calls in the right way.
+The API is providing a POST under the name0 "PostLocationData", as listed above, which is the method to use when sending location data to the aSTEP core. When using this POST it is important to ensure the correct parameters is used.
+The call will accept location data as an GPS coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
+This is important as it is one of the first calls that will be used in this sprint.
