@@ -1,9 +1,8 @@
 \subsection{JobScheduler}
 The \texttt{JobScheduler} was chosen as the scheduler for the background service in Section \ref{ssec:periodictasks}.
 The \texttt{JobScheduler} works by scheduling Intents, that are operations to be performed. %what you would normally use to call different activities called an Intent.
-An Intent that is not yet executed, is called a \texttt{PendingIntent}.
-When the \texttt{PendingIntent} is finally performed some variables in the systems may have changed.
-And so the context might not be the same, therefore a \texttt{PendingIntent} also requires a reference to the context when it was created.
+An \texttt{Intent} that is not yet executed, is called a \texttt{PendingIntent}.
+When a \texttt{PendingIntent} is finally performed, variables in the systems may have been changed, hence the context might not be the correct, therefore a \texttt{PendingIntent} also requires a reference to the context when it was created.
 This is performed to ensure that any permission given to the app is still available when the \texttt{job} is executed.
 A \texttt{job} is a \texttt{PendingIntent} as described in Section \ref{ssec:periodictasks} and a set of requirements for when the intent should be executed.
 
@@ -12,16 +11,18 @@ This includes requirements that needs to be fulfilled before the job can run, ho
 
 %The job itself can tell the scheduler how successful the job was, and if the job was unsuccessful and should be rescheduled. \todo{relevant?}
 
-In the app, the job is implemented as an extension to the \texttt{JobService} class which provides the required interface for the \texttt{JobScheduler} called RideShareService.
-The class reroutes the call by the \texttt{JobScheduler} to a \texttt{Handler} class.
-This \texttt{Handler} class, as described by the official documentation \cite{handler}, allows the service to send a runnable object to the threads message queue.
-This is then executed in the UI thread for debugging.
-The contents of this handler will be further explained later. \todo{Check that this line is correct.}
-
 \begin{lstlisting}[language=Java]
 JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
 JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), RideShareService.class.getName()));
 builder.setPeriodic(10000);
 int response  = jobScheduler.schedule(builder.build());	
 \end{lstlisting}
+
+In the app, the job is implemented as an extension to the \texttt{JobService} class which provides the required interface for the \texttt{JobScheduler} called RideShareService.
+The class reroutes the call by the \texttt{JobScheduler} to a \texttt{Handler} class.
+This \texttt{Handler} class, as described by the official documentation \cite{handler}, allows the service to send a runnable object to the threads message queue.
+This is then executed in the UI thread for debugging.
+The contents of this handler will be further explained later. \todo{Check that this line is correct.}
+
+
 
