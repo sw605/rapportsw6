@@ -18,13 +18,10 @@ This \texttt{Handler} class, as described by the official documentation \cite{ha
 This is then executed in the UI thread for debugging.
 The contents of this handler will be further explained later. \todo{Check that this line is correct.}
 
-\lstlisting[language=Java]{
+\begin{lstlisting}[language=Java]
 JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
 JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), RideShareService.class.getName()));
 builder.setPeriodic(10000);
-int response  = jobScheduler.schedule(builder.build());
-if(response<=0) {
-	Log.e("MainActivity", "Failed to start Job '" + 1 + "'. Recived error code '" + response + "'");
-}	
-}
+int response  = jobScheduler.schedule(builder.build());	
+\end{lstlisting}
 
