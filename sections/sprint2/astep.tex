@@ -13,25 +13,35 @@ However, the only relevant part for the rideshare solution is the API.
 
 % What is stored in aSTEP
 The aSTEP system will store information regarding location data, and basic user information. 
-The data stored in the aSTEP system, relevant to this project solution, is:
-\begin{itemize}
-	\item Location data consisting of userID, routeID, longitude, latitude and timestamp
-	\item Username
-	\item Password
-\end{itemize}
-\todo{D: table with astep specifications?}
+The data stored in the aSTEP system, relevant to this project solution, is shown in Table \ref{tab:storedinastep}.
+
+% Stored in aSTEP: storedinastep
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l}
+		Object & Description and properties \\
+		\hline
+		Location & Longitude, latitude, timestamp, routeID, userID \\
+		Username & Display and reference name of the user \\
+		Password & The authentication key of a user
+	\end{tabular}
+	\caption{Properties stored in the aSTEP system.}
+	\label{tab:storedinastep}
+\end{table}
 
 The aSTEP user management system does not provide storage of data regarding contact information nor profile picture for aSTEP users. 
 %This affects the rideshare solution, as there must be an external unit to store the aforementioned attributes. 
 
 
 % How to cummunicate with aSTEP
-The communication with aSTEP is done through a REST\todo{reference} API over Hypertext Transfer Protocol.
-Accordingly, the communication is performed by requests to aSTEP. 
+The communication with aSTEP is done through a REST API over Hypertext Transfer Protocol, decided in agreement between the aSTEP project groups.
+REST is an abbreviation of representational state transfer, and is a communications protocol that utilizes HTTP for the create, read, update and delete functions \cite{REST}.
+Accordingly, the communication is performed by making queries to the aSTEP system. 
 
 
 % api functions
-At the current stage of the development of aSTEP, the following API functions are available for user management and location services:
+At the current stage of the development of aSTEP, the following API functions are available for user management and location services are listed in Table \ref{tab:sprint2-api}.
+The relevant functions for the RideShare app are PostLocationData, to store the users' location in the aSTEP system, as well as the CreateUser, UpdatePassword, GetToken, EditPrivacySettings and access settings. The last ones are user management functions in aSTEP, where the names are self-explanatory, except GetToken which is the login function.
 
 
 \begin{table}[]
@@ -48,4 +58,3 @@ At the current stage of the development of aSTEP, the following API functions ar
 	\caption{Currently planned aSTEP API functions.}
 	\label{tab:sprint2-api}
 \end{table}
-\todo{reference this table. Add information about the functions.}
