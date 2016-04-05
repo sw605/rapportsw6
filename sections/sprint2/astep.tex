@@ -5,35 +5,35 @@ The analysis is based on the current development and planning of the API and oth
 
 % aSTEP organization - groups
 The status and intended functions are established in collaboration with the other project groups responsible for the aSTEP system side of the development. 
-The main groups involved are the user management group and outdoor location based services group.
+The main groups we are involved with are the user management group and outdoor location based services groups.
 
 % What does the aSTEP system look like?
-The current design of the aSTEP system is consisting of an API that apps and other external devices can communicate with, and a backend with user management and location based services.
-However, the only relevant part for the rideshare solution is the API.
+The current design of the aSTEP system is consisting of an API that apps and other external devices can communicate with, and a backend with user management and location based services, which is stored in a database system.
+However, the only relevant part for the \gls{rs} solution is the API, as the lower level of the aSTEP core is administrated by other groups.
 
 % What is stored in aSTEP
 The aSTEP system will store information regarding location data, and basic user information. 
 The data stored in the aSTEP system, relevant to this project solution, is:
 \begin{itemize}
-	\item Location data consisting of userID, routeID, longitude, latitude and timestamp
+	\item Location data consisting of userID, routeID, a set of GPS coordinates and timestamp.
 	\item Username
 	\item Password
 \end{itemize}
-\todo{D: table with astep specifications?}
 
-The aSTEP user management system does not provide storage of data regarding contact information nor profile picture for aSTEP users. 
-%This affects the rideshare solution, as there must be an external unit to store the aforementioned attributes. 
-
+The aSTEP user management system does not provide storage of data regarding contact information for aSTEP users.
+The only information stored is the username and password to keep the aSTEP core as simple as possible.
+Additional information that is required to make the app work as intended is each of the app groups own responsibility.
+The aSTEP users is made to ensure the correct permissions is giving to the correct user, which ensures a higher level of security.
+An API call can not be done whiteout the user first being authenticated with a valid login.
 
 % How to cummunicate with aSTEP
 The communication with aSTEP is done through a REST\todo{reference} API over Hypertext Transfer Protocol.
-Accordingly, the communication is performed by requests to aSTEP. 
+Accordingly, the communication is performed by requests to aSTEP.
+The aSTEP core will not be able to push information, which means that every communication must be done as a request from the device, where the aSTEP server then will response.
 
 
 % api functions
 At the current stage of the development of aSTEP, the following API functions are available form user management and location services:
-
-
 \begin{table}[]
 	\centering
 	\begin{tabular}{ll}
@@ -51,6 +51,6 @@ At the current stage of the development of aSTEP, the following API functions ar
 \todo{reference this table. Add information about the functions.}
 
 When using the aSTEP API it should be ensure to use the correct calls in the right way.
-The API is providing a POST under the name0 "PostLocationData", as listed above, which is the method to use when sending location data to the aSTEP core. When using this POST it is important to ensure the correct parameters is used.
+The API is providing a POST-request under the name "PostLocationData", as listed in \ref{tab:sprint2-api}, which is the method to use when sending location data to the aSTEP core. When using this POST it is important to ensure the correct parameters is used.
 The call will accept location data as an GPS coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
 This is important as it is one of the first calls that will be used in this sprint.
