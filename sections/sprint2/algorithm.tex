@@ -16,21 +16,21 @@ To show how the algorithm should work for different routes we introduce an examp
 The example introduces four user, each with one stable route in this example, in addition to the location of their routes, we also have their departure and arrival times, this can be seen in table \ref{timetable}.
 \begin{table}[]
 \centering
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-\textbf{User} & \textbf{Departure} & \textbf{Arrival} \\ \midrule
-Alice         & 07:20                   & 07:55                 \\
-Bob           & 07:35                   & 07:50                 \\
-Carol         & 08:05                   & 08:30                 \\
-Eve           & 07:30                   & 07:50                 \\ \bottomrule
+\textbf{User} & \textbf{Departure} & \textbf{Arrival} & \textbf{Distance} 	\\ \midrule
+Alice         & 07:20                   & 07:55       & 36.5 km 			\\
+Bob           & 07:35                   & 07:50       & 14 km  		  		\\
+Carol         & 08:05                   & 08:30       & 15 km         		\\
+Eve           & 07:30                   & 07:50       & 18 km         		\\ \bottomrule
 \end{tabular}
-\caption{The four users departure and arrival times}
+\caption{The four users departure and arrival times as well as their distances.}
 \label{timetable}
 \end{table}
-\todo{define length of routes}
+
 For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$.
 
-\subsubsection{Time Distance Analyser algorithm}
+\subsubsection{Time Distance Analyser Algorithm}
 To serve as an example, the algorithm should assess the score of Alice, on the way through route $r$, picking up person Bob, Carol or Eve, for each of their routes.
 The score represents the match of the routes of Alice and each of the other, and should be expressed as a decimal value from 0 to 1 which tells how good the match is.
 0 represents a bad match, a major detour or times not compatible, and 1 represents a perfect match, and requires no detour.
@@ -44,10 +44,12 @@ These are assumed to be evaluated by two sub algorithms that both takes the rout
 If either time or distance is deemed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
 From the scores of the sub algorithms, the final score can be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
 To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
-These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$. 
+These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
+
+For our example we simply set both $d_\gamma$ and $t_\gamma$ to 1. 
 
 \begin{algorithm}
-	\caption{The Time Distance Analyser pseudocode}
+	\caption{The Time Distance Analyser Pseudocode}
 	\label{alg:timedistanalyser}
 	\begin{algorithmic}[1]
 		\Require 
@@ -70,8 +72,6 @@ These constants enables weighting of the time and distance score independent of 
 The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
 Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic described in the previous paragraph.
 %%The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
-For our example we set $d_\gamma$ and $t_\gamma$ to respectively X and X, to . \todo{more here}
-
 The following sections will cover the subproblems.
 First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
 
