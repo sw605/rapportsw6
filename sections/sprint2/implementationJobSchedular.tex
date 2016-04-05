@@ -1,13 +1,19 @@
 \subsection{JobScheduler}
+The JobScheduler was chosen as the schedular for the background service in Section \ref{ssec:periodictasks}.
+It works by delaying what you would normally use to call different activities called an Intent.
+The delayed Intent is called a PendingIntent.
+When the PendingIntent is finally performed some variables in the systems may have changed.
+And so the context might not be the same, therefore a PendingIntent also requires a reference to the context when it was created.
+This is performed to ensure that any permission given to the app is still available when the job is executed.
+A job is a PendingIntent as described in Section \ref{ssec:periodictasks} and a set of requirements for when the intent should be executed.
 
-A JobScheduler works by getting a PendingIntent which contains information about what the user wants to happen and in what context.\todo{what is the intention/contents of this sentence?}
-This is performed to ensure that any permission given is still available when the job is executed.\todo{source}
-
-When a job\todo{what is a job?} is handed to the JobScheduler, information about the nature of the scheduling is also provided.
+When a job is handed to the JobScheduler, information about the nature of the scheduling is also provided.
 This includes requirements that needs to be fulfilled before the job can run, how often the job should be executed, and how precise the timing of the job should be.
 
-The job itself can tell the scheduler how successful the job was, and if the job was unsuccessful and should be rescheduled.\todo{relevant?}
+%The job itself can tell the scheduler how successful the job was, and if the job was unsuccessful and should be rescheduled. \todo{relevant?}
 
 In the app, the job is implemented as an extension to the JobService class which provides the required interface for the JobScheduler called RideShareService.
-The class reroutes the call by the JobScheduler to a Handler\todo{what is this?} class which handles the extension of the task in a separate thread.
+The class reroutes the call by the JobScheduler to a Handler class.
+This Handler class, as described by the official documentation \cite{handler}, allows the service to send a runnable object to the theads message queue.
+This is then executed in the UI thread for debugging.
 The contents of this handler will be further explained later. \todo{Check that this line is correct.}
