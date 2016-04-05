@@ -197,16 +197,18 @@ Line 5 takes the greatest time difference between the closest points.
 The reason for choosing the greatest value is to take a pessimistic approach, so the real delay will not be worse than the calculated.
 
 For the Alice example, defining the speed as constant through the whole route is preferable to keep it simple.
-Alice travels 36.5 km in 35 minutes, this gives a speed of  $\frac{36.5 km}{35 min} = 1.043 \frac{km}{min} $.
+Alice travels 36.5 km in 35 minutes, this gives a pace of  $\frac{35 min}{36.5 km} = 0.959\frac{min}{km} $.
+For this example the acceptable time difference is set to 15 minutes $\delta = 15$.
+The time analyser algorithm is applied to the example with the aforementioned data, the result can be seen in Table \ref{tbl:time}.
 
 \begin{table}[!ht]
 \centering
 \begin{tabular}{@{}llll@{}}
 \toprule
 \textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} 	\\ \midrule
-Bob         	& 3.57 km        & 1.85 km	    	& 0.5495 			\\
-Carol         	& 4.12 km        & 0 km       		& 0.6086        		\\
-Eve           	& 9.62 km        & 4.12 km		    & -0.5053        		\\ \bottomrule
+Bob         	& 5m:12s       & 1.85 km	    & 0.5495 			\\
+Carol         	& 3m:57s       & 0 km       	& 0.6086        		\\
+Eve           	& 13m:11s      & 4.12 km		& -0.5053        		\\ \bottomrule
 \end{tabular}
 \caption{The four users departure and arrival times as well as their distances.}
 \label{tbl:time}
