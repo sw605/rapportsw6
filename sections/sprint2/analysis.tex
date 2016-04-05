@@ -27,14 +27,14 @@ There are also properties of the user itself, like a description and a picture, 
 
 \subsection{Android Development Platform}
 When developing Android applications one of the first choices to consider is which API levels to target \cite{usesSDK}.
-The ´´\textit{API Level is an integer value that uniquely identifies the framework API revision offered by a version of the Android platform.}'' according to Android Developers \cite{usesSDK}.
+The ``\textit{API Level is an integer value that uniquely identifies the framework API revision offered by a version of the Android platform.}'' according to Android Developers \cite{usesSDK}.
 The distribution of the Android version levels are shown in \ref{fig:dashboard}.
 
-´´\textit{The manifest file presents essential information about your app to the Android system, information the system must have before it can run any of the app's code.}'', according to Android Developers \cite{androidManifest}.
+``\textit{The manifest file presents essential information about your app to the Android system, information the system must have before it can run any of the app's code.}'', according to Android Developers \cite{androidManifest}.
 The manifest requires to specify the API level for three definitions: minimum, target and maximum. 
 The target and max versions requires few consideration to determine.
-The "targetSdkVersion" reflects the version to which the app is developed and tested against, without enabling compatibility behaviors.
-The "maxSdkVersion" reflects the highest API level that an app is designed to run.
+The ``targetSdkVersion'' reflects the version to which the app is developed and tested against, without enabling compatibility behaviors.
+The ``maxSdkVersion'' reflects the highest API level that an app is designed to run.
 Both of these are set to the highest API level available during the start of the development, which is API version 23.
 
 \begin{figure}[h!]
@@ -44,7 +44,7 @@ Both of these are set to the highest API level available during the start of the
 	\label{fig:dashboard}
 \end{figure}
 
-The last API level which needs to be specified is the "minSdkVersion".
+The last API level which needs to be specified is the ``minSdkVersion''.
 This entry specifies the lowest API level which an app supports.
 A cause of this is that every device with an API level lower than the specified minSdkVersion will not be compatible with the app.
 Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
