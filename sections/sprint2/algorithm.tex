@@ -6,11 +6,11 @@ The criteria are practical to some extent, but the focus of the \gls{rs} system 
 A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
 A route is a chronological list of positions.
 
-To show how the algorithm should work for different routes we introduce an example which can be seen on figure \ref{fig:algEx1}.
+To illustrate how the algorithm should work for different routes an example is introduced, this example can be seen on Figure \ref{fig:algEx1}.
 \begin{figure}[!ht]
     \centering
 \input{figures/algorithmEx1.tex}
-    \caption{Alice, Bob, Carol and Eve.}
+    \caption{Alice, Bob, Carol and Eve's stable routes. Each grid represent a 5$\times$5 km area.}
     \label{fig:algEx1}
 \end{figure}
 The example introduces four user, each with one stable route in this example, in addition to the location of their routes, we also have their departure and arrival times, this can be seen in table \ref{timetable}.
@@ -49,7 +49,7 @@ These constants enables weighting of the time and distance score independent of 
 For our example we simply set both $d_\gamma$ and $t_\gamma$ to 1. 
 
 \begin{algorithm}
-	\caption{The Time Distance Analyser Pseudocode}
+	\caption{Time Distance Analyser Pseudocode}
 	\label{alg:timedistanalyser}
 	\begin{algorithmic}[1]
 		\Require 
@@ -72,6 +72,7 @@ For our example we simply set both $d_\gamma$ and $t_\gamma$ to 1.
 The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
 Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic described in the previous paragraph.
 %%The complexity of the algorithm is dependent on the calls on lines 2 and 3, because the rest of the algorithm is input independent, and therefore $O(1)$, if we ignore line 2 and 3.
+
 The following sections will cover the subproblems.
 First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
 
@@ -87,7 +88,7 @@ This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to 
 \end{align*}
 
 \begin{algorithm}
-	\caption{The Distance Analyser pseudocode}
+	\caption{Distance Analyser pseudocode}
 	\label{alg:distanalyser}
 	\begin{algorithmic}[1]
 		\Require 
@@ -96,8 +97,8 @@ This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to 
 		\Function{DistanceAnalyser}{$r, s, g$}
 			\State let $r_s$ be the closest point to $s$ in $r$
 			\State let $r_g$ be the closest point to $g$ in $r$
-			\State $d_s\gets 2\times dist(r_s, s)$\Comment Pickup detour distance
-			\State $d_g\gets 2\times dist(r_g, g)$\Comment Set off detour distance
+			\State $d_s\gets dist(r_s, s)$\Comment Pickup detour distance
+			\State $d_g\gets dist(r_g, g)$\Comment Set off detour distance
 			\State\Return $1-\frac{d_s + d_g}{\beta}$
 		\EndFunction
 	\end{algorithmic}
@@ -109,12 +110,31 @@ The approximation is rough as it assumes that the driver continues on the origin
 This makes the final score for the distance a pessimistic evaluation of the detour needed.
 
 The final score for the distance analyser is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
-For the example introduced in the beginning of this chapter we set the longest detour to be 20\% of Alice's total commute. \todo{more here}
 This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
 We remember that Algorithm \ref{alg:timedistanalyser} expected a value that less than zero when it was deemed unacceptable, so the value is inverted by subtracting it from one.
 
+For the example introduced in the beginning of this chapter the longest detour is set to be 25\% of Alice's total commute and Alice's route is modeled  as the line  $y = 4/7-\frac{2 x}{7}$.
+It is assumed that Alice's route have tracking points in every of the line, and therefore a line to point distance calculation is used in this example, this mean $d_s$ and $d_g$ will be calculated simultaneously as the distance is calculated.
+This gives the the results seen in Table \ref{tbl:distance} when applying the distance algorithm in Algorithm \ref{alg:distanalyser}.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{User} 	& \textbf{$d_s$} & \textbf{$d_g$} 	& \textbf{return value} 	\\ \midrule
+Bob         	& 3.57 km        & 1.85 km	    	& 0.5495 			\\
+Carol         	& 4.12 km        & 0 km       		& 0.6086        		\\
+Eve           	& 9.62 km        & 4.12 km		    & -0.5053        		\\ \bottomrule
+\end{tabular}
+\caption{The four users departure and arrival times as well as their distances.}
+\label{tbl:distance}
+\end{table}
+
+As can be seen in Table \ref{tbl:distance} the results for the distance analyser gives the best result for Carol, closely followed by Bob while Carol yields negative result since Alice's detour becomes longer than the acceptable 25\%. 
+
 %Because of line 2 and 3, where the whole route should be iterated through, the complexity of the algorithm is $O(|r|)$ where $|r|$ is the number of positions in route $r$.
-Line 4 to 6 perform arithmetic operations that run in constant time, and can be ignored when describing the asymptotic notation.
+%Line 4 to 6 perform arithmetic operations that run in constant time, and can be ignored when describing the asymptotic notation.
+
 
 \subsubsection{Time analyser}
 The time analyser algorithm works similarly as the distance analyser algorithm. 
@@ -154,7 +174,7 @@ And the differences in time must be the same.
 \fi
 
 \begin{algorithm}
-	\caption{The Time Analyser pseudocode}
+	\caption{Time Analyser pseudocode}
 	\label{alg:timeanalyser}
 	\begin{algorithmic}[1]
 		\Require 
