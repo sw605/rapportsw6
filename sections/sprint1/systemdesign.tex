@@ -33,7 +33,7 @@ A background service would enable the location data sampling and transfer to a s
 As seen in Figure \ref{fig:classDiagramSprint1Observer} the Observer class' main goal is to observe what activity the user is currently doing.
 In Google's API for android applications this is already a feature, so this will be used.
 If the activity is driving, the background service starts to store the locations with the RouteBuilder class.
-Locations are also a part of Google's API and includes longtitude, latitude and a time stamp.
+Locations are also a part of Google's API and includes longitude, latitude and a time stamp.
 When the Observer detects that the user stops driving, the Observer sends the route to the server.
 
 \begin{figure}[h]
