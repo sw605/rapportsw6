@@ -106,8 +106,8 @@ This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to 
 
 The distance analyser algorithm, as seen in Algorithm \ref{alg:distanalyser}, finds the points on the route that are closest to the start and end points.
 From those points, the algorithm approximates the detour required to take by the driver to pick up the passenger.
-The approximation is rough as it assumes that the driver continues on the original route and that a direct path from the route to the start and goal point exists.
-This makes the final score for the distance a pessimistic evaluation of the detour needed.
+The approximation assumes that the driver's new route distance will be the original length plus the distances to the passengers start point and goal point.
+This assumption does not represent every detour and thus this is an area for future optimization.
 
 The final score for the distance analyser is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
 This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
@@ -138,12 +138,12 @@ As can be seen in Table \ref{tbl:distance} the results for the distance analyser
 
 \subsubsection{Time analyser}
 The time analyser algorithm works similarly as the distance analyser algorithm. 
-It is also designed to take two points and a route as input and to return a score of only the time differences.
+It is also designed to take two points and a route as input and to return a score representing the time differences.
 
-When determining time difference two things should be taken into consideration: the detour duration and the existing differences in time.
+When determining time difference two things should be taken into consideration; the detour duration and the existing differences in time.
 The detour duration can be approximated by multiplying the detour distance with the time it takes to travel a distance unit.
 
-Each position in the route has information about when the location was visited.
+Each position in the drivers route has a timestamp for when the location was visited.
 This can be used to determine the relative time distance between two points by using the following function:
 \begin{align*}
 	time : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
@@ -151,9 +151,9 @@ This can be used to determine the relative time distance between two points by u
 \end{align*}
 
 The calculated detour time and relative time difference enables the approximation of the inconvenience the ridesharing is for the participants in the potential match.
-From the driver's perspective, the route starts at the normal time minus the detour duration to still make it on the usual time.
-This makes the detour the only inconvenience, in regards to time.
-If the passenger has to arrive earlier than otherwise, the driver would also have to take that into consideration making the inconvenience not only the detour but also the relative time.
+From the driver's perspective, the route starts at the normal time minus the detour duration to still arrive on the usual time.
+This makes the detour the only inconvenience in regards to time.
+If the passenger has to arrive earlier than otherwise, the driver would also have to take that into consideration making the inconvenience not only the detour, but also the relative time.
 
 From the passenger's perspective, the opposite is true when it comes to the relative time. 
 It is only an inconvenience when the driver must set them off before they need to arrive.
@@ -184,7 +184,7 @@ And the differences in time must be the same.
 		\Function{TimeAnalyser}{$r, s, g$}
 			\State let $r_s$ be the closest point to $s$ in $r$
 			\State let $r_g$ be the closest point to $g$ in $r$
-			\State $d \gets (2\times dist(r_s,s) + 2\times dist(r_g,g))\times\gamma$\Comment{The total detour time}
+			\State $d \gets (dist(r_s,s) + dist(r_g,g))\times\gamma$\Comment{The total detour time}
 			\State $t \gets max(time(r_s, s), time(r_g, g))$\Comment{The largest time difference}
 			\State\Return $1-\frac{|d - t| + d}{\delta}$
 		\EndFunction
@@ -194,10 +194,28 @@ And the differences in time must be the same.
 Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser algorithm.
 Line 2 to 4 is reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that it sums the detours and multiplies the result with the distance to time translation.
 Line 5 takes the greatest time difference between the closest points.
-The reason for choosing the greatest value again is the pessimistic approach, so that the delay will not be worse than that.
+The reason for choosing the greatest value is to take a pessimistic approach, so the real delay will not be worse than the calculated.
 
+For the Alice example, defining the speed as constant through the whole route is preferable to keep it simple.
+Alice travels 36.5 km in 35 minutes, this gives a speed of  $\frac{36.5 km}{35 min} = 1.043 \frac{km}{min} $.
 
-\todo{maybe fix/check up on complexty}
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} 	\\ \midrule
+Bob         	& 3.57 km        & 1.85 km	    	& 0.5495 			\\
+Carol         	& 4.12 km        & 0 km       		& 0.6086        		\\
+Eve           	& 9.62 km        & 4.12 km		    & -0.5053        		\\ \bottomrule
+\end{tabular}
+\caption{The four users departure and arrival times as well as their distances.}
+\label{tbl:time}
+\end{table}
+
+\todo{fix table}
+\todo{finish writeup on time}
+\todo{end with TDA and result}
+\todo{ fix/check up on complexty}
 %The complexity is the same as in Algorithm \ref{alg:distanalyser} because of the similarity of the first few lines and the last lines are simple arithmetic operations. 
 %The exceptions are $dist$, $time$, and $max$. 
 %$time$ and $dist$ have already been described in detail in this and previous section and are considered to be $O(1)$ operations.
