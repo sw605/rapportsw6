@@ -113,7 +113,7 @@ The final score for the distance analyser is calculated by taking the total deto
 This results in a value between zero and one when the detour is less than the largest detour, and greater than one when the detour is longer.
 We remember that Algorithm \ref{alg:timedistanalyser} expected a value that less than zero when it was deemed unacceptable, so the value is inverted by subtracting it from one.
 
-For the example introduced in the beginning of this chapter the longest detour is set to be 25\% of Alice's total commute and Alice's route is modeled  as the line  $y = 4/7-\frac{2 x}{7}$.
+For the example introduced in the beginning of this chapter the longest detour is set to be 25\% of Alice's total commute and Alice's route is modeled  as the line  $y = \frac{4}{7}-\frac{2 x}{7}$.
 It is assumed that Alice's route have tracking points in every of the line, and therefore a line to point distance calculation is used in this example, this mean $d_s$ and $d_g$ will be calculated simultaneously as the distance is calculated.
 This gives the the results seen in Table \ref{tbl:distance} when applying the distance algorithm in Algorithm \ref{alg:distanalyser}.
 
@@ -206,15 +206,14 @@ The time analyser algorithm is applied to the example with the aforementioned da
 \begin{tabular}{@{}llll@{}}
 \toprule
 \textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} \\ \midrule
-Bob         	& 5m:12s       & 0			    & 0.5495 				\\
-Carol         	& 3m:57s       & -10.79	      	& 0.6086        		\\
-Eve           	& 13m:11s      & 10m			& -0.5053        		\\ \bottomrule
+Bob         	& 5m:12s       & 3m			    & 0.63				\\
+Carol         	& 3m:57s       & 35m	      	& -0.75       		\\
+Eve           	& 13m:11s      & 18m			& 0.10        		\\ \bottomrule
 \end{tabular}
 \caption{The detour time and time difference for Alice compared to the other users as well as the score of the TimeAnalyser for each route.}
 \label{tbl:time}
 \end{table}
 
-\todo{fix table}
 \todo{finish writeup on time}
 \todo{end with TDA and result}
 \todo{ fix/check up on complexity}
