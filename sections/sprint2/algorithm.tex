@@ -126,7 +126,7 @@ Bob         	& 3.57 km        & 1.85 km	    	& 0.5495 			\\
 Carol         	& 4.12 km        & 0 km       		& 0.6086        		\\
 Eve           	& 9.62 km        & 4.12 km		    & -0.5053        		\\ \bottomrule
 \end{tabular}
-\caption{The four users departure and arrival times as well as their distances.}
+\caption{The detour distance for Alice compared to the other users as well as the score of the DistanceAnalyser for each route.}
 \label{tbl:distance}
 \end{table}
 
@@ -205,12 +205,12 @@ The time analyser algorithm is applied to the example with the aforementioned da
 \centering
 \begin{tabular}{@{}llll@{}}
 \toprule
-\textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} 	\\ \midrule
-Bob         	& 5m:12s       & 1.85 km	    & 0.5495 			\\
-Carol         	& 3m:57s       & 0 km       	& 0.6086        		\\
-Eve           	& 13m:11s      & 4.12 km		& -0.5053        		\\ \bottomrule
+\textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} \\ \midrule
+Bob         	& 5m:12s       & 0			    & 0.5495 				\\
+Carol         	& 3m:57s       & -10.79	      	& 0.6086        		\\
+Eve           	& 13m:11s      & 10m			& -0.5053        		\\ \bottomrule
 \end{tabular}
-\caption{The four users departure and arrival times as well as their distances.}
+\caption{The detour time and time difference for Alice compared to the other users as well as the score of the TimeAnalyser for each route.}
 \label{tbl:time}
 \end{table}
 
