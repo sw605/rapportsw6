@@ -1,19 +1,19 @@
 \section{Test}
-The purpose of the test chapter is to document the examination of the current status and functionality of the implementation of the solution.
+The purpose of the test chapter is to document the examination of the current status and functionality of the implementation.
 The tested part of the solution, is the location gathering as a background service.
 
 
 \subsection{Background service}
 To assess the functionality of the background service, it was necessary to receive some kind of information, confirming that the service was actually running.
-The background service was tested by making an Android toast, that appeared each time the \texttt{jobScheduler} executed the \texttt{PendingIntent}.
+The background service was tested by making a simple console output, that got printed each time the \texttt{jobScheduler} executed the \texttt{PendingIntent}.
 
-In accordance with the implementation, the toast message appeared every 10 seconds, independent of the app being open, background or closed completely on the test device.
+In accordance with the implementation, the output appeared every 10 seconds, independent of the app being open, in the background or closed completely on the test device.
 This proved that the background service was functioning as intended.
 
 \subsection{Location gathering}
 The location gathering was also performed in the test of the background service.
 The location test was performed by trying to access the last known location in each scheduled \texttt{PendingIntent}, and to print the result in the debug log in the IDE.
-The test yielded unreliable results.
+The test yielded unreliable results. \todo{What result did we get? - and why are the unreliable}
 
 The background service was executed regularly, but the location was not available in a major part of the executions.
 The missing locations seemed to be caused by the \texttt{googleApiClient} not being connected, as the location gathering is performed in the \texttt{onConnected} method.
