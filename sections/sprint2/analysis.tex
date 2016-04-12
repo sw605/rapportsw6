@@ -1,9 +1,25 @@
 \section{Analysis}
-This section contains the analysis of app functionality, Android app development, ridesharing algorithms and communication with the aSTEP system.
+This section contains the analysis of app functionality, Android app development, \gls{rs} algorithms and communication with the aSTEP system.
 
 %temporary title
 \subsection{App functionality}
-% Interviews and shit
+% meta shit
+The app user interface is a low priority task during this project.
+However, the app needs basic functionality, according to the requirements.
+
+% User management
+To be able to separate different routes, and to assign them to their respective users, there has to be a user management system, so that each user has its own ID.
+
+% Ride matches
+The user should also be informed with relevant information of ride matches, so that the user can make a decision of sharing a ride or not.
+
+% User settings
+The user of the application should also be able to adjust their settings.
+The settings are preferences regarding different properties of ride sharing.
+The user should be able to decide if it wants to get a ride or give a ride or both.
+There are also properties of the user itself, like a description and a picture, that other users can access to decide if they want to share a ride with the named user.
+
+
 
 % other shit...
 
@@ -11,21 +27,32 @@ This section contains the analysis of app functionality, Android app development
 
 \subsection{Android Development Platform}
 When developing Android applications one of the first choices to consider is which API levels to target \cite{usesSDK}.
-The manifest requires to specify the API level \todo{elaborate} for three definitions: minimum, target and maximum. \todo{connect API level and SDK version}
+The ``\textit{API Level is an integer value that uniquely identifies the framework API revision offered by a version of the Android platform.}'' according to Android Developers \cite{usesSDK}.
+The distribution of the Android version levels are shown in \ref{fig:dashboard}.
 
-The target and max versions requires few consideration to choose.
-The "targetSdkVersion" reflects the version to which the app is developed and tested against, without enabling compatibility behaviors.
-The "maxSdkVersion" reflects the highest API level that an app is designed to run.
+``\textit{The manifest file presents essential information about your app to the Android system, information the system must have before it can run any of the app's code.}'', according to Android Developers \cite{androidManifest}.
+The manifest requires to specify the API level for three definitions: minimum, target and maximum. 
+The target and max versions requires few consideration to determine.
+The ``targetSdkVersion'' reflects the version to which the app is developed and tested against, without enabling compatibility behaviors.
+The ``maxSdkVersion'' reflects the highest API level that an app is designed to run.
 Both of these are set to the highest API level available during the start of the development, which is API version 23.
-\todo{add android dashboard figure}
 
-The last API level which needs to be specified is the "minSdkVersion".
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/android-chart-march.png}
+	\caption{Android version distribution, March 2016 \cite{androidDashboard}}
+	\label{fig:dashboard}
+\end{figure}
+
+The last API level which needs to be specified is the ``minSdkVersion''.
 This entry specifies the lowest API level which an app supports.
 A cause of this is that every device with an API level lower than the specified minSdkVersion will not be compatible with the app.
 Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
 For this project we choose to target a higher API level for to simplify the development process.
-At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 is 35,3\%.
+At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 (Android Lollipop) is 35,3\%.
 API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time for user interface, as API level 21 added support for Android's new material design style \cite{android5API}. Refraining from further backwards compatibility allows the project focus to be on the functionality of the app. 
+
+\input{sections/sprint2/periodictask.tex}
 
 % algorithm analysis if necessary
 \subsection{Algorithms for ridesharing}
@@ -34,3 +61,6 @@ API version 21 is chosen as the minSdkVerison, the main reason for this choice i
 % aSTEP system functionality analysis: communication with aSTEP
 \input{sections/sprint2/astep.tex}
 
+% Sprint 2 krav
+\subsection{Requirements for the second sprint}
+\input{sections/sprint2/sprint2krav.tex}
