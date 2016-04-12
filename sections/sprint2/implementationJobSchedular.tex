@@ -1,0 +1,32 @@
+\subsection{JobScheduler}
+The \texttt{JobScheduler} was chosen as the scheduler for the background service in Section \ref{ssec:periodictasks}.
+The \texttt{JobScheduler} works by scheduling Intents, that are operations to be performed. %what you would normally use to call different activities called an Intent.
+An \texttt{Intent} that is not yet executed, is called a \texttt{PendingIntent}.
+When a \texttt{PendingIntent} is finally executed, variables in the systems may have been changed, hence the context might not be the correct, therefore a \texttt{PendingIntent} also requires a reference to the context when it was created.
+This is performed to ensure that permissions given to the app are still available when the \texttt{job} is executed.
+A \texttt{job} is a \texttt{PendingIntent} as described in Section \ref{ssec:periodictasks} and a set of requirements for when the intent should be executed.
+
+When a job is handed to the \texttt{JobScheduler}, information about the nature of the scheduling is also provided.
+This includes requirements that needs to be fulfilled before the job can run, how often the job should be executed, and how precise the timing of the job should be.
+
+%The job itself can tell the scheduler how successful the job was, and if the job was unsuccessful and should be rescheduled. \todo{relevant?}
+
+\begin{lstlisting}[language=Java, label=jobScheduler, caption=The implementation of jobScheduler.]
+JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), RideShareService.class.getName()));
+builder.setPeriodic(10000);
+int response  = jobScheduler.schedule(builder.build());	
+\end{lstlisting}
+
+Listing \ref{jobScheduler} presents the implementation of \texttt{jobScheduler} in the \texttt{MainActivity} of the app.
+
+In the app, the job is implemented as an extension to the \texttt{JobService} class which provides the required interface for the \texttt{JobScheduler} called RideShareService.
+The class reroutes the call by the \texttt{JobScheduler} to a \texttt{Handler} class.
+This \texttt{Handler} class, as described by the official documentation \cite{handler}, allows the service to send a runnable object to the threads message queue.
+%This is then executed in the UI thread for debugging.
+%The contents of this handler will be further explained later. \todo{Check that this line is correct.}
+
+The implementation makes the location gathering be performed as a background service every 10 seconds.
+The interval is temporary, and will serve to test the implementation.
+
+
