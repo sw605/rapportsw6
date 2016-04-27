@@ -155,9 +155,9 @@ This can be used to determine the relative time distance between two points by u
 \end{align*}
 
 The calculated detour time and relative time difference enables an approximation of the inconvenience the ridesharing is for the participants in the potential match.
-From the driver's perspective, the route starts at the normal time minus the detour duration to still arrive on the usual time.
+From the driver's perspective, the route starts at the normal time minus the detour duration, this is to still arrive on the usual time at the destination.
 This makes the detour the only inconvenience in regards to time.
-If the passenger has to arrive earlier than otherwise, the driver would also have to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
+If the passenger has to arrive earlier than the driver, the driver would also have to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
 
 From the passenger's perspective, the opposite is true when it comes to the relative time. 
 It is only an inconvenience when the driver must set them off before they need to arrive.
@@ -168,7 +168,7 @@ The formula for the total inconvenience when taking both participants into accou
 
 \[ |d - t| + d \]
 
-where $d$ is the detour and $t$ is the relative time.
+where $d$ is the detour time and $t$ is the relative time.
 
 \iffalse
 Now, let us consider what would happen on the return route.
@@ -196,11 +196,11 @@ And the differences in time must be the same.
 \end{algorithm}
 
 Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser algorithm.
-Line 2 to 4 is reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that it sums the detours and multiplies the result with the distance to time conversion.
+Line 2 to 4 are reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that they sums the detours and multiplies the result with the distance to time conversion.
 Line 5 assigns the greatest time difference between the closest points to $t$.
 The reason for choosing the greatest value is to use a pessimistic approach, so that the real delay will not be worse than the calculated.
 
-For the Alice example, defining the speed as constant through the whole route is preferable to keep it simple.
+For the Alice example, defining the speed as constant through the whole route is preferable to keep the example more simple.
 Alice travels 36.5 km in 35 minutes, this gives a pace of  $\frac{35 min}{36.5 km} = 0.959\frac{min}{km} $.
 For this example the acceptable time difference is set to 15 minutes $\delta = 15$.
 The time analyser algorithm is applied to the example with the aforementioned data, the result can be seen in Table \ref{tbl:time}.
@@ -237,7 +237,7 @@ Eve           	& -0.505       & 0.10			& 0        				\\ \bottomrule
 \end{table}
 
 The results in Table \ref{tbl:timedist} shows that with the set detour limits in distance and time the only compatible match for Alice is Bob with a score of $0.59$. 
-Although Carol scored acceptably in distance, the difference in time is unacceptable, thus assessed a score of $0$.
+Although Carol scores acceptable in the distance analyser, the time difference is unacceptable thus assessed a score of $0$.
 Eve scores below 0 in the distance parameter and is therefore also given a final score of $0$.
 
 The two modifiers $d_\gamma$ and $t_\gamma$ were set to $1$ in this example, but these modifiers, along with the acceptable detours in time and distance, can be adjusted to adapt scores if the given outputs do not reflect the expected outcomes or the users' actual willingness to share rides in a given situation. 
