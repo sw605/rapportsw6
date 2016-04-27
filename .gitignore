@@ -36,3 +36,5 @@ master.fdb_latexmk
 master.fls
 master.glo
 master.ist
+diff.glo
+diff.ist

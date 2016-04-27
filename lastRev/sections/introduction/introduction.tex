@@ -1,0 +1,57 @@
+\chapter{Introduction}\label{ch:introduction}
+%Structure
+% Introduction
+% Problem domain & environment
+%	- Semester project, cooperation with other groups
+% Intention of the solution
+%	- Scope
+%	- Backend focus, not GUI and aesthetics
+%	- Advantages of such a solution
+% Transition to problem statement
+
+
+% Introduction - awesome first sentence
+Commuters are causing traffic jams in dense areas traveling similar routes, this project embarks the task of informing the individual commuters of other commuters traveling a similar path, so that they could share vehicle.
+A such task also seeks to reduce the commuters impact on the environment.
+
+
+\section{Project environment}
+% Problem domain and environment
+This project is part of a collaboration project, \gls{astep}, of the SW6F16 semester.
+The semester goal is to develop a location based service with accompanying applications that utilizes the service. 
+
+% Semester project environment + sprint description
+The \gls{astep} project is developed in 10 teams in the span of 4 sprints.
+The sprints are synchronization points of the project groups, and this report will contain documentation of each sprint chronologically.
+There are four sprints in the project period.
+The first sprint is analysis and collaboration development, the second and third are development sprints, and the fourth is intended for test and finalization.
+The 10 project groups are assigned to their respective tasks, with 7 project groups developing the core \gls{astep} service, while the remaining 3 are developing applications utilizing the system.
+
+
+
+\section{Problem domain}
+% Solution scope and definition
+The problem domain of this project is to design and develop a solution which utilize the \gls{astep} system, and can identify and help drivers and passengers with arranging ridesharing.
+The solution's goal is to provide ridesharing suggestions to the users of the solution.
+When referring to the term ridesharing in this report, it is referred to as the action of private persons sharing a car for the whole or a part of a route. 
+This definition is covered by the terms carpool and ad hoc ridesharing by \citet{doi:10.1080/01441647.2011.621557}.  
+
+% Intention of the solution
+%The solution's intention is to generate matches of ride sharing companions, and notify the respective drivers and passengers of the match, enabling them to contact each other and share rides.
+%The matches should be custom made for each user, i.e. proposing appropriate candidates for ride sharing, which will be defined later.
+The intention of this project is to produce a android app that utilizing the \gls{astep} system and based on historical location data should ease the possibility of using and arranging carpool-style ridesharing.
+
+The scope of such a project can be large and therefore it is chosen early to that the main focus will be to design and implement the basic system which then later can be expanded on.
+This focus revolves around develop and implementing an algorithm that can be utilized to asses if two users of the system should be paired for ridesharing.
+Hence the purpose of the application will be to propose appropriate candidates for ridesharing.
+Furthermore, other parts of the application such as graphical user interface is not prioritized, but is developed to be functional enough for test and practical purposes.
+
+% Solution contributions/advantages
+Such an application could be beneficial for the users in several ways. There could be environmental and economical savings, as the number of polluting cars driven is reduced as described in \cite{doi:10.1080/01441647.2011.621557}. The application would ideally decrease trafical problems such as traffic jam and thereby also being time-saving, and causing less frustration for the drivers.
+
+There are some potential for both social, environmental and economical benefits, as the app allows people meet each other and thus reduce the use of cars, gasoline and the load on the road system.
+
+The future aspect of this solution seem bright since it easily should modified to work for autonomous vehicles.
+
+% Transition to problem statement
+To define the actual problem, as to initiate the research and development, a concrete formulation is made.

@@ -1,0 +1,253 @@
+\subsection{Algorithm}
+The system uses a custom developed algorithm to determine whether two routes are a good fit.
+This algorithm is loosely based on a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
+In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
+The criteria are practical to some extent, but the focus of the \gls{rs} system are the time and distance criteria.
+A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
+A route is a chronological list of positions.
+
+To illustrate how the algorithm should work for different routes an example is introduced. The example can be seen in Figure \ref{fig:algEx1}.
+\begin{figure}[!ht]
+    \centering
+\input{figures/algorithmEx1.tex}
+    \caption{Alice, Bob, Carol and Eve's stable routes. Each grid represent a 5$\times$5 km area.}
+    \label{fig:algEx1}
+\end{figure}
+The example introduces four users, each with one stable route in this example. In addition to the location of their routes, we also have their departure and arrival times that can be seen in Table \ref{timetable}.
+\todo{overvej om vi skal skrive expected outcome heroppe}
+\begin{table}[]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{User} & \textbf{Departure} & \textbf{Arrival} & \textbf{Distance} 	\\ \midrule
+Alice         & 07:20                   & 07:55       & 36.5 km 			\\
+Bob           & 07:35                   & 07:50       & 14 km  		  		\\
+Carol         & 08:05                   & 08:30       & 15 km         		\\
+Eve           & 07:30                   & 07:50       & 18 km         		\\ \bottomrule
+\end{tabular}
+\caption{The four users departure and arrival times as well as their distances.}
+\label{timetable}
+\end{table}
+
+For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$.
+
+\subsubsection{Time Distance Analyser Algorithm}
+To serve as an example, the algorithm should assess the score of Alice, on the way through route $r$, picking up person Bob, Carol or Eve, for each of their routes.
+The score represents the match of the routes of Alice and each of the other, and should be expressed as a decimal value from 0 to 1 which tells how good the match is.
+0 represents a bad match, a major detour or not compatible times, and 1 represents a perfect match, and requires no detour.
+A comparison will be made for $r_1$ against $r_2$.
+To summarize, the algorithm takes a route $r$ and two positions to compare against; start ($s$), and goal ($g$) as arguments.
+The algorithm then returns a decimal value between 0 and 1.
+
+In the algorithm, there are two aspects to be evaluated: Time and distance.
+These are assumed to be evaluated by two sub algorithms that both takes the route and two points as input and return a value from 0 to 1 depending on how closely they match.
+
+If either time or distance is deemed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
+From the scores of the sub algorithms, the final score can be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
+To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
+These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
+
+For our example we simply set both $d_\gamma$ and $t_\gamma$ to 1. 
+
+\begin{algorithm}
+	\caption{Time Distance Analyser Pseudocode}
+	\label{alg:timedistanalyser}
+	\begin{algorithmic}[1]
+		\Require 
+		\Statex let $d_\gamma$ be the modifier for distance in $\mathbb{R}_{>0}$
+		\Statex let $t_\gamma$ be the modifier for time in $\mathbb{R}_{>0}$
+		\Statex 
+		\Function{TimeDistanceAnalyser}{$r, s, g$}
+			\State $d\gets$\Call{DistanceAnalyser}{$r, s, g$}
+			\State $t\gets$\Call{TimeAnalyser}{$r, s, g$}
+			
+			\If{$d > 0 \wedge t > 0$}
+				\State \Return $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$
+			\Else
+				\State\Return 0
+			\EndIf
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+The final algorithm can be seen in Algorithm \ref{alg:timedistanalyser}.
+Line 2 and 3 are calls to the algorithms that solve the subproblems of scoring the time and location, and line 4 to 8 is the logic described in the previous paragraph.
+
+The following sections will cover the sub algorithms.
+First, the distance analyser algorithm will be described, followed by the time analyser algorithm.
+
+\subsubsection{Distance analyser}
+The distance analyser algorithm takes a route and two end points and assesses the score for the detour when only considering the distance.
+To do this, it is required to define how long the longest acceptable detour should be.
+The algorithm also needs a way of calculating the distance between two discrete locations, which can be performed by the function for euclidean distances.
+This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to denote the set of all possible locations:
+
+\begin{align*}
+	dist : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
+	a, b &\mapsto \sqrt{(a_{latitude} - b_{latitude})^2 + (a_{longitude} - b_{longitude})^2}
+\end{align*}
+
+\begin{algorithm}
+	\caption{Distance Analyser pseudocode}
+	\label{alg:distanalyser}
+	\begin{algorithmic}[1]
+		\Require 
+		\Statex let $\beta$ be the largest acceptable detour length in $\mathbb{R}_{>0}$ 
+		\Statex 
+		\Function{DistanceAnalyser}{$r, s, g$}
+			\State let $r_s$ be the closest point to $s$ in $r$
+			\State let $r_g$ be the closest point to $g$ in $r$
+			\State $d_s\gets dist(r_s, s)$\Comment Pickup detour distance
+			\State $d_g\gets dist(r_g, g)$\Comment Set off detour distance
+			\State\Return $1-\frac{d_s + d_g}{\beta}$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+The distance analyser algorithm, as seen in Algorithm \ref{alg:distanalyser}, finds the points on the route that are closest to the start and end points.
+From those points, the algorithm approximates the detour required to take by the driver to pick up the passenger.
+The approximation assumes that the driver's new route distance will be the original length plus the distances to the passengers start point and goal point.
+This assumption does not represent every detour and thus this is an area for future optimization.
+
+The final score for the distance analyser is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
+This results in a value between 0 and 1 when the detour is less than the largest detour, and greater than one when the detour is longer.
+The value is inverted by subtracting it from 1 to make greater values better matches, as required by Algorithm \ref{alg:timedistanalyser}.
+If the value is greater than the acceptable detour length, the inversion in the return statement will generate a negative value, hence causing Algorithm \ref{alg:timedistanalyser} to return a result representing no match.
+
+In the example introduced in the beginning of this chapter, the longest detour is set to be 25\% of Alice's total commute and Alice's route is modeled as the line  $y = \frac{4}{7}-\frac{2 x}{7}$.
+It is assumed that Alice's route have tracking points continuously in the line, and therefore a line to point distance calculation is used in this example, this means $r_s$ and $r_g$ will be calculated simultaneously as the distance is calculated.
+This gives the the results seen in Table \ref{tbl:distance} when applying the distance  Algorithm \ref{alg:distanalyser}.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{User} 	& \textbf{$d_s$} & \textbf{$d_g$} 	& \textbf{return value} 	\\ \midrule
+Bob         	& 3.57 km        & 1.85 km	    	& 0.550		 			\\
+Carol         	& 4.12 km        & 0 km       		& 0.609        		\\
+Eve           	& 9.62 km        & 4.12 km		    & -0.505        		\\ \bottomrule
+\end{tabular}
+\caption{The detour distance for Alice compared to the other users as well as the score of the DistanceAnalyser for each route.}
+\label{tbl:distance}
+\end{table}
+
+Table \ref{tbl:distance} presents the results for the distance analyser.
+The algorithm assesses the best results for Carol, followed by Bob while Carol yields a negative result since Alice's detour becomes longer than the acceptable 25\%. 
+
+
+\subsubsection{Time analyser}
+The time analyser algorithm works similarly to the distance analyser algorithm. 
+It is also designed to take two points and a route as input and to return a score representing the time differences.
+
+When determining time difference two things should be taken into consideration; the detour duration and the existing differences in time.
+The detour duration can be approximated by multiplying the detour distance with the time it takes to travel a distance unit.
+
+Each position in each driver's route has a timestamp for when the location was visited.
+This can be used to determine the relative time distance between two points by using the following function:
+\begin{align*}
+	time : \mathbb{L}\times\mathbb{L} &\rightarrow \mathbb{R}_{\geq 0}\\
+	a, b &\mapsto | a_{time} - b_{time} |
+\end{align*}
+
+The calculated detour time and relative time difference enables an approximation of the inconvenience the ridesharing is for the participants in the potential match.
+From the driver's perspective, the route starts at the normal time minus the detour duration to still arrive on the usual time.
+This makes the detour the only inconvenience in regards to time.
+If the passenger has to arrive earlier than otherwise, the driver would also have to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
+
+From the passenger's perspective, the opposite is true when it comes to the relative time. 
+It is only an inconvenience when the driver must set them off before they need to arrive.
+
+It is also worth noting that if the relative time is the same as the detour time, the only inconvenience for the driver is the detour.
+
+The formula for the total inconvenience when taking both participants into account is then defined as the following:
+
+\[ |d - t| + d \]
+
+where $d$ is the detour and $t$ is the relative time.
+
+\iffalse
+Now, let us consider what would happen on the return route.
+The situation is now that the driver and passenger want to return to their original locations, but they want to leave at a specific time.
+The algorithm already solves this because if a specific arrival time is defined a specific departure time must also be defined.
+And the differences in time must be the same.
+\fi
+
+\begin{algorithm}
+	\caption{Time Analyser pseudocode}
+	\label{alg:timeanalyser}
+	\begin{algorithmic}[1]
+		\Require 
+		\Statex let $\delta$ be the acceptable time difference in $\mathbb{R}_{>0}$
+		\Statex let $\gamma$ be the translation from distance to time in $\mathbb{R}_{>0}$ 
+		\Statex 
+		\Function{TimeAnalyser}{$r, s, g$}
+			\State let $r_s$ be the closest point to $s$ in $r$
+			\State let $r_g$ be the closest point to $g$ in $r$
+			\State $d \gets (dist(r_s,s) + dist(r_g,g))\times\gamma$\Comment{The total detour time}
+			\State $t \gets max(time(r_s, s), time(r_g, g))$\Comment{The largest time difference}
+			\State\Return $1-\frac{|d - t| + d}{\delta}$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser algorithm.
+Line 2 to 4 is reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that it sums the detours and multiplies the result with the distance to time conversion.
+Line 5 assigns the greatest time difference between the closest points to $t$.
+The reason for choosing the greatest value is to use a pessimistic approach, so that the real delay will not be worse than the calculated.
+
+For the Alice example, defining the speed as constant through the whole route is preferable to keep it simple.
+Alice travels 36.5 km in 35 minutes, this gives a pace of  $\frac{35 min}{36.5 km} = 0.959\frac{min}{km} $.
+For this example the acceptable time difference is set to 15 minutes $\delta = 15$.
+The time analyser algorithm is applied to the example with the aforementioned data, the result can be seen in Table \ref{tbl:time}.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} \\ \midrule
+Bob         	& 5m:12s       & 3m			    & 0.63				\\
+Carol         	& 3m:57s       & 35m	      	& -0.75       		\\
+Eve           	& 13m:11s      & 18m			& 0.10        		\\ \bottomrule
+\end{tabular}
+\caption{The detour time and time difference for Alice compared to the other users as well as the score of the TimeAnalyser for each route.}
+\label{tbl:time}
+\end{table}
+ 
+In the results from the example in Table \ref{tbl:time}, it can be seen that Bob receives a relatively high score, while Carol's score is below zero, and Eve is just within the acceptable range. 
+
+With the scores from the two subalgorithms, Algorithm \ref{alg:timedistanalyser} is able to assess the matches' final scores.
+The final results of the algorithm example can be seen in Table \ref{tbl:timedist}.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{User} 	& \textbf{$d$} & \textbf{$t$} 	& \textbf{return value} \\ \midrule
+Bob         	& 0.550 	   & 0.63		    & 0.59					\\
+Carol         	& 0.609        & -0.75	      	& 0       				\\
+Eve           	& -0.505       & 0.10			& 0        				\\ \bottomrule
+\end{tabular}
+\caption{The result for Alice's match compatibility to the other users calculated by the Time Distance Analyser.}
+\label{tbl:timedist}
+\end{table}
+
+The results in Table \ref{tbl:timedist} shows that with the set detour limits in distance and time the only compatible match for Alice is Bob with a score of $0.59$. 
+Although Carol scored acceptably in distance, the difference in time is unacceptable, thus assessed a score of $0$.
+Eve scores below 0 in the distance parameter and is therefore also given a final score of $0$.
+
+The two modifiers $d_\gamma$ and $t_\gamma$ were set to $1$ in this example, but these modifiers, along with the acceptable detours in time and distance, can be adjusted to adapt scores if the given outputs do not reflect the expected outcomes or the users' actual willingness to share rides in a given situation. 
+
+\subsubsection{Complexity}
+Considering the complexity of the three algorithm, the Time Distance Analyser complexity is only dependent on the calls on lines 2 and 3, while the rest of the algorithm is input independent.
+Line 2-3 are the calls to the two sub algorithms.
+
+In the Distance Analyser Algorithm \ref{alg:distanalyser} line 2 and 3 is where the whole route should be iterated through, the complexity of this sub algorithm is $O(|r|)$ where $|r|$ is the number of positions in route $r$.
+Line 4 to 6 perform arithmetic operations that run in constant time, and can be ignored when describing the asymptotic notation.
+
+For Time Analyser the complexity is the same as in Distance Analyser because of the similarity of the first few lines and the last lines are simple arithmetic operations. 
+The exceptions are $dist$, $time$, and $max$. 
+$time$ and $dist$, which both are described earlier, are considered to be $O(1)$ operations.
+$max$ takes two values, compares them and returns the largest of the two.
+This is also a constant operation and with that, we can determine that the Time Analyser algorithm is $O(|r|)$.
+
+Thus we have that the main algorithm is $O(|r|)$, the number of locations in a route.
