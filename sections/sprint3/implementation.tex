@@ -62,23 +62,12 @@ for (DetectedActivity da: detectedActivities){
 
 % Location Updates Request
 The \texttt{startLocationUpdates()}, shown in Listing \ref{startLocationUpdates}, is called to gather locations regularly.
-It checks for individual permission for fine location access, as required by Android M (SDK level 23 and higher), before requesting location updates from the Google Play Services' \texttt{LocationServices}.
 The location updates request is based on the Google API client instantiated in \texttt{MainActivity} and a \texttt{locationRequest}.
 The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location quality priority, respectively set to \todo{agree upon constants} 60 seconds, 120 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
 
 \begin{lstlisting}[language=Java, label=startLocationUpdates, caption=Start location updates functions.]
 public void startLocationUpdates(){
-	// Check individual permissions for Android M (SDK level 23) and up.
-	if(Build.VERSION.SDK_INT >= 23) {// Android M permission check
-		if (ActivityCompat.checkSelfPermission(
-					mainContext, Manifest.permission.ACCESS_FINE_LOCATION)
-					== PackageManager.PERMISSION_GRANTED){
-			// Initialize location request, where updates are received by 
-			// onLocationChanged()
-			LocationServices.FusedLocationApi
-				.requestLocationUpdates(googleApiClient, locationRequest, this);
-		}
-	}else { // Without individual permission tests
+	if(/* Omitted: Check permissions */) {
 		LocationServices.FusedLocationApi
 			.requestLocationUpdates(googleApiClient, locationRequest, this);
 	}
