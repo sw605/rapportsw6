@@ -3,7 +3,7 @@
 \subsection{Location Gathering Background service}
 % metatext
 This subsection will describe the contents of the implementation of the background location gathering.
-The new implementation is based on the poor results of the location gathering method implemented in sprint 2 that was not working as intended.
+The new implementation is based on the poor results \todo{can we document the poor results?} of the location gathering method implemented in sprint 2 that was not working as intended.
 The code examples in this section will not include potential logging and debugging lines as to save space and they do not influence the functionality of the code.
 
 
@@ -15,12 +15,16 @@ The activity recognition can thereafter check that the detected activity is a dr
 
 \begin{lstlisting}[language=Java, label=activityRecognitionInstantiation, caption=Initialization of activity recognition.]
 if(activityDetectionBroadcastReceiver == null) {
-	activityDetectionBroadcastReceiver = new ActivityDetectionBroadcastReceiver(googleApiClient, this);
-	LocalBroadcastManager.getInstance(this).registerReceiver(activityDetectionBroadcastReceiver, new IntentFilter("fapptory_inc.rideshare.BROADCAST_ACTION"));
+	activityDetectionBroadcastReceiver = 
+		new ActivityDetectionBroadcastReceiver(googleApiClient, this);
+		
+	LocalBroadcastManager.getInstance(this).registerReceiver(
+		activityDetectionBroadcastReceiver, 
+		new IntentFilter("fapptory_inc.rideshare.BROADCAST_ACTION"));
 }
 \end{lstlisting}
 
-The \texttt{activityDetectionBroadcastReceiver} is instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class, utilizing the \texttt{googleApiClient} and the \texttt{MainActivity}.
+The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance.
 
 The broadcast receiver is then applied by registering to the \gls{rs} app's\\ \texttt{BROADCAST\_ACTION}, so that the \texttt{activityDetectionBroadcastReceiver} only handles broadcasts sent by \gls{rs} and not by other apps.
 
@@ -66,12 +70,17 @@ The \texttt{locationRequest} is defined with properties regarding location updat
 public void startLocationUpdates(){
 	// Check individual permissions for Android M (SDK level 23) and up.
 	if(Build.VERSION.SDK_INT >= 23) {// Android M permission check
-		if (ActivityCompat.checkSelfPermission(mainContext, 			Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-			// Initialize location request, where updates are received by onLocationChanged()
-			LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+		if (ActivityCompat.checkSelfPermission(
+					mainContext, Manifest.permission.ACCESS_FINE_LOCATION)
+					== PackageManager.PERMISSION_GRANTED){
+			// Initialize location request, where updates are received by 
+			// onLocationChanged()
+			LocationServices.FusedLocationApi
+				.requestLocationUpdates(googleApiClient, locationRequest, this);
 		}
-	}else { // Without individual permission tests: Initialize location request, where updates are received by onLocationChanged()
-	LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+	}else { // Without individual permission tests
+		LocationServices.FusedLocationApi
+			.requestLocationUpdates(googleApiClient, locationRequest, this);
 	}
 }
 \end{lstlisting}
