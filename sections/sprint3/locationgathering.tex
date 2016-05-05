@@ -4,12 +4,11 @@ This requires a some certain design requirements which will be presented in the 
 
 \subsubsection{Overall Design}
 Some informal location tests in sprint 2 showed that polling locations with at hard intervals controlled by a timer proved difficult to get working reliable and thus we consider using the JobScheduler which does not provide hard time limit but should be reliable to work in an expected time frame, this will be discussed further in the implementation.
-The app main activity is the default activity and thus it is the code herein that is run when the app is opened.
-To execute the location gathering in the background service, the location gathering will be preformed in a background service. 
-This background should be activated automatic from the main activity once that activity is run.
+The location gathering should be a background service which will run i the background once the user have logged into the app. 
+
 The service should the be run contentiously with some interval and preform several different task based on which sensor input the service receives. 
-This first read the service should preform each time cycle is to poll the activity recognition method whether the value for \texttt{inVehicle} is above some threshold. 
-When the threshold for \texttt{inVehicle} is exceeded the service should start requesting the user location, this should probably be done though the Google Play Service location API which Google recommends above the native Android location framework\cite{apploc}.
+For each cycle the service preforms it should poll the activity recognition whether a user is registered as driving. 
+When the user is detected as driving the service should start requesting the user location, this is done though the Google Play Service location API which Google recommends above the native Android location framework\cite{apploc}.
 As long as the activity registers a users as driving the location should be polled with reasonable intervals.
 These locations should then be collected into a group of locations representing the users route.
 When the the activity recognition has not been registered as driving for  while we will consider the commute ended and thus the route building should be finalized and send to the server.  
@@ -18,21 +17,12 @@ When the the activity recognition has not been registered as driving for  while 
 When decided the polling frequency of both the activity recognition and the location gathering it is a question of striking the right balance of an accuracy representing the users actual behavior while preforming a minimal battery drain.
 
 Firstly we consider the first task of the location gathering service, the activity recognition.
-Polling the activity should require less power than polling the location, however every computation and sensor polling drains the users valuable battery power and should thus be kept to a minimum.  
+Polling the activity should require less power than polling the location.
+Here we check if someone is proofreading this.
+Many never smartphones have dedicated processes track the sensors responsible for activity recognition and therefore use a minimum of power.
+For a start the interval for activity recognition will be set to a couple of seconds, which later can be prolonged of this uses more battery than expected.
+The location request which will be called when a user is detected driving will in most cases need to activate a device's GPS and thus consume a lot of power.
+In this first iteration of location gathering it will be a simple solution which will request with static intervals, dynamic intervals based on factors such as speed could possible be an battery optimizing addition later on.
+The location interval will be set to collect in of rage of every 1-2 minutes.
 
-
-
-
-\iffalse
-Main
--activate BGS
-    BGS (always listening) "RideShareService"
-    -register activity
-    -if (change to driving): activate LBS *with GPS?
-        LBS (listening while driving) "LocationUpdaterService"
-        -cacheLocation every x min 
-        - utilize isBetterLocation?
-        -onDestroy: return cache
-    -if (change to other): deactivate LBS + cache -> localDB
--send localDB/routes to astep
-\fi
+This will be the initial setup, if experience shows need of possible for improvements the intervals will be adjusted accordingly.
