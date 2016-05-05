@@ -1,16 +1,16 @@
-This section will describe how the communication between the \gls{rs} system and the aSTEP system is handled.
-And how features from the aSTEP API is used to achieve the desired outcomes.
+This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is handled.
+And how features from the \gls{astep} API is used to achieve the desired outcomes.
 
-The aSTEP API is as described in Section \ref{ssec:communicationwithastep} is a REST API over HTTP. 
+The \gls{astep} API is as described in Section \ref{ssec:communicationwithastep} is a REST API over HTTP. 
 This means that all API calls are done through HTTP requests.
 
 An overview of all the possible HTTP-request was public available at \url{http://www.astep.cs.aau.dk/} on the 5\textsuperscript{th} of May 2016.
-We will only be using a subset of the features presented to us, those being; Locations, Routes, Users, and some way to allow \gls{rs} to access the data from the aSTEP server for its users.
-In the API there are two ways of doing this; by creating a group for all the app users or by having an edge from a seperate \gls{rs}-user to every aSTEP-user that uses the app.
+We will only be using a subset of the features presented to us, those being; Locations, Routes, Users, and some way to allow \gls{rs} to access the data from the \gls{astep} server for its users.
+In the API there are two ways of doing this; by creating a group for all the app users or by having an edge from a seperate \gls{rs}-user to every \gls{astep}-user that uses the app.
 
 We will spend a few lines to describe why we decided to use edges instead of groups:
 
-\paragraph{Groups} in the aSTEP program exists to allow users to gain access to eachothers data.
+\paragraph{Groups} in the \gls{astep} program exists to allow users to gain access to eachothers data.
 This could be used by making a user for the \gls{rs} system where all users who uses the app is included in.
 The problem with this is that all users have now granted access to their local data to anyone how happens to use the same app, regardless of the context. 
 This means that a malicios programmer could create a program that plots the locations of all users of the \gls{rs} app.
@@ -77,7 +77,7 @@ An overview of those can be seen on Table \ref{tab:asteprequests}.
 	\scriptsize
 	\begin{tabular}{l l l}
 		Path & Method & Description\\\midrule
-		/locations/outdoor/\{username\}/routes & POST & Send a route to the aSTEP server\\
+		/locations/outdoor/\{username\}/routes & POST & Send a route to the \gls{astep} server\\
 		/locations/outdoor/\{username\}/routes/match & GET & Match all new routes\\
 		/users & POST & Create a new user\\
 		/users/\{username\}/outUsers & POST & Request a new out user\\
