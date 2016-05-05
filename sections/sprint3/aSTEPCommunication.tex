@@ -1,0 +1,90 @@
+This section will describe how the communication between the \gls{rs} system and the aSTEP system is handled.
+And how features from the aSTEP API is used to achieve the desired outcomes.
+
+The aSTEP API is as described in Section \ref{ssec:communicationwithastep} is a REST API over HTTP. 
+This means that all API calls are done through HTTP requests.
+
+An overview of all the possible HTTP-request was public available at \url{http://www.astep.cs.aau.dk/} on the 5\textsuperscript{th} of May 2016.
+We will only be using a subset of the features presented to us, those being; Locations, Routes, Users, and some way to allow \gls{rs} to access the data from the aSTEP server for its users.
+In the API there are two ways of doing this; by creating a group for all the app users or by having an edge from a seperate \gls{rs}-user to every aSTEP-user that uses the app.
+
+We will spend a few lines to describe why we decided to use edges instead of groups:
+
+\paragraph{Groups} in the aSTEP program exists to allow users to gain access to eachothers data.
+This could be used by making a user for the \gls{rs} system where all users who uses the app is included in.
+The problem with this is that all users have now granted access to their local data to anyone how happens to use the same app, regardless of the context. 
+This means that a malicios programmer could create a program that plots the locations of all users of the \gls{rs} app.
+They would only need a new user registered as using the \gls{rs} app and would there for be included in the group.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\path[fill=red!30] (0:0cm) circle (2cm);
+		\path[fill=green!30] (57:1.75cm) circle (1.3cm);
+	
+		\begin{scope}
+			\clip(57:1.75cm) circle (1.3cm);
+			\path[fill=red!30!green!30] (0:0cm) circle (2cm);
+		\end{scope}
+		
+		\node at (0,	0) 		{$U_{Ramsy}$};
+		\node at (0.8,	0.63) 	{$U_1$};
+		\node at (0.1,	1.4)	{$U_2$};
+		\node at (1.87,	1.4) 	{$U_3$};
+		\node at (-1.2,	-0.3)	{$U_4$};
+		\node at (0.7,	-1.2) 	{$U_5$};
+		\node at (1.53, -0.84) 	{$U_6$};
+	\end{tikzpicture}
+	\label{fig:astepgroup}
+	\caption{How the \gls{rs}-system would use gropus. In the red group (the red circle) all users in that group can see all data from other users in the same group.}
+\end{figure}
+
+\paragraph{Edges} works is a similar way to groups but instead of granting all users access to every other users data, the edges only allow access from one user to another.
+Using the same method of establishing communication as with the groups we create a \gls{rs}-user and creates a edge from that user to every user that uses the \gls{rs} system.
+This way it is only when the \gls{rs} system uses its own user it is allowed to access data from the users.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		
+		\node (r) {$U_{Ramsy}$};
+		\node[below of=r] (1) {$U_1$};
+		\node[right of=1](2) {$U_2$};
+		\node[left of=1] (4) {$U_4$};
+		\node[right of=2] (5) {$U_5$};
+		\node[left of=4] (6) {$U_6$};
+		
+		\draw[->] (r) -- (1);
+		\draw[->] (r) -- (2);
+		\draw[->] (r) -- (4);
+		\draw[->] (r) -- (5);
+		\draw[->] (r) -- (6);
+		
+		\draw[->] (1) -- (4);
+	\end{tikzpicture}
+	\label{fig:astepgroup}
+	\caption{How the \gls{rs}-system would work with edges.}
+\end{figure}
+
+This means that edges can provide the same benifits without opening the same security flaws.
+Therefor the edges is determined to be the superior system.
+
+This means that we can determine the API calls required by the \gls{rs}-system.
+An overview of those can be seen on Table \ref{tab:asteprequests}.
+
+\begin{table}[h]
+	\centering
+	\scriptsize
+	\begin{tabular}{l l l}
+		Path & Method & Description\\\midrule
+		/locations/outdoor/\{username\}/routes & POST & Send a route to the aSTEP server\\
+		/locations/outdoor/\{username\}/routes/match & GET & Match all new routes\\
+		/users & POST & Create a new user\\
+		/users/\{username\}/outUsers & POST & Request a new out user\\
+		/users/\{username\}/outUsers/\{specifiedUsername\} & PUT & Accept out user\\
+		/users/\{username\}/token & GET & Get the current valid token for a user
+	\end{tabular}
+	\label{tab:asteprequests}
+	\caption{}
+\end{table}
+
