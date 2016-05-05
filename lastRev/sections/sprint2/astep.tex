@@ -1,0 +1,57 @@
+\subsection{Communication with aSTEP}
+% meta
+To be able to utilize the aSTEP system, the communication protocol and functions must be analyzed. 
+The analysis is based on the current development and planning of the API and other functions.
+
+% aSTEP organization - groups
+The status and intended functions are established in collaboration with the other project groups responsible for the aSTEP system side of the development. 
+The main groups we are involved with are the user management group and outdoor location based services groups.
+
+% What does the aSTEP system look like?
+The design of the aSTEP system at this point is consisting of an API that apps and services can communicate with, and a backend with user management and location based services, which is stored in a database system.
+However, the only relevant part for the \gls{rs} solution for us is the API, as the lower level of the aSTEP core is administrated by other groups.
+
+% What is stored in aSTEP
+The aSTEP system will store information regarding location data, and basic user information. 
+The data stored in the aSTEP system, relevant to this project solution, is:
+\begin{itemize}
+	\item Location data consisting of userID, routeID, a set of GPS coordinates and timestamp.
+	\item Username
+	\item Password
+\end{itemize}
+
+The aSTEP user management system does not provide storage of data regarding contact information for aSTEP users.
+The only information stored is a username and password to keep the aSTEP core as simple as possible.
+Additional information that is required to make the app work as intended is each of the app groups own responsibility.
+The aSTEP users is made to ensure the correct permissions is giving to the correct user, to ensure the appropriate data is returned to each user.
+An API call can not be done without the user first being authenticated with a valid login.
+
+% How to cummunicate with aSTEP
+The communication with aSTEP is done through a REST API over Hypertext Transfer Protocol, decided in agreement between the aSTEP project groups.
+REST is an abbreviation of REpresentational State Transfer, and is a communications design often used in for HTTP-communication\cite{REST}.
+Accordingly, the communication is performed by making queries to the aSTEP system. 
+All communication must be done as a request from the device, where the aSTEP server then will respond.
+
+
+% api functions
+At the current stage of the development of aSTEP, the following API functions are available form user management and location services:
+\begin{table}[]
+	\centering
+	\begin{tabular}{ll}
+		LBS & UM    \\
+		\hline
+		\begin{tabular}[t]{@{}l@{}}
+			GetAllEntitiesInArea\\ GetAllEntitiesInTimePeriod\\ GetAllGroupMemebersLocationAndName\\ GetAllFriendsInArea\\ GetAllFriendsInRadius\\ GetAllGroupMembersInArea\\ GetAllGroupMembersInRadius\\ PostLocationData\end{tabular}
+		&
+		\begin{tabular}[t]{@{}l@{}}
+			Create user\\ Get token\\ Update password\\ Edit privacy settings\\ Allow user2 to access user1's info\end{tabular}
+	\end{tabular}
+	\caption{Currently planned aSTEP API functions.}
+	\label{tab:sprint2-api}
+\end{table}
+\todo{reference this table. Add information about the functions.}
+
+When using the aSTEP API it should be ensure to use the correct calls in the right way.
+The API is providing a POST-request under the name ``PostLocationDat'', as listed in \ref{tab:sprint2-api}, which is the method to use when sending location data to the aSTEP core.
+When using this POST it is important to ensure the correct parameters is used.
+The call will accept location data as an coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
