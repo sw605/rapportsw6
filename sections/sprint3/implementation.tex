@@ -8,9 +8,9 @@ The code examples in this section will not include potential logging and debuggi
 
 
 % activityRecognitionInstantiation
-The location gathering should first detect that the device is in a driving activity and then begin recording locations, according to the design described in the design section.
+The location gathering should first detect that the device is in a driving activity and then begin recording locations, according to the design described in Section \ref{ssec:LocationGatherBGS}.
 To achieve the functionality, the app must connect to a Google API client and subscribe to activity recognition.
-The subscription to the activity recognition is shown in Listing \ref{activityRecognitionInstantiation}.
+The code for subscribing to the activity recognition is shown in Listing \ref{activityRecognitionInstantiation}.
 The activity recognition can thereafter check that the detected activity is a driving activity, and accordingly activate the location gathering.
 
 \begin{lstlisting}[language=Java, label=activityRecognitionInstantiation, caption=Initialization of activity recognition.]
@@ -24,7 +24,7 @@ if(activityDetectionBroadcastReceiver == null) {
 }
 \end{lstlisting}
 
-The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance.
+The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class from, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance to broadcast detected activities.
 
 The broadcast receiver is then applied by registering to the \gls{rs} app's\\ \texttt{BROADCAST\_ACTION}, so that the \texttt{activityDetectionBroadcastReceiver} only handles broadcasts sent by \gls{rs} and not by other apps.
 
