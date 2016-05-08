@@ -1,3 +1,15 @@
-A new background service is considered as the background service implemented and tested in sprint 2 was not performing as expected.
+A new background service is considered as the background service implemented and tested in sprint 2 was not performing correctly.
+Additionally, the constant interval between gathering GPS location might not be ideal, as a user could be stationary for periods of time, thus the location gathering is performed unnecessarily when the user is e.g. sleeping.
+
+\textbf{Location Gathering}\\
 Another way of gathering locations is to request location updates from the Google Play Services \cite{receivingLocationUpdates}.
 By this method, an app can receive regular location updates by subscribing to a location provider.
+The app could then receive a notification when a new location is detected, and rely on the Google implementation and energy optimizations in Android.
+
+\textbf{Activity Detection}\\
+% energy preserving
+The \gls{rs} app is supposed to gather locations when the user is driving, according to the requirements, and hence activity recognition is explored to be able to detect the user's activity and potentially reduce energy consumption.
+
+The activity detection could improve two factors: Energy consumption and location filtering.
+The location filtering could be done by only recording locations when the user is driving.
+The energy consumption is lowered as the GPS unit is only utilized when the locations are necessary to collect.
