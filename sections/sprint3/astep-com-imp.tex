@@ -1,0 +1,66 @@
+%meta text
+An overview of the implementation of the API calls to \gls{astep} will be described in the following chapter.
+
+In previously design phases it were decided what API calls should be implemented in the app.
+On \ref{tab:asteprequests} a specified list of calls only to be performed on the app can be seen.
+
+\begin{table}[h]
+	\centering
+	\scriptsize
+	\begin{tabular}{l l l}
+		Path & Method & Description\\\midrule
+		/locations/outdoor/\{username\}/routes & POST & Send a route to the \gls{astep} server\\
+		/users & POST & Create a new user\\
+		/users/\{username\}/token & GET & Get the current valid token for a user\\
+		/users & POST & Invalidate old token and get new\\
+		/users/\{username\}/token & POST & Invalidates previous token for a user\\
+	\end{tabular}
+	\label{tab:asteprequests}
+	\caption{}
+\end{table} 
+
+The API calls are implemented using a \texttt{HttpURLConnection} class, which is a \texttt{URLConnection} class for HTTP specific data transfer over the web.
+ \texttt{HttpURLCOnnection} may be used to send and receive streaming data whose length is not known in advance.
+ This is needed as every API call varies in size.
+ Looking at the API call to post a route, it will be the one that varies in size the most as every routes will differ in size.
+
+
+
+Using a object orientate structure, each API call is implemented to overwrite a \texttt{helperClass} which will handle the inputs, such as username, password, token, and routes.
+The inputs is then transformed to a part of an URL which would fit each of the relevant API calls.
+
+The helperClass is then parsed to the \texttt{HttpURLConnection} which will use a string builder to create the final URL from the API base URL, \texttt{http://astep.cs.aau.dk:8080/api/}.
+Lastly the \texttt{HttpURLConnection} is trying to perform the API call, from where response codes are handled.
+
+It should be noted that passwords are not in the URL part of the API call, as these will be logged on the \gls{astep} server. 
+This would be a major security issue.
+Instead are password and tokens parsed as part of the body, which is used by REST. 
+This will hide the content from the URL and instead be transfered in an \texttt{OutputStream} encoded in raw bytes. 
+
+On two examples of API calls can be seen on \ref{list:example}.
+Post route is simplified to reduce size and make it easier to explain.
+
+\begin{enumerate}
+\label{list:example}
+\item POST new user
+\begin{enumerate}
+\item URL: http://astep.cs.aau.dk:8080/api/users?username=USERNAME
+\item CURL: curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d 'PASSWORD' 'http://astep.cs.aau.dk:8080/api/users?username=USERNAME'
+\end{enumerate}
+\item POST route to \gls{astep}
+\begin{enumerate}
+\item URL: http://astep.cs.aau.dk:8080/api/locations/outdoor/outdoor/routes?authorization=TOKEN\&route=longitude,latitude,precision,timestamp;\&route=longitude,latitude,precision,timestamp
+\&distance\_weight\&time\_weight\&largest\_acceptable\_detour\\
+\_length=146\&acceptable\'httptime\_difference=32
+\item CURL: curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' 'URL from above'
+\end{enumerate}
+\end{enumerate}
+
+As seen on Create user in \ref{list:example}, the username is parsed in the URL while the password is included in a header.
+On the other hand is the post route only parsed in the URL as there are no information that needs to be hidden.
+Every decision made around parsing the data from the app to the aSTEP server is decided by the individual aSTEP API groups.
+
+
+%hey
+
+%farvel
