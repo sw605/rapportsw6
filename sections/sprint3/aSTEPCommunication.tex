@@ -14,7 +14,7 @@ There are two ways of resolving user data sharing using the API.
 The first solution is to create a group for all the \gls{rs} users, and the second is to create one administrating \gls{rs} user that has an access edge to every \gls{rs} user in \gls{astep} system.
 The following paragraphs will elaborate the alternatives.
 
-\paragraph{Groups}\\ 
+\textbf{Groups}\\ 
 Groups in the \gls{astep} system exist to allow users to gain access to each others data.
 This could be utilized by making a \gls{rs} group in which all \gls{rs} users are included.
 An issue with this solution is that all users have granted all other users access to their own location data. 
@@ -44,7 +44,7 @@ The intruder would only need a registered \gls{rs} user and would thereby be inc
 	\caption{How the \gls{rs}-system would use groups. In the red group (the red circle) all users in that group can see all data from other users in the same group.}
 \end{figure}
 
-\paragraph{Edges}\\ 
+\textbf{Edges}\\ 
 Edges work in a similar way to groups, but only allowing access from one user to another.
 Using the same method of establishing communication as with the groups we create a \gls{rs} user and creates a edge from that user to every user in the \gls{rs} system.
 This way it is only when the \gls{rs} system uses its own user it is allowed to access data from the users.
