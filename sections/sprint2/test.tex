@@ -1,7 +1,21 @@
 \section{Test}
-The test performed in this sprint was regarding the location gathering.
-The implementation of the jobScheduler made it impossible for the \texttt{GoogleApiClient} to connect, hence not being able to assess the device location.
-Additionally, the interval based location gathering, would be using battery consequently, regardless of the activity of the user. 
-It is preferable to activate GPS locationing feature as little as possible, because GPS location is battery consuming.
+The purpose of the test chapter is to document the  current functionality of the implemented solution.
+An informal test was performed on the app to assess the behavior and precision of the location gathering as a background service.
 
-\todo{hard documentation/facts of jobScheduler results.}
+\subsection{Background service}
+To assess the functionality of the background service, it was necessary to receive some kind of information, confirming that the service was actually running.
+The background service was tested by making a simple IDE console output, that got printed each time the \texttt{jobScheduler} executed the \texttt{PendingIntent}.
+
+In accordance with the implementation, the output appeared every 10 seconds, independent of the app being open, in the background or closed completely on the test device.
+This proved that the background service was functioning as intended.
+
+\subsection{Location gathering}
+Location gathering was also performed in the test of the background service.
+The location test was performed by trying to access the last known location in each scheduled \texttt{PendingIntent}, and to print the result in the debug log in the IDE.
+The background service was executed regularly, but the location was only available once in a significant number of attempts.
+The missing locations seemed to be caused by the \texttt{googleApiClient} not being connected, as the location gathering is performed in the \texttt{onConnected} method.
+The missing locations seems to derive from the thread not existing long enough for the \texttt{googleApiClient} to connect to the services.
+
+The implementation of the \texttt{jobScheduler} made it impossible for the \texttt{GoogleApiClient} to connect, hence not being able to assess the device location.
+Additionally, the interval based location gathering, would be using battery consequently, regardless of the activity of the user. 
+It is preferable to activate GPS location feature as little as possible, because GPS location collection is battery consuming\citep{gpsbattery}.
