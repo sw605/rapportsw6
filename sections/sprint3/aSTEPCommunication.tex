@@ -8,12 +8,12 @@ The \gls{astep} API is, as described in Section \ref{ssec:communicationwithastep
 This means that all API calls are done through HTTP requests\footnote{Overview of all the HTTP-request available in \gls{astep} can be found at \url{http://www.astep.cs.aau.dk/}}.
 
 We will only be using a subset of the features presented to us, those being; Locations, Routes, Users, and some way to allow \gls{rs} to access the data from the \gls{astep} server for its users.
-In the API there are two ways of doing this; by creating a group for all the app users or by having an edge from a seperate \gls{rs}-user to every \gls{astep}-user that uses the app.
+In the API there are two ways of doing this; by creating a group for all the app users or by having an edge from a separate \gls{rs}-user to every \gls{astep}-user that uses the app.
 
-\paragraph{Groups} in the \gls{astep} program exists to allow users to gain access to eachothers data.
+\paragraph{Groups} in the \gls{astep} program exists to allow users to gain access to each others data.
 This could be used by making a user for the \gls{rs} system where all users who uses the app is included in.
 The problem with this is that all users have now granted access to their local data to anyone how happens to use the same app, regardless of the context. 
-This means that a malicios programmer could create a program that plots the locations of all users of the \gls{rs} app.
+This means that a malicious programmer could create a program that plots the locations of all users of the \gls{rs} app.
 They would only need a new user registered as using the \gls{rs} app and would there for be included in the group.
 
 \begin{figure}[h]
@@ -36,7 +36,7 @@ They would only need a new user registered as using the \gls{rs} app and would t
 		\node at (1.53, -0.84) 	{$U_6$};
 	\end{tikzpicture}
 	\label{fig:astepgroup}
-	\caption{How the \gls{rs}-system would use gropus. In the red group (the red circle) all users in that group can see all data from other users in the same group.}
+	\caption{How the \gls{rs}-system would use groups. In the red group (the red circle) all users in that group can see all data from other users in the same group.}
 \end{figure}
 
 \paragraph{Edges} works is a similar way to groups but instead of granting all users access to every other users data, the edges only allow access from one user to another.
@@ -66,7 +66,7 @@ This way it is only when the \gls{rs} system uses its own user it is allowed to 
 	\caption{How the \gls{rs}-system would work with edges.}
 \end{figure}
 
-This means that edges can provide the same benifits without opening the same security flaws.
+This means that edges can provide the same benefits without opening the same security flaws.
 Therefor the edges is determined to be the superior system.
 
 A  overview of every API calls, as of sprint 3, required by the \gls{rs}-system can be seen on Table \ref{tab:asteprequests}.
