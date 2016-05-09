@@ -1,13 +1,23 @@
 \section{Implementation}
+The implementation section contains descriptions of selected parts of the implementation performed in sprint 3.
+
+The main focus is the location gathering service, which will record locations continuously while the user is driving, but not otherwise. 
 
 \subsection{Location Gathering Background service}
 % metatext
 This subsection will describe the contents of the implementation of the background location gathering.
-The new implementation is based on the poor results \todo{can we document the poor results?} of the location gathering method implemented in sprint 2 that was not working as intended.
-The code examples in this section will not include potential logging and debugging lines as to save space and they do not influence the functionality of the code.
+The new implementation is founded on the poor results of the location gathering method implemented in sprint 2, Section \ref{section:locationgathering}, that was not working as intended.
+The code examples in this section will not include potential logging and debugging lines as for better readability and they do not influence the functionality of the code.
+
+\textbf{Implementation plan}\\
+According to the design, Section \ref{section:s3locgath}, the locations should first be requested when the user is driving.
+Therefore, the implementation starts by instantiating an activity detector.
+The activity detector can thereafter check the received activity, and begin location gathering if the activity is above a confidence threshold for driving activity.
+When the confidence is lower than the threshold for a period of time, the driving activity can be considered finished, and the route must be stored and later transmitted to the \gls{astep} system.
 
 
 % activityRecognitionInstantiation
+\textbf{Activity recognition instantiation}\\
 The location gathering should first detect that the device is in a driving activity and then begin recording locations, according to the design described in Section \ref{ssec:LocationGatherBGS}.
 To achieve the functionality, the app must connect to a Google API client and subscribe to activity recognition.
 The code for subscribing to the activity recognition is shown in Listing \ref{activityRecognitionInstantiation}.
@@ -33,6 +43,7 @@ The broadcast receiver is then applied by registering to the \gls{rs} app's\\ \t
 
 
 % Activity Detection Broadcast Receiver
+\textbf{Activity Detection Broadcast Receiver}\\
 The main operations in regards to activity detection and location gathering are done by the activity detection broadcast receiver.
 
 When the \texttt{activityDetectionBroadcastReceiver} receives a RideShare broadcast, the extra data in the broadcast is stored in the \texttt{ArrayList<DetectedActivity> detectedActivities}.
@@ -61,6 +72,7 @@ for (DetectedActivity da: detectedActivities){
 \end{lstlisting}
 
 % Location Updates Request
+\textbf{Location Updates Request}\\
 The \texttt{startLocationUpdates()}, shown in Listing \ref{startLocationUpdates}, is called to gather locations regularly.
 The location updates request is based on the Google API client instantiated in \texttt{MainActivity} and a \texttt{locationRequest}.
 The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location quality priority, respectively set to \todo{agree upon constants} 60 seconds, 120 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
@@ -78,3 +90,4 @@ To send the routes gathered through the location service, the communication with
 
 \subsection{App-to-aSTEP communication}
 % ja..
+\todo{remove??}
