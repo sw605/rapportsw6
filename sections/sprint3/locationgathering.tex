@@ -4,7 +4,7 @@ This requires certain design features that will be presented in the following se
 
 
 \subsubsection{Overall Design}
-The informal tests performed in sprint 2, Section \ref{section:s2test}, showed that polling locations with fixed intervals controlled by a timer proved difficult to get working reliably, as the Google API client never seemed to connect before the task had finished executing. 
+The informal tests performed in sprint 2, Section \ref{sec:s2test}, showed that polling locations with fixed intervals controlled by a timer proved difficult to get working reliably, as the Google API client never seemed to connect before the task had finished executing. 
 Thus we explore the possibility of using a broadcast receiver which does not provide fixed time intervals, but receives updates within a defined time interval.
 
 To ensure location gathering is not performed more than necessary, the activity recognition service should be running continuously and decide the location gathering status.
@@ -18,8 +18,8 @@ When the the activity recognition has not been registered as driving in 5 minute
 The location update and activity recognition frequency is balanced between energy consumption and accuracy.
 
 First, we consider the initial task of the location gathering service: The activity recognition.
-The activity recognition is used to decide the location requests, as it has lower consumption than the GPS unit. \todo{source}
-Many newer smartphones \todo{source} have dedicated processes to track the sensors responsible for activity recognition and therefore use little power.
+The activity recognition is used to decide the location requests, as it has lower consumption than the GPS unit \cite{fuckGPS} since the GPS system prevents a phone form going into it's normal sleep cycles.
+Many newer smartphones \cite{coCPU} have dedicated processes to track the sensors responsible for activity recognition and therefore use little power.
 The interval of activity recognition will be set to every 5 seconds, which later can be optimized to use less power or be more accurate if needed.
 
 The location request which will be called when a user is detected driving, and will in most cases need to activate a device's GPS and thus consume a lot of power.

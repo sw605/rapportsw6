@@ -1,11 +1,11 @@
 This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is performed, and how features from the \gls{astep} API are used to achieve the required functionality.
 The \gls{rs} system continues the triple part design, but has to adjust to the \gls{astep} progression and changes.
 
-The \gls{astep} API remains a REST API, thus meaning that all API calls are done through HTTP requests\footnote{Overview of all the HTTP-request available in \gls{astep} can be found at \url{http://www.astep.cs.aau.dk/}}.\todo{move to appendix with mortens liste?}
+The \gls{astep} API remains a REST API, thus meaning that all API calls are done through HTTP requests.
 The \gls{astep} system provides an assortment of API functions, but the \gls{rs} system will only be using a subset of the features: Routes and Users, excluding categories such as indoor LBS.
 The API functions are utilized to send recorded routes to \gls{astep}, and to create and edit users.
 Because there are restrictions regarding user information sharing in \gls{astep}, it is also necessary to allow \gls{rs} to access the data from the \gls{astep} server for its users.
-
+A overview of the API functionality as of sprint 3 can be found in Appendix \ref{ch:appAlabel}. 
 
 \subsection{User management}
 %why UM
@@ -71,11 +71,11 @@ This way, only when the \gls{rs} system uses its own user the remaining user dat
 		
 		\draw[->] (1) -- (4);
 	\end{tikzpicture}
-	\label{fig:astepedge}
 	\caption{How the \gls{rs}-system would work with edges.}
+	\label{fig:astepedge}
 \end{figure}
 
-The edges method allows edges to provide the same\todo{what, claus?} benefits while disabling the security flaws.
+The edges method allows edges to provide the same benefits as groups while disabling the security flaw mentioned above.
 Therefore, the edges method is selected as the user management design pattern.
 
 \textbf{Creating users}\\
