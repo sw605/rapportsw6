@@ -1,0 +1,66 @@
+% test setup
+The \gls{rs} app was built to an Android installation file and installed on three units to test on a variation of devices.
+The devices were a Sony Xperia Z2, a Samsung Galaxy S6 and a Huawei Nexus 6P, all with Android Marshmallow 6.0.1 as operating system.
+The app was opened and the necessary permissions were granted, so that the app would function properly.
+The app was configured with the values seen in Table \ref{tab:appconfig}.
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{l r}
+		Variable description & Value in milliseconds\\
+		\hline
+		Fastest location update interval & 60000\\
+		Target location update interval & 60000\\
+		Activity confidence value & 80\\
+		Activity stop threshold & 180000\\
+		Minimum number of route locations & 4\\
+		Request activity updates & 5000\\ 
+	\end{tabular}
+	\caption{App configuration in test.}
+	\label{tab:appconfig}
+\end{table}
+
+% device setup
+To make sure the app would gather locations in different states, the phones had different configurations.
+The Xperia Z2 was locked and connected to a computer for debugging purposes and logging events.
+The Nexus 6P had the app open with a locked and turned off screen. 
+The Galaxy S6 had the app opened, was returned to the home screen and then locked.
+
+% route plan
+The route driven to test the location gathering can be seen in Figure \ref{fig:testroute}.
+The route was driven with the intention of gathering the whole route as a single route on each of the devices.
+The drive had one stop at the point marked by a green square in Figure \ref{fig:testroute}.
+The stop had a duration of 2 minutes, thus not passing the threshold value of 3 minutes.
+The drive continued and ended at the start position, where the persons of the respective devices walked from the vehicle to the group room.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/testroute.png}
+	\caption{The test drive route, driven clockwise from the red pin.}
+	\label{fig:testroute}
+\end{figure}
+
+
+% test results
+All three devices were able to gather the driven route. 
+The routes were recorded with approximately the same start and end time, and the recorded routes can be seen in Figure \ref{fig:testrouterecordings}. 
+As the figure shows, the gathered routes relatively accurately represent the actual route.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/testRouteRecordings.png}
+	\caption{Recorded routes. Green route is Nexus 6P, red route is Xperia Z2, orange route is Galaxy S6.}
+	\label{fig:testrouterecordings}
+\end{figure}
+
+The Xperia device had the largest deviation from the actual route, and this could be caused by multiple factors.
+Because the device was placed below the debugging laptop, interference with the GPS signals could occur.
+The device could also have a poorly manufactured GPS unit.
+This is not further investigated, as the two other devices gathered fairly accurate locations during the test.
+
+
+
+% results evaluation
+The test reveals that the app is able to gather locations whilst the app is not actively being utilized by a user.
+The location accuracy seems to depend on the device on which the app is installed.
+Location gathering as a background service is considered accomplished and the respective requirement is evaluated as fulfilled.

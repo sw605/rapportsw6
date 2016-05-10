@@ -75,7 +75,7 @@ for (DetectedActivity da: detectedActivities){
 \textbf{Location Updates Request}\\
 The \texttt{startLocationUpdates()}, shown in Listing \ref{startLocationUpdates}, is called to gather locations regularly.
 The location updates request is based on the Google API client instantiated in \texttt{MainActivity} and a \texttt{locationRequest}.
-The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location quality priority, respectively set to \todo{agree upon constants} 60 seconds, 120 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
+The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location quality priority, respectively set to 60 seconds, 60 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
 
 \begin{lstlisting}[language=Java, label=startLocationUpdates, caption=Start location updates functions.]
 public void startLocationUpdates(){
