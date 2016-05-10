@@ -1,10 +1,11 @@
-A new background service is examined as the background service implemented and tested in \ref{section:test} was not performing correctly.
-Additionally, the constant interval between gathering GPS location is not ideal, as a user could be stationary for periods of time, thus the location gathering is performed unnecessarily when the user is e.g. sleeping.
+A new background service is examined as the background service implemented and tested in Section \ref{sec:s2test} was not performing correctly.
+Furthermore, the constant interval between gathering GPS location is not ideal, as a user could be stationary for periods of time, thus the location gathering is performed unnecessarily when the user is e.g. sleeping.
 
 \textbf{Location Gathering}\\
-Since \ref{section:locationgathering} we have learned a new method for gathering locations by requesting location updates from the Google Play Services \cite{receivingLocationUpdates}.
+Since Section \ref{section:locationgathering} we have discovered a new method for gathering locations. 
+It can be done by requesting location updates from the Google Play Services \cite{receivingLocationUpdates}.
 By this method, an app can receive regular location updates by subscribing to a location provider.
-The app could then receive a notification when a new location is detected, and rely on the Google implementation which is already optimized for Android.
+The app could then receive a notification when a new location is detected, and rely on the Google implementation which is already optimized within Android.
 
 \textbf{Activity Detection}\\
 % energy preserving

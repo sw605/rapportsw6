@@ -1,20 +1,28 @@
-In the second sprint the \gls{rs} system were designed to consists of three parts: The app, the \gls{rs} server, and the \gls{astep} system.
-As the \gls{astep} system have evolved small redesigns to the \gls{rs} system design is necessary.
+This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is performed, and how features from the \gls{astep} API are used to achieve the required functionality.
+The \gls{rs} system continues the triple part design, but has to adjust to the \gls{astep} progression and changes.
 
-This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is handled.
-And how features from the \gls{astep} API is used to achieve the desired outcomes.
+The \gls{astep} API remains a REST API, thus meaning that all API calls are done through HTTP requests.
+The \gls{astep} system provides an assortment of API functions, but the \gls{rs} system will only be using a subset of the features: Routes and Users, excluding categories such as indoor LBS.
+The API functions are utilized to send recorded routes to \gls{astep}, and to create and edit users.
+Because there are restrictions regarding user information sharing in \gls{astep}, it is also necessary to allow \gls{rs} to access the data from the \gls{astep} server for its users.
+A overview of the API functionality as of sprint 3 can be found in Appendix \ref{ch:appAlabel}. 
 
-The \gls{astep} API is, as described in Section \ref{ssec:communicationwithastep}, a REST API. 
-This means that all API calls are done through HTTP requests\footnote{Overview of all the HTTP-request available in \gls{astep} can be found at \url{http://www.astep.cs.aau.dk/}}.
+\subsection{User management}
+%why UM
+User management must be performed for the \gls{rs} system to utilize the route matching algorithm, because the algorithm requires access to the routes and locations based on the different users.
 
-We will only be using a subset of the features presented to us, those being; Locations, Routes, Users, and some way to allow \gls{rs} to access the data from the \gls{astep} server for its users.
-In the API there are two ways of doing this; by creating a group for all the app users or by having an edge from a seperate \gls{rs}-user to every \gls{astep}-user that uses the app.
+% how-to
+There are two ways of resolving user data sharing using the \gls{astep} API.
+The first solution is to create a group for all the \gls{rs} users.
+The second is to create one administrating \gls{rs} user that has an access edge to every \gls{rs} user in \gls{astep} system.
+The following paragraphs will elaborate the alternatives.
 
-\paragraph{Groups} in the \gls{astep} program exists to allow users to gain access to eachothers data.
-This could be used by making a user for the \gls{rs} system where all users who uses the app is included in.
-The problem with this is that all users have now granted access to their local data to anyone how happens to use the same app, regardless of the context. 
-This means that a malicios programmer could create a program that plots the locations of all users of the \gls{rs} app.
-They would only need a new user registered as using the \gls{rs} app and would there for be included in the group.
+\textbf{Groups}\\ 
+Groups in the \gls{astep} system exist to allow users to gain access to each others data.
+This could be utilized by making a \gls{rs} group in which all \gls{rs} users are included.
+An issue with this solution is that all users have granted all other users access to their own location data. 
+The solution allows a malicious programmer to create a program that either copies or edits the locations of all users of the \gls{rs} app.
+The intruder would only need a registered \gls{rs} user and would thereby be included in the group.
 
 \begin{figure}[h]
 	\centering
@@ -36,12 +44,13 @@ They would only need a new user registered as using the \gls{rs} app and would t
 		\node at (1.53, -0.84) 	{$U_6$};
 	\end{tikzpicture}
 	\label{fig:astepgroup}
-	\caption{How the \gls{rs}-system would use gropus. In the red group (the red circle) all users in that group can see all data from other users in the same group.}
+	\caption{How the \gls{rs}-system would use groups. In the red group (the red circle) all users in that group can see all data from other users in the same group.}
 \end{figure}
 
-\paragraph{Edges} works is a similar way to groups but instead of granting all users access to every other users data, the edges only allow access from one user to another.
-Using the same method of establishing communication as with the groups we create a \gls{rs}-user and creates a edge from that user to every user in the \gls{rs} system.
-This way it is only when the \gls{rs} system uses its own user it is allowed to access data from the users.
+\textbf{Edges}\\ 
+Edges work in a similar way to groups, but only allowing access from one user to another, corresponding to a group of two users.
+This can be accomplished by establishing communication using the same method of as with the groups and creating a \gls{rs} user and instantiate an edge from the \gls{rs} user to every user in the \gls{rs} system, illustrated in Figure \ref{fig:astepedge}.
+This way, only when the \gls{rs} system uses its own user the remaining user data can be accessed.
 
 \begin{figure}[h]
 	\centering
@@ -62,31 +71,15 @@ This way it is only when the \gls{rs} system uses its own user it is allowed to 
 		
 		\draw[->] (1) -- (4);
 	\end{tikzpicture}
-	\label{fig:astepgroup}
 	\caption{How the \gls{rs}-system would work with edges.}
+	\label{fig:astepedge}
 \end{figure}
 
-This means that edges can provide the same benifits without opening the same security flaws.
-Therefor the edges is determined to be the superior system.
+The edges method allows edges to provide the same benefits as groups while disabling the security flaw mentioned above.
+Therefore, the edges method is selected as the user management design pattern.
 
-A  overview of every API calls, as of sprint 3, required by the \gls{rs}-system can be seen on Table \ref{tab:asteprequests}.
+\textbf{Creating users}\\
+In sprint 2 it was also decided to create users through the \gls{rs} server, this has been changed to simplify the implementation and reduce design complexity.
 
-\begin{table}[h]
-	\centering
-	\scriptsize
-	\begin{tabular}{l l l}
-		Path & Method & Description\\\midrule
-		/locations/outdoor/\{username\}/routes & POST & Send a route to the \gls{astep} server\\
-		/locations/outdoor/\{username\}/routes/match & GET & Match all new routes\\
-		/users & POST & Create a new user\\
-		/users/\{username\}/outUsers & POST & Request a new out user\\
-		/users/\{username\}/outUsers/\{specifiedUsername\} & PUT & Accept out user\\
-		/users/\{username\}/token & GET & Get the current valid token for a user
-	\end{tabular}
-	\label{tab:asteprequests}
-	\caption{}
-\end{table}
-
-In sprint 2 it was also decided to created a user through the \gls{rs} server, this have been changed to simplify the implementation.
-When a user registers in the app an API call will be issued to the \gls{astep} API directly from the app where before this was done through the \gls{rs} server. 
-The username and the additional information such as phone number and full name are still transfered to the \gls{rs} server for storing.
+When a user registers in the \gls{rs} app, the app will issue an API call directly to the \gls{astep} API, instead of performing the operation through the \gls{rs} server. 
+The username and additional information, such as phone number and full name, will still be transferred to the \gls{rs} server to enable contact information sharing with other \gls{rs} users.
