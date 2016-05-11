@@ -21,11 +21,12 @@ The app was configured with the values seen in Table \ref{tab:appconfig}.
 \end{table}
 
 % device setup
+\iffalse
 To make sure the app would gather locations in different states, the phones had different configurations.
 The Xperia Z2 was locked and connected to a computer for debugging purposes and logging events.
 The Nexus 6P had the app open with a locked and turned off screen. 
 The Galaxy S6 had the app opened, was returned to the home screen and then locked.\todo{not sure if this paragraph is necessary}
-
+\fi
 % route plan
 The route driven to test the location gathering can be seen in Figure \ref{fig:testroute}.
 The route was driven with the intention of gathering the whole route as a single route on each of the devices.
@@ -34,24 +35,24 @@ The stop had a duration of 2 minutes, thus not passing the threshold value of 3 
 The drive continued and ended at the start position, where the persons of the respective devices walked from the vehicle to the group room.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=0.6\textwidth]{figures/testroute.png}
-	\caption{Test drive route, driven clockwise from the red pin.}
-	\label{fig:testroute}
+	\begin{subfigure}[b]{0.55\textwidth}
+		\includegraphics[width=\textwidth, trim={0 0 1cm 0},clip]{figures/testroute.png}
+		\caption{Test drive route, driven clockwise from the red pin.}
+		\label{fig:testroute}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.44\textwidth}
+		\includegraphics[width=\textwidth, trim={0 0 2cm 1.2cm},clip]{figures/testRouteRecordings.png}
+		\caption{Recorded routes. Orange route is Nexus 6P, red route is Xperia Z2 and green route is Galaxy S6.}
+		\label{fig:testrouterecordings}
+	\end{subfigure}
+	\caption{Actual route and recorded route data.}
 \end{figure}
-
 
 % test results
 All three devices were able to gather the driven route. 
 The routes were recorded with approximately the same start and end time, and the recorded routes can be seen in Figure \ref{fig:testrouterecordings}. 
 As the figure shows, the gathered route data relatively accurately represent the actual route.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.6\textwidth]{figures/testRouteRecordings.png}
-	\caption{Recorded routes. Orange route is Nexus 6P, red route is Xperia Z2 and green route is Galaxy S6.}
-	\label{fig:testrouterecordings}
-\end{figure}
 
 The Xperia device had the largest deviation from the actual route, and this could be caused by multiple factors.
 Because the device was placed below the debugging laptop, interference with the GPS signals could occur.
