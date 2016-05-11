@@ -75,7 +75,7 @@ for (DetectedActivity da: detectedActivities){
 \textbf{Location Updates Request}\\
 The \texttt{startLocationUpdates()}, shown in Listing \ref{startLocationUpdates}, is called to gather locations regularly.
 The location updates request is based on the Google API client instantiated in \texttt{MainActivity} and a \texttt{locationRequest}.
-The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location quality priority, respectively set to 60 seconds, 60 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
+The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location accuracy priority, respectively set to 60 seconds, 60 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
 
 \begin{lstlisting}[language=Java, label=startLocationUpdates, caption=Start location updates functions.]
 public void startLocationUpdates(){
@@ -86,4 +86,11 @@ public void startLocationUpdates(){
 }
 \end{lstlisting}
 
-The routes will then be send to the \gls{astep} service.
+\subsection{Route Matching Algorithm}
+The implementation of the route matching algorithm is delegated to the previously mentioned outdoor location based service group, as they are responsible for implementation in the \gls{astep} system.
+They were given the pseudocode algorithm developed in sprint 2 and cooperated with during the implementation process.
+The implementation will not be documented here, as the implementation is not performed by us.
+However, the implementation should be tested, and we generated test data with accompanying result expectations.
+The test data was also handed over, but this will be described in the following test section.
+
+
