@@ -1,27 +1,27 @@
 % metatext
-The route matching algorithm is implemented by the outdoor group, and to check that the implementation reflects the intention a test is performed.
+The route matching algorithm is implemented by one of the \gls{astep} outdoor groups, and to check that the implementation reflects the intention a test is performed.
 
-The algorithm is tested with a sequence of routes, based on an empty route database.
+The implementation is tested with a sequence of routes inserted into a previous empty route database.
 By adding routes sequentially, we can anticipate the matching outcome for each addition.
 
 
 % test data
 \textbf{Test Data}\\
-There are a number of cases that should be tested, and we generate route data for each. 
-The test was assuming the users U1, U2, U3 and U4 were existing in the \gls{astep} system.
+A number of cases should be tested, and we generate route data for each. 
+Before the route data is input users U1, U2, U3 and U4 are created to the \gls{astep} system.
 
 First, the stable route generation must be confirmed functioning.
-We created a route for the example user U1 and made two copies that were slightly edited in location and time, and skewed respectively one and two weeks ahead of the original route.
+A route is created for U1 and made two copies that were slightly edited in location and time, and skewed respectively one and two weeks ahead of the original route.
 These three routes should be assessed a high matching score, close to 1, and be considered a stable route for this user.
 
 Second, the algorithm should not be matching routes that are not relevant in location or time.
-The example user U2 is added two routes not matching in location, as seen in Figure \ref{fig:algroutes}.
-The blue U2 route was during the day time and the black during night time.
-These routes should be assessed a low match score, assumed 0.
+U2 gets two routes added not matching in location, as seen in Figure \ref{fig:algroutes}.
+The blue U2 route is during the day time and the black during night time.
+These routes should thus be assessed a low match score, assumed 0.
 
 Because the algorithm should match routes of different users, we thirdly created two routes for the user U3.
 The routes were differencing slightly in locations and time, but were made with the intention to match with each other, with one week difference in time.
-The routes were also made to roughly overlap with the routes of U1, so that the U1 stable route would be a sub-route of the U3 route.
+The routes were also made to roughly overlap with the routes of U1, so that U1's stable route would roughly be a sub-route of the U3 route.
 
 Lastly, the U4 route was made to discern location and time matching of the algorithm.
 The route is stable and approximately at the same time as the U1 and U3 routes, but is directed in the opposite way, northwest instead of southeast.
@@ -58,4 +58,6 @@ The results reflect that U3 can pick up U1 along the way, while U1 will have to 
 
 % test results conciderations 
 \textbf{Test Conclusion}\\
-The algorithm test results are considered sufficient for the current application, but testing, including user interviews, over large amounts of data for actual users is necessary to confirm the practical convenience of the score results.
+The algorithm test results are considered sufficient for the current application. 
+However testing, including user interviews, over large amounts of data for actual users is necessary to confirm the practical convenience of the score results.
+The design of the algorithm allows adjustment of several parameter concerning distance, time and the the weight of those in the final score by changing parameters in the \gls{rs} server's call to \gls{astep} system. 
