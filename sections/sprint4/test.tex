@@ -3,25 +3,28 @@
 This section will contain descriptions and documentation of the tests performed on the whole \gls{rs} solution in the fourth sprint.
 The tests are the final tests on the solution, and will serve as a full system test and as the basis for the solution and project evaluation.
 The tests are distributed into categories of the different parts in the solution: vertices(things) and edges(communication).
+Even though not all elements described in this section are described in the previous implementation sections, they are considered, as they are part of the solution.
+
+Because of the short remaining project time, the tests are performed informally. 
+However, the tests yield practical implementation results, and reflect the functionality of the solution.
 
 
 \subsection{RideShare App}
 \textbf{Background location gathering}\\
-The background location caching test was performed in sprint 3, and was assessed fully functional.
+The background location caching test was performed in sprint 3, and was evaluated being fully functional, and will not be tested further here.
 
 \textbf{Display matches to user}\\
-currently no.
-not fulfilled requirement.
+\todo{fill in}
 
 
 \subsection{aSTEP}
-Our contribution to the \gls{astep} system was the pseudocode for the algorithm.
+Our contribution to the \gls{astep} system was the pseudo code for the algorithm.
 The algorithm was tested in sprint 3 and evaluated as sufficient for the solution, although missing a more comprehensive test with actual user routes.
 
 
 \subsection{RideShare Server}
 \textbf{some category tested}\\
-work quite well, preferably.
+works quite well, preferably.
 
 \textbf{another tested category}\\
 assumed working!
@@ -29,13 +32,35 @@ assumed working!
 
 \subsection{App - aSTEP Communication}
 \textbf{Route push}\\
-works
+Pushing routes with around 10 values is working correctly, as presented in the location gathering test in Section \ref{subsec:bgstest2}.
+The \gls{astep} system is, however, limited by a 2000\todo{check} character limit for the URL length.
+This limits the length of the supported routes to push to \gls{astep} to around 60\todo{check} locations in a route.
 
 \textbf{Register new user}\\
-works
+Registering a user with English letters is tested and performs as expected.
 
 \textbf{Login}\\
-works. receiving token. real nice.
+Calling the \gls{astep} API with the correct arguments yield an ok signal and a token.
+The token is successfully utilized to authorize other API calls.
+
+However, there are problems logging in with passwords and usernames containing Scandinavian letters, as can be seen in Table \ref{tab:logintest}.
+
+This seems to be a problem with Android not incorporating the mentioned letters as standard, because the \gls{astep} website API responds positively for the tested values.
+This is a usability problem with the \gls{rs} app, and could be solved by implementing the support of international letters.
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{}lll@{}}
+		Username & Password & Result \\
+		\hline
+		a & a & 200 OK\\
+		ø & ø & 404 not found\\
+		å & a & 404 not found\\
+		b & å & 401 unauthorized\\
+	\end{tabular}
+	\caption{Registered users login test.}
+	\label{tab:logintest}
+\end{table}
 
 
 \subsection{RideShare Server - aSTEP Communication}
@@ -48,4 +73,4 @@ It works as intended.
 The \gls{rs} app receives matches goodly.
 
 \textbf{Store extra data to new user}\\
-is it done?
+Is working in beta as of May 16th.
