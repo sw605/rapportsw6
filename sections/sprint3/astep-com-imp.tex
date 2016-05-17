@@ -35,7 +35,7 @@ This would be a major security issue.
 Instead password and tokens are parsed as part of the body, which is used by REST. 
 This will hide the content from the URL and instead be transfered in an \texttt{OutputStream} encoded in raw bytes. 
 
-On two examples of API calls can be seen in List \ref{list:example}.
+Two examples of API calls can be seen in List \ref{list:example}.
 The post route example is simplified to reduce size and make it better explainable.
 
 \todo{fix references and captions}
@@ -45,7 +45,8 @@ The post route example is simplified to reduce size and make it better explainab
 \item POST new user
 \begin{enumerate}
 \item URL: http://astep.cs.aau.dk:80/api/users?username=USERNAME
-\item CURL: curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d 'PASSWORD' 'http://astep.cs.aau.dk:80/api/users?username=USERNAME'
+\item CURL: curl -X POST --header 'Content-Type: application/json' --header\\
+ 'Accept: application/json' -d 'PASSWORD' 'http://astep.cs.aau.dk:80/api/users?username=USERNAME'
 \end{enumerate}
 \item POST route to \gls{astep}
 \begin{enumerate}
