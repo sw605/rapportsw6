@@ -1,2 +1,80 @@
 \section{Implementation}
 
+\subsection{Location Gathering Background service}
+% metatext
+This subsection will describe the contents of the implementation of the background location gathering.
+The new implementation is based on the poor results \todo{can we document the poor results?} of the location gathering method implemented in sprint 2 that was not working as intended.
+The code examples in this section will not include potential logging and debugging lines as to save space and they do not influence the functionality of the code.
+
+
+% activityRecognitionInstantiation
+The location gathering should first detect that the device is in a driving activity and then begin recording locations, according to the design described in Section \ref{ssec:LocationGatherBGS}.
+To achieve the functionality, the app must connect to a Google API client and subscribe to activity recognition.
+The code for subscribing to the activity recognition is shown in Listing \ref{activityRecognitionInstantiation}.
+The activity recognition can thereafter check that the detected activity is a driving activity, and accordingly activate the location gathering.
+
+\begin{lstlisting}[language=Java, label=activityRecognitionInstantiation, caption=Initialization of activity recognition.]
+if(activityDetectionBroadcastReceiver == null) {
+	activityDetectionBroadcastReceiver = 
+		new ActivityDetectionBroadcastReceiver(googleApiClient, this);
+		
+	LocalBroadcastManager.getInstance(this).registerReceiver(
+		activityDetectionBroadcastReceiver, 
+		new IntentFilter("fapptory_inc.rideshare.BROADCAST_ACTION"));
+}
+\end{lstlisting}
+
+The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class from, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance to broadcast detected activities.
+
+The broadcast receiver is then applied by registering to the \gls{rs} app's\\ \texttt{BROADCAST\_ACTION}, so that the \texttt{activityDetectionBroadcastReceiver} only handles broadcasts sent by \gls{rs} and not by other apps.
+
+% ActivityIntentService broadcast description
+
+
+
+% Activity Detection Broadcast Receiver
+The main operations in regards to activity detection and location gathering are done by the activity detection broadcast receiver.
+
+When the \texttt{activityDetectionBroadcastReceiver} receives a RideShare broadcast, the extra data in the broadcast is stored in the \texttt{ArrayList<DetectedActivity> detectedActivities}.
+The \texttt{detectedActivities} is iterated over, shown in Listing \ref{activityRecognitionIteration} to find the driving activity \texttt{DetectedActivity.IN\_VEHICLE}.
+The \texttt{startLocationUpdates()}, which is described later, is called if the confidence is above the threshold and if locations are not currently being recorded.
+Line 8 controls the location cache in case a drive is stopped temporarily and starts again, appending the cached route to the actual route.
+
+\begin{lstlisting}[language=Java, label=activityRecognitionIteration, caption=Iteration over received list of activity recognition.]
+for (DetectedActivity da: detectedActivities){
+	if(da.getType() == DetectedActivity.IN_VEHICLE){
+		if(da.getConfidence() >= ACTIVITY_CONFIDENCE_VALUE){
+			if(!isCurrentlyCollectingLocations) {
+				startLocationUpdates();
+				isCurrentlyCollectingLocations = true;
+			}
+			if(potentialStopDrivingActivity && potentialAstepRoute.size() > 0){
+				astepRoute.addAll(astepRoute.size(), potentialAstepRoute);
+				potentialAstepRoute.clear();
+			}
+			lastDetectedVehicleActivity = System.currentTimeMillis();
+			potentialStopDrivingActivity = false;
+			drivingActivityDetected = true;
+		}
+	}
+}
+\end{lstlisting}
+
+% Location Updates Request
+The \texttt{startLocationUpdates()}, shown in Listing \ref{startLocationUpdates}, is called to gather locations regularly.
+The location updates request is based on the Google API client instantiated in \texttt{MainActivity} and a \texttt{locationRequest}.
+The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location quality priority, respectively set to \todo{agree upon constants} 60 seconds, 120 seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
+
+\begin{lstlisting}[language=Java, label=startLocationUpdates, caption=Start location updates functions.]
+public void startLocationUpdates(){
+	if(/* Omitted: Check permissions */) {
+		LocationServices.FusedLocationApi
+			.requestLocationUpdates(googleApiClient, locationRequest, this);
+	}
+}
+\end{lstlisting}
+
+To send the routes gathered through the location service, the communication with \gls{astep} must be established.
+
+\subsection{App-to-aSTEP communication}
+% ja..
