@@ -1,2 +1,19 @@
-\chapter{Appendix A name}\label{ch:appAlabel}
-Here is the first appendix
+\chapter{Sprint 3 API functionality}\label{ch:appAlabel}
+In the following table are the API functionality as they were in sprint 3 with regards to UM and outdoor location based service.
+Indoor location based service is omitted. The list is based on the information available at \url{http://www.astep.cs.aau.dk/}.
+At the URL the most recent version of the API will be available at any given time.
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{ll}
+		Outdoor location services & User Management    \\
+		\hline
+		\begin{tabular}[t]{@{}l@{}}
+			Get user past location\\ Get user past locations area\\ Get user past Locations radius\\ post user current location\\ Post user current route\\ Get all new route matches\\ Get all locations friends\\ Get all users in area \\ Get locations friends \\ Get subset of users area \\ Get users outside area \\Get subset of users radius \\ Get locations friend timestamp\end{tabular}
+		&
+		\begin{tabular}[t]{@{}l@{}}
+			Create group \\ Get administrated groups\\ Add administration\\ Remove administration \\ Get invited users \\ Invite user to group \\ Revoke group invitation \\ Get members of a group \\ Remove user from group \\ Create user \\ Get groups that a user is invited to \\ Decline group invitation \\ Get groups that user is member of \\ Join group \\ Leave group \\ Get outdoor-user\\ Request outdoor user \\ Delete outdoor-user \\ Validate outdoor-user\\ Change password\\ Get token \\ Issue token\end{tabular}
+	\end{tabular}
+	\caption{Currently planned aSTEP API functions.}
+	\label{tbl:s3api}
+\end{table}
