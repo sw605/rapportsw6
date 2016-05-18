@@ -1,9 +1,8 @@
 \section{Requirement Specification}
 % Metatext
-To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the solution. 
-The requirements are divided into two main categories: functional and nonfunctional requirements. 
-The requirements are sorted in the MoSCoW structure, enabling the project group to solve the highest prioritized requirements first, hence developing a solution that fulfills the core purpose before adding additional functionality.
-\todo{add reasoning and source of MSCW categories + functional/non-functional}
+%To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the application to be developed. 
+The requirements are divided into two main categories; functional and nonfunctional requirements, and are furthermore sorted in the MoSCoW \cite{moscow} structure.
+This assist in solving the highest prioritized requirements first, hence a the core purpose of the system can be developed first and the adding additional functionality.
 
 
 % Requirements
@@ -11,7 +10,7 @@ The requirements are sorted in the MoSCoW structure, enabling the project group 
 Functional requirement are requirements directly related to the tasks and operations of the developed application.
 
 \textbf{Must-have requirements}\\
-These are the requirements the solution must fulfill to be acceptable.
+These requirements must be fulfilled to have an acceptable solution.
 
 \textit{Graphical user interface}\\
 The application must have a graphical user interface (GUI), as user must be able to operate the application them selves. 
@@ -21,7 +20,7 @@ The GUI must be intuitive, as user may have different experience with using mobi
 Unique user accounts is required as it serve as a identifier for each user, using the system. With user accounts, store personal information, and compare user based on the data. 
 It will also provide function for displaying user to other users.
 
-\textit{Communication with the \gls{astep} core.}\\
+\textit{Communication with the \gls{astep} system.}\\
 As the project is a part of the bigger system \gls{astep}, there mush be a relation to the developed platform. 
 The communication would be storing data in the \gls{astep} database and using user management also implemented on the platform.
 
@@ -33,14 +32,15 @@ This data should be stored in the \gls{astep} database.
 \textit{Automatically determine regular routes.}\\
 Automatically determine regular routes the user take. 
 Regular routes should be saved for later comparison. 
-Discarding routes that are not used often.
+Ignoring routes that are not used often.
 
-\textit{Automatic ride sharing recommendations.}\\
-A automatically comparison with other users routes must be computed. When two regular routes are found similar, each user must be notified of such, whiteout any user input.
+\textit{Automatic suggest ride sharing partners.}\\
+An automatic comparison with other users routes must be computed.
+When two regular routes are found similar, the users must receive an indication of the match in the app.
 
 
 \textbf{Should-have requirements}\\
-The requirements in this subsection are requirements that are important, but not regarded as highly critical.
+The requirements in this subsection are important, but not regarded as critical for a functional system.
 
 \textit{Give the user option to specify wherever they have a car or not.}\\
 Some users might not have a car, and that should be considered as people whiteout car would need to be treated differently from those who have.
@@ -49,7 +49,7 @@ Some users might not have a car, and that should be considered as people whiteou
 Giving they are frequent users of the application, and have a bad experience with either a driver or passenger, they should be able to blacklist them.
 
 \textit{Suggest rides with user who only drives a subset of the way from A to B.}\\
-Giving users the option to drive with people who do not have the same source and destination, will increase the pool of which users to suggest, as user can \"tag along\" part of the ride.
+Giving users the option to drive with people who do not have the same source and destination, will increase the pool of which users to suggest, as user can ``tag along'' part of the ride.
 
 
 \textbf{Could-have requirements}\\
@@ -72,25 +72,17 @@ The nonfunctional requirements for the solution are stated here.
 These are the requirements the solution must fulfill to be acceptable.
 
 \textit{Development cooperation with the other \gls{astep} project groups.}\\
-The development of the app must be done in cooperation with the other \gls{astep} project groups.
+The development must be done in cooperation with the other \gls{astep} groups.
 
 \textit{User privacy}\\
-The application must respect user privacy, especially in regards  to whom have access to a user location data and general user data.
-A solution will be developed in collaboration with other groups of the \gls{astep} project. The solution should consider elements such as, database storage, user management and other developers.
+The app must respect user privacy, especially in regards to a user location data and user data in general.
+A solution will be developed in collaboration with other \gls{astep} groups.
+The solution should consider elements such as database storage, user management and developers.
 
 \textbf{Should-have requirements}\\
-The requirements in this subsection are requirements that are important, but not regarded as highly critical.
+Requirements that are important, but not regarded as highly critical.
 
 \textit{Aesthetics matching other \gls{astep} project applications}\\
-The application must be of the same design and guidelines as the other applications developed for \gls{astep}.
+The app must share design and guidelines as the other apps developed for \gls{astep}.
 
-\textbf{Could-have requirements}\\
-These are the lowest realistic requirements. 
-
-\textit{Placeholder}\\
-\todo{find requirement}
-
-\textbf{Would-have requirements}\\
-The following requirements are only considered when all other requirements are satisfied, but initially regarded as tasks to be solved in future projects.
-\todo{find requirement}
-
+No further non-functional requirements are set at this stage of the project.
