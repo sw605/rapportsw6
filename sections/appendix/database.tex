@@ -1,0 +1,27 @@
+\chapter{Database Implementation}
+\label{appendix:database}
+\begin{lstlisting}[
+           language=SQL,
+           showspaces=false,
+           basicstyle=\ttfamily,
+           numbers=left,
+           numberstyle=\tiny,
+           commentstyle=\color{gray}
+        ]
+CREATE DATABASE ramsydata;
+CREATE TABLE userdetails(
+	username VARCHAR(50) PRIMARY KEY,
+	fullname VARCHAR(255),
+	phonenumber VARCHAR(30),
+	email VARCHAR(255)
+);
+?
+CREATE TABLE matches(
+	user1 VARCHAR(50) REFERENCES userdetails(username),
+	user2 VARCHAR(50) REFERENCES userdetails(username),
+	matchfound DOUBLE PRECISION,
+	lastUpdate TIMESTAMP,
+	score INT,
+	PRIMARY KEY(user1, user2, matchfound)
+);
+\end{lstlisting}
