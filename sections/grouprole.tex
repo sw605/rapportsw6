@@ -1,4 +1,31 @@
 \chapter{Group Role}
-The \gls{astep} is a multi-group semester project, and consists of several parts. This project group is responsible for developing an app that utilizes the \gls{astep} core, and contribute to the development of the interface of the core.
+This section describes the multi-group project setting and the role of our group’s work in the multi-project.
+The \gls{astep} is a multi-group semester project, and consists of 10 4-person groups. 
 
-Insert some shit figures of the \gls{astep} core structure draft.
+The multi-group project consists of several components, e.g. user management and outdoor location based services (OD) groups, as seen in Figure \ref{fig:astepGroups}.
+Each group is assigned to one component, and some components have multiple groups assigned to them, and the component architecture can be seen in Figure \ref{fig:astepCore}.
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\includegraphics[width=\textwidth]{figures/InformalArchitecture.png}
+		\caption{The \gls{astep} core architecture \cite{astepArchitectureImage}. OD and ID are abbreviations of respectively outdoor and indoor location based services.}
+		\label{fig:astepCore}
+	\end{subfigure}
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.48\textwidth}
+		\includegraphics[width=\textwidth]{figures/astepGroups.png}
+		\caption{The \gls{astep} group distribution according to the project guidelines.}
+		\label{fig:astepGroups}
+	\end{subfigure}
+	\caption{\gls{astep} architectural design}
+	\label{fig:astepArchitecture}
+\end{figure}
+
+
+Our project group is responsible for developing an app that utilizes the \gls{astep} core, and contribute to the development of the interface of the core.
+As the project focus is on commuting, the solution will depend upon outdoor location based services.
+Any user registration, login or other user related tasks should be handled by the user management group.
+According to our project focus and the component architecture, represented in Figure \ref{fig:astepCore}, we will mainly cooperate with the outdoor LBS and user management groups.
