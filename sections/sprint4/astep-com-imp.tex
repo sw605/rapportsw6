@@ -1,10 +1,10 @@
 %meta text
 This subsection contains an overview of the implementation of the API calls utilized to communicate with \gls{astep}.
-Both the api calls in the app and on the RS server will be presented.
+Both the API calls in the app and on the \gls{rs} server will be presented.
 
  \subsubsection{Application}
-In the design phases \ref{sec:aSTEPCommunication.tex} it was decided what API calls should be implemented in the app.
-A specified list of calls only to be performed on the app can be seen in the table below.
+In the design phases \ref{sec:aSTEPCommunication.tex}, it was decided what API calls should be implemented in the app.
+A specified list of calls only to be performed on the app can be seen in Table \ref{tab:asteprequests} below.
 
 \begin{table}[h]
 	\centering
@@ -21,61 +21,67 @@ A specified list of calls only to be performed on the app can be seen in the tab
 	\label{tab:asteprequests}
 \end{table} 
 
-The API calls are implemented using a \texttt{HttpURLConnection} class, which is a \texttt{URLConnection} class for HTTP specific data transfer over the web.
-\texttt{HttpURLConnection} may be used to send and receive streaming data whose length is not known in advance.
+The API calls are implemented using an \texttt{HttpURLConnection} class.
+This is a \texttt{URLConnection} class for HTTP-specific data transfer over the internet.
+\texttt{HttpURLConnection} is used to send and receive streaming data whose length is not known in advance.
 This is needed as every API call varies in size.
 E.g., the API call to post a route will be the one that varies the most in size as routes differ in size, based on the number of locations and their accuracy.
 
 
-Using an object oriented structure, each API call is implemented to overwrite a \texttt{helperClass} which will handle the inputs, such as username, password, token, and routes.
+Using an object-oriented structure, each API call is implemented to overwrite a \texttt{AsyncTaskAPIHelper} which will handle the inputs, such as username, password, token, and routes.
 The inputs are then transformed to a part of a URL which would fit each of the relevant API calls.
-The \texttt{helperClass} is then parsed to the \texttt{HttpURLConnection} which will use a string builder to create the final URL from the API base URL, \texttt{http://astep.cs.aau.dk:80/api/}.
+The \texttt{AsyncTaskAPIHelper} is then parsed to the \texttt{HttpURLConnection} which will use a string builder to create the final URL from the API base URL, \texttt{http://astep.cs.aau.dk:80/api/}.
 Lastly, the \texttt{HttpURLConnection} is trying to perform the API call from where response codes are handled.
 
-It should be noted that passwords are not in the URL part of the API call, as these will be logged on the \gls{astep} server. 
+It should be noted that passwords are not in the URL part of the API call, as these are logged in the \gls{astep} server. 
 This would be a major security issue.
-Instead password and tokens are parsed as part of the body or header, which is used by REST. 
-This will hide the content from the URL and instead be transfered in an \texttt{OutputStream} encoded in raw bytes. 
-Two examples of API calls can be seen in \ref{apitable}.
+Instead, password and tokens are parsed as part of the body or header, which is used by REST. 
+This will hide the content from the URL and instead be transferred in an \texttt{OutputStream} encoded in raw bytes. 
+Two examples of API calls can be seen in Table \ref{tab:apitable}.
 
-\begin{table}[]
-\scriptsize
-\centering
-\label{apitable}
-\begin{tabular}{|l|l|lll}
-\cline{1-2}
-POST new user &                                                                                                                                                                                                                                                                                             &  &  &  \\ \cline{1-2}
-URL:          & http://astep.cs.aau.dk:80/api/users?username=USERNAME                                                                                                                                                                                                                                       &  &  &  \\ \cline{1-2}
-CURL:         & \begin{tabular}[c]{@{}l@{}}curl -X POST -\-header 'Content-Type: application/json' -\-header 'Accept: application/json'\\  -d 'PASSWORD' 'http://astep.cs.aau.dk:80/api/users?username=USERNAME'\end{tabular}                                                                               &  &  &  \\ \cline{1-2}
-POST route    &                                                                                                                                                                                                                                                                                             &  &  &  \\ \cline{1-2}
-URL:          & \begin{tabular}[c]{@{}l@{}}http://astep.cs.aau.dk:80/api/locations/outdoor/outdoor/routes?authorization=TOKEN\\ \&route=longitude,latitude,precision,timestamp;\&distance\_weight\&time\_weight\\ \&largest\_acceptable\_detour\_length=146\&acceptable\'httptime\_difference=32h\end{tabular} &  &  &  \\ \cline{1-2}
-CURL:         & \begin{tabular}[c]{@{}l@{}}curl -X POST -\-header 'Content-Type: application/json'\\  -\-header 'Accept: application/json' 'URL from above'\end{tabular}                                                                                                                                    &  &  &  \\ \cline{1-2}
-\end{tabular}
-\caption{Create user and send route to \gls{astep} api calls}
+\begin{table}[h]
+	\scriptsize
+	\centering
+	\begin{tabularx}{\textwidth}{l X}
+		\textbf{POST new user} &  \\\toprule
+		URL:          & http://astep.cs.aau.dk:80/api/users?username=USERNAME  \\
+		\rowcolor{blue!10}
+		CURL:         & curl -X POST -\-header 'Content-Type: application/json' -\-header 'Accept: application/json' -d 'PASSWORD' 'http://astep.cs.aau.dk:80/api/users?username=USERNAME' \\\\
+		\textbf{POST route} & \\\toprule
+		URL:          & http://astep.cs.aau.dk:80/api/locations/outdoor/outdoor/routes?authorization=TOKEN
+						\&route=longitude;latitude;precision;timestamp\&distance\_weight\&time\_weight
+						\&largest\_acceptable\_detour\_length=146\&acceptable\'httptime\_difference=32h\\ 
+		\rowcolor{blue!10}
+		CURL:         & curl -X POST -\-header 'Content-Type: application/json' -\-header 'Accept: application/json' 'URL from above' \\
+	\end{tabularx}
+	\caption{Create user and send route to \gls{astep} api calls}
+	\label{tab:apitable}
 \end{table}
 
 
-As seen in 'POST new user', the username is parsed in the URL while the password is included in a header.
-On the other hand, the 'POST route to \gls{astep}' is only parsed in the URL as there is no information that needs to be hidden.
-The post route example is simplified to reduce size and make it better explainable.
+As seen in 'POST new user', the username is passed in the URL while the password is included in a header.
+On the other hand, the 'POST route' is only passed in the URL as there is no information that needs to be hidden.
+The post route example is simplified to reduce its size and make it easier to explain.
 Longitude, latitude, and precision are all doubles.
-timestamp is of the ISO format with year, month, day, hour, minute, second.  
+The timestamp is in the ISO 8601 format with year, month, day, hour, minute, and second.  
 The rest of the parameters is integers used to control the algorithm as explained in \ref{sec:routematchingalgorith}. 
+In the given example the route given is only consisting of one location, for multiple locations, the URL would have to repeat the \enquote*{\&route=\dots} part.
 
-
-
-
-Every decision made regarding parsing data to the \gls{astep} server is decided by the individual \gls{astep} API groups.
+Every decision made regarding parsing data in the header or body to the \gls{astep} server was made by the \gls{astep} API groups.
 
 \subsubsection{RideShare Server}
-On the RS server a faster implementation were done.
-The RS server requires only two API calls one for getting matched routes from \gls{astep} and one for checking if a user is a valid \gls{astep} user.
+On the \gls{rs} server, a simpler communication with the \gls{astep} server is implemented.
+The \gls{rs} server requires only two API calls one for getting matched routes from \gls{astep} and one for checking if a user is a valid \gls{astep} user.
 Both API calls is implemented as their own \texttt{HttpURLConnection}.
-The validate user check is performed when a user create a user in the app. First a user is created at \gls{astep} then a request to the RideShare server is issued, where a check is performed to ensure the user correctly registered in \gls{astep}.
+The validate user check is performed when a user create a user in the app. 
+First a user is created at \gls{astep} then a request to the RideShare server is issued, where a check is performed to ensure the user correctly registered in \gls{astep}.
 The check is done by sending the token received from \gls{astep} to the RideShare server and then checked up against \gls{astep} again.
 If the user is valid the additional information provided when registering will be stored on our RideShare server for later retrieval. 
 
-The route match api call is right now called when the server is requested to do so by the developers. \todo{Jeg er ikke sikker på det her er korrekt}
-The api call will use the token provided to fetch matched to the user related to the token. 
-\gls{astep} will then return every match for that user, with a score, the matched routes and the name of who the matches is with.
+The route match api call is called once a day as described in the previous section.
+The api call uses the token for its own user to fetch matches from the aSTEP server. 
+\gls{astep} then returns every match for users 
+that user, with a score, the matched routes and the username of who the matches is with.
 This information is then send back to the application to be displayed.
+The idea is that later on the match results can be limited to the users that allowed the \gls{rs} user to access their data.
+Currently, the only limiting factor is that only matches with users that are registered in the database is saved, and \gls{rs} is currently the only app that uses route functionality.
