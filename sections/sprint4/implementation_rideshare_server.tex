@@ -1,0 +1,83 @@
+% Connections
+The server is implemented as a Java application running on a computer.
+It communicates with the \gls{astep} API by using the \texttt{HttpURLConnection} class.
+What is sent through these connections will be explained in later sections.
+
+The app communicates with the server though the \texttt{ServerSocket} class and the \texttt{Socket} class.
+These classes provide input and output streams which can be written to and read from.
+A \texttt{BufferedStreamReader} reads the input stream as this class provides an easy to use interface for reading the input line by line.
+The server writes to the output stream using the \texttt{PrintWriter} class.
+This class is similar to the standard output stream in the way that it prints the string provided to the stream.
+
+The messages send back and forth have two types: simple strings and JSON objects.
+The simple strings are used for error messages such as \enquote{Unknown message} and \enquote{Invalid token} while the JSON objects are used for more complex results such as arrays of matches.
+
+% Client requests
+These responses are to the clients messages.
+Currently, there are two messages which are as follows:
+
+{\centering
+	\begin{tabular}{l l}
+		Update matches & \enquote{\texttt{UPD:[TOKEN]}}\\
+		Register & \enquote{\texttt{REG:[TOKEN]:[PHONENUMBER]:[E-MAIL]:[FULL NAME]}}
+	\end{tabular}
+}
+
+The server checks the token sent through the \gls{astep} API and gets the username in both cases.
+Update matches gets the updated set of matches for the user and register adds the user to the user details table in a database on the server.
+
+%Main loop
+The communication is contained in a loop that is implemented so that the server is ready for new clients as often as possible.
+The loop is as seen in the following enumeration.
+
+\begin{enumerate}
+	\item Load server configurations
+	\item Open Server side socket
+	\item If it is less than 24 hours since last match update from \gls{astep} goto 5
+	\item Create a thread to get match updates from \gls{astep}
+	\item Wait for a client
+	\item Create a thread to handle client request in another thread
+	\item goto 3
+\end{enumerate}
+
+The 24-hour interval, in line 3, was chosen to minimize the work that the \gls{astep} server has to do while presenting the users with relevant information.
+When getting matches from \gls{astep} the system runs the algorithms as described in Section \ref{ssec:algorithm} on routes that were received within the last two week.
+The matches are then stored in the server's own database.
+
+%Database
+All contact to the database is handled in a class with a single instance ensured with the use of singleton pattern. 
+This is because the database needs to know the configurations for the database in question (the username and password), which is loaded from a file.
+It would be inefficient if the server had to read this file every time it needs to access the database.
+
+Withing the database is only two tables; userdetails and matches.
+The userdetails table keeps extra details about the users of the system such as contact information and an alias they can use apart from their \gls{astep} username (stored as fullname).
+The table description can be seen in Table \ref{tab:userdetails}.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l|l}
+		Column 		& Type                   & Modifiers\\\hline
+		username    & character varying(50)  & primary key\\
+		phonenumber & character varying(30)  & not null\\
+		email       & character varying(255) &\\
+		fullname    & character varying(255) & not null\\
+	\end{tabular}
+	\caption{The table definition of userdetails in the \gls{rs} system.}
+	\label{tab:userdetails}
+\end{table}
+
+A table of meta data for matches is stored that contains the information that is required by the system design.
+The table description can be seen in Table \ref{tab:matches}.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l|l|l}
+			   Column  &            Type             & Modifiers\\\hline
+			 user1     & character varying(50)       & references userdetails(username)\\
+			 user2     & character varying(50)       & references userdetails(username)\\
+			 starttime & timestamp without time zone & not null\\
+			 score     & integer                     &
+	\end{tabular}
+	\caption{The table definition of matches in the \gls{rs} system.}
+	\label{tab:matches}
+\end{table}
