@@ -2,51 +2,29 @@
 % analysis metatext
 This section contains descriptions of the analysis performed in sprint 4.
 The analysis is performed to evaluate the current status of the solution, and hence enabling the further development on the solution parts.
-The status is considered with regards to the previously performed tests and the requirement specification, so that the solution can fulfill the requirements, be usable and finally pass an acceptance test.
+The status is considered with regards to the previously performed tests and the requirement specification, so that the solution can fulfill the requirements, be usable and, finally, pass an acceptance test.
 The analysis is divided into three sections, each dedicated to one of the three main parts of the solution.
 
-\iffalse
-\subsection{Missing features for completing the solution}
-The \gls{rs} solution has currently, successfully implemented the following parts:
-\begin{itemize}
-	\item \gls{rs} App
-	\subitem Background location gathering and caching
-	\subitem \gls{astep} Login
-	\subitem Push routes to \gls{astep}
-	\item \gls{astep}
-	\subitem Algorithm matches routes
-	\subitem Automatically determine regular routes
-	\subitem Matching routes where one is a subroute
-	\item \gls{rs} Server
-	\subitem Database to store supplementary user data
-\end{itemize} 
-
-However, there are still parts to implement according to the requirements.
-The missing features seen in the 'must have' category are:
-\begin{itemize}
-	\item Display matches to user
-	\item User registration
-\end{itemize}
-\fi
+The solution is well analysed through the previous sprint analyses, and the necessary features are outlined in their respective sprints.
+The current analysis will be focused on implementation prioritization of the missing features of the \gls{rs} solution, and does not rely on analysing new material.
 
 
 \subsection{\gls{astep}}
 The only part of the \gls{astep} controlled by the \gls{rs} solution is the algorithm, and it is tested and evaluated as functional, according to Section \ref{sec:s3algtest}. However, the \gls{astep} must be tested to check that the \gls{rs} complies with the requirements in the API.
+Potential failures in the \gls{astep} communication would be caused by poor implementation in the \gls{rs} app or in the \gls{astep} system, or by poor cooperation or misunderstanding between the project groups.
+
+The \gls{astep} part of the solution does not need any further development currently, but needs testing in context with the \gls{rs} solution.
 
 \subsection{\gls{rs} Server}
-The \gls{rs} server is currently missing, but its functionality and position in the \gls{rs} solution is described in the previous sprints \todo{add reference}.
-The server fulfills the requirement of storing contact information for the users, as this is not provided by the \gls{astep} system.
+The \gls{rs} server is currently missing, but its functionality and position in the \gls{rs} solution is analysed and designed in the previous sprints, e.g. in system design in Section \ref{sec:s2systemdesign}. Because the \gls{rs} server is sufficiently described previously, there will be no further analysis of the server requirements.
 
-Additionally, the \gls{rs} server fetches the generated matches from \gls{astep} system and stores them, enabling the \gls{rs} app to display the matches to their respective users.
+The server must fulfill the requirement of storing contact information for the users, as this is not provided by the \gls{astep} system.
+Additionally, the \gls{rs} server needs to fetch the generated matches from \gls{astep} system and stores them, enabling the \gls{rs} app to display the matches to their respective users.
 
-Because the \gls{rs} server is sufficiently described previously, there will be no further analysis of the server requirements.
 
 \subsection{\gls{rs} App}
 The visual \gls{rs} app interface is currently consisting of a static, temporary placeholder list of two fictitious matches, and an empty settings menu.
-
-The app needs to provide actual route matches and a login system to be usable.
-The matches should be provided by the \gls{rs} server.
-
+The match interface needs to be implemented to comply with the requirement of displaying matches to the user. Furthermore, to separate user accounts and fulfill the requirement regarding login, the login interface and functionality must be implemented.
 
 
 
