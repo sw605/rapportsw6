@@ -1,13 +1,13 @@
 \section{Test}
 In this section a full test of the system will be performed.
-The test will be an acceptance test, and will seek to verify if the requirement set in the beginning of the project.
+The test will be an acceptance test, and will seek to verify if the requirement set in the beginning of the project is satisfied.
 The acceptance test will be designed to test the whole system with some manual generated data.
 The scope of the test will be to test the Must-have requirements form Section \ref{sec:req}.
-Some retirements is verified working in previous tests, these can be omitted form the acceptance test, if so, this will be accounted for. 
+Some retirements is verified working in previous tests, these can be omitted form the acceptance test. 
 
-The Must, have requirements from Section \ref{sec:req}, firstly the functional; Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups, User privacy.
+The Must have requirements from Section \ref{sec:req} is as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
 
-User location tracking and storage, as well a automatic determining regular routes are both fully verified in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}, the latter also partly accounting for the requirement suggesting ride partners the only thing missing for this requirement, is to check whether they are shown correctly to an user of the app. 
+'User location tracking and storage', as well as 'automatic determining regular routes' are both fully verified in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}, the latter also partly accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
 The nonfunctional requirement of development cooperation is accounted for in Section \ref{refhere}\todo{fix this todo}, thus we need an acceptance test which can test if the following requirements is upheld. 
 \begin{itemize}
 	\item Graphical user interface
@@ -18,13 +18,16 @@ The nonfunctional requirement of development cooperation is accounted for in Sec
 \end{itemize}
 
 \subsection{Acceptance Test Design}
-Firstly some test data will be added to the \gls{rs} server's database, the content can be seen in Appendix \ref{app:datadump}.
+Firstly will the performed tests be explained and then later executed.
+Some mock test data will be added to the \gls{rs} server's database, the content can be seen in Appendix \ref{app:datadump}.
 
-These data have is a combination of data pulled form the \gls{astep} database as well s some data we have designed ourselves to generate matches for th user \texttt{test}.
-THe setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
+These data sets is a combination of data pulled form the \gls{astep} database as well as some data we have designed ourselves to generate matches for th user \texttt{test}.
+The setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
+An android emulator is used instead of an actual phone, as we can avoid opening ports on the computer running the server.
 
-The first task consist of opening the app, and registering a new user. If this succeeds the user should then log out again and then log in with the user \texttt{test} accompanied by the password \texttt{test}.
-When the user logs into the app again the appropriate matches stored in \gls{rs} database, should be downloaded to and viewed in the app.
+The first task consist of opening the app and registering as a new user. If this succeeds the user should then log out again and then log in with the user \texttt{test} accompanied by the password \texttt{test}.
+As we are using mock data, only the user \texttt{test} have any matches.
+When the user logs into the app again the appropriate matches stored in \gls{rs} database, will be fetched from the server and should be displayed in the app.
 If the lists are shown for the user \texttt{test} but not for the newly registered user, the overall test are completed. 
 
 The GUI will have been tested through availability of the different functions in the app, the user functionality will be tested when registering an user an logging in, this will also partly test the communication with the \gls{astep} system.
@@ -35,8 +38,8 @@ The requirement concerning user privacy is tested be seeing if location data abo
 
 \subsection{Performing the Test}
 First a new user, \texttt{user22} was created as can be seen in Figure \ref{s4tp:newuser}.
-In the process of creating a new user, some unexpected behavior regarding scandinavian charterers.
-Some additional tests were performed which can be seen in Table \ref{tab:logintest}.
+In the process of creating a new user, some unexpected behavior regarding scandinavian charterers were observed.
+Some additional tests were performed to further explore this observation, which can be seen in Table \ref{tab:logintest}.
 \begin{table}[!ht]
 	\centering
 	\begin{tabular}{@{}lll@{}}
@@ -50,11 +53,12 @@ Some additional tests were performed which can be seen in Table \ref{tab:loginte
 	\caption{Registered users login test.}
 	\label{tab:logintest}
 \end{table}
-Some additional \gls{astep} API test leads us to believe that this is an problem in the android app.
+Some additional \gls{astep} API test leads us to believe that this is an problem in the android app as the special characters is working when tested on the \gls{astep} swagger interface.
 
-The registering of the user \texttt{user22} was successful and as can be seen in the right side of Figure \ref{s4tp:numain}, as expected no matches were shown to this newly registered user. 
-The user were then logged out.
-The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged in successful, and redirected to the main interface of the, where the user was presented with all the appropriate matches as shown in \ref{s4tp:testmain}.
+The registering of the user \texttt{user22} were later successful when using UTF-8 characters and as can be seen in the right side of Figure \ref{s4tp:numain}. 
+As expected no matches were found to this newly registered \texttt{user22}. 
+The user were then logged out of the app.
+The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged in successful, and redirected to the main interface of the app, where the user was presented with all the appropriate matches as shown in \ref{s4tp:testmain}.
 \begin{figure}[ht!]
 \centering
 \begin{subfigure}[b]{0.24\textwidth}
@@ -81,11 +85,11 @@ The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged
 \end{figure}
 
 \subsection{Test Conclusion}
-Based on this acceptance test we can confirm that our products fulfills every Must-have requirement, in addition to this the solution also fulfills an Should-have requirement pertained to suggesting route matches based on shared sub-routes. 
-While every Must-have requirement is met and that is a success, there is still room for improvement both of the the developed solution as well as expanding the functionality, either with additional requirements from the analysis of these or with new ones based on new knowledge or user testing. 
+Based on this acceptance test we can confirm that our products fulfills every Must-have requirement.
+Even though every Must-have requirement is met there is still room for improvement both for the already developed solution as well as expanding the functionality, either with additional requirements from the analysis or with new ones based on new knowledge. 
 The possibilities for further development will be discussed in Section \ref{sec:future}.
 
-%% one huge shit tack
+%% one huge shit tack below --------------------------------------------------------------------------------------------------------------------
 \iffalse
 \section{Acceptance Test}
 % metatext for test section
