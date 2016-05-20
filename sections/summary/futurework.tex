@@ -1,23 +1,23 @@
 \section{Future Work}\label{sec:future}
-This section contains the features that were thought of during the project period, but were not implemented because of time constraints or disregarded to maintain a consistent focus for the project.
+This section contains the features that were thought of during the project period but was not implemented because of time constraints or disregarded to maintain a consistent focus for the project.
 
 \subsection{Registration of users}
-Because having connections between the users of the app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}, the edges described in Section ?? \todo{} was not implemented.
-This should be done during user registration with a few API calls.
-It might be possible to also include a way to intergrate facebook as a alternative login method.
+Because having connections between the users of the app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}, the edges described in Section \ref{ssec:usermanagement} was not implemented.
+This should be done during user registration with a few API calls to \gls{astep}.
+It might be possible to also include a way to integrate  facebook as an alternative login method.
 
-Another feature that is going to be important in the future is to allow users to use the same \gls{astep} user for multiple applications.
-This can be done by introducing a two step registration, with the first step being logging in to \gls{astep} or creating a new \gls{astep} user.
+Another feature that is going to be important in the future is to allow users to use the same \gls{astep} user for many applications.
+This can be done by introducing a two-step registration, with the first step being logging into \gls{astep} or creating a new \gls{astep} user.
 And the second step being creating a new \gls{rs} user.
-How this is achived is up to the group implementing it, but it could be done though an altered user interface.
+How this is achieved is up to the group implementing it, but it could be done though an altered user interface.
 
 \subsection{User interface}
 And when talking about user interface.
-It is stated multiple times that the focus of this project was never the interface, and it could therefor use an overhaul.
-This overhaul would include a more consistent design between views and possibly a number of functionality that makes the app more enjoyable to use.
+It is stated many times that the focus of this project was never the interface, and it could therefor use an overhaul.
+This overhaul would include a more consistent design between views and functionality that makes the app more enjoyable to use.
 
 This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
-Another feature would be to display additional information when a user tapped on a match, a new activity would start which shows formation about the match.
+Another feature would be to display more information when a user tapped on a match, a new activity would start which shows formation about the match.
 This information could include other people that often travels with the user and details about the others route which were matched with.
 One way to display details about the route that were matched witch would be to plot it into some sort of Google Maps intergration.
 
@@ -33,12 +33,12 @@ It would also be better if the server could use push notifications to send new r
 \subsection{App functionality}
 
 The app does not take into account the users which are not driving.
-This feature would require a rework of the internal route system in the \gls{astep} system or have the routes go through the \gls{rs} server before sending them to \gls{astep}.
+This feature would need a rework of the internal route system in the \gls{astep} system or have the routes go through the \gls{rs} server before sending them to \gls{astep}.
 Also the app would need a whole seperate system is needed if the app should detect walking routes.
-This would also require to make the algorithm smarter in order to decide who can be matched against.
+This would also need to make the algorithm smarter to decide whom can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
-Another thing is that the algortihm assumes that the one who is picking up the passenger is responsible for contacting possible passengers.
+Another thing is that the algortihm assumes that the one who is picking up the passenger handles contacting possible passengers.
 
 
 % Messenger service
@@ -50,9 +50,9 @@ For the algorithm there is a lot of improvements that can be made in the search 
 The algorithm does not use any filtering of routes to compare other than a simple time cut off.
 This could be done by using geo-fences and/or some implementation of the $S^2$ algorithm.
 A less complex solution could be to round the coordinate in to a lower accuracy and thereby generating a grid.
-Rounding down to for example two decimal places has an accuracy of approximatly 1.1 kilometers.
+Rounding down to for example two decimal places has an accuracy of 1.1 kilometers.
 
-Another point is that the algortihm does not take speed limits and terrain into account when calculating the detours.
+Another feature that the algorithm does not take into account is speed limits and terrain when calculating the detours.
 This feature would increase the accuracy of the estimated detours and by extension give more accurate scores.
 It could be implemented by using the Google Maps API to generate the required routes.
 
