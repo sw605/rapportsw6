@@ -1,3 +1,28 @@
+\section{Test}
+In this section a full test of the system will be performed.
+The test will be an acceptance test, and will seek to verify if the requirement set in the beginning of the project.
+The acceptance test will be designed to test the whole system with some manual generated data.
+The scope of the test will be to test the Must-have requirements form Section \ref{sec:req}.
+Some retirements is verified working in previous tests, these can be omitted form the acceptance test, if so, this will be accounted for. 
+
+The Must, have requirements from Section \ref{sec:req}, firstly the functional; Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups, User privacy.
+
+User location tracking and storage, as well a automatic determining regular routes are both fully verified in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}, the latter also partly accounting for the requirement suggesting ride partners the only thing missing for this requirement, is to check whether they are shown correctly to an user of the app. 
+The nonfunctional requirement of development coorporation is accounted for in Section \ref{refhere}\todo{fix this todo}, thus we need an acceptance test which can test if the following requirements is upheld. 
+\begin{itemize}
+	\item Graphical user interface
+	\item User accounts, including login and registration
+	\item Communication with the \gls{astep} system
+	\item Showing users their ridesharing matches in the app
+	\item User privacy
+\end{itemize}
+
+\subsection{Acceptance Test Design}
+Firstly some test data will be added to the \gls{rs} server's database, the content can be seen in Appendix \ref{app:datadump}.
+
+
+%% one huge shit tack
+\iffalse
 \section{Acceptance Test}
 % metatext for test section
 This section will contain descriptions and documentation of an informal acceptance test performed on the whole \gls{rs} solution in the fourth sprint.
@@ -94,3 +119,4 @@ The \gls{rs} app receives matches goodly.
 
 \textbf{Store extra data to new user}\\
 Is working in beta as of May 16th.
+\fi
