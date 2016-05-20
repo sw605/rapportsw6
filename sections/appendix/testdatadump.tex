@@ -1,12 +1,12 @@
 \chapter{Sprint 4 \gls{rs} database test data}
 \label{app:datadump}
 \begin{lstlisting}[
-           language=SQL,
+language=SQL,
            showspaces=false,
-           basicstyle=\ttfamily,
+           basicstyle=ttfamily,
            numbers=left,
-           numberstyle=\tiny,
-           commentstyle=\color{gray}
+           numberstyle=tiny,
+           commentstyle=color{gray}
         ]
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -42,24 +42,24 @@ CREATE TABLE userdetails (
 ALTER TABLE userdetails OWNER TO postgres;
 -- Data for Name: matches; Type: TABLE DATA; Schema: public; Owner: postgres
 COPY matches (user1, user2, matchfound, lastupdate, score) FROM stdin;
-niels	alex	1463383750000	2016-05-16 07:29:37.902	20
-alex	carsten	1463383750000	2016-05-16 07:29:37.984	50
-svend	carsten	1463383750000	2016-05-16 07:29:37.986	70
-svend	alex	1463383750000	2016-05-16 07:29:37.987	90
-test	alex	0	2016-05-16 15:33:19.818857	23
-test	alex	1	2016-05-16 15:33:19.818857	47
-test	carsten	1	2016-05-16 15:33:19.818857	3
-test	carsten	21	2016-05-16 15:33:19.818857	87
-\.
+niels   alex    1463383750000   2016-05-16 07:29:37.902 20
+alex    carsten 1463383750000   2016-05-16 07:29:37.984 50
+svend   carsten 1463383750000   2016-05-16 07:29:37.986 70
+svend   alex    1463383750000   2016-05-16 07:29:37.987 90
+test    alex    0   2016-05-16 15:33:19.818857  23
+test    alex    1   2016-05-16 15:33:19.818857  47
+test    carsten 1   2016-05-16 15:33:19.818857  3
+test    carsten 21  2016-05-16 15:33:19.818857  87
+.
 -- Data for Name: userdetails; Type: TABLE DATA; Schema: public; Owner: postgres
 COPY userdetails (username, phonenumber, email, fullname) FROM stdin;
-test	+4511223344	\N	Susie Hund
-alex	+4512345678	\N	Alex
-carsten	+4512345678	\N	Carsten
-svend	+4512345678	\N	Svend
-niels	+4512345678	\N	\N
-wiingreen	+4542267385	\N	Claus Worm Wiingreen
-\.
+test    +4511223344 N   Susie Hund
+alex    +4512345678 N   Alex
+carsten +4512345678 N   Carsten
+svend   +4512345678 N   Svend
+niels   +4512345678 N   N
+wiingreen   +4542267385 N   Claus Worm Wiingreen
+.
 -- Name: matches_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 ALTER TABLE ONLY matches
     ADD CONSTRAINT matches_pkey PRIMARY KEY (user1, user2, matchfound);

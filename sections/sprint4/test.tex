@@ -8,7 +8,7 @@ Some retirements is verified working in previous tests, these can be omitted for
 The Must, have requirements from Section \ref{sec:req}, firstly the functional; Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups, User privacy.
 
 User location tracking and storage, as well a automatic determining regular routes are both fully verified in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}, the latter also partly accounting for the requirement suggesting ride partners the only thing missing for this requirement, is to check whether they are shown correctly to an user of the app. 
-The nonfunctional requirement of development coorporation is accounted for in Section \ref{refhere}\todo{fix this todo}, thus we need an acceptance test which can test if the following requirements is upheld. 
+The nonfunctional requirement of development cooperation is accounted for in Section \ref{refhere}\todo{fix this todo}, thus we need an acceptance test which can test if the following requirements is upheld. 
 \begin{itemize}
 	\item Graphical user interface
 	\item User accounts, including login and registration
@@ -19,6 +19,58 @@ The nonfunctional requirement of development coorporation is accounted for in Se
 
 \subsection{Acceptance Test Design}
 Firstly some test data will be added to the \gls{rs} server's database, the content can be seen in Appendix \ref{app:datadump}.
+
+These data have is a combination of data pulled form the \gls{astep} database as well s some data we have designed ourselves to generate matches for th user \texttt{test}.
+THe setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
+
+The first task consist of opening the app, and registering a new user. If this succeeds the user should then log out again and then log in with the user \texttt{test} accompanied by the password \texttt{test}.
+When the user logs into the app again the appropriate matches stored in \gls{rs} database, should be downloaded to and viewed in the app.
+If the lists are shown for the user \texttt{test} but not for the newly registered user, the overall test are completed. 
+
+The GUI will have been tested through availability of the different functions in the app, the user functionality will be tested when registering an user an logging in, this will also partly test the communication with the \gls{astep} system.
+The rest of the requirement pertaining communication with \gls{astep} are verified in the earlier tests.
+If the matches is correctly pulled from the \gls{rs} server and showed to the user will be tested when the user \texttt{test} are logged in.
+The requirement concerning user privacy is tested be seeing if location data about other users are displayed to the user currently logged in. 
+
+
+\subsection{Performing the Test}
+First a new user, \texttt{user22} was created as can be seen in Figure \ref{s4tp:newuser}.
+In the process of creating a new user, some unexpected behavior regarding scandinavian charterers.
+Some additional tests were performed which can be seen in Table \ref{tab:logintest}.
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{@{}lll@{}}
+		Username & Password & Result \\
+		\hline
+		a & a & 200 OK\\
+		ø & ø & 404 not found\\
+		å & a & 404 not found\\
+		b & å & 401 unauthorized\\
+	\end{tabular}
+	\caption{Registered users login test.}
+	\label{tab:logintest}
+\end{table}
+Some additional \gls{astep} API test leads us to believe that this is an problem in the android app.
+
+The registering of the user \texttt{user22} was successful and as can be seen in the right side of Figure \ref{s4tp:numain}, as expected no matches were shown to this newly registered user. 
+The user were then logged out.
+The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged in successful, and redirected to the main interface of the, where the user was presented with all the appropriate matches as shown in \ref{s4tp:testmain}.
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{.25\textwidth}
+        \centering
+        \includegraphics[width=0.3\linewidth, height=0.15\textheight]{figures/s4test/newuser.png}
+        \caption{$dt=0.1$}
+        \label{s4tp:newuser}
+    \end{minipage}%
+    \begin{minipage}{0.25\textwidth}
+        \centering
+        \includegraphics[width=0.3\linewidth, height=0.15\textheight]{figures/s4test/newusermain.png}
+        \caption{$dt =$}
+        \label{s4tp:numain}
+    \end{minipage}
+\end{figure}
+
 
 
 %% one huge shit tack
