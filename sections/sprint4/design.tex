@@ -1,13 +1,24 @@
 \section{Design}
 % metatext
+The design of the implementation planned for sprint 4 is described in this chapter.
+The primary focus for the implementation is finishing the app and implementing the \gls{rs} server.
+An important part is especially implementation of the API calls to the \gls{astep}.
 
+\subsection{\gls{rs} App}
+To make the \gls{rs} app acceptable, the missing features must be implemented.
+The list of matches needs to be implemented, so that the user interface reflects the respective users' matches.
+To implement the user matches list, the app must utilize the API calls regarding route matches.
+These calls must be in the correct \gls{astep} format to be accepted and to work properly.
+The actual API call could be generalized to a single class so it can be reused for different API calls and to support potential future expansion.
+Every API call must be in their own class building the correct URL to be used in an API client.
+For user experience and avoid user interface stalls, it is important to make the API calls asynchronous. 
+A list of the API calls that must be implemented to make the \gls{rs} app functionality can be found in Table \ref{tab:relevantastepapi}.
 
-\subsection{Algorithm redesign}
+\subsection{\gls{rs} Server}
+As described in Section \ref{sec:s2systemdesign}, it was decided that the necessary user information not stored in the \gls{astep} server should be stored in the \gls{rs} server.
+It was also decided in Section \ref{sec:s2systemdesign} that it is the \gls{rs} server that is responsible for calling the \gls{astep} API to store the generated matches, thus enabling the \gls{rs} server to provide the route match information for the \gls{rs} app.
+In order to store the data received from \gls{astep}, a database is needed on the \gls{rs} server.
+The database needs two tables to perform the required operations: one for user data and one for matched routes.
 
-
-\subsection{Algorithm test design}
-
-
-
-\subsection{RideShare Server Design}
-
+As there are few tasks performed on the \gls{rs} server, a simpler implementation of the API calls can be implemented.
+Both the API calls and the connection to the app should be implemented as asynchronous, because there can be several requests to and from the server simultaneously. 
