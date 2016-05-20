@@ -55,23 +55,35 @@ Some additional \gls{astep} API test leads us to believe that this is an problem
 The registering of the user \texttt{user22} was successful and as can be seen in the right side of Figure \ref{s4tp:numain}, as expected no matches were shown to this newly registered user. 
 The user were then logged out.
 The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged in successful, and redirected to the main interface of the, where the user was presented with all the appropriate matches as shown in \ref{s4tp:testmain}.
-\begin{figure}[!htb]
-    \centering
-    \begin{minipage}{.25\textwidth}
-        \centering
-        \includegraphics[width=0.3\linewidth, height=0.15\textheight]{figures/s4test/newuser.png}
-        \caption{$dt=0.1$}
+\begin{figure}[ht!]
+\centering
+\begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{figures/s4test/newuser.png}
+        \caption{Registering a new user.}
         \label{s4tp:newuser}
-    \end{minipage}%
-    \begin{minipage}{0.25\textwidth}
-        \centering
-        \includegraphics[width=0.3\linewidth, height=0.15\textheight]{figures/s4test/newusermain.png}
-        \caption{$dt =$}
+\end{subfigure}
+\begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{figures/s4test/newusermain.png}
+        \caption{App drawer over empty mainscreen.}
         \label{s4tp:numain}
-    \end{minipage}
+    \end{subfigure}
+\begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{figures/s4test/logintest.png}
+        \caption{Login screen for a returning user.}
+        \label{s4tp:logintest}
+\end{subfigure}
+\begin{subfigure}[b]{0.24\textwidth}
+        \includegraphics[width=\textwidth]{figures/s4test/testmain.png}
+        \caption{Main-screen for an user with matches.}
+        \label{s4tp:testmain}
+\end{subfigure}
+\caption{Screenshots from the acceptance test.}
 \end{figure}
 
-
+\subsection{Test Conclusion}
+Based on this acceptance test we can confirm that our products fulfills every Must-have requirement, in addition to this the solution also fulfills an Should-have requirement pertained to suggesting route matches based on shared sub-routes. 
+While every Must-have requirement is met and that is a success, there is still room for improvement both of the the developed solution as well as expanding the functionality, either with additional requirements from the analysis of these or with new ones based on new knowledge or user testing. 
+The possibilities for further development will be discussed in Section \ref{sec:future}.
 
 %% one huge shit tack
 \iffalse
