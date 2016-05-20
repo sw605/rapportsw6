@@ -1,4 +1,4 @@
-\section{Future Work}
+\section{Future Work}\label{sec:future}
 This section contains the features that were thought of during the project period, but were not implemented because of time constraints or disregarded to maintain a consistent focus for the project.
 
 \subsection{Registration of users}
@@ -21,31 +21,42 @@ Another feature would be to display additional information when a user tapped on
 This information could include other people that often travels with the user and details about the others route which were matched with.
 One way to display details about the route that were matched witch would be to plot it into some sort of Google Maps intergration.
 
-The app also does not take into account the users which are not driving.
-This feature would require a rework of the internal route system in the \gls{astep} system.
-Another thing that could be improved is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
+Another improvement that is needed is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
 
 \subsection{Server}
 To make the changes to the user interface a rework of some of the parts in the server would also need to be reworked.
 Currently, there is no way to store profile pictures, and only meta data about routes are stored.
 This means that there is currently no way to implement profile pictures, and there is not enough information in the meta data to plot the routes on a map.
 
+It would also be better if the server could use push notifications to send new routes to the clients when detected instead of the current implementation where the app asks the server for updates every time it is opened.
+
+\subsection{App functionality}
+
+The app does not take into account the users which are not driving.
+This feature would require a rework of the internal route system in the \gls{astep} system or have the routes go through the \gls{rs} server before sending them to \gls{astep}.
+Also the app would need a whole seperate system is needed if the app should detect walking routes.
+This would also require to make the algorithm smarter in order to decide who can be matched against.
+For instance it would not make sense to see if someone who is riding a bike could pick up other users.
+
+Another thing is that the algortihm assumes that the one who is picking up the passenger is responsible for contacting possible passengers.
 
 
-%Register users på den rigtige måde med edges
+% Messenger service
+The use of the phonenumbers for establishing contact between users has the problem that is sends your phonenumber to strangers.
+A better solution would be an instant messaging system which is intergrated in the app itself.
+
+\subsection{Algorithm}
+For the algorithm there is a lot of improvements that can be made in the search space for matches.
+The algorithm does not use any filtering of routes to compare other than a simple time cut off.
+This could be done by using geo-fences and/or some implementation of the $S^2$ algorithm.
+A less complex solution could be to round the coordinate in to a lower accuracy and thereby generating a grid.
+Rounding down to for example two decimal places has an accuracy of approximatly 1.1 kilometers.
+
+Another point is that the algortihm does not take speed limits and terrain into account when calculating the detours.
+This feature would increase the accuracy of the estimated detours and by extension give more accurate scores.
+It could be implemented by using the Google Maps API to generate the required routes.
+
 %App
 %	UI
-%		Proper error handling/messages to user
 %		App instruction pop-ups on first start
-%	map view af ruter der er matched med
-%	Vis profilbilleder
 %Flyt overførslen af router over til body istedet for URL
-%RSS
-%	Gem profilbilleder
-%	Push route matches
-%Astep aka Algorithm
-%	Display matches both ways?
-%	Optimizations (d-trees?)
-%	Grid/cell structure
-%	Map integration (actual road distances and speed limits)
-% Tag højde for folk der kører og ikke kører
