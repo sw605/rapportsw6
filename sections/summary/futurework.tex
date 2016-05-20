@@ -1,2 +1,51 @@
 \section{Future Work}
-Fix it.
+This section contains the features that were thought of during the project period, but were not implemented because of time constraints or disregarded to maintain a consistent focus for the project.
+
+\subsection{Registration of users}
+Because having connections between the users of the app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}, the edges described in Section ?? \todo{} was not implemented.
+This should be done during user registration with a few API calls.
+It might be possible to also include a way to intergrate facebook as a alternative login method.
+
+Another feature that is going to be important in the future is to allow users to use the same \gls{astep} user for multiple applications.
+This can be done by introducing a two step registration, with the first step being logging in to \gls{astep} or creating a new \gls{astep} user.
+And the second step being creating a new \gls{rs} user.
+How this is achived is up to the group implementing it, but it could be done though an altered user interface.
+
+\subsection{User interface}
+And when talking about user interface.
+It is stated multiple times that the focus of this project was never the interface, and it could therefor use an overhaul.
+This overhaul would include a more consistent design between views and possibly a number of functionality that makes the app more enjoyable to use.
+
+This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
+Another feature would be to display additional information when a user tapped on a match, a new activity would start which shows formation about the match.
+This information could include other people that often travels with the user and details about the others route which were matched with.
+One way to display details about the route that were matched witch would be to plot it into some sort of Google Maps intergration.
+
+The app also does not take into account the users which are not driving.
+This feature would require a rework of the internal route system in the \gls{astep} system.
+Another thing that could be improved is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
+
+\subsection{Server}
+To make the changes to the user interface a rework of some of the parts in the server would also need to be reworked.
+Currently, there is no way to store profile pictures, and only meta data about routes are stored.
+This means that there is currently no way to implement profile pictures, and there is not enough information in the meta data to plot the routes on a map.
+
+
+
+%Register users på den rigtige måde med edges
+%App
+%	UI
+%		Proper error handling/messages to user
+%		App instruction pop-ups on first start
+%	map view af ruter der er matched med
+%	Vis profilbilleder
+%Flyt overførslen af router over til body istedet for URL
+%RSS
+%	Gem profilbilleder
+%	Push route matches
+%Astep aka Algorithm
+%	Display matches both ways?
+%	Optimizations (d-trees?)
+%	Grid/cell structure
+%	Map integration (actual road distances and speed limits)
+% Tag højde for folk der kører og ikke kører
