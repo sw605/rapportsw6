@@ -20,3 +20,10 @@ clean:
 
 live: clean
 	latexmk -pvc -pdflatex='pdflatex -file-line-error -synctex=1' -pdf master.tex
+
+dif:
+	pdflatex --synctex=1 diff.tex
+	bibtex master
+	pdflatex --synctex=1 diff.tex
+	pdflatex --synctex=1 diff.tex
+	pdflatex --synctex=1 diff.tex
