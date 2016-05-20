@@ -7,6 +7,11 @@ This section contains the analysis of app functionality, Android app development
 The app user interface is a low priority task during this project.
 However, the app needs basic functionality, according to the requirements.
 
+% Only vehicle
+The app should only tack a user when in a vehicle.
+It is decided not to consider users using only bike or walking.
+This is done to ensure a working implementation for one use case, whereas it can be expanded later. 
+
 % User management
 To be able to separate different routes, and to assign them to their respective users, there has to be a user management system, so that each user has its own ID.
 
@@ -19,11 +24,7 @@ The settings are preferences regarding different properties of ride sharing.
 The user should be able to decide if it wants to get a ride or give a ride or both.
 There are also properties of the user itself, like a description and a picture, that other users can access to decide if they want to share a ride with the named user.
 
-
-
-% other shit...
-
-
+% other shit..
 
 \subsection{Android Development Platform}
 When developing Android applications one of the first choices to consider is which API levels to target \cite{usesSDK}.
@@ -53,9 +54,6 @@ At the time of writing, the platform version distribution sum of API levels grea
 API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time for user interface, as API level 21 added support for Android's new material design style \cite{android5API}. Refraining from further backwards compatibility allows the project focus to be on the functionality of the app. 
 
 \input{sections/sprint2/periodictask.tex}
-
-% algorithm analysis if necessary
-\subsection{Algorithms for ridesharing}
 
 
 % aSTEP system functionality analysis: communication with aSTEP
