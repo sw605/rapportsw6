@@ -1,25 +1,24 @@
 \section{Design}
 % metatext
-In this chapter the design of the implementation that is to be done in sprint 4 will be described.
-The primary focus for the implementation is, as described in analysis, finishing the app and implementing the RideShare server.
-A important part is especially implementation of the api calls to the \gls{astep}.
+The design of the implementation planned for sprint 4 is described in this chapter.
+The primary focus for the implementation is finishing the app and implementing the \gls{rs} server.
+An important part is especially implementation of the API calls to the \gls{astep}.
 
-\subsection{Application}
-On the application the api call should be implemented.
-These calls should be of the format accepted by \gls{astep}, its important to ensure correctness here or the app will not function as intended.
-The actual api call connection(A api client) should generalized to a single class so it is easy to add more different calls in the future.
-Every api call must be in their own class building the correct URL to be used in a api client.
-It is also very important to make the api calls asynchronous. 
-If this is not achieved the app will stall at every api call and the UI will have to wait for the api client to do its thing before unfreezing again.
-A list of the api calls that must be implemented can be found on table \ref{tab:relevantastepapi}
+\subsection{\gls{rs} App}
+To make the \gls{rs} app acceptable, the missing features must be implemented.
+The list of matches needs to be implemented, so that the user interface reflects the respective users' matches.
+To implement the user matches list, the app must utilize the API calls regarding route matches.
+These calls must be in the correct \gls{astep} format to be accepted and to work properly.
+The actual API call could be generalized to a single class so it can be reused for different API calls and to support potential future expansion.
+Every API call must be in their own class building the correct URL to be used in an API client.
+For user experience and avoid user interface stalls, it is important to make the API calls asynchronous. 
+A list of the API calls that must be implemented to make the \gls{rs} app functionality can be found in Table \ref{tab:relevantastepapi}.
 
-\subsection{RideShare server}
-As it were described in section \ref{sec:s2systemdesign} it were decided that user information not stored on the \gls{astep} server should be stored on the RideShare server.
-It were also decided in \ref{sec:s2systemdesign} that it is the RideShare server which must call the matched using the api and then stored the matched so it can be delivered to the app. 
-In order to do so a  database is needed on the RideShare server.
-The database must contain two tables, one for user data and one for matched routes.
-The database must be accessible from the developed server executable.
+\subsection{\gls{rs} Server}
+As described in Section \ref{sec:s2systemdesign}, it was decided that the necessary user information not stored in the \gls{astep} server should be stored in the \gls{rs} server.
+It was also decided in Section \ref{sec:s2systemdesign} that it is the \gls{rs} server that is responsible for calling the \gls{astep} API to store the generated matches, thus enabling the \gls{rs} server to provide the route match information for the \gls{rs} app.
+In order to store the data received from \gls{astep}, a database is needed on the \gls{rs} server.
+The database needs two tables to perform the required operations: one for user data and one for matched routes.
 
-As there a little functionality on the RideShare Server a simpler implementation of the api calls can be implemented.
-Both the api calls and the connection to the app should be implemented in asynchronous as there can be several request going to and from the server simultaneously. 
-If this is not done request can be blocked and functionality of both the server and app may decrease.
+As there are few tasks performed on the \gls{rs} server, a simpler implementation of the API calls can be implemented.
+Both the API calls and the connection to the app should be implemented as asynchronous, because there can be several requests to and from the server simultaneously. 
