@@ -5,13 +5,15 @@ The test is an acceptance test, and is performed to verify that the solution com
 The acceptance test will be designed to test the whole system with some manually generated data.
 The scope of the test is to check that the 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
 Some requirements are validated as working in previous tests, and these are omitted from the acceptance test. 
+First the test design is explained and described and, subsequently, the test execution and results are documented.
 
 % paragraph listing all requirements...
 The 'Must have' requirements from Section \ref{sec:req} are as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
 
 % previously tested requirements
-'User location tracking and storage', as well as 'automatic determining regular routes' are confirmed acceptable in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}.
-The latter also partially accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
+There have been extensive tests of the solution parts during the development, and the test results fulfilling requirements do not have to be performed again.
+'User location tracking and storage', as well as 'automatic determining regular routes' were assessed acceptable in respectively Section \ref{subsec:bgstest2} and \ref{subsec:algotest}.
+The latter is also partially accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
 The nonfunctional requirement of development cooperation is accounted for in Section \ref{refhere}\todo{fix this todo}. 
 The remaining requirements that needs to be accounted for and acceptance tested are the following:
 \begin{itemize}
@@ -23,29 +25,34 @@ The remaining requirements that needs to be accounted for and acceptance tested 
 \end{itemize}
 
 \subsection{Acceptance Test Design}
-Firstly will the performed tests be explained and then later executed.
-Some mock test data will be added to the \gls{rs} server's database, the content can be seen in Appendix \ref{app:datadump}.
+This section is documenting the acceptance test design, and serves to describe the test method performed on the solution to evaluate the compliance with the requirements.
 
-These data sets is a combination of data pulled form the \gls{astep} database as well as some data we have designed ourselves to generate matches for th user \texttt{test}.
+\todo{describe what the data is and why it's there}
+Mock test data is added to the \gls{rs} server's database. 
+The content can be seen in Appendix \ref{app:datadump}. 
+The data sets are a combination of data pulled form the \gls{astep} database as well as data we constructed to generate matches for the test user \texttt{test}.
+As we are using specialized mock data for the purpose of testing, only the user \texttt{test} has any matches.
 The setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
-An android emulator is used instead of an actual phone, as we can avoid opening ports on the computer running the server.
+An android emulator is used in the testing instead of an actual device so that we can avoid opening ports to the \gls{rs} server.
 
-The first task consist of opening the app and registering as a new user. 
-If this succeeds the user should then log out again and then log in with the user \texttt{test} accompanied by the password \texttt{test}.
-As we are using mock data, only the user \texttt{test} have any matches.
-When the user logs into the app again the appropriate matches stored in \gls{rs} database, will be fetched from the server and should be displayed in the app.
-If the lists are shown for the user \texttt{test} but not for the newly registered user, the overall test are completed. 
+The first task in the test consist of opening the app and registering a new user with username \texttt{test} and the password \texttt{test}.
+If this succeeds, the user is then logged out and then logged in with the same credentials.
+When the user is logged into the app again, the appropriate matches stored in the \gls{rs} database will be fetched from the server and should be displayed in the app.
+If the lists are shown for the user \texttt{test}, but not for the newly registered user, the overall test is completed. 
 
-The GUI will have been tested through availability of the different functions in the app, the user functionality will be tested when registering an user an logging in, this will also partly test the communication with the \gls{astep} system.
-The rest of the requirement pertaining communication with \gls{astep} are verified in the earlier tests.
-If the matches is correctly pulled from the \gls{rs} server and showed to the user will be tested when the user \texttt{test} are logged in.
+The GUI will have been tested through availability of the different functions in the app.
+The user functionality will be tested when registering an user and logging in, this will also partially test the communication with the \gls{astep} system.
+
+
+The rest of the requirements pertaining communication with \gls{astep} were verified in the tests performed in the previous sprints.
+If the matches are pulled correctly from the \gls{rs} server and showed to the user, will be tested when the user \texttt{test} are logged in.
 The requirement concerning user privacy is tested be seeing if location data about other users are displayed to the user currently logged in. 
 
 
 \subsection{Performing the Test}
 First a new user, \texttt{user22} was created as can be seen in Figure \ref{s4tp:newuser}.
-In the process of creating a new user, some unexpected behavior regarding scandinavian charterers were observed.
-Some additional tests were performed to further explore this observation, which can be seen in Table \ref{tab:logintest}.
+In the process of creating a new user, some unexpected behavior regarding Scandinavian letters were observed.
+Some additional tests were performed to further explore this observation, and they can be seen in Table \ref{tab:logintest}.
 \begin{table}[!ht]
 	\centering
 	\begin{tabular}{@{}lll@{}}
@@ -59,12 +66,14 @@ Some additional tests were performed to further explore this observation, which 
 	\caption{Registered users login test.}
 	\label{tab:logintest}
 \end{table}
-Some additional \gls{astep} API test leads us to believe that this is an problem in the android app as the special characters is working when tested on the \gls{astep} swagger interface.
 
-The registering of the user \texttt{user22} were later successful when using UTF-8 characters and as can be seen in the right side of Figure \ref{s4tp:numain}. 
-As expected no matches were found to this newly registered \texttt{user22}. 
-The user were then logged out of the app.
-The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged in successful, and redirected to the main interface of the app, where the user was presented with all the appropriate matches as shown in \ref{s4tp:testmain}.
+Some additional \gls{astep} API test leads us to believe that this is an problem in the Android application as the special characters is working correctly when tested directly in the \gls{astep} API web interface.
+
+The registering of the user \texttt{user22} was later successfully executed when using standard English letters and can be seen in the right side of Figure \ref{s4tp:numain}. 
+As expected, no matches were found to the newly registered user \texttt{user22}. 
+The user was then logged out of the app.
+The user \texttt{test} was then, as seen in Figure \ref{s4tp:logintest}, logged in successfully, and redirected to the main interface of the app, where the user was presented with the appropriate matches, shown in \ref{s4tp:testmain}.
+
 \begin{figure}[ht!]
 \centering
 \begin{subfigure}[b]{0.24\textwidth}
@@ -92,6 +101,7 @@ The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged
 
 \subsection{Test Conclusion}
 The acceptance test confirms that the developed solution fulfills the Must-have requirements.
+
 \todo{the following is not test conclusion}
 Even though every Must-have requirement is met there is still room for improvement for both  the already developed solution as well as expanding the functionality, either with additional requirements from the analysis or with new ones based on new knowledge. 
 The possibilities for further development will be discussed in Section \ref{sec:future}.
