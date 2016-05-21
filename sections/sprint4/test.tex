@@ -1,11 +1,11 @@
 \section{Test}
-In this section a full test of the system will be performed.
-The test will be an acceptance test, and will seek to verify if the requirement set in the beginning of the project is satisfied.
-The acceptance test will be designed to test the whole system with some manual generated data.
-The scope of the test will be to test the Must-have requirements form Section \ref{sec:req}.
-Some retirements is verified working in previous tests, these can be omitted form the acceptance test. 
+In this section the performed full system test will be documented.
+The test is an acceptance test, and is performed to verify that the solution satisfies the established requirement specification.
+The acceptance test will be designed to test the whole system with some manually generated data.
+The scope of the test will be to check that the 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
+Some requirements are validated as working in previous tests, and these are omitted from the acceptance test. 
 
-The Must have requirements from Section \ref{sec:req} is as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
+The 'Must have' requirements from Section \ref{sec:req} are as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
 
 'User location tracking and storage', as well as 'automatic determining regular routes' are both fully verified in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}, the latter also partly accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
 The nonfunctional requirement of development cooperation is accounted for in Section \ref{refhere}\todo{fix this todo}, thus we need an acceptance test which can test if the following requirements is upheld. 
@@ -25,7 +25,8 @@ These data sets is a combination of data pulled form the \gls{astep} database as
 The setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
 An android emulator is used instead of an actual phone, as we can avoid opening ports on the computer running the server.
 
-The first task consist of opening the app and registering as a new user. If this succeeds the user should then log out again and then log in with the user \texttt{test} accompanied by the password \texttt{test}.
+The first task consist of opening the app and registering as a new user. 
+If this succeeds the user should then log out again and then log in with the user \texttt{test} accompanied by the password \texttt{test}.
 As we are using mock data, only the user \texttt{test} have any matches.
 When the user logs into the app again the appropriate matches stored in \gls{rs} database, will be fetched from the server and should be displayed in the app.
 If the lists are shown for the user \texttt{test} but not for the newly registered user, the overall test are completed. 
@@ -93,16 +94,16 @@ The possibilities for further development will be discussed in Section \ref{sec:
 \iffalse
 \section{Acceptance Test}
 % metatext for test section
-This section will contain descriptions and documentation of an informal acceptance test performed on the whole \gls{rs} solution in the fourth sprint.
-The tests are the final tests on the solution, and will serve as a full system test and as the basis for the solution and project evaluation.
-The complete system structure can be perceived as an graph, where the app and servers are the vertices while the communication can be seen as the edges. 
-For a full acceptance of the app, every edge and vertex in the considered graph must be evaluated. 
-Even though not every elements described in this section are described in the previous implementation sections, they are considered as they are part of the solution.
+This section contains descriptions and documentation of the informal test performed on the \gls{rs} solution in the fourth sprint.
+The test is the final test on the solution, and is a full system acceptance test and serves as the basis for the solution and project evaluation.
+The system structure can be represented as a graph, where the app and servers are the vertices and the communication are edges. 
+For a full acceptance test of the solution, each edge and vertex in the solution graph must be evaluated. 
+Even though not all elements described in this section are documented in the previous implementation sections, they are considered as they are part of the solution.
 
-The tests are performed informally. 
-However, the tests yield practical implementation results, and reflect the functionality of the solution.
-For the system to pass the acceptance test it must as a minimum fulfill the Must-have requirements which were defined in Section \ref{sec:req}, these the one below.
-Firstly the functional requirements.
+% section overview
+The tests yield practical implementation results, and reflect the functionality of the solution.
+For the solution to pass the acceptance test it must as a minimum fulfill the Must-have requirements which were defined in Section \ref{sec:req}.
+A summary list of the functional requirements can be seen below.
 \begin{itemize}
 	\item Graphical user interface
 	\item User accounts, including login and registration
@@ -111,17 +112,22 @@ Firstly the functional requirements.
 	\item Automatically determine regular routes
 	\item Automatic suggest ride sharing partners
 \end{itemize}
-In addition to the two non-functional Must-have requirements;
+
+Additionally, there are two non-functional requirements.
 \begin{itemize}
 	\item Development cooperation with the other \gls{astep} project groups
 	\item User privacy
 \end{itemize}
-Some of these requirements are fulfilled by a single part of the system while other is satisfied by two or more subparts of the system and some fulfilled by the system as a whole.
+
+Some of these requirements can be fulfilled by a single part of the system while other needs two or more parts of the system to be accepted.
+
 \subsection{\gls{rs} App}
-The app itself should fulfill many of the Must-have requirements.
+The \gls{rs} app itself should fulfill many of the Must-have requirements.
 The Must-have requirements which the app itself must satisfy are the GUI and location tracking requirements, while it is represent a part of the rest of the functional requirements and the non-functional requirement concerning privacy.
+
 \textbf{Background location gathering}\\
 The background location caching test was performed in Section \ref{subsec:bgstest2} in sprint 3, and was evaluated being fully functional, and will not be tested further here.
+
 \textbf{Graphical User Interface}
 The app implements an graphical user interface which allows access for the other functionality described in the requirements and is thereby considered fulfilled.
 The GUI also supports the fulfillment of some of the other requirements, by supporting this functionality though the GUI of the app.
@@ -134,8 +140,10 @@ The test performed in sprint 3 of the \gls{astep} route system also verified the
 
 \subsection{\gls{rs} Server}
 Our own server have two main functions, fetching matches and allowing us to store additional user data.
+
 \textbf{Math Storage}\\
 The fetching and storage works as intended on the server. 
+
 \textbf{User Data}\\
 works quite well, preferably.
 
