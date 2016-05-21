@@ -1,15 +1,14 @@
 \section{Future Work}\label{sec:future}
-This section contains the features that were thought of during the project period but was not implemented because of time constraints or disregarded to maintain a consistent focus for the project.
+This section contains work that could be done in future semesters.
 
 \subsection{Registration of users}
-Because having connections between the users of the app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}, the edges described in Section \ref{subsec:usermanagement} was not implemented.
-This should be done during user registration with a few API calls to \gls{astep}.
-It might be possible to also include a way to integrate  facebook as an alternative login method.
+Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.
+As the edges described in Section \ref{subsec:usermanagement} was not implemented.
+This could be done during user registration with a few API calls to \gls{astep}.
+It could also be possible to integrate Facebook as an alternative login method.
 
-Another feature that is going to be important in the future is to allow users to use the same \gls{astep} user for many applications.
-This can be done by introducing a two-step registration, with the first step being logging into \gls{astep} or creating a new \gls{astep} user.
-And the second step being creating a new \gls{rs} user.
-How this is achieved is up to the group implementing it, but it could be done though an altered user interface.
+Another feature that is likely to be important in the future is to allowing users to use the same \gls{astep} user for different applications.
+This could be done by looking at tokens and how they are handled in the \astep{astep} system.
 
 \subsection{User interface}
 And when talking about user interface.
@@ -19,7 +18,7 @@ This overhaul would include a more consistent design between views and functiona
 This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
 Another feature would be to display more information when a user tapped on a match, a new activity would start which shows formation about the match.
 This information could include other people that often travels with the user and details about the others route which were matched with.
-One way to display details about the route that were matched witch would be to plot it into some sort of Google Maps intergration.
+One way to display details about the route that were matched witch would be to plot it into some sort of Google Maps integration.
 
 Another improvement that is needed is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
 
@@ -34,16 +33,16 @@ It would also be better if the server could use push notifications to send new r
 
 The app does not take into account the users which are not driving.
 This feature would need a rework of the internal route system in the \gls{astep} system or have the routes go through the \gls{rs} server before sending them to \gls{astep}.
-Also the app would need a whole seperate system is needed if the app should detect walking routes.
+Also the app would need a whole separate system is needed if the app should detect walking routes.
 This would also need to make the algorithm smarter to decide whom can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
-Another thing is that the algortihm assumes that the one who is picking up the passenger handles contacting possible passengers.
+Another thing is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.
 
 
 % Messenger service
-The use of the phonenumbers for establishing contact between users has the problem that is sends your phonenumber to strangers.
-A better solution would be an instant messaging system which is intergrated in the app itself.
+The use of the phone numbers for establishing contact between users has the problem that is sends your phone number to strangers.
+A better solution would be an instant messaging system which is integrated in the app itself.
 
 \subsection{Algorithm}
 For the algorithm there is a lot of improvements that can be made in the search space for matches.
