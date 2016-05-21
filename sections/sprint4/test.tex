@@ -1,14 +1,19 @@
 \section{Test}
+% metatext
 In this section the performed full system test will be documented.
-The test is an acceptance test, and is performed to verify that the solution satisfies the established requirement specification.
+The test is an acceptance test, and is performed to verify that the solution complies with the established requirement specification.
 The acceptance test will be designed to test the whole system with some manually generated data.
-The scope of the test will be to check that the 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
+The scope of the test is to check that the 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
 Some requirements are validated as working in previous tests, and these are omitted from the acceptance test. 
 
+% paragraph listing all requirements...
 The 'Must have' requirements from Section \ref{sec:req} are as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
 
-'User location tracking and storage', as well as 'automatic determining regular routes' are both fully verified in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}, the latter also partly accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
-The nonfunctional requirement of development cooperation is accounted for in Section \ref{refhere}\todo{fix this todo}, thus we need an acceptance test which can test if the following requirements is upheld. 
+% previously tested requirements
+'User location tracking and storage', as well as 'automatic determining regular routes' are confirmed acceptable in respectively Section \ref{subsec:bgstest} and \ref{subsec:algotest}.
+The latter also partially accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
+The nonfunctional requirement of development cooperation is accounted for in Section \ref{refhere}\todo{fix this todo}. 
+The remaining requirements that needs to be accounted for and acceptance tested are the following:
 \begin{itemize}
 	\item Graphical user interface
 	\item User accounts, including login and registration
@@ -86,8 +91,9 @@ The user \texttt{test} were then, as seen in Figure \ref{s4tp:logintest}, logged
 \end{figure}
 
 \subsection{Test Conclusion}
-Based on this acceptance test we can confirm that our products fulfills every Must-have requirement.
-Even though every Must-have requirement is met there is still room for improvement both for the already developed solution as well as expanding the functionality, either with additional requirements from the analysis or with new ones based on new knowledge. 
+The acceptance test confirms that the developed solution fulfills the Must-have requirements.
+\todo{the following is not test conclusion}
+Even though every Must-have requirement is met there is still room for improvement for both  the already developed solution as well as expanding the functionality, either with additional requirements from the analysis or with new ones based on new knowledge. 
 The possibilities for further development will be discussed in Section \ref{sec:future}.
 
 %% one huge shit tack below --------------------------------------------------------------------------------------------------------------------
