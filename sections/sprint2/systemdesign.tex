@@ -1,7 +1,7 @@
 \subsection{System design}\label{sec:s2systemdesign}
 % metatext & redesign motivation
 In the first iteration, the \gls{rs} system was designed to consist of two parts: The \gls{rs} app and the \gls{astep} system.
-Because the \gls{astep} does not provide the anticipated services, such as storing basic user information\todo{?}, this data must be stored elsewhere.
+Because the \gls{astep} does not provide the anticipated services, such as storing basic user information, this data must be stored elsewhere.
 This forces a redesign of the system.
 This section contains descriptions of the redesign of the different parts, and a definition of their respective responsibilities.
 
@@ -9,7 +9,7 @@ This section contains descriptions of the redesign of the different parts, and a
 % data conciderations
 The \gls{astep} system still provides the functionality to store locations and route history for users.
 The \gls{rs} app continues to collect \todo{smt missing?} device location data.  
-The \gls{rs} solution will need additional data storage to fulfill the defined system requirements, because the \gls{rs} users need to be able to contact each other, to make the \gls{rs} app usable\todo{try to change the structure of this this sencente}.
+For user to able to contact each other when a match is given, the solution will need additional data storage to fulfill this requirement.
 
 
 % btw, an RSS can be used for more! Match scores, etc.
@@ -24,7 +24,7 @@ The \gls{rs} server could store the extra user data and connect the user to the 
 
 % instanciate RSS (RideShare Server)
 The \gls{rs} server has two main purposes.
-Firstly, to store additional information about the system users, and secondly to store the score \todo{} for previously assessed scores \todo{} between given stable routes.
+Firstly, to store additional information about the system users, and secondly to store the score for previously assessed scores between given stable routes.
 The different purposes and responsibilities of the parts depicted in Figure \ref{fig:s2systemdesign} will be elaborated in the following text.
 
 
