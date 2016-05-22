@@ -1,58 +1,56 @@
 \section{Future Work}\label{sec:future}
 This section contains work that could be done in future semesters.
 
-\subsection{Registration of users}
-Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.
-As the edges described in Section \ref{subsec:usermanagement} was not implemented.
-This could be done during user registration with a few API calls to \gls{astep}.
-It could also be possible to integrate Facebook as an alternative login method.
-
-Another feature that is likely to be important in the future is to allowing users to use the same \gls{astep} user for different applications.
-This could be done by looking at tokens and how they are handled in the \astep{astep} system.
-
-\subsection{User interface}
-And when talking about user interface.
-It is stated many times that the focus of this project was never the interface, and it could therefor use an overhaul.
-This overhaul would include a more consistent design between views and functionality that makes the app more enjoyable to use.
-
-This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
-Another feature would be to display more information when a user tapped on a match, a new activity would start which shows formation about the match.
-This information could include other people that often travels with the user and details about the others route which were matched with.
-One way to display details about the route that were matched witch would be to plot it into some sort of Google Maps integration.
-
-Another improvement that is needed is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
-
-\subsection{Server}
-To make the changes to the user interface a rework of some of the parts in the server would also need to be reworked.
-Currently, there is no way to store profile pictures, and only meta data about routes are stored.
-This means that there is currently no way to implement profile pictures, and there is not enough information in the meta data to plot the routes on a map.
-
-It would also be better if the server could use push notifications to send new routes to the clients when detected instead of the current implementation where the app asks the server for updates every time it is opened.
-
 \subsection{App functionality}
-
 The app does not take into account the users which are not driving.
-This feature would need a rework of the internal route system in the \gls{astep} system or have the routes go through the \gls{rs} server before sending them to \gls{astep}.
-Also the app would need a whole separate system is needed if the app should detect walking routes.
-This would also need to make the algorithm smarter to decide whom can be matched against whom.
+It could be userfull to consider users who would bike or walk to work, and give them the opportunity to get a lift ex. if the weather is bad.
+This could also lead to make the algorithm smarter as to decide whom can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
 Another thing is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.
 
+\subsubsection*{Registration of users}
+Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.\todo{make better, I dunno how}
+As the edges described in Section \ref{subsec:usermanagement} was not implemented as they were not finished in the api.
+Implementation could be done during user registration with a few API calls to \gls{astep}.
+It could also be possible to integrate Facebook as an alternative login method.
+
+Another feature that is likely to be important in the future is to allowing users to use the same \gls{astep} user for different applications.
+This could be done by looking at tokens and how they are handled in the \astep{astep} system.
+As of right now everything you login you are issued a new token, invalidating existing tokens.
+
+\subsubsection*{User interface}
+It is stated many times that the focus of this project was never the interface, and it could therefor use an overhaul.
+This overhaul could include a more consistent design between views and functionality that makes the app more enjoyable to use.
+
+This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
+Another feature could be to display more information when a user tapped on a match, a new activity could start which shows formation about the match.
+This information could include other people that often travels with the user and details about the others route which were matched with.
+One way to display details about the route that were matched witch could be to plot it into some sort of Google Maps integration.
+
+Another improvement that is needed is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
+
+\subsection{Server}
+If changes to the user interface were made a rework of parts of the server would also need to be needed.
+Currently, there is no way to store profile pictures, as only meta data about routes are stored.
+This means that there is currently no way to implement profile pictures in the app, and there is not enough information in the meta data to plot the routes on a map.
+
+It could also be better if the server could use push notifications to send new routes to the clients when detected instead of the current implementation where the app asks the server for updates every time it is opened.
 
 % Messenger service
-The use of the phone numbers for establishing contact between users has the problem that is sends your phone number to strangers.
-A better solution would be an instant messaging system which is integrated in the app itself.
+The current implementation of the phone numbers as the only option for establishing contact between users has the problem that is sends your phone number to strangers.
+A better solution could be an instant messaging system which is integrated in the app itself.
 
 \subsection{Algorithm}
 For the algorithm there is a lot of improvements that can be made in the search space for matches.
 The algorithm does not use any filtering of routes to compare other than a simple time cut off.
 This could be done by using geo-fences and/or some implementation of the $S^2$ algorithm.
-A less complex solution could be to round the coordinate in to a lower accuracy and thereby generating a grid.
+A less complex solution could be to round the coordinate in to a lower accuracy of the GPS data.
+By lowering the GPS coordinate in accuracy an larger margin of precision is made, with the consequences of making a 'grid' as can be used for filtering.
 Rounding down to for example two decimal places has an accuracy of 1.1 kilometers.
 
 Another feature that the algorithm does not take into account is speed limits and terrain when calculating the detours.
-This feature would increase the accuracy of the estimated detours and by extension give more accurate scores.
+This feature could increase the accuracy of the estimated detours and by extension give more accurate scores.
 It could be implemented by using the Google Maps API to generate the required routes.
 
 %App
