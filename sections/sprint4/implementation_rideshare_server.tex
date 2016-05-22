@@ -1,5 +1,5 @@
 % Connections
-The server is implemented as a Java application running on a computer.
+The server is implemented as a Java application running on a windows machine.
 It communicates with the \gls{astep} API by using the \texttt{HttpURLConnection} class.
 What is sent through these connections will be explained in later sections.
 
@@ -9,12 +9,11 @@ A \texttt{BufferedStreamReader} reads the input stream as this class provides an
 The server writes to the output stream using the \texttt{PrintWriter} class.
 This class is similar to the standard output stream in the way that it prints the string provided to the stream.
 
-The messages send back and forth have two types: simple strings and JSON objects.
+The messages send back and forth are of two types: Strings and JSON objects.
 The simple strings are used for error messages such as \enquote{Unknown message} and \enquote{Invalid token} while the JSON objects are used for more complex results such as arrays of matches.
 
 % Client requests
-These responses are to the clients messages.
-Currently, there are two messages which are as follows:
+These following two messages are used on the clients.:
 
 {\centering
 	\begin{tabular}{l l}
@@ -23,11 +22,11 @@ Currently, there are two messages which are as follows:
 	\end{tabular}
 }
 
-The server checks the token sent through the \gls{astep} API and gets the username in both cases.
-Update matches gets the updated set of matches for the user and register adds the user to the user details table in a database on the server.
+The server checks the recived token sent through the \gls{astep} API and gets the username in both cases.
+Update matches gets the updated set of matches for a user and register adds the user to the user details table in the database on the server.
 
 %Main loop
-The communication is contained in a loop that is implemented so that the server is ready for new clients as often as possible.
+The communication is contained in a loop that is implemented so the server is ready for new clients as often as possible.
 The loop is as seen in the following enumeration.
 
 \begin{enumerate}
@@ -42,11 +41,11 @@ The loop is as seen in the following enumeration.
 
 The 24-hour interval, in line 3, was chosen to minimize the work that the \gls{astep} server has to do while presenting the users with relevant information.
 When getting matches from \gls{astep} the system runs the algorithms as described in Section \ref{ssec:algorithm} on routes that were received within the last two week.
-The matches are then stored in the server's own database.
+The matches are then stored in the servers own database.
 
 %Database
 All contact to the database is handled in a class with a single instance ensured with the use of singleton pattern. 
-This is because the database needs to know the configurations for the database in question (the username and password), which is loaded from a file.
+This is done as the database needs to its configurations (the username and password), which is loaded from a file.
 It would be inefficient if the server had to read this file every time it needs to access the database.
 
 Withing the database is only two tables; userdetails and matches.
@@ -66,7 +65,7 @@ The table description can be seen in Table \ref{tab:userdetails}.
 	\label{tab:userdetails}
 \end{table}
 
-A table of meta data for matches is stored that contains the information that is required by the system design.
+A table of meta data for matches is stored which contains the information that is required by the system design. /todo{Uklart hvad der snakkes om - Corlin}
 The table description can be seen in Table \ref{tab:matches}.
 
 \begin{table}[h]
@@ -82,4 +81,4 @@ The table description can be seen in Table \ref{tab:matches}.
 	\label{tab:matches}
 \end{table}
 
-Sql statements of the database can be found on appendix \ref{appendix:database}.
+Sql statements used for creating the database can be found on appendix \ref{appendix:database}.

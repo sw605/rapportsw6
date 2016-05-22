@@ -6,28 +6,21 @@ The status is considered with regards to the previously performed tests and the 
 The analysis is divided into three sections, each dedicated to one of the three main parts of the solution.
 
 The solution is well analysed throughout the previous sprint analyses, and the necessary features are outlined in their respective sprints.
-The current analysis will be focused on implementation prioritization of the missing features of the \gls{rs} solution, and does not rely on analysing new material.
+The current analysis will be focused on implementation  of high prioritized requirements from the MoSCoW analsys done in sprint one, and does not rely on analysing new material.
 
 
 \subsection{\gls{astep}}
-The only part of the \gls{astep} controlled by the \gls{rs} solution is the algorithm, and it is tested and evaluated as functional, according to Section \ref{sec:s3algtest}. However, the \gls{astep} must be tested to check that the \gls{rs} complies with the requirements in the API.
-Potential failures in the \gls{astep} communication could be caused by poor implementation in the \gls{rs} app or in the \gls{astep} system, or by poor cooperation or misunderstanding between the project groups.
+The only part of the \gls{astep} controlled by the \gls{rs} solution is the algorithm, and it is tested and evaluated as functional, according to Section \ref{sec:s3algtest}. However, the \gls{astep} must be tested to check that the \gls{rs} system satisfy the correct implementation of the API. 
+%Potential failures in the \gls{astep} communication could be caused by poor implementation in the \gls{rs} app or in the \gls{astep} system, or by poor cooperation or misunderstanding between the project groups.
 
-%The \gls{astep} part of the solution does not need any further development currently, but needs testing in context with the \gls{rs} solution.
 
 \subsection{\gls{rs} Server}
-The \gls{rs} server is currently missing, but its functionality and position in the \gls{rs} solution is analysed and designed in the previous sprints, e.g. in system design in Section \ref{sec:s2systemdesign}. Because the \gls{rs} server is sufficiently described previously, there will be no further analysis of the server requirements.
+The \gls{rs} server is currently not functional, but its functionality and position in the \gls{rs} solution is analysed and designed in the previous sprints, e.g. in system design in Section \ref{sec:s2systemdesign}. Because the \gls{rs} server is sufficiently described previously, there will be no further analysis of the server requirements.
 
 The server must fulfill the requirement of storing contact information for the users, as this is not provided by the \gls{astep} system.
-Additionally, the \gls{rs} server needs to fetch the generated matches from \gls{astep} system and stores them, enabling the \gls{rs} app to display the matches to their respective users.
+Additionally, the \gls{rs} server needs to fetch the calculated matches from \gls{astep} system and stores them locally on the server, enabling the \gls{rs} app to display the matches to their respective users.
 
 
 \subsection{\gls{rs} App}
 The visual \gls{rs} app interface is currently consisting of a static, temporary placeholder list of two fictitious matches, and an empty settings menu.
 The match interface needs to be implemented to comply with the requirement of displaying matches to the user. Furthermore, to separate user accounts and fulfill the requirement regarding login, the login interface and functionality must be implemented.
-
-
-
-% Sprint 4 krav
-\subsection{Requirements for the fourth sprint}
-\input{sections/sprint4/sprint4krav.tex}
