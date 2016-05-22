@@ -1,3 +1,4 @@
+\label{sec:aSTEPCommunication.tex}
 This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is performed, and how features from the \gls{astep} API are used to achieve the required functionality.
 The \gls{rs} system continues the triple part design, but has to adjust to the \gls{astep} progression and changes.
 
@@ -7,7 +8,7 @@ The API functions are utilized to send recorded routes to \gls{astep}, and to cr
 Because there are restrictions regarding user information sharing in \gls{astep}, it is also necessary to allow \gls{rs} to access the data from the \gls{astep} server for its users.
 A overview of the API functionality as of sprint 3 can be found in Appendix \ref{ch:appAlabel}. 
 
-\subsection{User management}
+\subsection{User management}\label{subsec:usermanagement}
 %why UM
 User management must be performed for the \gls{rs} system to utilize the route matching algorithm, because the algorithm requires access to the routes and locations based on the different users.
 
