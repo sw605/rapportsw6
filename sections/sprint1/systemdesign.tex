@@ -1,9 +1,9 @@
 % Metatext
 This section contains documentation of the system design, consisting of the structural and behavioral design.
-\todo{add metatext}
+
 
 % Divided into structual & behavioral design
-\subsubsection{Structual Design}
+\subsubsection{Structural Design}
 % overall system design intro
 The overall structural design of the system is based on the analysis of the first iteration.
 
@@ -52,17 +52,17 @@ If the RouteStabilityAnalyser determines that the route is stable, the informati
 The server then uses the RouteSimilarityAnalyser to find matches for the new \todo{does not need to be a new stable route??} StableRoute.
 The matches are stored and new matches are transmitted to the appropriate devices to inform the users of a new match.
 
-\begin{figure}[h]
+\begin{figure}[ht!]
 	\centering
 	\input{figures/classDiagramSprint1Server.tex}
-	\caption{The structure of the system inside the server. This package should be an isolated system within the server.}
+	\caption{The structure of the system inside the \gls{astep} server.}
 	\label{fig:classDiagramSprint1Server}
-\end{figure}\todo{fix: "This package should be an isolated system within the server."}
+\end{figure}
 
 The application acts as an interface to the background process for the user.
 This is where the user logs in and can see an overview of candidates for car pooling.
 
-\begin{figure}[h]
+\begin{figure}[ht!]
 	\centering
 	\input{figures/classDiagramSprint1Application.tex}
 	\caption{The class structure of the application.}
@@ -76,6 +76,8 @@ The RouteAnalyzer filter routes according to its concrete implementation.
 After the filtering, the RouteAnalyser uses the strategy pattern to determine how to compare the routes.
 This enables other projects to develop their own filters and comparison functions in later projects.
 
-To reduce the search space, a weekly stability was decided upon. \todo{did we?}
-This means that the RouteStabilityAnalyser can be limited to analyze one to two months of data.
-This will be further tested and evaluated in another chapter. \todo{reference to test and evaluation}\todo{add arguments}
+To reduce the search space, a weekly stability was decided upon.
+This means that the RouteStabilityAnalyser can be limited to analyze a couple of months worth of data at most.
+
+This will be that basic of the system design which is used as the basic for further design and development.
+Future additions or changes to the system design will be covered in later sprints. 
