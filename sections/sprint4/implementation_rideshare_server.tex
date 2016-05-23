@@ -61,12 +61,13 @@ The table description can be seen in Table \ref{tab:userdetails}.
 		email       & character varying(255) &\\
 		fullname    & character varying(255) & not null\\
 	\end{tabular}
-	\caption{The table definition of userdetails in the \gls{rs} system.}
+	\caption{The table definition of user details in the \gls{rs} system.}
 	\label{tab:userdetails}
 \end{table}
 
-A table of meta data for matches is stored which contains the information that is required by the system design. /todo{Uklart hvad der snakkes om - Corlin}
-The table description can be seen in Table \ref{tab:matches}.
+A table of metadata for matches is stored on the \gls{rs} server, and it contains the information that is specified in the system design. 
+The table description can be seen in Table \ref{tab:matches}, where the different data types and names are defined.
+The SQL statements used for creating the database can be found in Appendix \ref{appendix:database}.
 
 \begin{table}[h]
 	\centering
@@ -81,4 +82,3 @@ The table description can be seen in Table \ref{tab:matches}.
 	\label{tab:matches}
 \end{table}
 
-Sql statements used for creating the database can be found on appendix \ref{appendix:database}.

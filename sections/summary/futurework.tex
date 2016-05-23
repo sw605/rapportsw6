@@ -2,12 +2,12 @@
 This section contains work that could be done in future semesters.
 
 \subsection{App functionality}
-The app does not take into account the users which are not driving.
-It could be userfull to consider users who would bike or walk to work, and give them the opportunity to get a lift ex. if the weather is bad.
-This could also lead to make the algorithm smarter as to decide whom can be matched against whom.
+The app does not take into account the users who are not driving.
+It could be useful to consider users who would bike or walk to work, and give them the opportunity to get a lift to save time, or if the weather is bad.
+This could also lead to make the algorithm smarter as to decide who can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
-Another thing is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.
+Another aspect is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.\todo{this point totally needs more explanation. probably you are still working on it, but in general it is never a good idea to propose points and do not elaborate them. You can not assume the reader can always understand your ideas, even if you think they are very simple.}
 
 \subsubsection*{Registration of users}
 Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.\todo{make better, I dunno how}
@@ -15,9 +15,9 @@ As the edges described in Section \ref{subsec:usermanagement} was not implemente
 Implementation could be done during user registration with a few API calls to \gls{astep}.
 It could also be possible to integrate Facebook as an alternative login method.
 
-Another feature that is likely to be important in the future is to allowing users to use the same \gls{astep} user for different applications.
+Another feature that is likely to be important in the future is allowing users to avail the same \gls{astep} user for different applications.
 This could be done by looking at tokens and how they are handled in the \gls{astep} system.
-As of right now everything you login you are issued a new token, invalidating existing tokens.
+As of right now everything you login you\todo{what does this mean?} are issued a new token, invalidating existing tokens.
 
 \subsubsection*{User interface}
 It is stated many times that the focus of this project was never the interface, and it could therefor use an overhaul.
@@ -26,9 +26,9 @@ This overhaul could include a more consistent design between views and functiona
 This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
 Another feature could be to display more information when a user tapped on a match, a new activity could start which shows formation about the match.
 This information could include other people that often travels with the user and details about the others route which were matched with.
-One way to display details about the route that were matched witch could be to plot it into some sort of Google Maps integration.
+One way to display details about the route that were matched witch could be to plot it into a map, where a seemingly natural integration is with Google Maps.\todo{separate the different topics}
 
-Another improvement that is needed is the error messages displayed to the user, which currently is mostly non-informative or non-existent.
+Another improvement that is needed is the error messages displayed to the user, which currently is mostly non-informative or non-existent.\todo{elaborate}
 
 \subsection{Server}
 If changes to the user interface were made a rework of parts of the server would also need to be needed.
@@ -38,20 +38,20 @@ This means that there is currently no way to implement profile pictures in the a
 It could also be better if the server could use push notifications to send new routes to the clients when detected instead of the current implementation where the app asks the server for updates every time it is opened.
 
 % Messenger service
-The current implementation of the phone numbers as the only option for establishing contact between users has the problem that is sends your phone number to strangers.
+The current implementation of the phone numbers as the only option for establishing contact between users has the problem that is sends your phone number to strangers.\todo{funky sentence}
 A better solution could be an instant messaging system which is integrated in the app itself.
 
 \subsection{Algorithm}
-For the algorithm there is a lot of improvements that can be made in the search space for matches.
+For the algorithm there are improvements that can be made in the search space for matches.
 The algorithm does not use any filtering of routes to compare other than a simple time cut off.
-This could be done by using geo-fences and/or some implementation of the $S^2$ algorithm.
+This could be done by using geo-fences and/or some implementation of the $S^2$\todo{elaborate} algorithm.
 A less complex solution could be to round the coordinate in to a lower accuracy of the GPS data.
-By lowering the GPS coordinate in accuracy an larger margin of precision is made, with the consequences of making a 'grid' as can be used for filtering.
+By lowering the GPS coordinate in accuracy a larger margin of precision is made, with the consequences of making a 'grid' as can be used for filtering.
 Rounding down to for example two decimal places has an accuracy of 1.1 kilometers.
 
 Another feature that the algorithm does not take into account is speed limits and terrain when calculating the detours.
 This feature could increase the accuracy of the estimated detours and by extension give more accurate scores.
-It could be implemented by using the Google Maps API to generate the required routes.
+It could be implemented by using the Google Maps API to generate the required routes.\todo{one of the main points! Elaborate}
 
 %App
 %	UI

@@ -27,9 +27,8 @@ The remaining requirements that needs to be accounted for and acceptance tested 
 \subsection{Acceptance Test Design}
 This section is documenting the acceptance test design, and serves to describe the test method performed on the solution to evaluate the compliance with the requirements.
 
-\todo{describe what the data is and why it's there}
-Mock test data is added to the \gls{rs} server's database. 
-The content can be seen in Appendix \ref{app:datadump}. 
+To make the app respond as it would in a real world test, mock test data is added to the \gls{rs} server's database. 
+The content can be seen in Appendix \ref{app:datadump}, and was consisting of user information as well as hard coded route matches.
 The data sets are a combination of data pulled form the \gls{astep} database as well as data we constructed to generate matches for the test user \texttt{test}.
 As we are using specialized mock data for the purpose of testing, only the user \texttt{test} has any matches.
 The setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
@@ -49,7 +48,7 @@ The requirement concerning user privacy is tested be seeing if location data abo
 
 
 \subsection{Performing the Test}
-First a new user, \texttt{user22} was created as can be seen in Figure \ref{s4tp:newuser}.
+First a new user, \texttt{user22}, was created and this can be seen in Figure \ref{s4tp:newuser}.
 In the process of creating a new user, some unexpected behavior regarding Scandinavian letters were observed.
 Some additional tests were performed to further explore this observation, and they can be seen in Table \ref{tab:logintest}.
 \begin{table}[!ht]
@@ -66,7 +65,7 @@ Some additional tests were performed to further explore this observation, and th
 	\label{tab:logintest}
 \end{table}
 
-Some additional \gls{astep} API test leads us to believe that this is a problem in the Android application as the special characters are working correctly when tested directly in the \gls{astep} API web interface.
+Some additional \gls{astep} API test points to that the issue is a problem in the Android application as the special characters were working correctly when tested directly in the \gls{astep} API web interface.
 
 The registering of the user \texttt{user22} was later successfully executed when using standard English letters and can be seen in the right side of Figure \ref{s4tp:numain}. 
 As expected, no matches were found to the newly registered user \texttt{user22}. 
