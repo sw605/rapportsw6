@@ -70,17 +70,18 @@ In the given example the route given is only consisting of one location, for mul
 Every decision made regarding parsing data in the header or body to the \gls{astep} server was made by the \gls{astep} API groups.
 
 \subsubsection{\gls{rs} Server}
-On the \gls{rs} server, a simpler communication with the \gls{astep} server is implemented.
-The \gls{rs} server requires only two API calls one for getting matched routes from \gls{astep} and one for checking if a user is a valid \gls{astep} user.
-Both API calls is implemented as their own \texttt{HttpURLConnection}.
+A communication with the \gls{astep} server is implemented on the \gls{rs} server.
+The \gls{rs} server requires only two API calls to comply with the requirements.
+One for getting matched routes from \gls{astep} and one for checking if a user is a valid \gls{astep} user.
+Both API calls are implemented as their own \texttt{HttpURLConnection}.
 The validate user check is performed when a user registers in the app. 
 First a user is created at \gls{astep} then a request to the \gls{rs} server is issued, where a check is performed to ensure the user correctly registered in \gls{astep}.
 The check is done by sending the token received from \gls{astep} to the \gls{rs} server and then checked up against \gls{astep} again.
-If the user is valid the additional information, provided when registering, will be stored on our \gls{rs} server for later retrieval. 
+If the user is valid the additional information, provided when registering, will be stored on the \gls{rs} server for later retrieval. 
 
 The route match API call is called once a day as described in the previous chapter.
 The API call uses the token form the requesting user to fetch matches from the \gls{astep} server. 
 \gls{astep} then returns every match for the particular user, with a score, the matched routes, and the full name of who the matches is with.
 This information is then send from the \gls{rs} server to the application to be displayed.
 %The idea is that later on the match results can be limited to the users that allowed the \gls{rs} user to access their data.
-Currently, the only limiting factor is that only matches with users that are registered in the database is saved, and \gls{rs} is currently the only app that uses route functionality.
+Currently, the only limiting factor is that only matches with users that are registered in the database are saved, and \gls{rs} is currently the only app that uses the route functionality.

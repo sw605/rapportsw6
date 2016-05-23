@@ -22,12 +22,12 @@ These following two messages are used on the clients.:
 	\end{tabular}
 }
 
-The server checks the recived token sent through the \gls{astep} API and gets the username in both cases.
+The server checks the received token sent through the \gls{astep} API and gets the username in both cases.
 Update matches gets the updated set of matches for a user and register adds the user to the user details table in the database on the server.
 
 %Main loop
 The communication is contained in a loop that is implemented so the server is ready for new clients as often as possible.
-The loop is as seen in the following enumeration.
+The loop is as seen in the following numbered list:
 
 \begin{enumerate}
 	\item Load server configurations
@@ -48,13 +48,13 @@ All contact to the database is handled in a class with a single instance ensured
 This is done as the database needs to its configurations (the username and password), which is loaded from a file.
 It would be inefficient if the server had to read this file every time it needs to access the database.
 
-Withing the database is only two tables; userdetails and matches.
-The userdetails table keeps extra details about the users of the system such as contact information and an alias they can use apart from their \gls{astep} username (stored as fullname).
+The database is only containing two tables: userdetails and matches.
+The userdetails table keeps extra details about the users of the system such as contact information and an alias they can use apart from their \gls{astep} username, stored as fullname.
 The table description can be seen in Table \ref{tab:userdetails}.
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{l|l|l}
+	\begin{tabular}{l l l}
 		Column 		& Type                   & Modifiers\\\hline
 		username    & character varying(50)  & primary key\\
 		phonenumber & character varying(30)  & not null\\
@@ -70,7 +70,7 @@ The table description can be seen in Table \ref{tab:matches}.
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{l|l|l}
+	\begin{tabular}{l l l}
 			   Column  &            Type             & Modifiers\\\hline
 			 user1     & character varying(50)       & references userdetails(username)\\
 			 user2     & character varying(50)       & references userdetails(username)\\

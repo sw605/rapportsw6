@@ -1,14 +1,14 @@
 \section{Test}\label{sec:s4test}
 % metatext
-In this section the performed full system test will be documented.
+In this final test section we will document the performed full system test.
 The test is an acceptance test, and is performed to verify that the solution complies with the established requirement specification.
-The acceptance test will be designed to test the whole system with some manually generated data.
-The scope of the test is to check that the 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
+The acceptance test will be designed to test the whole system with manually generated data.
+The scope of the test is to check that the functional 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
 Some requirements are validated as working in previous tests, and these are omitted from the acceptance test. 
-First the test design is explained and described and, subsequently, the test execution and results are documented.
+First, the test is explained and described and, subsequently, the test execution and results are documented.
 
 % paragraph listing all requirements...
-The 'Must have' requirements from Section \ref{sec:req} are as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
+% The 'Must have' requirements from Section \ref{sec:req} are as follow, firstly the functional; A Graphical user interface, User accounts including login and registration, Communication with the \gls{astep} system, User location tracking and storage, Automatically determine regular routes, Automatic suggest ride sharing partners. The two nonfunctional requirements are; Development cooperation with the other \gls{astep} project groups and User privacy.
 
 % previously tested requirements
 There have been extensive tests of the solution parts during the development, and the test results fulfilling requirements do not have to be performed again.
@@ -40,9 +40,8 @@ If this succeeds, the user is then logged out and then logged in with the same c
 When the user is logged into the app again, the appropriate matches stored in the \gls{rs} database will be fetched from the server and should be displayed in the app.
 If the lists are shown for the user \texttt{test}, but not for the newly registered user, the overall test is completed. 
 
-The GUI will have been tested through availability of the different functions in the app.
-The user functionality will be tested when registering an user and logging in, this will also partially test the communication with the \gls{astep} system.
-
+The GUI is tested through availability of the different functions in the app.
+The user functionality will be tested when registering an user and logging in, this will concurrently also partially test the communication with the \gls{astep} system.
 
 The rest of the requirements pertaining communication with \gls{astep} were verified in the tests performed in the previous sprints.
 If the matches are pulled correctly from the \gls{rs} server and showed to the user, will be tested when the user \texttt{test} are logged in.
@@ -67,7 +66,7 @@ Some additional tests were performed to further explore this observation, and th
 	\label{tab:logintest}
 \end{table}
 
-Some additional \gls{astep} API test leads us to believe that this is an problem in the Android application as the special characters is working correctly when tested directly in the \gls{astep} API web interface.
+Some additional \gls{astep} API test leads us to believe that this is a problem in the Android application as the special characters are working correctly when tested directly in the \gls{astep} API web interface.
 
 The registering of the user \texttt{user22} was later successfully executed when using standard English letters and can be seen in the right side of Figure \ref{s4tp:numain}. 
 As expected, no matches were found to the newly registered user \texttt{user22}. 
@@ -98,11 +97,13 @@ The user \texttt{test} was then, as seen in Figure \ref{s4tp:logintest}, logged 
 \end{subfigure}
 \caption{Screenshots from the acceptance test.}
 \end{figure}
+\todo{if time: update to current color scheme}
 
 \subsection{Test Conclusion}
-The acceptance test confirms that the developed solution fulfills the Must-have requirements.
-It can be concluded that the app works and have an actual use when both the \gls{rs} server and \gls{astep} API is functional.
-It can track users location in vehicle, store their data and display data back from \gls{astep} when expected to.
+The acceptance test confirmed that the developed solution fulfills the functional Must-have requirements.
+The tests explored the full specter of the app functionalities.
+It can be concluded that the app is usable when both the \gls{rs} server and \gls{astep} API is functional.
+The app is able to track a users location when driving in a vehicle, store the location data and display route match data from \gls{astep} when expected.
 
 %Even though every Must-have requirement is met there is still room for improvement for both  the already developed solution as well as expanding the functionality, either with additional requirements from the analysis or with new ones based on new knowledge. 
 %The possibilities for further development will be discussed in Section \ref{sec:future}.
