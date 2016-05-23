@@ -1,11 +1,11 @@
 \label{sec:aSTEPCommunication.tex}
 This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is performed, and how features from the \gls{astep} API are used to achieve the required functionality.
-The \gls{rs} system continues the triple part design, but has to adjust to the \gls{astep} progression and changes.
+The \gls{rs} system continues the triple part design, as explained in \ref{sec:s2systemdesign}, but has to adjust to the \gls{astep} progression and changes.
 
 The \gls{astep} API remains a REST API, thus meaning that all API calls are done through HTTP requests.
 The \gls{astep} system provides an assortment of API functions, but the \gls{rs} system will only be using a subset of the features: Routes and Users, excluding categories such as indoor LBS.
-The API functions are utilized to send recorded routes to \gls{astep}, and to create and edit users.
-Because there are restrictions regarding user information sharing in \gls{astep}, it is also necessary to allow \gls{rs} to access the data from the \gls{astep} server for its users.
+The API functions are utilized to send recorded routes to \gls{astep}, and to create new \gls{astep} users.
+As there are restrictions regarding user information sharing internal in \gls{astep}, it is necessary to allow \gls{rs} to access data from the \gls{astep} server external.
 A overview of the API functionality as of sprint 3 can be found in Appendix \ref{ch:appAlabel}. 
 
 \subsection{User management}\label{subsec:usermanagement}
@@ -50,7 +50,7 @@ The intruder would only need a registered \gls{rs} user and would thereby be inc
 
 \textbf{Edges}\\ 
 Edges work in a similar way to groups, but only allowing access from one user to another, corresponding to a group of two users.
-This can be accomplished by establishing communication using the same method of as with the groups and creating a \gls{rs} user and instantiate an edge from the \gls{rs} user to every user in the \gls{rs} system, illustrated in Figure \ref{fig:astepedge}.
+This can be accomplished by establishing communication using the same method as with the groups and creating a \gls{rs} user and instantiate an edge from the \gls{rs} user to every other user in the \gls{rs} system, illustrated in Figure \ref{fig:astepedge}.
 This way, only when the \gls{rs} system uses its own user the remaining user data can be accessed.
 
 \begin{figure}[h]

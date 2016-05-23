@@ -1,7 +1,7 @@
 \section{Implementation}
 The implementation section contains descriptions of selected parts of the implementation performed in sprint 3.
 
-The main focus is the location gathering service, which will record locations continuously while the user is driving, but not otherwise. 
+The main focus in this implementation is the location gathering service, which will record locations continuously while the user is driving, but not otherwise. 
 
 \subsection{Location Gathering Background service}
 % metatext
@@ -11,8 +11,8 @@ The code examples in this section will not include potential logging and debuggi
 
 \textbf{Implementation plan}\\
 According to the design, Section \ref{section:s3locgath}, the locations should first be requested when the user is driving.
-Therefore, the implementation starts by instantiating an activity detector.
-The activity detector can thereafter check the received activity, and begin location gathering if the activity is above a confidence threshold for driving activity.
+Therefore, the implementation starts by instantiating an activity recognizer.
+The activity recognizer can thereafter check the received activity, and begin location gathering if the activity is recognized as driving with a confidence threshold above 80\%.
 When the confidence is lower than the threshold for a period of time, the driving activity can be considered finished, and the route must be stored and later transmitted to the \gls{astep} system.
 
 
@@ -34,19 +34,16 @@ if(activityDetectionBroadcastReceiver == null) {
 }
 \end{lstlisting}
 
-The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class from, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance to broadcast detected activities.
+The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance to receive detected activities.
 
 The broadcast receiver is then applied by registering to the \gls{rs} app's\\ \texttt{BROADCAST\_ACTION}, so that the \texttt{activityDetectionBroadcastReceiver} only handles broadcasts sent by \gls{rs} and not by other apps.
-
-% ActivityIntentService broadcast description
-
 
 
 % Activity Detection Broadcast Receiver
 \textbf{Activity Detection Broadcast Receiver}\\
 The main operations in regards to activity detection and location gathering are done by the activity detection broadcast receiver.
 
-When the \texttt{activityDetectionBroadcastReceiver} receives a RideShare broadcast, the extra data in the broadcast is stored in the \texttt{ArrayList<DetectedActivity> detectedActivities}.
+When the \texttt{activityDetectionBroadcastReceiver} receives a RideShare broadcast, the detected activities in the broadcast is stored in the \texttt{ArrayList<DetectedActivity> detectedActivities}.
 The \texttt{detectedActivities} is iterated over, shown in Listing \ref{activityRecognitionIteration} to find the driving activity \texttt{DetectedActivity.IN\_VEHICLE}.
 The \texttt{startLocationUpdates()}, which is described later, is called if the confidence is above the threshold and if locations are not currently being recorded.
 Line 8 controls the location cache in case a drive is stopped temporarily and starts again, appending the cached route to the actual route.
@@ -89,9 +86,9 @@ public void startLocationUpdates(){
 \subsection{Route Matching Algorithm}\label{sec:routematchingalgorith}
 The implementation of the route matching algorithm is delegated to the previously mentioned outdoor location based service group, as they are responsible for implementation in the \gls{astep} system.
 They were given the pseudocode algorithm developed in sprint 2 and cooperated with during the implementation process.
-The implementation will not be documented here, as the implementation is not performed by us.
+The implementation will not be documented here, as the actual implementation is not performed by us.
 However, the implementation should be tested, and we generated test data with accompanying result expectations.
 The test data was also handed over, but this will be described in the following test section.
 
-In cooperation with the outdoor group, it were decided to send every variable for the algorithm as parameters in the api call.
-This were done so we would have controle over the algorithm to ensure it peformed as we saw fit.
+In cooperation with the outdoor group, it were decided to send every variable for the algorithm as parameters in the API call.
+This were done so we would have control over the algorithm to ensure it performed as we saw fit.

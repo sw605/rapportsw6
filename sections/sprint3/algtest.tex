@@ -8,18 +8,18 @@ By adding routes sequentially, we can anticipate the matching outcome for each a
 % test data
 \textbf{Test Data}\\
 A number of cases should be tested, and we generate route data for each. 
-Before the route data is input users U1, U2, U3 and U4 are created to the \gls{astep} system.
+Before the route data is generated, users U1, U2, U3 and U4 are created in the \gls{astep} system.
 
-First, the stable route generation must be confirmed functioning.
-A route is created for U1 and made two copies that were slightly edited in location and time, and skewed respectively one and two weeks ahead of the original route.
-These three routes should be assessed a high matching score, close to 1, and be considered a stable route for this user.
+First the stable route generation must be confirmed functioning.
+A route is created for U1 and two copies are made that were slightly edited in location and time, and skewed respectively one and two weeks ahead of the original route.
+These three routes should be assessed a high matching score, close to 1, and be considered a stable route for U1.
 
 Second, the algorithm should not be matching routes that are not relevant in location or time.
 U2 gets two routes added not matching in location, as seen in Figure \ref{fig:algroutes}.
 The blue U2 route is during the day time and the black during night time.
 These routes should thus be assessed a low match score, assumed 0.
 
-Because the algorithm should match routes of different users, we thirdly created two routes for the user U3.
+Because the algorithm should match routes of different users, we thirdly created two routes for user U3.
 The routes were differencing slightly in locations and time, but were made with the intention to match with each other, with one week difference in time.
 The routes were also made to roughly overlap with the routes of U1, so that U1's stable route would roughly be a sub-route of the U3 route.
 
