@@ -1,21 +1,19 @@
-\subsection{Periodic Tasks}\label{ssec:periodictasks}
-
-When the app is installed the program needs to run a task periodically to cache locations.
-\Citet{friesen2015android} writes about how this can be done in the Android API with the AlarmManager and the JobSchedular.
+\subsection{Periodic Background Tasks}\label{ssec:periodictasks}
+When the app is installed the program needs to run a task periodically to collect location data.
+\Citet{friesen2015android} writes how this can be done in the Android API with respectively the AlarmManager and the JobSchedular.
 
 \paragraph{AlarmManager}
 In the first Android version (API 1) the AlarmManager was created to handle alarms.
 They implemented it as a general class which can call any task after a given period has passed.
-The alarm can then be set to be reoccuring which means that we can use this to cache location data in a set interval.
+The alarm can then be set to be reoccurring which means that we can use this to cache location data in a set interval.
 
-\paragraph{JobSchedular}
-In Android 5.0 (API 21) an alternative to the AlarmManager was implemented, the JobSchedular.
-This functions in a similar way as the AlarmManager, but tries to bach the jobs together and fire them at the same time.
+\paragraph{JobScheduler}
+In Android 5.0 (API 21) an alternative to the AlarmManager was implemented, the JobScheduler.
+This functions in a similar way as the AlarmManager, but tries to batch the jobs together and execute them in bundles.
 This means that the device can save power by avoiding going to sleep just to wake a short moment later.
-The sacrefice is precision. 
+The sacrifice for this is precision in time. 
 While the AlarmManager has the option to occur at a exact time, the JobSchedular does not.
-This is needed to give the AlarmManager enough control to effeciently bach the jobs together.
+This is needed to give the JobScheduler enough control to efficiently batch the jobs together.
 
-\todo{Something is missing} Because the timing of the location data is less important than the constant stream of data the JobSchedular.
-This has the advantages of saving power making it more likely that the device will stay powered for the duration of the trip.
-And by extention giving a complete route.
+Because the timing of the location data is less important than the constant stream of data the JobScheduler is chosen as the basic for the background tasks.
+This has the advantages of saving power which is preferable.
