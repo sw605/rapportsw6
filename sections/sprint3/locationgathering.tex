@@ -5,22 +5,22 @@ This requires certain design features that will be presented in the following se
 
 \subsubsection{Overall Design}
 The informal tests performed in sprint 2, Section \ref{sec:s2test}, showed that polling locations with fixed intervals controlled by a timer proved difficult to get working reliably, as the Google API client never seemed to connect before the task had finished executing. 
-Thus, we explore the possibility of using a broadcast receiver which does not provide fixed time intervals but receives updates within a defined time frame.
+Thus we explore the possibility of using a broadcast receiver which does not provide fixed time intervals, but receives updates within a defined time frame.
 
 To ensure location gathering is not performed more than necessary, the activity recognition service should be running continuously and decide the location gathering status.
 The service should start requesting locations when the user is detected as driving. 
 The location updates request is done through the Google Play Service location API which Google recommends above the native Android location framework \cite{apploc}.
 As long as the activity registers the user as driving, the location should be received with reasonable intervals.
 The gathered locations should be collected into a group of locations representing the current route.
-When the activity recognition has not been registered as driving in 5 minutes the route is considered ended, and the route building should be finalized and send to the server.
+When the the activity recognition has not been registered as driving in 5 minutes the route is considered ended, and the route building should be finalized and send to the server.
 
 
 Every constant interval used in the current state is intervals we though as fitting.
-The method of ensuring use full data is of trial and error as there is little to base our constants on.
-If tests find that the data is not precise enough changes will be applied.
+The method of ensuring usefull data is of trial and error as there is little to base our constants on.
+If test find that the data is not precise enough changes will be applied.
 
 \subsubsection{Polling frequency}
-The location update and activity recognition frequency are balanced between energy consumption and accuracy.
+The location update and activity recognition frequency is balanced between energy consumption and accuracy.
 
 First, we consider the initial task of the location gathering service: The activity recognition.
 The activity recognition is used to decide the location requests, as it has lower energy consumption than the GPS unit \cite{fuckGPS} since the GPS system prevents a phone form going into its normal sleep cycles.
@@ -28,8 +28,8 @@ Many newer smartphones \cite{coCPU} have dedicated processes to track the sensor
 The interval of activity recognition will be set to every five seconds, which later can be optimized to use less power or be more accurate if needed.
 
 %The location request which will be called when a user is detected as driving, will in most cases need to activate a device's GPS and thus consume a lot of power.
-The first iteration of location gathering it will be a simple solution which will request with static intervals whereas dynamic intervals based on factors such as speed possibly could be evaluated for battery optimization later on.
-The location updates interval will be set to most frequently at one minute, but targeted at every two minutes.
+The first iteration of location gathering it will be a simple solution which will request with static intervals, whereas dynamic intervals based on factors such as speed possibly could be evaluated for battery optimization later on.
+The location updates interval will be set to most frequently at 1 minute, but targeted at every 2 minutes.
 Although the interval values are within the time scope, the values are susceptible to changes depending on test results.
 
 %This will be the initial setup, if experience shows need of possible for improvements the intervals will be optimized accordingly.
