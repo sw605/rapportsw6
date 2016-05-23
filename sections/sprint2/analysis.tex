@@ -4,30 +4,29 @@ This section contains the analysis of app functionality, Android app development
 %temporary title
 \subsection{App functionality}
 % meta shit
-The app user interface is a low priority task during this project.
+The app user interface is as earlier stated a low priority task during this project.
 However, the app needs basic functionality, according to the requirements.
 
 % Only vehicle
-To concentrate the app focus and to ensure that users matched by routes can transport each other, the app is decided to only track a user when in a vehicle.
+To concentrate the app focus and to ensure that users matched by routes can transport each other, it is decided to only track users when they are traveling in a vehicle.
 This excludes consideration of users only bicycling or walking as means of transportation.
-The app could be expanded upon later, but at the current stage, only car commuters are targeted as app users.
+%The app could be expanded upon later, but at the current stage, only car commuters are targeted as app users.
 % User management
-To be able to separate different routes, and to assign them to their respective users, there has to be a user management system, so that each user has its own ID.
+To be able to separate different routes, and to assign them to their respective users, there has to be a user management system, so that each user has its own UID.
 % Ride matches
 The user should also be informed with relevant information of ride matches, so that the user can make a decision of sharing a ride or not.
 
 % User settings
 The user of the application should also be able to adjust their settings.
 The settings are preferences regarding different properties of ride sharing.
-The user should be able to decide if it wants to get a ride or give a ride or both.
-There are also properties of the user itself, like a description and a picture, that other users can access to decide if they want to share a ride with the named user.
+The user should be able to decide if they wants to get a ride, give a ride or both.
+There should also also be properties related to the user them self, like a description and a picture, that other users can access to decide if they want to share a ride with the user.
 
 % other shit..
 
 \subsection{Android Development Platform}
 When developing Android applications one of the first choices to consider is which API levels to target \cite{usesSDK}.
 The ``\textit{API Level is an integer value that uniquely identifies the framework API revision offered by a version of the Android platform.}'' according to Android Developers \cite{usesSDK}.
-The distribution of the Android version levels are shown in \ref{fig:dashboard}.
 
 ``\textit{The manifest file presents essential information about your app to the Android system, information the system must have before it can run any of the app's code.}'', according to Android Developers \cite{androidManifest}.
 The manifest requires to specify the API level for three definitions: minimum, target and maximum. 
@@ -42,6 +41,7 @@ A cause of this is that every device with an API level lower than the specified 
 Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
 For this project we choose to target a higher API level for to simplify the development process.
 At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 (Android Lollipop) is 35,3\%.
+The distribution of the Android version levels are shown in \ref{fig:dashboard}.
 
 \begin{figure}[h]
 	\begin{center}
@@ -52,6 +52,8 @@ At the time of writing, the platform version distribution sum of API levels grea
 \end{figure}
 The version distribution as of March 2016 can be seen on Figure \ref{fig:dashboard}
 API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time as API level 21 among other things added support for the material design style \cite{android5API}. Refraining from further backwards compatibility allows the focus of the project to be on the functionality of the app. 
+
+As the API level is decided it is possible to look at different existing solutions to help ease the design and implementation of the solution.
 
 \input{sections/sprint2/periodictask.tex}
 
