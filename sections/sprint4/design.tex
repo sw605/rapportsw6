@@ -10,9 +10,9 @@ A list of matches needs to be implemented, so that the user interface reflects t
 To implement the user matches list, the app must utilize the API calls regarding route matches.
 These calls must be in the correct \gls{astep} format to be accepted and to work properly.
 The actual API call could be generalized to a single class so it can be reused for different API calls and to support potential future expansion.
-Every API call must be in their own class for building the correct URL to be used in an API client.
+Every API call must be in their own class for building the correct URL to be used with an API client.
 
-For the user experience and to avoid user interface stalls, it is important to make the API calls asynchronous. 
+It is important to make the API calls asynchronous for the user experience and to avoid user interface stalls. 
 If the functions are made synchronous, the app will wait for a response for the API calls, and hence rendering the user interface unusable.
 The stall is affecting the whole app, and it could lead to other issues or failures.
 A list of the API calls that must be implemented to make the \gls{rs} app functional can be found in Table \ref{tab:relevantastepapi}.

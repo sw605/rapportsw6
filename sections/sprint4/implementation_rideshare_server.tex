@@ -26,8 +26,8 @@ The server checks the received token sent through the \gls{astep} API and gets t
 Update matches gets the updated set of matches for a user and register adds the user to the user details table in the database on the server.
 
 %Main loop
-The communication is contained in a loop that is implemented so the server is ready for new clients as often as possible.
-The loop is as seen in the following numbered list:
+The communication is contained in a loop that is implemented on the server, so that the server is ready for new clients as often as possible.
+The loop is configured as seen in the following list:
 
 \begin{enumerate}
 	\item Load server configurations
@@ -39,17 +39,17 @@ The loop is as seen in the following numbered list:
 	\item goto 3
 \end{enumerate}
 
-The 24-hour interval, in line 3, was chosen to minimize the work that the \gls{astep} server has to do while presenting the users with relevant information.
-When getting matches from \gls{astep} the system runs the algorithms as described in Section \ref{ssec:algorithm} on routes that were received within the last two week.
+The 24-hour interval, in line 3, was chosen to reduce the load on the \gls{astep} server, and minimizes work while presenting users with relevant information.
+When receiving matches from \gls{astep}, the system runs the algorithms as described in Section \ref{ssec:algorithm} on routes that were received within the last two week.
 The matches are then stored in the servers own database.
 
 %Database
-All contact to the database is handled in a class with a single instance ensured with the use of singleton pattern. 
+All contact to the database is handled in a class with a single instance ensured\todo{guarantee for what? - Bjørn} with the use of singleton pattern. 
 This is done as the database needs to its configurations (the username and password), which is loaded from a file.
 It would be inefficient if the server had to read this file every time it needs to access the database.
 
-The database is only containing two tables: userdetails and matches.
-The userdetails table keeps extra details about the users of the system such as contact information and an alias they can use apart from their \gls{astep} username, stored as fullname.
+The database is only containing two tables: user details and matches.
+The user details table keeps additional information about the users of the system, such as contact information and an alias they can use apart from their \gls{astep} username, stored as 'fullname'.
 The table description can be seen in Table \ref{tab:userdetails}.
 
 \begin{table}[h]
@@ -65,7 +65,7 @@ The table description can be seen in Table \ref{tab:userdetails}.
 	\label{tab:userdetails}
 \end{table}
 
-A table of metadata for matches is stored on the \gls{rs} server, and it contains the information that is specified in the system design. 
+A table of metadata for matches is stored on the \gls{rs} server, and contains the information that is specified in the system design. 
 The table description can be seen in Table \ref{tab:matches}, where the different data types and names are defined.
 The SQL statements used for creating the database can be found in Appendix \ref{appendix:database}.
 

@@ -3,7 +3,7 @@ This subsection contains an overview of the implementation of the API calls util
 Both the API calls in the app and on the \gls{rs} server will be presented.
 
  \subsubsection{Application}
-In the design phases \ref{sec:aSTEPCommunication.tex}, it was decided what API calls should be implemented in the app.
+In the design phase, Section \ref{sec:aSTEPCommunication.tex}, it was decided what API calls should be implemented in the app.
 A specified list of calls only to be performed on the app can be seen in Table \ref{tab:asteprequests} below.
 
 \begin{table}[h]
@@ -23,10 +23,8 @@ A specified list of calls only to be performed on the app can be seen in Table \
 
 The API calls are implemented using an \texttt{HttpURLConnection} class.
 This is a \texttt{URLConnection} class for HTTP-specific data transfer.
-\texttt{HttpURLConnection} is used to send and receive streaming data whose length is not known in advance.
-This is needed as every API call varies in size.
+\texttt{HttpURLConnection} is used to send and receive streaming data whose length is not known in advance, and this is needed as every API call varies in size.
 E.g., the API call to post a route will be the one that varies the most in size as routes differ in number of locations.
-
 
 Using an object-oriented structure, each API call is implemented to overwrite a \texttt{AsyncTaskAPIHelper} which will handle the inputs, such as username, password, token, and routes.
 The inputs are then transformed to a part of a URL which would fit each of the relevant API calls.
@@ -34,7 +32,7 @@ The \texttt{AsyncTaskAPIHelper} result is then parsed to the \texttt{HttpURLConn
 Lastly, the \texttt{HttpURLConnection} is trying to perform the API call from where response codes are handled.
 
 It should be noted that passwords are not in the URL part of the API call, as these are logged in the \gls{astep} server. 
-This would be a major security issue.
+This would be a major security issue.\todo{because of what?}
 Instead, password and tokens are parsed as part of the body or header, which is used by REST. 
 This will hide the content from the URL and instead be transferred in an \texttt{OutputStream} encoded in raw bytes. 
 Two examples of API calls can be seen in Table \ref{tab:apitable}.
@@ -64,14 +62,14 @@ On the other hand, the 'POST route' is only passed in the URL as there is no inf
 The post route example is simplified to reduce its size and make it easier to read.
 Longitude, latitude, and precision are all placeholders for doubles.
 The timestamp is in the ISO 8601 format with year, month, day, hour, minute, and second.  
-The rest of the parameters is integers used to control the algorithm as explained in \ref{sec:routematchingalgorith}. 
+The rest of the parameters is integers used to control the algorithm as explained in Section \ref{sec:routematchingalgorith}. 
 In the given example the route given is only consisting of one location, for multiple locations, the URL would have to repeat the \enquote*{\&route=\dots} part.
 
 Every decision made regarding parsing data in the header or body to the \gls{astep} server was made by the \gls{astep} API groups.
 
 \subsubsection{\gls{rs} Server}
 A communication with the \gls{astep} server is implemented on the \gls{rs} server.
-The \gls{rs} server requires only two API calls to comply with the requirements.
+The \gls{rs} server only requires two API calls to comply with our requirements to the solution.
 One for getting matched routes from \gls{astep} and one for checking if a user is a valid \gls{astep} user.
 Both API calls are implemented as their own \texttt{HttpURLConnection}.
 The validate user check is performed when a user registers in the app. 
