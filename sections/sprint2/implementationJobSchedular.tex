@@ -18,12 +18,12 @@ int response  = jobScheduler.schedule(builder.build());
 
 Listing \ref{jobScheduler} presents the implementation of \texttt{jobScheduler} in the \texttt{MainActivity} of the app.
 
-In the app, the job is implemented as an extension to the \texttt{JobService} class which provides the required interface for the \texttt{JobScheduler} called RideShareService.
+In the app, the jobScheduler is implemented as an extension to the \texttt{JobService} class which provides the required interface for the \texttt{JobScheduler} called RideShareService.
 The class reroutes the call by the \texttt{JobScheduler} to a \texttt{Handler} class.
 This \texttt{Handler} class, as described by the official documentation \cite{handler}, allows the service to send a runnable object to the threads message queue.
 
 
-The implementation makes the location gathering be performed as a background service every 2 minutes.
+The implementation makes the location gathering be performed as a background service every two minutes.
 As covered in Section \ref{ssec:loctrack} this interval is temporary, and will serve to test the implementation, until further experience is gathered regarding optimizing the task frequency.
 
 
