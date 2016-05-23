@@ -1,7 +1,7 @@
 %  A simple AAU report template.
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL lastRev/master.tex   Wed Apr 27 09:55:10 2016
-%DIF ADD master.tex           Wed Apr 27 10:06:46 2016
+%DIF DEL lastRev/master.tex   Thu May  5 09:23:57 2016
+%DIF ADD master.tex           Thu May  5 09:23:57 2016
 %  2015-05-08 v. 1.2.0
 %  Copyright 2010-2015 by Jesper Kjær Nielsen <jkn@es.aau.dk>
 %
@@ -16,64 +16,40 @@
 %  GNU General Public License for more details.
 %
 %  You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
-%DIF 16c16-39
-%DIF < %
-%DIF -------
- %DIF > 
- %DIF > 
+
+
 % Latexdiff preamble
- %DIF > 
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
- %DIF > 
 %DIF UNDERLINE PREAMBLE
- %DIF > 
 \RequirePackage[normalem]{ulem}
- %DIF > 
 \RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1}
- %DIF > 
 \providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}}
- %DIF > 
 \providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}
- %DIF > 
 %DIF SAFE PREAMBLE
- %DIF > 
 \providecommand{\DIFaddbegin}{}
- %DIF > 
 \providecommand{\DIFaddend}{}
- %DIF > 
 \providecommand{\DIFdelbegin}{}
- %DIF > 
 \providecommand{\DIFdelend}{}
- %DIF > 
 %DIF FLOATSAFE PREAMBLE
- %DIF > 
 \providecommand{\DIFaddFL}[1]{\DIFadd{#1}}
- %DIF > 
 \providecommand{\DIFdelFL}[1]{\DIFdel{#1}}
- %DIF > 
 \providecommand{\DIFaddbeginFL}{}
- %DIF > 
 \providecommand{\DIFaddendFL}{}
- %DIF > 
 \providecommand{\DIFdelbeginFL}{}
- %DIF > 
 \providecommand{\DIFdelendFL}{}
- %DIF > 
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
- %DIF > 
- %DIF > 
- %DIF > 
-%DIF -------
+
+
 \input{setup/preamble.tex}% package inclusion and set up of the document
 \input{setup/hyphenations.tex}% 
 \input{setup/macros.tex}% my new macros
 
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
-%DIF CTRADITIONAL PREAMBLE %DIF PREAMBLE
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
 \RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
-\RequirePackage[stable]{footmisc} %DIF PREAMBLE
-\providecommand{\DIFadd}[1]{{\protect\color{blue} \sf #1}} %DIF PREAMBLE
-\providecommand{\DIFdel}[1]{{\protect\color{red} [..\footnote{removed: #1} ]}} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
 %DIF SAFE PREAMBLE %DIF PREAMBLE
 \providecommand{\DIFaddbegin}{} %DIF PREAMBLE
 \providecommand{\DIFaddend}{} %DIF PREAMBLE
@@ -171,6 +147,7 @@
 \chapter*{Preface\markboth{Preface}{Preface}}\label{ch:preface}
 \addcontentsline{toc}{chapter}{Preface}
 Here is the preface. You should put your signatures at the end of the preface.
+We should have things here like, astep, multi-group, thank davide, android, etc.
 
 \vspace{\baselineskip}\hfill Aalborg University, \today
 \vfill\noindent
@@ -237,15 +214,16 @@ The semester goal is to develop a location based service with accompanying appli
 % Semester project environment + sprint description
 The \gls{astep} project is developed in 10 teams in the span of 4 sprints.
 The sprints are synchronization points of the project groups, and this report will contain documentation of each sprint chronologically.
-There are four sprints in the project period.
-The first sprint is analysis and collaboration development, the second and third are development sprints, and the fourth is intended for test and finalization.
-The 10 project groups are assigned to their respective tasks, with 7 project groups developing the core \gls{astep} service, while the remaining 3 are developing applications utilizing the system.
+\DIFdelbegin \DIFdel{There are four sprints in the project period.
+}\DIFdelend The first sprint is \DIFaddbegin \DIFadd{intended for }\DIFaddend analysis and collaboration development, the second and third are development sprints, and the fourth is intended for test and finalization.
+The 10 project groups are assigned to their respective tasks, with 7 project groups developing the core \gls{astep} service, while the remaining \DIFdelbegin \DIFdel{3 }\DIFdelend \DIFaddbegin \DIFadd{three groups }\DIFaddend are developing applications utilizing the system.
 
 
 
 \section{Problem domain}
 % Solution scope and definition
-The problem domain of this project is to design and develop a solution which utilize the \gls{astep} system, and can identify and help drivers and passengers with arranging ridesharing.
+\DIFdelbegin \DIFdel{The problem domain of this project is to design and develop a solution which utilize the }%DIFDELCMD < \gls{astep} %%%
+\DIFdel{system , and }\DIFdelend \DIFaddbegin \DIFadd{Because we must use }\gls{astep}\DIFadd{, we came up with the idea of a system which }\DIFaddend can identify and help drivers and passengers with arranging ridesharing.
 The solution's goal is to provide ridesharing suggestions to the users of the solution.
 When referring to the term ridesharing in this report, it is referred to as the action of private persons sharing a car for the whole or a part of a route. 
 This definition is covered by the terms carpool and ad hoc ridesharing by \citet{doi:10.1080/01441647.2011.621557}.  
@@ -253,19 +231,22 @@ This definition is covered by the terms carpool and ad hoc ridesharing by \citet
 % Intention of the solution
 %The solution's intention is to generate matches of ride sharing companions, and notify the respective drivers and passengers of the match, enabling them to contact each other and share rides.
 %The matches should be custom made for each user, i.e. proposing appropriate candidates for ride sharing, which will be defined later.
-The intention of this project is to produce a android app that utilizing the \gls{astep} system and based on historical location data should ease the possibility of using and arranging carpool-style ridesharing.
+The intention of this project is to produce \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{an }\DIFaddend android app that utilizing the \gls{astep} system and based on historical location data should ease the possibility of using and arranging carpool-style ridesharing.
 
 The scope of such a project can be large and therefore it is chosen early to that the main focus will be to design and implement the basic system which then later can be expanded on.
-This focus revolves around develop and implementing an algorithm that can be utilized to asses if two users of the system should be paired for ridesharing.
-Hence the purpose of the application will be to propose appropriate candidates for ridesharing.
-Furthermore, other parts of the application such as graphical user interface is not prioritized, but is developed to be functional enough for test and practical purposes.
+\DIFdelbegin \DIFdel{This focus revolves }\DIFdelend \DIFaddbegin \DIFadd{The purpose of the application will be to propose appropriate candidates for ridesharing.
+This will revolve }\DIFaddend around develop and implementing an algorithm that can be utilized to asses if two users of the system should be paired for ridesharing.
+\DIFdelbegin \DIFdel{Hence the purpose of the application will be to propose appropriate candidates for ridesharing.
+}\DIFdelend Furthermore, other parts of the application such as graphical user interface is not prioritized, but is developed to be functional enough for test and practical purposes.
 
 % Solution contributions/advantages
-Such an application could be beneficial for the users in several ways. There could be environmental and economical savings, as the number of polluting cars driven is reduced as described in \cite{doi:10.1080/01441647.2011.621557}. The application would ideally decrease trafical problems such as traffic jam and thereby also being time-saving, and causing less frustration for the drivers.
+Such an application could be beneficial for the users in several ways. There could be environmental and economical savings, as the number of polluting cars driven is reduced as described in \cite{doi:10.1080/01441647.2011.621557}. The application would ideally decrease \DIFdelbegin \DIFdel{trafical }\DIFdelend \DIFaddbegin \DIFadd{traffical }\DIFaddend problems such as traffic jam and thereby also being time-saving, and causing less frustration for the drivers.
 
 There are some potential for both social, environmental and economical benefits, as the app allows people meet each other and thus reduce the use of cars, gasoline and the load on the road system.
+\DIFdelbegin %DIFDELCMD < 
 
-The future aspect of this solution seem bright since it easily should modified to work for autonomous vehicles.
+%DIFDELCMD < %%%
+\DIFdelend The future aspect of this solution seem bright since it easily should modified to work for autonomous vehicles.
 
 % Transition to problem statement
 To define the actual problem, as to initiate the research and development, a concrete formulation is made.
@@ -283,8 +264,10 @@ Sharing rides is advantageous in economical and environmental sense, but it is m
 }
 
 % Transition to requirement specification
-The problem statement is split into several requirements in different areas.
-\section{Requirement Specification}
+\DIFdelbegin \DIFdel{The problem statementis split into several requirements in different areas .
+}\DIFdelend \DIFaddbegin \DIFadd{To successfully solve the problem statement, we  define requirements with regards the different areas of the development and final product.}
+
+\DIFaddend \section{Requirement Specification}
 % Metatext
 To provide a clear direction of the solution and to state the success criteria, this section contains the requirements for the solution. 
 The requirements are divided into two main categories: functional and nonfunctional requirements. 
@@ -834,7 +817,7 @@ And by extention giving a complete route.
 
 
 % aSTEP system functionality analysis: communication with aSTEP
-\subsection{Communication with aSTEP}
+\subsection{Communication with aSTEP}\label{ssec:communicationwithastep}
 % meta
 To be able to utilize the aSTEP system, the communication protocol and functions must be analyzed. 
 The analysis is based on the current development and planning of the API and other functions.
@@ -996,8 +979,8 @@ In the paper, the algorithm considers multiple aspects when assessing matches, s
 The criteria are practical to some extent, but the focus of the \gls{rs} system are the time and distance criteria.
 A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
 A route is a chronological list of positions.
-\DIFaddbegin \DIFadd{A disadvantages of the algorithm presented here is that the distance is calculated as a euclidean distance rather than a map distance. 
-This would be a obvious place for future improvements to the algorithm.}\DIFaddend 
+A disadvantages of the algorithm presented here is that the distance is calculated as a euclidean distance rather than a map distance. 
+This would be a obvious place for future improvements to the algorithm.
 
 To illustrate how the algorithm should work for different routes an example is introduced. The example can be seen in Figure \ref{fig:algEx1}.
 \begin{figure}[!ht]
@@ -1031,9 +1014,7 @@ To illustrate how the algorithm should work for different routes an example is i
     \label{fig:algEx1}
 \end{figure}
 The example introduces four users, each with one stable route in this example. In addition to the location of their routes, we also have their departure and arrival times that can be seen in Table \ref{timetable}.
-\DIFdelbegin %DIFDELCMD < \todo{overvej om vi skal skrive expected outcome heroppe}
-%DIFDELCMD < %%%
-\DIFdelend \begin{table}[]
+\begin{table}[]
 \centering
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -1047,27 +1028,21 @@ Eve           & 07:30                   & 07:50       & 18 km         		\\ \bott
 \label{timetable}
 \end{table}
 
-For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$.
+For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$
+The outcome should be a score representing if Alice, on the way through route $r$, should pick up some of the persons Bob, Carol or Eve, for each of their routes.
 
-\subsubsection{\DIFdel{Time Distance Analyser Algorithm}}
-%DIFAUXCMD
-\addtocounter{subsubsection}{-1}%DIFAUXCMD
-\DIFdel{To serve as an example, the algorithm should assess the score of }\DIFdelend \DIFaddbegin \DIFadd{The outcome should be a score representing if }\DIFaddend Alice, on the way through route $r$, \DIFdelbegin \DIFdel{picking up person }\DIFdelend \DIFaddbegin \DIFadd{should pick up some of the persons }\DIFaddend Bob, Carol or Eve, for each of their routes.
-
-\DIFdelbegin \DIFdel{The score }\DIFdelend \DIFaddbegin 
-
-\DIFadd{The expected outcome is Bob will match reasonable in both distance and time difference and hence be given a score indicating a match.
+The expected outcome is Bob will match reasonable in both distance and time difference and hence be given a score indicating a match.
 Carol is expected to match reasonable in distance as well but will lack a match comparing travel times and therefore not produce a match.
 Comparing with Eve a somewhat match on time is expected while the distance will be way off.
-The score }\DIFaddend represents the match of the routes of Alice and each of the other, and should be expressed as a decimal value from 0 to 1 which tells how good the match is.
+The score represents the match of the routes of Alice and each of the other, and should be expressed as a decimal value from 0 to 1 which tells how good the match is.
 0 represents a bad match, a major detour or not compatible times, and 1 represents a perfect match, and requires no detour.
 A comparison will be made for $r_1$ against $r_2$.
 To summarize, the algorithm takes a route $r$ and two positions to compare against; start ($s$), and goal ($g$) as arguments.
 The algorithm then returns a decimal value between 0 and 1.
 
-\DIFaddbegin \subsubsection{\DIFadd{Time Distance Analyser Algorithm}}
+\subsubsection{Time Distance Analyser Algorithm}
 
-\DIFaddend In the algorithm, there are two aspects to be evaluated\DIFdelbegin \DIFdel{: Time }\DIFdelend \DIFaddbegin \DIFadd{; time }\DIFaddend and distance.
+In the algorithm, there are two aspects to be evaluated; time and distance.
 These are assumed to be evaluated by two sub algorithms that both takes the route and two points as input and return a value from 0 to 1 depending on how closely they match.
 
 If either time or distance is deemed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
@@ -1144,7 +1119,7 @@ If the value is greater than the acceptable detour length, the inversion in the 
 
 In the example introduced in the beginning of this chapter, the longest detour is set to be 25\% of Alice's total commute and Alice's route is modeled as the line  $y = \frac{4}{7}-\frac{2 x}{7}$.
 It is assumed that Alice's route have tracking points continuously in the line, and therefore a line to point distance calculation is used in this example, this means $r_s$ and $r_g$ will be calculated simultaneously as the distance is calculated.
-This gives the the results \DIFdelbegin \DIFdel{seen }\DIFdelend \DIFaddbegin \DIFadd{showed }\DIFaddend in Table \ref{tbl:distance} when applying the distance  Algorithm \ref{alg:distanalyser}.
+This gives the the results showed in Table \ref{tbl:distance} when applying the distance  Algorithm \ref{alg:distanalyser}.
 
 \begin{table}[!ht]
 \centering
@@ -1178,9 +1153,9 @@ This can be used to determine the relative time distance between two points by u
 \end{align*}
 
 The calculated detour time and relative time difference enables an approximation of the inconvenience the ridesharing is for the participants in the potential match.
-From the driver's perspective, the route starts at the normal time minus the detour duration\DIFaddbegin \DIFadd{, this is }\DIFaddend to still arrive on the usual time \DIFaddbegin \DIFadd{at the destination}\DIFaddend .
+From the driver's perspective, the route starts at the normal time minus the detour duration, this is to still arrive on the usual time at the destination.
 This makes the detour the only inconvenience in regards to time.
-If the passenger has to arrive earlier than \DIFdelbegin \DIFdel{otherwise}\DIFdelend \DIFaddbegin \DIFadd{the driver}\DIFaddend , the driver would also have to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
+If the passenger has to arrive earlier than the driver, the driver would also have to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
 
 From the passenger's perspective, the opposite is true when it comes to the relative time. 
 It is only an inconvenience when the driver must set them off before they need to arrive.
@@ -1191,7 +1166,7 @@ The formula for the total inconvenience when taking both participants into accou
 
 \[ |d - t| + d \]
 
-where $d$ is the detour \DIFaddbegin \DIFadd{time }\DIFaddend and $t$ is the relative time.
+where $d$ is the detour time and $t$ is the relative time.
 
 \iffalse
 Now, let us consider what would happen on the return route.
@@ -1219,11 +1194,11 @@ And the differences in time must be the same.
 \end{algorithm}
 
 Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser algorithm.
-Line 2 to 4 \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{are }\DIFaddend reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that \DIFdelbegin \DIFdel{it }\DIFdelend \DIFaddbegin \DIFadd{they }\DIFaddend sums the detours and multiplies the result with the distance to time conversion.
+Line 2 to 4 are reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that they sums the detours and multiplies the result with the distance to time conversion.
 Line 5 assigns the greatest time difference between the closest points to $t$.
 The reason for choosing the greatest value is to use a pessimistic approach, so that the real delay will not be worse than the calculated.
 
-For the Alice example, defining the speed as constant through the whole route is preferable to keep \DIFdelbegin \DIFdel{it }\DIFdelend \DIFaddbegin \DIFadd{the example more }\DIFaddend simple.
+For the Alice example, defining the speed as constant through the whole route is preferable to keep the example more simple.
 Alice travels 36.5 km in 35 minutes, this gives a pace of  $\frac{35 min}{36.5 km} = 0.959\frac{min}{km} $.
 For this example the acceptable time difference is set to 15 minutes $\delta = 15$.
 The time analyser algorithm is applied to the example with the aforementioned data, the result can be seen in Table \ref{tbl:time}.
@@ -1260,7 +1235,7 @@ Eve           	& -0.505       & 0.10			& 0        				\\ \bottomrule
 \end{table}
 
 The results in Table \ref{tbl:timedist} shows that with the set detour limits in distance and time the only compatible match for Alice is Bob with a score of $0.59$. 
-Although Carol \DIFdelbegin \DIFdel{scored acceptably in distance, the difference in time is unacceptable, }\DIFdelend \DIFaddbegin \DIFadd{scores acceptable in the distance analyser, the time difference is unacceptable }\DIFaddend thus assessed a score of $0$.
+Although Carol scores acceptable in the distance analyser, the time difference is unacceptable thus assessed a score of $0$.
 Eve scores below 0 in the distance parameter and is therefore also given a final score of $0$.
 
 The two modifiers $d_\gamma$ and $t_\gamma$ were set to $1$ in this example, but these modifiers, along with the acceptable detours in time and distance, can be adjusted to adapt scores if the given outputs do not reflect the expected outcomes or the users' actual willingness to share rides in a given situation. 
@@ -1363,8 +1338,8 @@ The interval is temporary, and will serve to test the implementation.
 
 
 % Location gathering
-\subsection{Location Gathering}
-% metatext
+\subsection{Location Gathering} \DIFaddbegin \label{section:locationgathering}
+\DIFaddend % metatext
 To get the user location in the background service\todo{describe BGS before this}, the Google Play Services is utilized.
 The Google Play Services provides necessary location data, due to the integration on the platform.
 
@@ -1471,57 +1446,760 @@ private ASTEPLocation convertToAstepLocation(Location gLocation) {
 
 
 
-\section{Test}
+\section{Test} \DIFdelbegin \DIFdel{The test performed in this sprint was regarding the location gathering}\DIFdelend \DIFaddbegin \label{sec:s2test}
+\DIFadd{The purpose of the test chapter is to document the  current functionality of the implemented solution.
+An informal test was performed on the app to assess the behavior and precision of the location gathering as a background service.}
 
+\subsection{\DIFadd{Background service}}
+\DIFadd{To assess the functionality of the background service, it was necessary to receive some kind of information, confirming that the service was actually running.
+The background service was tested by making a simple IDE console output, that got printed each time the }\texttt{\DIFadd{jobScheduler}} \DIFadd{executed the }\texttt{\DIFadd{PendingIntent}}\DIFaddend .
 
+\DIFaddbegin 
 
-% Sprint 3
+\DIFadd{In accordance with the implementation, the output appeared every 10 seconds, independent of the app being open, in the background or closed completely on the test device.
+This proved that the background service was functioning as intended.}
+
+\subsection{\DIFadd{Location gathering}} 
+\DIFadd{Location gathering was also performed in the test of the background service.
+The location test was performed by trying to access the last known location in each scheduled }\texttt{\DIFadd{PendingIntent}}\DIFadd{, and to print the result in the debug log in the IDE.
+The background service was executed regularly, but the location was only available once in a significant number of attempts.
+The missing locations seemed to be caused by the }\texttt{\DIFadd{googleApiClient}} \DIFadd{not being connected, as the location gathering is performed in the }\texttt{\DIFadd{onConnected}} \DIFadd{method.
+The missing locations seems to derive from the thread not existing long enough for the }\texttt{\DIFadd{googleApiClient}} \DIFadd{to connect to the services.}
+
+\DIFaddend The implementation of the \DIFdelbegin \DIFdel{jobScheduler }\DIFdelend \DIFaddbegin \texttt{\DIFadd{jobScheduler}} \DIFaddend made it impossible for the \texttt{GoogleApiClient} to connect, hence not being able to assess the device location.
+Additionally, the interval based location gathering, would be using battery consequently, regardless of the activity of the user. 
+It is preferable to activate GPS \DIFdelbegin \DIFdel{locationing }\DIFdelend \DIFaddbegin \DIFadd{location }\DIFaddend feature as little as possible, because GPS location \DIFaddbegin \DIFadd{collection }\DIFaddend is battery consuming\DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\citep{gpsbattery}}%DIFAUXCMD
+}\DIFaddend .
+
+\DIFdelbegin %DIFDELCMD < \todo{hard documentation/facts of jobScheduler results.}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend % Sprint 3
 \chapter{Sprint 3}
 Metatext for the third iteration
 \section{Analysis}
+% metatext
+\DIFaddbegin \DIFadd{This analysis section contains analysis of the previous sprint with the intention of improving the solution, and considerations of further development of }\gls{rs}\DIFadd{.
+Additionally, because the }\gls{astep} \DIFadd{system is in development and the }\gls{rs} \DIFadd{solution is dependent on its status, the }\gls{astep} \DIFadd{will be examined for changes and additions.}\DIFaddend 
 
-% Sprint 3 krav
+\DIFaddbegin \DIFadd{First, the location gathering will be investigated, followed by an examination of the current configuration of the }\gls{astep} \DIFadd{system.}
+
+\DIFaddend \subsection{Location gathering as a background service} \label{ssec:LocationGatherBGS}
+\DIFaddbegin \DIFadd{A new background service is examined as the background service implemented and tested in Section \ref{sec:s2test} was not performing correctly.
+Furthermore, the constant interval between gathering GPS location is not ideal, as a user could be stationary for periods of time, thus the location gathering is performed unnecessarily when the user is e.g. sleeping.}\DIFaddend 
+
+\DIFaddbegin \textbf{\DIFadd{Location Gathering}}\\
+\DIFadd{Since Section \ref{section:locationgathering} we have discovered a new method for gathering locations. 
+It can be done by requesting location updates from the Google Play Services \mbox{%DIFAUXCMD
+\cite{receivingLocationUpdates}}%DIFAUXCMD
+.
+By this method, an app can receive regular location updates by subscribing to a location provider.
+The app could then receive a notification when a new location is detected, and rely on the Google implementation which is already optimized within Android.}
+
+\textbf{\DIFadd{Activity Detection}}\\
+%DIF >  energy preserving
+\DIFadd{The }\gls{rs} \DIFadd{app is supposed to gather locations when the user is driving, according to the requirements, and hence activity recognition is explored to be able to detect the user's activity and potentially reduce energy consumption.}
+
+\DIFadd{The activity detection could improve two factors: Energy consumption and location filtering.
+The location filtering should be done by only recording locations when the user is driving.
+The energy consumption is lowered as the GPS unit is only utilized when the locations are necessary to collect.}
+
+
+%DIF > \subsection{Changes to the aSTEP API}
+\DIFaddend \subsection{Changes to the aSTEP API}%DIF <  description of changes and following consequences
+
+\DIFaddbegin \label{s3:apianal}
+\DIFadd{Because the }\gls{astep} \DIFadd{is in development, there has been changes in the API since the last sprint analysis. 
+The }\gls{astep} \DIFadd{API has been updated with new functionality both regarding to user management and location based services.
+The LBS are split into indoor and outdoor locations calls, but the outdoor services are the only relevant calls for the }\gls{rs} \DIFadd{system.
+%DIF > The list of all API functions as of the third sprint can been seen in the appendix\todo{add appendix reference}. %Table \ref{tab:s3api}.
+}\DIFaddend 
+
+\DIFaddbegin \iffalse
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{ll}
+		\DIFaddFL{Outdoor location services }& \DIFaddFL{User Management    }\\
+		\hline
+		\begin{tabular}[t]{@{}l@{}}
+			\DIFaddFL{Get user past location}\\ \DIFaddFL{Get user past locations area}\\ \DIFaddFL{Get user past Locations radius}\\ \DIFaddFL{post user current location}\\ \DIFaddFL{Post user current route}\\ \DIFaddFL{Get all new route matches}\\ \DIFaddFL{Get all locations friends}\\ \DIFaddFL{Get all users in area }\\ \DIFaddFL{Get locations friends }\\ \DIFaddFL{Get subset of users area }\\ \DIFaddFL{Get users outside area }\\\DIFaddFL{Get subset of users radius }\\ \DIFaddFL{Get locations friend timestamp}\end{tabular}
+		&
+		\begin{tabular}[t]{@{}l@{}}
+			\DIFaddFL{Create group }\\ \DIFaddFL{Get administrated groups}\\ \DIFaddFL{Add administration}\\ \DIFaddFL{Remove administration }\\ \DIFaddFL{Get invited users }\\ \DIFaddFL{Invite user to group }\\ \DIFaddFL{Revoke group invitation }\\ \DIFaddFL{Get members of a group }\\ \DIFaddFL{Remove user from group }\\ \DIFaddFL{Create user }\\ \DIFaddFL{Get groups that a user is invited to }\\ \DIFaddFL{Decline group invitation }\\ \DIFaddFL{Get groups that user is member of }\\ \DIFaddFL{Join group }\\ \DIFaddFL{Leave group }\\ \DIFaddFL{Get outdoor-user}\\ \DIFaddFL{Request outdoor user }\\ \DIFaddFL{Delete outdoor-user }\\ \DIFaddFL{Validate outdoor-user}\\ \DIFaddFL{Change password}\\ \DIFaddFL{Get token }\\ \DIFaddFL{Issue token}\end{tabular}
+	\end{tabular}
+	\caption{\DIFaddFL{Currently planned aSTEP API functions.}}
+	\label{tab:s3api}
+\end{table}
+\fi
+
+\DIFadd{An overview of the relevant API calls, as of sprint 3, for the }\gls{rs} \DIFadd{system can be seen in Table \ref{tab:relevantastepapi}, while the complete set of sprint 3 outdoor location services and user management services can be seen in the appendix. }\todo{fix appendix}
+
+\begin{table}[h]
+	\centering
+	\scriptsize
+	\begin{tabular}{l l l}
+		\DIFaddFL{Path }& \DIFaddFL{Method }& \DIFaddFL{Description}\\\midrule
+		\DIFaddFL{/locations/outdoor/\{username\}/routes }& \DIFaddFL{POST }& \DIFaddFL{Send a route to the }\gls{astep} \DIFaddFL{server}\\
+		\DIFaddFL{/locations/outdoor/\{username\}/routes/match }& \DIFaddFL{GET }& \DIFaddFL{Match all new routes}\\
+		\DIFaddFL{/users }& \DIFaddFL{POST }& \DIFaddFL{Create a new user}\\
+		\DIFaddFL{/users/\{username\}/outUsers }& \DIFaddFL{POST }& \DIFaddFL{Request a new out user}\\
+		\DIFaddFL{/users/\{username\}/outUsers/\{specifiedUsername\} }& \DIFaddFL{PUT }& \DIFaddFL{Accept out user}\\
+		\DIFaddFL{/users/\{username\}/token }& \DIFaddFL{GET }& \DIFaddFL{Get the current valid token for a user
+	}\end{tabular}
+	\caption{\DIFaddFL{Relevant }\gls{astep} \DIFaddFL{API functions.}}
+	\label{tab:relevantastepapi}
+\end{table}
+
+\DIFadd{For the location based services, the }\gls{astep} \DIFadd{system now offers different get requests regarding a users location history, nearby users and users based on groups or friends.
+The services offered by the user management is also expanded since the previous sprint. 
+The implementation of the concept of groups entails multiple new API calls. 
+The group concept is implemented as an access control that restricts users access to other users data.
+The }\gls{rs} \DIFadd{system design will need to reflect these changes, and will be further analyzed in the following sections.  
+The particulars of the different API calls will be elaborated in the following sections as they are used.}
+
+
+
+\DIFaddend % Sprint 3 krav
 \subsection{Requirements for the third sprint}
-%meta - to edit
-Sprint four is...
+%DIF < meta - to edit
+\DIFdelbegin \DIFdel{Sprint four is ...}\DIFdelend %DIF > meta - to edit
+\DIFaddbegin \DIFadd{The third sprint is deemed to satisfy the requirements not met in the previous sprints.
+The app is currently a working template and can instantiate a background service, but is not completed. 
+The background service redesign and implementation is the main focus of this sprint, together with the route matching algorithm testing.}\DIFaddend 
 
 % something
-\textbf{some requirement}\\
-placeholder
+\DIFdelbegin \textbf{\DIFdel{some requirement}}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \textbf{\DIFadd{Location gathering as a background service}}\DIFaddend \\
+\DIFdelbegin \DIFdel{placeholder}\DIFdelend \DIFaddbegin \DIFadd{The original requirement of location gathering was not fulfilled by the implementation in sprint 2, thus it must be reimplemented.
+The background service should be sensitive to the users current activity and only record locations when the user is driving.}\DIFaddend 
+
+\DIFaddbegin \textbf{\DIFadd{Conclude the route matching algorithm through test and collaboration}}\\
+\DIFadd{The route matching algorithm was designed in sprint 2 and delivered to the outdoor group}\todo{clarify?} \DIFadd{responsible for the implementation in }\gls{astep}\DIFadd{.
+The algorithm is supposed to be implemented within this sprint, and the implementation should be tested for ability to produce results and correctness.
+The testing must be done with some test data, along with result expectations.}
 
 
-\section{Design}
+
+\DIFaddend \section{Design}
 % metatext
+\DIFdelbegin %DIFDELCMD < 
 
-\section{Implementation}
+%DIFDELCMD < %%%
+\subsection{\DIFdel{System design}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+\DIFdel{In the second sprintthe }%DIFDELCMD < \gls{rs} %%%
+\DIFdel{system were designed to consists of three parts: The app, the }%DIFDELCMD < \gls{rs} %%%
+\DIFdel{server, and the }%DIFDELCMD < \gls{astep} %%%
+\DIFdel{system.
+As the}%DIFDELCMD < \gls{astep} %%%
+\DIFdel{system have evolved small redesigns to the }%DIFDELCMD < \gls{rs} %%%
+\DIFdel{system design is necessary}\DIFdelend \DIFaddbegin \DIFadd{This design section contains documentation of the redesign of the background location gathering service and the minor system changes, as well as the design of the user data access management}\DIFaddend .
+
+\DIFaddbegin \subsection{\DIFadd{System design}}
+\DIFaddend This section will describe how the communication between the \gls{rs} system and the \gls{astep} system is \DIFdelbegin \DIFdel{handled.
+And }\DIFdelend \DIFaddbegin \DIFadd{performed, and }\DIFaddend how features from the \gls{astep} API \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{are }\DIFaddend used to achieve the \DIFdelbegin \DIFdel{desired outcomes.
+}\DIFdelend \DIFaddbegin \DIFadd{required functionality.
+The }\gls{rs} \DIFadd{system continues the triple part design, but has to adjust to the }\gls{astep} \DIFadd{progression and changes.}\DIFaddend 
+
+The \gls{astep} API \DIFdelbegin \DIFdel{is, as described in Section \ref{ssec:communicationwithastep}, }\DIFdelend \DIFaddbegin \DIFadd{remains }\DIFaddend a REST API\DIFdelbegin \DIFdel{. 
+This means }\DIFdelend \DIFaddbegin \DIFadd{, thus meaning }\DIFaddend that all API calls are done through HTTP requests\DIFdelbegin \footnote{\DIFdel{Overview of all the HTTP-request available in }%DIFDELCMD < \gls{astep} %%%
+\DIFdel{can be found at }%DIFDELCMD < \url{http://www.astep.cs.aau.dk/}%%%
+}%DIFAUXCMD
+\addtocounter{footnote}{-1}%DIFAUXCMD
+\DIFdel{.
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{We }\DIFdelend \DIFaddbegin \DIFadd{.
+The }\gls{astep} \DIFadd{system provides an assortment of API functions, but the }\gls{rs} \DIFadd{system }\DIFaddend will only be using a subset of the features\DIFdelbegin \DIFdel{presented to us, those being; Locations, Routes , Users, and some way to }\DIFdelend \DIFaddbegin \DIFadd{: Routes and Users, excluding categories such as indoor LBS.
+The API functions are utilized to send recorded routes to }\gls{astep}\DIFadd{, and to create and edit users.
+Because there are restrictions regarding user information sharing in }\gls{astep}\DIFadd{, it is also necessary to }\DIFaddend allow \gls{rs} to access the data from the \gls{astep} server for its users.
+\DIFdelbegin \DIFdel{In the API there }\DIFdelend \DIFaddbegin \DIFadd{A overview of the API functionality as of sprint 3 can be found in Appendix \ref{ch:appAlabel}. }
+
+\subsection{\DIFadd{User management}}
+%DIF > why UM
+\DIFadd{User management must be performed for the }\gls{rs} \DIFadd{system to utilize the route matching algorithm, because the algorithm requires access to the routes and locations based on the different users.}
+
+%DIF >  how-to
+\DIFadd{There }\DIFaddend are two ways of \DIFdelbegin \DIFdel{doing this; by creating }\DIFdelend \DIFaddbegin \DIFadd{resolving user data sharing using the }\gls{astep} \DIFadd{API.
+The first solution is to create }\DIFaddend a group for all the \DIFdelbegin \DIFdel{app usersor by having an edge from a seperate }\DIFdelend \DIFaddbegin \gls{rs} \DIFadd{users.
+The second is to create one administrating }\DIFaddend \gls{rs} \DIFdelbegin \DIFdel{-user to every }\DIFdelend \DIFaddbegin \DIFadd{user that has an access edge to every }\gls{rs} \DIFadd{user in }\DIFaddend \gls{astep} \DIFdelbegin \DIFdel{-user that uses the app}\DIFdelend \DIFaddbegin \DIFadd{system.
+The following paragraphs will elaborate the alternatives}\DIFaddend .
+
+\DIFdelbegin \paragraph{\DIFdel{Groups}} %DIFAUXCMD
+\addtocounter{paragraph}{-1}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \textbf{\DIFadd{Groups}}\\ 
+\DIFadd{Groups }\DIFaddend in the \gls{astep} \DIFdelbegin \DIFdel{program exists }\DIFdelend \DIFaddbegin \DIFadd{system exist }\DIFaddend to allow users to gain access to \DIFdelbegin \DIFdel{eachothers }\DIFdelend \DIFaddbegin \DIFadd{each others }\DIFaddend data.
+This could be \DIFdelbegin \DIFdel{used }\DIFdelend \DIFaddbegin \DIFadd{utilized }\DIFaddend by making a \DIFdelbegin \DIFdel{user for the }\DIFdelend \gls{rs} \DIFdelbegin \DIFdel{system where all users who uses the app is includedin.
+The problem with this }\DIFdelend \DIFaddbegin \DIFadd{group in which all }\gls{rs} \DIFadd{users are included.
+An issue with this solution }\DIFaddend is that all users have \DIFdelbegin \DIFdel{now granted }\DIFdelend \DIFaddbegin \DIFadd{granted all other users }\DIFaddend access to their \DIFdelbegin \DIFdel{local datato anyone how happens to use the same app, regardless of the context. 
+This means that a malicios programmer could }\DIFdelend \DIFaddbegin \DIFadd{own location data. 
+The solution allows a malicious programmer to }\DIFaddend create a program that \DIFdelbegin \DIFdel{plots }\DIFdelend \DIFaddbegin \DIFadd{either copies or edits }\DIFaddend the locations of all users of the \gls{rs} app.
+\DIFdelbegin \DIFdel{They }\DIFdelend \DIFaddbegin \DIFadd{The intruder }\DIFaddend would only need a \DIFdelbegin \DIFdel{new user registered as using the }\DIFdelend \DIFaddbegin \DIFadd{registered }\DIFaddend \gls{rs} \DIFdelbegin \DIFdel{app and would there for }\DIFdelend \DIFaddbegin \DIFadd{user and would thereby }\DIFaddend be included in the group.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\path[fill=red!30] (0:0cm) circle (2cm);
+		\path[fill=green!30] (57:1.75cm) circle (1.3cm);
+
+		\begin{scope}
+			\clip(57:1.75cm) circle (1.3cm);
+			\path[fill=red!30!green!30] (0:0cm) circle (2cm);
+		\end{scope}
+
+		\node at (0,	0) 		{$U_{\gls{rs}}$};
+		\node at (0.8,	0.63) 	{$U_1$};
+		\node at (0.1,	1.4)	{$U_2$};
+		\node at (1.87,	1.4) 	{$U_3$};
+		\node at (-1.2,	-0.3)	{$U_4$};
+		\node at (0.7,	-1.2) 	{$U_5$};
+		\node at (1.53, -0.84) 	{$U_6$};
+	\end{tikzpicture}
+	\label{fig:astepgroup}
+	\caption{How the \gls{rs}-system would use \DIFdelbeginFL \DIFdelFL{gropus}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{groups}\DIFaddendFL . In the red group (the red circle) all users in that group can see all data from other users in the same group.}
+\end{figure}
+
+\DIFdelbegin \paragraph{\DIFdel{Edges}} %DIFAUXCMD
+\addtocounter{paragraph}{-1}%DIFAUXCMD
+\DIFdel{works is }\DIFdelend \DIFaddbegin \textbf{\DIFadd{Edges}}\\ 
+\DIFadd{Edges work in }\DIFaddend a similar way to groups\DIFdelbegin \DIFdel{but instead of granting all users access to every other users data, the edges only allow }\DIFdelend \DIFaddbegin \DIFadd{, but only allowing }\DIFaddend access from one user to another\DIFdelbegin \DIFdel{.
+Using }\DIFdelend \DIFaddbegin \DIFadd{, corresponding to a group of two users.
+This can be accomplished by establishing communication using }\DIFaddend the same method of \DIFdelbegin \DIFdel{establishing communication }\DIFdelend as with the groups \DIFdelbegin \DIFdel{we create }\DIFdelend \DIFaddbegin \DIFadd{and creating }\DIFaddend a \gls{rs} \DIFdelbegin \DIFdel{-user and creates a edge from that }\DIFdelend \DIFaddbegin \DIFadd{user and instantiate an edge from the }\gls{rs} \DIFaddend user to every user in the \gls{rs} system\DIFaddbegin \DIFadd{, illustrated in Figure \ref{fig:astepedge}}\DIFaddend .
+This way\DIFdelbegin \DIFdel{it is }\DIFdelend \DIFaddbegin \DIFadd{, }\DIFaddend only when the \gls{rs} system uses its own user \DIFdelbegin \DIFdel{it is allowed to access data from the users}\DIFdelend \DIFaddbegin \DIFadd{the remaining user data can be accessed}\DIFaddend .
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+
+		\node (r) {$U_{\gls{rs}}$};
+		\node[below of=r] (1) {$U_1$};
+		\node[right of=1](2) {$U_2$};
+		\node[left of=1] (4) {$U_4$};
+		\node[right of=2] (5) {$U_5$};
+		\node[left of=4] (6) {$U_6$};
+
+		\draw[->] (r) -- (1);
+		\draw[->] (r) -- (2);
+		\draw[->] (r) -- (4);
+		\draw[->] (r) -- (5);
+		\draw[->] (r) -- (6);
+
+		\draw[->] (1) -- (4);
+	\end{tikzpicture}
+	\DIFdelbeginFL %DIFDELCMD < \label{fig:astepgroup}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \caption{How the \gls{rs}-system would work with edges.}
+	\DIFaddbeginFL \label{fig:astepedge}
+\DIFaddendFL \end{figure}
+
+\DIFdelbegin \DIFdel{This means that edges can }\DIFdelend \DIFaddbegin \DIFadd{The edges method allows edges to }\DIFaddend provide the same \DIFdelbegin \DIFdel{benifits without opening the same security flaws.
+Therefor the edges is determined to be the superior system.
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{A  overview of every API calls, as of sprint 3, required by the }%DIFDELCMD < \gls{rs}%%%
+\DIFdel{-system can be seen on Table \ref{tab:asteprequests}}\DIFdelend \DIFaddbegin \DIFadd{benefits as groups while disabling the security flaw mentioned above.
+Therefore, the edges method is selected as the user management design pattern}\DIFaddend .
+
+\DIFdelbegin %DIFDELCMD < \begin{table}[h]
+%DIFDELCMD < 	\centering
+%DIFDELCMD < 	\scriptsize
+%DIFDELCMD < 	\begin{tabular}{l l l}
+%DIFDELCMD < 		%%%
+\DIFdelFL{Path }%DIFDELCMD < & %%%
+\DIFdelFL{Method }%DIFDELCMD < & %%%
+\DIFdelFL{Description}\DIFdelendFL \DIFaddbeginFL \textbf{\DIFaddFL{Creating users}}\DIFaddendFL \\
+\DIFdelbeginFL %DIFDELCMD < \midrule
+%DIFDELCMD < 		%%%
+\DIFdelFL{/locations/outdoor/\{username\}/routes }%DIFDELCMD < & %%%
+\DIFdelFL{POST }%DIFDELCMD < & %%%
+\DIFdelFL{Send a route to the }%DIFDELCMD < \gls{astep} %%%
+\DIFdelFL{server}%DIFDELCMD < \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{/locations/outdoor/\{username\}/routes/match }%DIFDELCMD < & %%%
+\DIFdelFL{GET }%DIFDELCMD < & %%%
+\DIFdelFL{Match all new routes}%DIFDELCMD < \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{/users }%DIFDELCMD < & %%%
+\DIFdelFL{POST }%DIFDELCMD < & %%%
+\DIFdelFL{Create a new user}%DIFDELCMD < \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{/users/\{username\}/outUsers }%DIFDELCMD < & %%%
+\DIFdelFL{POST }%DIFDELCMD < & %%%
+\DIFdelFL{Request a new out user}%DIFDELCMD < \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{/users/\{username\}/outUsers/\{specifiedUsername\} }%DIFDELCMD < & %%%
+\DIFdelFL{PUT }%DIFDELCMD < & %%%
+\DIFdelFL{Accept out user}%DIFDELCMD < \\
+%DIFDELCMD < 		%%%
+\DIFdelFL{/users/\{username\}/token }%DIFDELCMD < & %%%
+\DIFdelFL{GET }%DIFDELCMD < & %%%
+\DIFdelFL{Get the current valid token for a user
+	}%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 	\label{tab:asteprequests}
+%DIFDELCMD < 	%%%
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+}
+%DIFAUXCMD
+%DIFDELCMD < \end{table}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend In sprint 2 it was also decided to \DIFdelbegin \DIFdel{created a user }\DIFdelend \DIFaddbegin \DIFadd{create users }\DIFaddend through the \gls{rs} server, this \DIFdelbegin \DIFdel{have }\DIFdelend \DIFaddbegin \DIFadd{has }\DIFaddend been changed to simplify the implementation \DIFdelbegin \DIFdel{.
+}\DIFdelend \DIFaddbegin \DIFadd{and reduce design complexity.
+}
+
+\DIFaddend When a user registers in the \DIFdelbegin \DIFdel{app }\DIFdelend \DIFaddbegin \gls{rs} \DIFadd{app, the app will issue }\DIFaddend an API call \DIFdelbegin \DIFdel{will be issued }\DIFdelend \DIFaddbegin \DIFadd{directly }\DIFaddend to the \gls{astep} API\DIFdelbegin \DIFdel{directly from the app where before this was done }\DIFdelend \DIFaddbegin \DIFadd{, instead of performing the operation }\DIFaddend through the \gls{rs} server. 
+The username and \DIFdelbegin \DIFdel{the additional information}\DIFdelend \DIFaddbegin \DIFadd{additional information, }\DIFaddend such as phone number and full name\DIFdelbegin \DIFdel{are still transfered }\DIFdelend \DIFaddbegin \DIFadd{, will still be transferred }\DIFaddend to the \gls{rs} server \DIFdelbegin \DIFdel{for storing}\DIFdelend \DIFaddbegin \DIFadd{to enable contact information sharing with other }\gls{rs} \DIFadd{users}\DIFaddend .
 
 
-\section{Test}
+\subsection{Location Gathering}\DIFaddbegin \label{section:s3locgath}
+\DIFaddend The location gathering should \DIFdelbegin \DIFdel{as previously discussed be performed seamlessly }\DIFdelend \DIFaddbegin \DIFadd{be performed unnoticeable }\DIFaddend for the user and in the background without any \DIFdelbegin \DIFdel{user interaction necessary }\DIFdelend \DIFaddbegin \DIFadd{necessary user interactions}\DIFaddend . 
+This requires certain design \DIFdelbegin \DIFdel{requirements which }\DIFdelend \DIFaddbegin \DIFadd{features that }\DIFaddend will be presented in the following \DIFdelbegin \DIFdel{text. 
+The location gathering should be a background service which will run i the background once the user have logged into the app. }\DIFdelend \DIFaddbegin \DIFadd{sections. }\DIFaddend 
 
+
+\subsubsection{Overall Design}
+The informal tests performed in sprint 2\DIFaddbegin \DIFadd{, Section \ref{sec:s2test}, }\DIFaddend showed that polling locations with fixed intervals controlled by a timer proved difficult to get working reliably, as the Google API client never seemed to connect before the task had finished executing. 
+Thus we explore the possibility of using a broadcast receiver which does not provide fixed time intervals, but receives updates within a defined time interval.
+
+To ensure location gathering is not performed more than necessary, the activity recognition service should be running continuously and decide the location gathering status.
+The service should start requesting locations when the user is detected as driving. 
+The location updates request is done through the Google Play Service location API which Google recommends above the native Android location framework \cite{apploc}.
+As long as the activity registers the user as driving, the location should be received with reasonable intervals.
+The gathered locations should be collected into a group of locations representing the current route.
+When the the activity recognition has not been registered as driving in 5 minutes the route is considered ended, and the route building should be finalized and send to the server.
+
+\subsubsection{Polling frequency}
+The location update and activity recognition frequency is balanced between energy consumption and accuracy.
+
+First, we consider the initial task of the location gathering service: The activity recognition.
+The activity recognition is used to decide the location requests, as it has lower consumption than the GPS unit \DIFdelbegin \DIFdel{. }%DIFDELCMD < \todo{source}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{fuckGPS} }%DIFAUXCMD
+since the GPS system prevents a phone form going into it's normal sleep cycles.
+}\DIFaddend Many newer smartphones \DIFdelbegin %DIFDELCMD < \todo{source} %%%
+\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{coCPU} }%DIFAUXCMD
+}\DIFaddend have dedicated processes to track the sensors responsible for activity recognition and therefore use little power.
+The interval of activity recognition will be set to \DIFdelbegin \DIFdel{a couple of }\DIFdelend \DIFaddbegin \DIFadd{every 5 }\DIFaddend seconds, which later can be optimized to use less power or be more accurate if needed.
+
+The location request which will be called when a user is detected driving, and will in most cases need to activate a device's GPS and thus consume a lot of power.
+The first iteration of location gathering it will be a simple solution which will request with static intervals, whereas dynamic intervals based on factors such as speed possibly could be evaluated for battery optimization later on.
+The location updates interval will be set to \DIFdelbegin \DIFdel{range of every 1-2 minutes.
+}\DIFdelend \DIFaddbegin \DIFadd{most frequently at 1 minute, but targeted at every 2 minutes.
+Although the interval values are within the time scope, the values are susceptible to changes depending on test results.
+}\DIFaddend 
+
+%This will be the initial setup, if experience shows need of possible for improvements the intervals will be optimized accordingly.
+
+
+\DIFdelbegin \subsection{\DIFdel{App-to-aSTEP communication}}
+
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+%DIFDELCMD < 
+
+%DIFDELCMD < 
+%DIFDELCMD < %%%
+\DIFdelend \section{Implementation}
+\DIFaddbegin \DIFadd{The implementation section contains descriptions of selected parts of the implementation performed in sprint 3.
+}\DIFaddend 
+
+\DIFaddbegin \DIFadd{The main focus is the location gathering service, which will record locations continuously while the user is driving, but not otherwise. 
+}
+
+\DIFaddend \subsection{Location Gathering Background service}
+% metatext
+This subsection will describe the contents of the implementation of the background location gathering.
+The new implementation is \DIFdelbegin \DIFdel{based }\DIFdelend \DIFaddbegin \DIFadd{founded }\DIFaddend on the poor results \DIFdelbegin %DIFDELCMD < \todo{can we document the poor results?} %%%
+\DIFdelend of the location gathering method implemented in sprint 2\DIFaddbegin \DIFadd{, Section \ref{section:locationgathering}, }\DIFaddend that was not working as intended.
+The code examples in this section will not include potential logging and debugging lines as \DIFdelbegin \DIFdel{to save space }\DIFdelend \DIFaddbegin \DIFadd{for better readability }\DIFaddend and they do not influence the functionality of the code.
+
+\DIFaddbegin \textbf{\DIFadd{Implementation plan}}\\
+\DIFadd{According to the design, Section \ref{section:s3locgath}, the locations should first be requested when the user is driving.
+Therefore, the implementation starts by instantiating an activity detector.
+The activity detector can thereafter check the received activity, and begin location gathering if the activity is above a confidence threshold for driving activity.
+When the confidence is lower than the threshold for a period of time, the driving activity can be considered finished, and the route must be stored and later transmitted to the }\gls{astep} \DIFadd{system.}
+
+
+\DIFaddend % activityRecognitionInstantiation
+\DIFaddbegin \textbf{\DIFadd{Activity recognition instantiation}}\\
+\DIFaddend The location gathering should first detect that the device is in a driving activity and then begin recording locations, according to the design described in Section \ref{ssec:LocationGatherBGS}.
+To achieve the functionality, the app must connect to a Google API client and subscribe to activity recognition.
+The code for subscribing to the activity recognition is shown in Listing \ref{activityRecognitionInstantiation}.
+The activity recognition can thereafter check that the detected activity is a driving activity, and accordingly activate the location gathering.
+
+\begin{lstlisting}[language=Java, label=activityRecognitionInstantiation, caption=Initialization of activity recognition.]
+if(activityDetectionBroadcastReceiver == null) {
+	activityDetectionBroadcastReceiver = 
+		new ActivityDetectionBroadcastReceiver(googleApiClient, this);
+
+	LocalBroadcastManager.getInstance(this).registerReceiver(
+		activityDetectionBroadcastReceiver, 
+		new IntentFilter("fapptory_inc.rideshare.BROADCAST_ACTION"));
+}
+\end{lstlisting}
+
+The \texttt{activityDetectionBroadcastReceiver} is an instantiation of the\\ \texttt{ActivityDetectionBroadcastReceiver} class from, utilizing the \texttt{googleApiClient} and \texttt{this} which in this case references the current \texttt{MainActivity} instance to broadcast detected activities.
+
+The broadcast receiver is then applied by registering to the \gls{rs} app's\\ \texttt{BROADCAST\_ACTION}, so that the \texttt{activityDetectionBroadcastReceiver} only handles broadcasts sent by \gls{rs} and not by other apps.
+
+% ActivityIntentService broadcast description
+
+
+
+% Activity Detection Broadcast Receiver
+\DIFaddbegin \textbf{\DIFadd{Activity Detection Broadcast Receiver}}\\
+\DIFaddend The main operations in regards to activity detection and location gathering are done by the activity detection broadcast receiver.
+
+When the \texttt{activityDetectionBroadcastReceiver} receives a RideShare broadcast, the extra data in the broadcast is stored in the \texttt{ArrayList<DetectedActivity> detectedActivities}.
+The \texttt{detectedActivities} is iterated over, shown in Listing \ref{activityRecognitionIteration} to find the driving activity \texttt{DetectedActivity.IN\_VEHICLE}.
+The \texttt{startLocationUpdates()}, which is described later, is called if the confidence is above the threshold and if locations are not currently being recorded.
+Line 8 controls the location cache in case a drive is stopped temporarily and starts again, appending the cached route to the actual route.
+
+\begin{lstlisting}[language=Java, label=activityRecognitionIteration, caption=Iteration over received list of activity recognition.]
+for (DetectedActivity da: detectedActivities){
+	if(da.getType() == DetectedActivity.IN_VEHICLE){
+		if(da.getConfidence() >= ACTIVITY_CONFIDENCE_VALUE){
+			if(!isCurrentlyCollectingLocations) {
+				startLocationUpdates();
+				isCurrentlyCollectingLocations = true;
+			}
+			if(potentialStopDrivingActivity && potentialAstepRoute.size() > 0){
+				astepRoute.addAll(astepRoute.size(), potentialAstepRoute);
+				potentialAstepRoute.clear();
+			}
+			lastDetectedVehicleActivity = System.currentTimeMillis();
+			potentialStopDrivingActivity = false;
+			drivingActivityDetected = true;
+		}
+	}
+}
+\end{lstlisting}
+
+% Location Updates Request
+\DIFaddbegin \textbf{\DIFadd{Location Updates Request}}\\
+\DIFaddend The \texttt{startLocationUpdates()}, shown in Listing \ref{startLocationUpdates}, is called to gather locations regularly.
+The location updates request is based on the Google API client instantiated in \texttt{MainActivity} and a \texttt{locationRequest}.
+The \texttt{locationRequest} is defined with properties regarding location update interval, fastest interval, and location \DIFdelbegin \DIFdel{quality }\DIFdelend \DIFaddbegin \DIFadd{accuracy }\DIFaddend priority, respectively set to \DIFdelbegin %DIFDELCMD < \todo{agree upon constants} %%%
+\DIFdelend 60 seconds, \DIFdelbegin \DIFdel{120 }\DIFdelend \DIFaddbegin \DIFadd{60 }\DIFaddend seconds and \texttt{PRIORITY\_HIGH\_ACCURACY}.
+
+\begin{lstlisting}[language=Java, label=startLocationUpdates, caption=Start location updates functions.]
+public void startLocationUpdates(){
+	if(/* Omitted: Check permissions */) {
+		LocationServices.FusedLocationApi
+			.requestLocationUpdates(googleApiClient, locationRequest, this);
+	}
+}
+\end{lstlisting}
+
+\DIFdelbegin \DIFdel{To send the routes gathered through the location service, the communication with }\DIFdelend \DIFaddbegin \subsection{\DIFadd{Route Matching Algorithm}}
+\DIFadd{The implementation of the route matching algorithm is delegated to the previously mentioned outdoor location based service group, as they are responsible for implementation in the }\DIFaddend \gls{astep} \DIFdelbegin \DIFdel{must be established.
+}\DIFdelend \DIFaddbegin \DIFadd{system.
+They were given the pseudocode algorithm developed in sprint 2 and cooperated with during the implementation process.
+The implementation will not be documented here, as the implementation is not performed by us.
+However, the implementation should be tested, and we generated test data with accompanying result expectations.
+The test data was also handed over, but this will be described in the following test section.}\DIFaddend 
+
+
+
+\subsection{App-to-aSTEP communication}
+%DIF <  ja..
+%DIF > meta text
+\DIFaddbegin \DIFadd{This section contains an overview of the implementation of the API calls utilized to communicate with }\gls{astep}\DIFadd{.}
+
+\DIFadd{In the previous design phases it was decided what API calls should be implemented in the app.
+A specified list of calls only to be performed on the app can be seen in Table \ref{tab:asteprequests}.}
+
+\begin{table}[h]
+	\centering
+	\scriptsize
+	\begin{tabular}{l l l}
+		\DIFaddFL{Path }& \DIFaddFL{Method }& \DIFaddFL{Description}\\\midrule
+		\DIFaddFL{/locations/outdoor/\{username\}/routes }& \DIFaddFL{POST }& \DIFaddFL{Send a route to the }\gls{astep} \DIFaddFL{server}\\
+		\DIFaddFL{/users }& \DIFaddFL{POST }& \DIFaddFL{Create a new user}\\
+		\DIFaddFL{/users/\{username\}/token }& \DIFaddFL{GET }& \DIFaddFL{Get the current valid token for a user}\\
+		\DIFaddFL{/users }& \DIFaddFL{POST }& \DIFaddFL{Invalidate old token and get new}\\
+		\DIFaddFL{/users/\{username\}/token }& \DIFaddFL{POST }& \DIFaddFL{Invalidates previous token for a user}\\
+	\end{tabular}
+	\caption{\DIFaddFL{Caption}}
+	\label{tab:asteprequests}
+\end{table} 
+
+\DIFadd{The API calls are implemented using a }\texttt{\DIFadd{HttpURLConnection}} \DIFadd{class, which is a }\texttt{\DIFadd{URLConnection}} \DIFadd{class for HTTP specific data transfer over the web.
+}\texttt{\DIFadd{HttpURLConnection}} \DIFadd{may be used to send and receive streaming data whose length is not known in advance.
+This is needed as every API call varies in size.
+E.g., the API call to post a route will be the one that varies the most in size as routes differ in size, based on the number of locations and their accuracy.}
+
+
+\DIFadd{Using an object orientated structure, each API call is implemented to overwrite a }\texttt{\DIFadd{helperClass}} \DIFadd{which will handle the inputs, such as username, password, token, and routes.
+The inputs are then transformed to a part of an URL which would fit each of the relevant API calls.
+The }\texttt{\DIFadd{helperClass}} \DIFadd{is then parsed to the }\texttt{\DIFadd{HttpURLConnection}} \DIFadd{which will use a string builder to create the final URL from the API base URL, }\texttt{\DIFadd{http://astep.cs.aau.dk:80/api/}}\DIFadd{.
+Lastly, the }\texttt{\DIFadd{HttpURLConnection}} \DIFadd{is trying to perform the API call from where response codes are handled.}
+
+\DIFadd{It should be noted that passwords are not in the URL part of the API call, as these will be logged on the }\gls{astep} \DIFadd{server. 
+This would be a major security issue.
+Instead password and tokens are parsed as part of the body, which is used by REST. 
+This will hide the content from the URL and instead be transfered in an }\texttt{\DIFadd{OutputStream}} \DIFadd{encoded in raw bytes. }
+
+\DIFadd{Two examples of API calls can be seen in List \ref{list:example}.
+The post route example is simplified to reduce size and make it better explainable.}
+
+\todo{fix references and captions}
+
+\begin{enumerate}
+\label{list:example}
+\item \DIFadd{POST new user
+}\begin{enumerate}
+\item \DIFadd{URL: http://astep.cs.aau.dk:80/api/users?username=USERNAME
+}\item \DIFadd{CURL: curl -X POST --header 'Content-Type: application/json' --header}\\
+ \DIFadd{'Accept: application/json' -d 'PASSWORD' 'http://astep.cs.aau.dk:80/api/users?username=USERNAME'
+}\end{enumerate}
+\item \DIFadd{POST route to }\gls{astep}
+\begin{enumerate}
+\item \DIFadd{URL: http://astep.cs.aau.dk:80/api/locations/outdoor/outdoor/routes?authorization=TOKEN\&route=longitude,latitude,precision,timestamp;\&route=longitude,latitude,precision,timestamp
+\&distance\_weight\&time\_weight\&largest\_acceptable\_detour}\\
+\DIFadd{\_length=146\&acceptable\'httptime\_difference=32
+}\item \DIFadd{CURL: curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' 'URL from above'
+}\end{enumerate}
+\end{enumerate}
+
+\DIFadd{As seen in Create user in List \ref{list:example}, the username is parsed in the URL while the password is included in a header.
+On the other hand, the post route is only parsed in the URL as there is no information that needs to be hidden.
+Every decision made regarding parsing data from the apps to the }\gls{astep} \DIFadd{server is decided by the individual }\gls{astep} \DIFadd{API groups.}
+
+
+
+\DIFaddend \section{Test}
+\DIFaddbegin \DIFadd{A test of the location gathering background service was performed to examine the functionality, performance and reliability.}\DIFaddend 
+
+\subsection{Location gathering as background service}
+%DIF >  test setup
+\DIFaddbegin \DIFadd{The }\gls{rs} \DIFadd{app was built and installed on three units to test on a variation of devices.
+The devices were a Sony Xperia Z2, a Samsung Galaxy S6 and a Huawei Nexus 6P, all with Android Marshmallow 6.0.1 as operating system.
+The app was opened and the necessary permissions were granted, so that the app could function properly.
+The app was configured with the values seen in Table \ref{tab:appconfig}.}\DIFaddend 
+
+\DIFdelbegin \subsection{\DIFdel{App-to-aSTEP communication}}
+
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+\DIFdelend \DIFaddbegin \begin{table}[!ht]
+	\centering
+	\begin{tabular}{l r l}
+		\DIFaddFL{Variable description }& \DIFaddFL{Value }& \DIFaddFL{Unit}\\
+		\hline
+		\DIFaddFL{Fastest location update interval }& \DIFaddFL{60000 }& \DIFaddFL{milliseconds}\\
+		\DIFaddFL{Target location update interval }& \DIFaddFL{60000 }& \DIFaddFL{milliseconds}\\ 
+		\DIFaddFL{Activity confidence value }& \DIFaddFL{80 }& \DIFaddFL{percent}\\
+		\DIFaddFL{Activity stop threshold }& \DIFaddFL{180000 }& \DIFaddFL{milliseconds}\\
+		\DIFaddFL{Minimum number of route locations }& \DIFaddFL{4 }& \DIFaddFL{locations }\\
+		\DIFaddFL{Request activity updates }& \DIFaddFL{5000 }& \DIFaddFL{milliseconds}\\ 
+	\end{tabular}
+	\caption{\DIFaddFL{Parameter configuration in test of the background service route tracking.}}
+	\label{tab:appconfig}
+\end{table}
+
+\DIFaddend 
+
+%DIF >  device setup
+\DIFaddbegin \iffalse
+\DIFadd{To make sure the app would gather locations in different states, the phones had different configurations.
+The Xperia Z2 was locked and connected to a computer for debugging purposes and logging events.
+The Nexus 6P had the app open with a locked and turned off screen. 
+The Galaxy S6 had the app opened, was returned to the home screen and then locked.}\todo{not sure if this paragraph is necessary}
+\fi
+%DIF >  route plan
+\DIFadd{The route driven to test the location gathering can be seen in Figure \ref{fig:testroute}.
+The route was driven with the intention of gathering the whole route as a single route on each of the devices.
+The drive had one stop at the point marked by a green square in Figure \ref{fig:testroute}.
+The stop had a duration of 2 minutes, thus not passing the threshold value of 3 minutes.
+The drive continued and ended at the start position, where the persons of the respective devices walked from the vehicle to the group room.}
+
+\begin{figure}[h]
+	\begin{subfigure}[b]{0.55\textwidth}
+		\includegraphics[width=\textwidth, trim={0 0 1cm 0},clip]{figures/testroute.png}
+		\caption{\DIFaddFL{Test drive route, driven clockwise from the red pin.}}
+		\label{fig:testroute}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.44\textwidth}
+		\includegraphics[width=\textwidth, trim={0 0 2cm 1.2cm},clip]{figures/testRouteRecordings.png}
+		\caption{\DIFaddFL{Recorded routes. Orange route is Nexus 6P, red route is Xperia Z2 and green route is Galaxy S6.}}
+		\label{fig:testrouterecordings}
+	\end{subfigure}
+	\caption{\DIFaddFL{Actual route and recorded route data.}}
+\end{figure}
+
+%DIF >  test results
+\DIFadd{All three devices were able to gather the driven route. 
+The routes were recorded with approximately the same start and end time, and the recorded routes can be seen in Figure \ref{fig:testrouterecordings}. 
+As the figure shows, the gathered route data relatively accurately represent the actual route.}
+
+
+\DIFadd{The Xperia device had the largest deviation from the actual route, and this could be caused by multiple factors.
+Because the device was placed below the debugging laptop, interference with the GPS signals could occur.
+The device could also have a poorly manufactured GPS unit.
+This is not further investigated, as the two other devices gathered fairly accurate locations during the test.}
+
+
+
+%DIF >  results evaluation
+\DIFadd{The test reveals that the app is able to gather locations whilst the app is not actively being utilized by a user.
+The location accuracy seems to be device specific.
+Location gathering as a background service is considered accomplished and the respective requirement is evaluated as fulfilled.
+}
+
+
+
+\DIFaddend \subsection{Route Match Algorithm}
+%DIF >  metatext
+\DIFaddbegin \DIFadd{The route matching algorithm is implemented by one of the }\gls{astep} \DIFadd{outdoor groups, and to check that the implementation reflects the intention a test is performed.
+}
+
+\DIFadd{The implementation is tested with a sequence of routes inserted into a previous empty route database.
+By adding routes sequentially, we can anticipate the matching outcome for each addition.
+}
+
+
+\DIFaddend % test data
+\DIFaddbegin \textbf{\DIFadd{Test Data}}\\
+\DIFadd{A number of cases should be tested, and we generate route data for each. 
+Before the route data is input users U1, U2, U3 and U4 are created to the }\gls{astep} \DIFadd{system.}\DIFaddend 
+
+\DIFaddbegin \DIFadd{First, the stable route generation must be confirmed functioning.
+A route is created for U1 and made two copies that were slightly edited in location and time, and skewed respectively one and two weeks ahead of the original route.
+These three routes should be assessed a high matching score, close to 1, and be considered a stable route for this user.
+}
+
+\DIFadd{Second, the algorithm should not be matching routes that are not relevant in location or time.
+U2 gets two routes added not matching in location, as seen in Figure \ref{fig:algroutes}.
+The blue U2 route is during the day time and the black during night time.
+These routes should thus be assessed a low match score, assumed 0.
+}
+
+\DIFadd{Because the algorithm should match routes of different users, we thirdly created two routes for the user U3.
+The routes were differencing slightly in locations and time, but were made with the intention to match with each other, with one week difference in time.
+The routes were also made to roughly overlap with the routes of U1, so that U1's stable route would roughly be a sub-route of the U3 route.
+}
+
+\DIFadd{Lastly, the U4 route was made to discern location and time matching of the algorithm.
+The route is stable and approximately at the same time as the U1 and U3 routes, but is directed in the opposite way, northwest instead of southeast.
+The U4 route should match poorly with U1 and U3 routes, close to 0, but could score a bit higher, as the locations overlap with U3 route.
+}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/algorithmroutes.png}
+	\caption{\DIFaddFL{Generated routes to be tested by the algorithm.}}
+	\label{fig:algroutes}
+\end{figure}
+
+
+\DIFaddend % other group executed their implemenation on test data
+\DIFaddbegin \textbf{\DIFadd{Test Execution}}\\
+\DIFadd{We had no influence over the actual method of the testing, but we received the following test results in Figure \ref{fig:algresults} from the outdoor group.
+}\DIFaddend 
+
+
+% test results
+\DIFaddbegin \textbf{\DIFadd{Test Results}}\\
+\DIFadd{The test results seen in Figure \ref{fig:algresults} reveal that the algorithm is performing correctly.
+The results correspond to the assumptions made during the data generation.
+All three routes of U1 are matched highly, as expected.
+The U3 route is matching reasonably well with the U1 routes, and neither of the U1 routes are matching with the U3 route.
+The results reflect that U3 can pick up U1 along the way, while U1 will have to make a significant detour to pick up U3.
+}\DIFaddend 
+
+\DIFaddbegin \begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/newtestresultrs.png}
+	\caption{\DIFaddFL{Results generated by the implemented algorithm.}}
+	\label{fig:algresults}
+\end{figure}
+
+
+\DIFaddend % test results conciderations 
+\DIFaddbegin \textbf{\DIFadd{Test Conclusion}}\\
+\DIFadd{The algorithm test results are considered sufficient for the current application. 
+However testing, including user interviews, over large amounts of data for actual users is necessary to confirm the practical convenience of the score results.
+The design of the algorithm allows adjustment of several parameter concerning distance, time and the the weight of those in the final score by changing parameters in the }\gls{rs} \DIFadd{server's call to }\gls{astep} \DIFadd{system. 
+}\DIFaddend 
 
 
 % Sprint 4
 \chapter{Sprint 4}
-Metatext for the fourth iteration
+%meta - to edit
+Sprint four is the fourth and last iteration of the project.
+
 \section{Analysis}
 
-% Sprint 3 krav
+\subsection{Missing features for completing the solution}
+
+\subsection{Algorithm results analysis}
+
+
+% Sprint 4 krav
 \subsection{Requirements for the fourth sprint}
-%meta - to edit
-Sprint four is...
+
 
 % something
-\textbf{some requirement}\\
+\textbf{Route Matching Algorithm}\\
 placeholder
 
 
 \section{Design}
 % metatext
 
+
+\subsection{Algorithm redesign}
+
+
+\subsection{Algorithm test design}
+
+
+
+\subsection{RideShare Server Design}
+
+
 \section{Implementation}
 
+\subsection{RideShare Server}
+% indhold i server
 
+
+
+% kommunikation med aSTEP
+
+
+
+% respons/kommunikation med app
 \section{Test}
+% metatext for test section
+
+
+\subsection{Background location gathering}
+
+
+\subsection{RideShare Server}
+
+
+\subsection{App-RideShare Server Communication}
+
+
+\subsection{App-aSTEP Communication}
+
+
+\subsection{RideShare Server-aSTEP Communication}
+
+
+\subsection{App-RideShare Server Communication}
 
 
 
@@ -1540,6 +2218,24 @@ Fix it.
 
 % Appendix
 \appendix
-\chapter{Appendix A name}\label{ch:appAlabel}
-Here is the first appendix
-\end{document}
+\chapter{Sprint 3 API functionality}\label{ch:appAlabel}
+\DIFdelbegin \DIFdel{Here is the first appendix}\DIFdelend \DIFaddbegin \DIFadd{In the following table are the API functionality as they were in sprint 3 with regards to UM and outdoor location based service.
+Indoor location based service is omitted. The list is based on the information available at }\url{http://www.astep.cs.aau.dk/}\DIFadd{.
+At the URL the most recent version of the API will be available at any given time.
+}
+
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{ll}
+		\DIFaddFL{Outdoor location services }& \DIFaddFL{User Management    }\\
+		\hline
+		\begin{tabular}[t]{@{}l@{}}
+			\DIFaddFL{Get user past location}\\ \DIFaddFL{Get user past locations area}\\ \DIFaddFL{Get user past Locations radius}\\ \DIFaddFL{post user current location}\\ \DIFaddFL{Post user current route}\\ \DIFaddFL{Get all new route matches}\\ \DIFaddFL{Get all locations friends}\\ \DIFaddFL{Get all users in area }\\ \DIFaddFL{Get locations friends }\\ \DIFaddFL{Get subset of users area }\\ \DIFaddFL{Get users outside area }\\\DIFaddFL{Get subset of users radius }\\ \DIFaddFL{Get locations friend timestamp}\end{tabular}
+		&
+		\begin{tabular}[t]{@{}l@{}}
+			\DIFaddFL{Create group }\\ \DIFaddFL{Get administrated groups}\\ \DIFaddFL{Add administration}\\ \DIFaddFL{Remove administration }\\ \DIFaddFL{Get invited users }\\ \DIFaddFL{Invite user to group }\\ \DIFaddFL{Revoke group invitation }\\ \DIFaddFL{Get members of a group }\\ \DIFaddFL{Remove user from group }\\ \DIFaddFL{Create user }\\ \DIFaddFL{Get groups that a user is invited to }\\ \DIFaddFL{Decline group invitation }\\ \DIFaddFL{Get groups that user is member of }\\ \DIFaddFL{Join group }\\ \DIFaddFL{Leave group }\\ \DIFaddFL{Get outdoor-user}\\ \DIFaddFL{Request outdoor user }\\ \DIFaddFL{Delete outdoor-user }\\ \DIFaddFL{Validate outdoor-user}\\ \DIFaddFL{Change password}\\ \DIFaddFL{Get token }\\ \DIFaddFL{Issue token}\end{tabular}
+	\end{tabular}
+	\caption{\DIFaddFL{Currently planned aSTEP API functions.}}
+	\label{tbl:s3api}
+\end{table}
+ \DIFaddend\end{document}

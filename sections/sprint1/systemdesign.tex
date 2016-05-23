@@ -1,12 +1,12 @@
-To exploit availability of sensors on the mobile phone and computational power of the server, the system is developed in two parts: the phone application and an extension of the route system in the \gls{astep} system which handles the analysis and comparison of routes.
-The two parts will have their own delegated responsibilities, and will perform the necessary tasks, enabling the system to deliver the service\todo{define solution service in analysis/problem?}.
+To exploit the availability of sensors on the mobile phone and computational power of the server, the system is developed in two parts: the phone application and an extension of the route system in the \gls{astep} system which handles the analysis and comparison of routes.
+The two parts will have their own delegated responsibilities, and will perform the necessary tasks, enabling the system to deliver the service.
 
 % The app
 The application, hereafter referenced as the app, is the program executed on a mobile device.
-Its resposibilities include the gathering of location data and act as the user interface. 
+Its responsibilities include the gathering of location data and act as the user interface. 
 
 % device limitations -> app abilities
-The solution is assumed to require much processing power to compare all routes in the system with eachother, and must be able to access location data to get the aformentioned routes.
+The solution is assumed to require much processing power to compare all routes in the system with each other, and must be able to access location data to get the aformentioned routes.
 Doing this from the app would require that each user has a copy of every other user's routes.
 This is a serious privacy concern as this would enable other applications to leach on to the \gls{astep} system a gather data about when people are home and where they live, which is not something we wish to enable.
 As mentioned before, calculating the best routes would most likely require a lot of processing power, which would drain the battery and produce heat.
@@ -21,9 +21,9 @@ This is a much better solution as the battery impact is minimized and private in
 %	\label{fig:packageDiagramSprint1}
 %\end{figure}
 
-In the app a service running in the background would handle the location data sampling and transfer to a server.
+In the app, a service running in the background would handle the location data sampling and transfer to a server.
 This service could possibly be kept alive when the application is closed as its own thread.
-Because the main objective on the background service would be to oberserve and transfer to \gls{astep}, lets call it Observer, the structure of the class can be seen in Figure \ref{fig:classDiagramSprint1Observer}.
+Because the main objective of the background service would be to observe and transfer to \gls{astep}, let us call it Observer, the structure of the class can be seen in Figure \ref{fig:classDiagramSprint1Observer}.
 The Observer's main goal is to observe what activity the user is currently doing and act accordingly.
 In Google's API for android applications there are already implementations for this kind of service, so that will be used.
 
@@ -53,9 +53,9 @@ The matches are stored and new matches are transmitted to the appropriate device
 %	\label{fig:classDiagramSprint1Application}
 %\end{figure}
 
-This is the start of a project that will be further developed upon and expanded in the future, emphasizing the importance of reuse in the server, to reduce the amount of specialized server resources.
+This is the start of a project that will be further developed upon and expanded in the future, emphasizing the importance of reuse in the server, to reduce the number of specialized server resources.
 By isolating parts that are specific to the rideshare app on the server, most of this system would be reusable.
-A good example of how this is achived through object-oriented design is the RouteAnalyser from Figure \ref{fig:classDiagramSprint1Server}.
+A good example of how this is achieved through object-oriented design is the RouteAnalyser from Figure \ref{fig:classDiagramSprint1Server}.
 The RouteAnalyzer filter routes according to its concrete implementation.
 After the filtering, the RouteAnalyser uses the strategy pattern to determine how to compare the routes.
 This enables other projects to develop their own filters and comparison functions for later projects.
@@ -67,5 +67,5 @@ This enables other projects to develop their own filters and comparison function
 	\label{fig:classDiagramSprint1Server}
 \end{figure}
 
-Because commuters was our target and commutes are most likely to occur on a weekly basis, a weekly stability was decided upon.
+Because commuters were our target and commutes are most likely to occur on a weekly basis, a weekly stability was decided upon.
 This means that the RouteStabilityAnalyser can be limited to analyze one to two months of data.
