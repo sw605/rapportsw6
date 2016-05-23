@@ -12,7 +12,7 @@ The code examples in this section will not include potential logging and debuggi
 \textbf{Implementation plan}\\
 According to the design, Section \ref{section:s3locgath}, the locations should first be requested when the user is driving.
 Therefore, the implementation starts by instantiating an activity recognizer.
-The activity recognizer can thereafter check the received activity, and begin location gathering if the activity is recognized as driving with a confidence threshold above 80\%.
+The activity recognizer can thereafter check the received activity, and begin location gathering if the activity is recognized as driving with a confidence above 80\%.
 When the confidence is lower than the threshold for a period of time, the driving activity can be considered finished, and the route must be stored and later transmitted to the \gls{astep} system.
 
 
@@ -84,11 +84,11 @@ public void startLocationUpdates(){
 \end{lstlisting}
 
 \subsection{Route Matching Algorithm}\label{sec:routematchingalgorith}
-The implementation of the route matching algorithm is delegated to the previously mentioned outdoor location based service group, as they are responsible for implementation in the \gls{astep} system.
+The implementation of the route-matching algorithm is delegated to the previously mentioned outdoor location based service group, as they are responsible for implementation in the \gls{astep} system.
 They were given the pseudocode algorithm developed in sprint 2 and cooperated with during the implementation process.
 The implementation will not be documented here, as the actual implementation is not performed by us.
 However, the implementation should be tested, and we generated test data with accompanying result expectations.
 The test data was also handed over, but this will be described in the following test section.
 
-In cooperation with the outdoor group, it were decided to send every variable for the algorithm as parameters in the API call.
-This were done so we would have control over the algorithm to ensure it performed as we saw fit.
+In cooperation with the outdoor group, it was decided to send every variable for the algorithm as parameters in the API call.
+This was done so we would have control over the algorithm to ensure it performed as we saw fit.
