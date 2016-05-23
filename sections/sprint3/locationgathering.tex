@@ -12,7 +12,7 @@ The service should start requesting locations when the user is detected as drivi
 The location updates request is done through the Google Play Service location API which Google recommends above the native Android location framework \cite{apploc}.
 As long as the activity registers the user as driving, the location should be received with reasonable intervals.
 The gathered locations should be collected into a group of locations representing the current route.
-When the the activity recognition has not been registered as driving in 5 minutes the route is considered ended, and the route building should be finalized and send to the server.
+When the the activity recognition has not been registered as driving for five minutes the route is considered ended, and the route building should be finalized and send to the server.
 
 
 Every constant interval used in the current state is intervals we though as fitting.

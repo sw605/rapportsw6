@@ -1,7 +1,7 @@
 \subsection{Location Gathering} \label{section:locationgathering}
 % metatext
-To get the user location in the background service\todo{describe BGS before this}, the Google Play Services is utilized.
-The Google Play Services provides necessary location data, due to the integration on the platform.
+To get the location of a device in a background service, the Google Play Services is utilized.
+%The Google Play Services provides necessary location data, due to the integration on the platform.
 
 % permissions
 First, to retrieve location information, the \texttt{manifest.xml} file must be edited as to acquire permissions to the course and fine location.
@@ -13,7 +13,7 @@ This is done by adding the following lines to the manifest:
 \end{lstlisting}
 
 % gathering overview
-The location is retrieved by utilizing the \texttt{GoogleApiClient}, then converted to an \gls{astep} location format.\todo{ensure this is documented}
+The location is retrieved by utilizing the \texttt{GoogleApiClient}, then converted to an \gls{astep} location format.
 This prepares the location data to be sent to the aSTEP system.
 
 
@@ -85,6 +85,7 @@ private Location getCurrentGLocation(){
 return tempGLocation;
 }
 \end{lstlisting}
+\todo{Bjørn har en fix kommentar her. -MP}
 
 % aSTEP location
 \textbf{Convert to aSTEP location}\\
