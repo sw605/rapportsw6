@@ -42,13 +42,14 @@ A cause of this is that every device with an API level lower than the specified 
 Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
 For this project we choose to target a higher API level for to simplify the development process.
 At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 (Android Lollipop) is 35,3\%.
-\begin{wrapfigure}{r}{0.6\textwidth}
+
+\begin{figure}[h]
 	\begin{center}
-	\includegraphics[width=0.58\textwidth]{figures/android-chart-march.png}
+	\includegraphics[width=0.78\textwidth]{figures/android-chart-march.png}
 	\end{center}
 	\caption{Android version distribution, March 2016 \cite{androidDashboard}}
 	\label{fig:dashboard}
-\end{wrapfigure}
+\end{figure}
 The version distribution as of March 2016 can be seen on Figure \ref{fig:dashboard}
 API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time as API level 21 among other things added support for the material design style \cite{android5API}. Refraining from further backwards compatibility allows the focus of the project to be on the functionality of the app. 
 

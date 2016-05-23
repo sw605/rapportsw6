@@ -5,11 +5,11 @@ The location data should only be collected when the user is driving in a vehicle
 Such collection of location data can be done by using already existing services, such as the Google Play Service.
 
 % something
-Location data in RideShare is only useful if it is formatted in GPS coordinates, stored in a collection that represents a route from A to B.
+Location data in \gls{rs} is only useful if it is formatted in GPS coordinates, stored in a collection that represents a route from A to B.
 There are several ways to collect location data. 
 One of them is by developing a component to do so on the android device. 
 Another way is to use already existing services, such as one of the Google Play Services.
-%We have decided to use Google Play Services as they are well tested, and provide a reliable foundation.
+
 
 To use Google Play Services, a client library much be included in the app, which will communicate via inter-process communication to the Google Play Services which is already existing on every android device. 
 When the application is connected to the Google Play Services, it will automatically receive silent updates regularly, to acquire new features and bug fixes to the used services. 

@@ -1,14 +1,15 @@
 \subsection{Algorithm}\label{ssec:algorithm}
-The system uses a custom developed algorithm to determine whether two routes are a good fit.
+The \gls{rs} system uses a custom developed algorithm to determine whether two routes are a good match.
 This algorithm is loosely based on a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
 In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
-The criteria are practical to some extent, but the focus of the \gls{rs} system are the time and distance criteria.
+The criteria are practical to some extent, but the focus of the \gls{rs} system is the time and distance criteria.
+
 A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
 A route is a chronological list of positions.
-A disadvantages of the algorithm presented here is that the distance is calculated as a euclidean distance rather than a map distance. 
+A disadvantages of the algorithm presented here is that the distance is calculated as a euclidean distance rather than a road distance. 
 This would be a obvious place for future improvements to the algorithm.
 
-To illustrate how the algorithm should work for different routes an example is introduced. The example can be seen in Figure \ref{fig:algEx1}.
+To illustrate how the algorithm is supposed to work for different routes an example is introduced. The example can be seen in Figure \ref{fig:algEx1}.
 \begin{figure}[!ht]
     \centering
 \input{figures/algorithmEx1.tex}
@@ -30,12 +31,12 @@ Eve           & 07:30                   & 07:50       & 18 km         		\\ \bott
 \label{timetable}
 \end{table}
 
-For this example, the goal will be to find out if any route matches with Alice's route $\{A_s-A_g\}$
+For this example, the goal will be to find out if any route matches with Alice's route $\{A_s,A_g\}$
 The outcome should be a score representing if Alice, on the way through route $r$, should pick up some of the persons Bob, Carol or Eve, for each of their routes.
 
 The expected outcome is Bob will match reasonable in both distance and time difference and hence be given a score indicating a match.
 Carol is expected to match reasonable in distance as well but will lack a match comparing travel times and therefore not produce a match.
-Comparing with Eve a somewhat match on time is expected while the distance will be way off.
+Comparing with Eve a somewhat match on time is expected while the distance will be insufficient.
 The score represents the match of the routes of Alice and each of the other, and should be expressed as a decimal value from 0 to 1 which tells how good the match is.
 0 represents a bad match, a major detour or not compatible times, and 1 represents a perfect match, and requires no detour.
 A comparison will be made for $r_1$ against $r_2$.
@@ -47,7 +48,7 @@ The algorithm then returns a decimal value between 0 and 1.
 In the algorithm, there are two aspects to be evaluated; time and distance.
 These are assumed to be evaluated by two sub algorithms that both takes the route and two points as input and return a value from 0 to 1 depending on how closely they match.
 
-If either time or distance is deemed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
+If either time or distance is assessed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
 From the scores of the sub algorithms, the final score can be expressed as the average score $\frac{d+t}{2}$, where $d$ is the distance score and $t$ is the time score.
 To increase flexibility of the algorithm, two constants are introduced $d_\gamma$ and $t_\gamma$.
 These constants enables weighting of the time and distance score independent of each other by expanding the expression to $\frac{d\times d_\gamma+t\times t_\gamma}{d_\gamma+t_\gamma}$.
@@ -112,7 +113,7 @@ This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to 
 The distance analyser algorithm, as seen in Algorithm \ref{alg:distanalyser}, finds the points on the route that are closest to the start and end points.
 From those points, the algorithm approximates the detour required to take by the driver to pick up the passenger.
 The approximation assumes that the driver's new route distance will be the original length plus the distances to the passengers start point and goal point.
-This assumption does not represent every detour and thus this is an area for future optimization.
+This assumption does not represent the actual detour and thus this is an area for future optimization.
 
 The final score for the distance analyser is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
 This results in a value between 0 and 1 when the detour is less than the largest detour, and greater than one when the detour is longer.
