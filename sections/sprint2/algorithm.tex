@@ -155,14 +155,12 @@ This can be used to determine the relative time distance between two points by u
 \end{align*}
 
 The calculated detour time and relative time difference enables an approximation of the inconvenience the ridesharing is for the participants in the potential match.
-From the driver's perspective, the route starts at the normal time minus the detour duration, this is to still arrive on the usual time at the destination.
+From the driver's perspective, the route starts at the normal time minus the detour duration, to still arrive on the usual time at the destination.
 This makes the detour the only inconvenience in regards to time.
-If the passenger has to arrive earlier than the driver, the driver would also have to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
+If the passenger has to arrive earlier than the driver, the driver would also need to take that into consideration, thus making the relative time distance the inconvenience in addition to the detour.
 
 From the passenger's perspective, the opposite is true when it comes to the relative time. 
-It is only an inconvenience when the driver must set them off before they need to arrive.
-
-It is also worth noting that if the relative time is the same as the detour time, the only inconvenience for the driver is the detour.
+It is only an inconvenience when the driver must set them off before they need to arrive. It is also worth noting that if the relative time is the same as the detour time, the only inconvenience for the driver is the detour.
 
 The formula for the total inconvenience when taking both participants into account is then defined as the following:
 
@@ -196,7 +194,7 @@ And the differences in time must be the same.
 \end{algorithm}
 
 Algorithm \ref{alg:timeanalyser} shows the pseudocode for the time analyser algorithm.
-Line 2 to 4 are reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that they sums the detours and multiplies the result with the distance to time conversion.
+Line 2 to 4 are reminiscent of line 2 to 5 in Algorithm \ref{alg:distanalyser} with the difference that they sum the detours and multiplies the result with the distance to time conversion.
 Line 5 assigns the greatest time difference between the closest points to $t$.
 The reason for choosing the greatest value is to use a pessimistic approach, so that the real delay will not be worse than the calculated.
 

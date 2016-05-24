@@ -14,7 +14,7 @@ Location gathering was also performed in the test of the background service.
 The location test was performed by trying to access the last known location in each scheduled \texttt{PendingIntent}, and to print the result in the debug log in the IDE.
 The background service was executed regularly, but the location was only available once in a significant number of attempts.
 The missing locations seemed to be caused by the \texttt{googleApiClient} not being connected, as the location gathering is performed in the \texttt{onConnected} method.
-The missing locations seems to derive from the thread not existing long enough for the \texttt{googleApiClient} to connect to the services.
+The missing locations seems to derive from the thread not existing long enough for the \texttt{googleApiClient} to connect to the Google Play Services.
 
 The implementation of the \texttt{jobScheduler} made it impossible for the \texttt{GoogleApiClient} to connect, hence not being able to assess the device location.
 Additionally, the interval based location gathering, would be using battery consequently, regardless of the activity of the user. 

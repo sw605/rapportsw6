@@ -1,14 +1,13 @@
-\subsection{Location}
-As documented in the analysis in Section \ref{ssec:locktrack} the choice for activity recognition and location gathering the choice fell upon Google Play Service.
+\subsection{Location}\todo{point of this section? Belongs to S3?}
+As documented in the analysis in Section \ref{ssec:loctrack} the choice of activity recognition and location gathering was the Google Play Services.
 
 In the following test some values will be decided, in concern to the design of the location tracking. 
-These values are yet certain and might be adjusted later as more knowledge of the practical implication of these are gathered. 
+These values are yet uncertain and might be adjusted later as more knowledge of the practical implication of these are gathered. 
 
-
-Activity recognition should be polled contentiously to check whether a user is registered as in vehicle.
+Activity recognition should be polled continuously to check whether a user is registered as in vehicle.
 When a user is in a vehicle with a probability level above 80\%, a location request must be be performed.
 
-The application must be running in the background while the device is turned on, for it to be able to differ between the users activity at all times and collect data. 
+The application must be logged into and running in the background while the device is turned on to be able to differ between the users activity at all times and collect data. 
 The interval for collecting location data from the location services will be set to every two minutes, while in a vehicle, to reduce energy consumption. 
 Every location collected during the driving activity must be appended to a list that represents an entire route when the driving activity ends.
 

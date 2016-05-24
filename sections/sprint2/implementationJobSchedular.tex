@@ -1,5 +1,5 @@
 \subsection{Background Service}
-The \texttt{JobScheduler} was chosen as the scheduler for managing the background service in Section \ref{ssec:periodictasks}.
+The \texttt{JobScheduler} is chosen as the scheduler for managing the background service in Section \ref{ssec:periodictasks}.
 The \texttt{JobScheduler} works by scheduling Intents, that are operations to be performed. 
 An \texttt{Intent} that is not yet executed, is called a \texttt{PendingIntent}.
 When a \texttt{PendingIntent} is finally executed, variables in the systems may have been changed, hence the context might not be the correct, therefore a \texttt{PendingIntent} also requires a reference to the context when it was created.
@@ -23,7 +23,7 @@ The class reroutes the call by the \texttt{JobScheduler} to a \texttt{Handler} c
 This \texttt{Handler} class, as described by the official documentation \cite{handler}, allows the service to send a runnable object to the threads message queue.
 
 
-The implementation makes the location gathering be performed as a background service every two minutes.
+The implementation makes the location gathering being instantiated as a background service every two minutes.
 As covered in Section \ref{ssec:loctrack} this interval is temporary, and will serve to test the implementation, until further experience is gathered regarding optimizing the task frequency.
 
 
