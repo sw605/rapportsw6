@@ -1,9 +1,14 @@
 \section{Future Work}\label{sec:future}
-This section contains description of work that could be done in future semesters, if the app should be refined and further advanced.
+This section contains description of work that could be done in future semesters, if the \gls{rs} system should be refined and further advanced.
 
-\subsection{App functionality}
-Currently, the app does not take into account the users who are not driving.
-It could be useful to consider users who are biking or walking to work, and give them the opportunity to get a ride to save time, or if the weather is bad.
+\subsection{User Acceptance}
+As of this semester our system is solely developed based on our analysis of the interest and development in ridesharing solutions.
+Before further development it would be ideally to actual test whether the expected interest in the solutions actual exist.
+In addition validation of a marked for the solution, users interviews or similar research could also be used to evaluate the current state of the system and which changes or improvements users or potential users would prefer.
+
+\subsection{App Functionality}
+Currently, the app does not take users who are not driving into account.
+It could be useful to consider users who are biking or walking to work, and give them the opportunity to get a ride match.
 This could also lead to improving the algorithm, as to decide who can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
@@ -12,50 +17,50 @@ But as it is now, only one of the users will receive the information about the m
 The user receiving the notification is the one who have the shortest detour to pick up the other, so he or she can decide if it is worth it. 
 In the future a change could be made so that users who wants to be picked up could also see the matches and request a ride.
 
-%Another aspect is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.
-%\todo{this point totally needs more explanation. probably you are still working on it, but in general it is never a good idea to propose points and do not elaborate them. You can not assume the reader can always understand your ideas, even if you think they are very simple. - Davide. what does it even mean - Bjørn}
-
-\subsubsection*{Registration of users}
-%Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.\todo{make better, I dunno how. - 1 + Bjørn}
+\subsubsection*{Registration of Users}
 The edges described in Section \ref{subsec:usermanagement} was not implemented as they were not finished in the API.
 Implementation could be done during user registration with a few API calls to \gls{astep}.
-It could also be possible to integrate Facebook as an alternative login method and information provider.
+It could also be possible to integrate login possibilities such as Google or Facebook as alternative login methods and user info providers.
 
-Another feature that is likely to be important in the future is allowing users to use the same \gls{astep} user for different applications.
-This could be done by exploiting tokens and improving how they are handled in the \gls{astep} system.
-In the current solution, every time you log in to our app you are issued a new token, invalidating existing tokens.
+Another feature which can become important in the future is allowing users to use the same \gls{astep} user for different applications.
+This could be done by utilizing tokens and improving how they are handled in the \gls{astep} system.
 
-\subsubsection*{User interface}
-It is stated that the user interface was not in focus of this project, and it could benefit from an overhaul.
-This redesign could include a more consistent visual theme between the views, and functionality that makes the app more enjoyable to use.
-This could be profile pictures for matches, making the user more confident in that the person they are driving with is the same they matched with.
-One suggestion is to display more user information when tapping on a user match.
-This information could include other people that often travels with the user and details about the others route which were matched with.
-One way to display details about the route that the user was matched with could be to represent it on a map, where a seemingly natural integration is with Google Maps.
+\subsubsection*{User Interface}
+Since the user interface was not a priority of this project, it could benefit from an redesign.
+This redesign could include a more consistent visual theme between the views, and functionality that makes the app more easier to use.
+Profile pictures for accounts could make  users more trustworthy to users whom they match with.
+More user information could also be displayed when tapping on a user match.
+Displaying details about a route that a user was matched with could be represented on a map, where a seemingly natural integration is with Google Maps.
 
-Another improvement that is needed is the error messages displayed to the user, which currently are mostly non-informative or non-existent, because the existing messages were made for development purposes.
+Improvements is needed handling and displaying error messages users, which currently are mostly non-informative or non-existent, because many of those messages were written for development purposes.
 
 \subsection{Server}
-If changes to the user interface were made, a rework of parts of the server could potentially be needed.
-Currently, there is no way to store profile pictures, as only meta data about routes is stored.
-This means that there is currently no way to implement profile pictures in the app, and there is not enough information in the meta data to plot the routes on a map.
+Some user interface changes will require server support.
+Currently, there is no support for storing profile pictures.
 
-It could also be an improvement if the server could use push notifications and send new routes matches to the clients when detected, instead of the current implementation where the app asks the server for updates every time it is opened.
+It could also be an improvement if the server could send push notifications with new routes matches to a user's app when detected, instead of the current implementation where the app request the server for updates when the app is opened.
 
 % Messenger service
-The only option for establishing contact between users is currently by phone numbers.
-The user's phone number is sent to strangers also using the app, and this could be unwanted by users.
-A better solution would be an instant messaging system, integrated in the app itself, or a preference regarding sharing the phone number.
+The current option for establishing contact between users is by phone numbers.
+The user's phone number is sent to strangers also using the app, which could be unwanted by users.
+A better solution would be a messaging system, integrated in the app itself or another similar way of users whom matched, to communicate.
 
 \subsection{Algorithm}
-For the algorithm there are improvements that can be made in the search space for matches.
+For the algorithm several refinements can be made.
+Some actual user test of the algorithms accuracy and some more formal testing would give a better basic.
+Both in regards to deciding which parts of the algorithm could use improvement most, as well as gathering some information about which parameters are most important to user when considering possible matches.
+
+The input parameters of the algorithm could also be evaluated or expanded upon.
+As mentioned in 
+
+One possible thing to improve upon is the search space for matches.
 The algorithm does not use any filtering of routes other than a simple time comparison.
-Additional filtering could be done by using GEO-fencing.
+Additional filtering could be done by using geo-fencing.
 Another less complex solution could be to truncate the coordinate in to a lower accuracy location.
-By lowering the GPS coordinates decimals in accuracy, a larger margin of precision is made, with the consequences of making a 'grid' as can be used for filtering.
+By lowering the GPS coordinates decimals in accuracy, a larger margin of precision is expressed, with the consequences of making a `grid' as can be used for filtering.
 Rounding down to two decimals as described by \citet{gpsdecimal}, for example, has an accuracy of 1.1 kilometers.
 
-One of the most important feature improvements that the algorithm could use is maps, speed limits and terrain when calculating detours.
+One of the most important feature improvements to the algorithm, is to consider maps, speed limits, traffic data and terrain when calculating detours.
 This feature could increase the accuracy of the estimated detour time and distance, and hence yield more accurate scores.
-It could be implemented by utilizing the Google Maps API to generate the required routes.
+It could be implemented by utilizing the Google Maps API.
 
