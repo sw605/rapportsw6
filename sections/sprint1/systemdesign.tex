@@ -52,7 +52,7 @@ This is the start of a project that will be further developed upon and expanded 
 By isolating parts that are specific to the rideshare app on the server, most of this system would be reusable.
 An example of how this is achieved through object-oriented design, is the RouteAnalyser seen in Figure \ref{fig:classDiagramSprint1Server}.
 The RouteAnalyzer filter routes according to its concrete implementation.
-After the filtering, the RouteAnalyser uses the strategy pattern\todo{not defined - Bjørn} to determine how to compare the routes.
+After the filtering, the RouteAnalyser compare the routes.
 This enables other projects to develop their own filters and comparison functions for later projects.
 
 \begin{figure}[h!]
