@@ -7,10 +7,10 @@ It could be useful to consider users who are biking or walking to work, and give
 This could also lead to improving the algorithm, as to decide who can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
-When using the current version of the algorithm it is implemented so two users are matched with each other.
-But as it is now, only one of the users will receive a notification about the match.
+When using the current version of the algorithm it is implemented so that two users are matched with each other.
+But as it is now, only one of the users will receive the information about the match.
 The user receiving the notification is the one who have the shortest detour to pick up the other, so he or she can decide if it is worth it. 
-In the future a change could be performed so users who are to be picked up could also see the matches and request a ride. \todo{læs denne para/todo og se om den er fin - Corlin}
+In the future a change could be made so that users who wants to be picked up could also see the matches and request a ride.
 
 %Another aspect is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.
 %\todo{this point totally needs more explanation. probably you are still working on it, but in general it is never a good idea to propose points and do not elaborate them. You can not assume the reader can always understand your ideas, even if you think they are very simple. - Davide. what does it even mean - Bjørn}
@@ -53,7 +53,7 @@ The algorithm does not use any filtering of routes other than a simple time comp
 Additional filtering could be done by using GEO-fencing.
 Another less complex solution could be to truncate the coordinate in to a lower accuracy location.
 By lowering the GPS coordinates decimals in accuracy, a larger margin of precision is made, with the consequences of making a 'grid' as can be used for filtering.
-Rounding down to two decimals as seen in \cite{gpsdecimala}, for example, has an accuracy of 1.1 kilometers.
+Rounding down to two decimals as described by \citet{gpsdecimal}, for example, has an accuracy of 1.1 kilometers.
 
 One of the most important feature improvements that the algorithm could use is maps, speed limits and terrain when calculating detours.
 This feature could increase the accuracy of the estimated detour time and distance, and hence yield more accurate scores.
