@@ -1,21 +1,22 @@
 \section{Requirement Specification}\label{sec:req}
 % Metatext
-The requirements are divided into two main categories; functional and nonfunctional requirements and are furthermore sorted in the MoSCoW \cite{moscow} structure.
-This assist in solving the highest prioritized requirements first, hence the core purpose of the system can be developed first and later adding additional functionality.
+The requirements are divided into two main categories, functional and nonfunctional requirements, and are furthermore sorted in the MoSCoW \cite{moscow} structure.
+The structure assists in solving the core purpose of the system first, as these are the highest prioritized requirements, and later adding additional functionality.
+
 
 % Requirements
 \subsection{Functional requirements}
-Functional requirements are requirements directly related to the tasks and operations of the developed application.
+The functional requirements are directly related to the tasks and operations of the developed application.
 
 \textbf{Must-have requirements}\\
-These requirements must be fulfilled to have an acceptable solution.
+The 'Must have' requirements must be fulfilled for the solution to be acceptable.
 
 \textit{Graphical user interface}\\
-The application must have a graphical user interface (GUI) as users must be able to operate the application themselves. 
+The application must have a graphical user interface (GUI) as users must be able to use the application themselves, and to structurally and aesthetically display user matches. 
 The GUI must be intuitive as users may have different levels of experience with using mobile applications.
 
 \textit{User accounts, including login and registration.}\\
-Unique user accounts are required as it serves as an identifier for each user, using the system. 
+Unique user accounts are required as it serves as an identifier for each user in the system. 
 With user accounts, store personal information, and compare user based on the data. 
 It will also provide functionality for displaying user to other users.
 
@@ -24,46 +25,43 @@ As the project is a part of the bigger system \gls{astep}, there must be a relat
 The communication would be storing data in the \gls{astep} database and using user management also implemented on the platform.
 
 \textit{User location tracking and storage.}\\
-As the application must track users as they move around, location sensors must be polled, such as GPS. 
-The application should track users commute.
-This data should be stored in the \gls{astep} database.
+The application must track users as they move, to be able to determine the users travel routes.
+The application should store the commuted routes and the data should be stored in the \gls{astep} database.
 
 \textit{Automatically determine regular routes.}\\
-Automatically determine regular routes the user take. 
-Regular routes should be saved for later comparison. 
-Ignoring routes that are not used often.
+The solution must automatically determine if a route is regular. 
+Regular routes should be used for route comparison and match generating. 
 
-\textit{Automatic suggest ridesharing partners.}\\
-An automatic comparison with other users routes must be computed.
+\textit{Automatic user ridesharing suggestions.}\\
+Automatic matching with other users routes must be provided to the the individual app users, and the matches must be computed.
 When two regular routes are found similar, the users must receive an indication of the match in the app.
-If this shows to be a heavy computation it is deemed to be done on the \gls{astep} core.
+If the match computation shows to be a excessive process it is deemed to be done in the \gls{astep} core.
 
 
 \textbf{Should-have requirements}\\
-The requirements in this subsection are important, but not regarded as critical for a functional system.
+The requirements in this subsection are important, but are not regarded as critical for the functionality of the solution.
 
-\textit{Give the user option to specify wherever they have a car or not.}\\
-Some users might not have a car, and that should be considered as people whiteout car would need to be treated differently from those who have.
+\textit{Give the user option to specify whether they have a car or not.}\\
+Because some users might not have a car, they should be considered differently than the ones with, as the users without vehicle cannot give a ride to a potential match.
 
 \textit{Enable users to blacklist other users.}\\
-Giving they are frequent users of the application, and have a bad experience with either a driver or passenger, they should be able to blacklist them.
+Users should be able to filter other users from the matches to prevent further possible bad experiences with either a driver or passenger.
 
 \textit{Suggest rides with users who only drives a subset of the way from A to B.}\\
-Giving users the option to drive with people who do not have the same source and destination, will increase the pool of which users to suggest, as a user can ``tag along'' part of the ride.
+Giving users the option to match with people who do not have the same source and destination, will increase the number of suggested matches, as a user can join a part of the matches' route.
 
 
 \textbf{Could-have requirements}\\
-These are the lowest realistic requirements. 
+The 'Could have' requirements are the lowest realistically fulfillable requirements, and are implemented if the higher priority requirements are fulfilled.
 
 \textit{Ride reservation or request from, to, time.}\\
-Reserve rides with other users. 
-This includes both regular commutes and commutes users would do rarely.
+This requirement enables the user to reserve rides with other users. 
 
 \textbf{Would-have requirements}\\
 The following requirements are only considered when all other requirements are satisfied but initially regarded as tasks to be solved in future projects.
 
 \textit{Inform users of their environmental and economic savings due to their use of the solution.}\\
-Provide detailed information on how much fuel users save, how much money saved based on fuel prices, and how much CO2 that is not released into the environment. 
+Provide users with detailed information on how much fuel the user has saved, how much money saved based on fuel prices, and how much CO2 that is not released into the environment. 
 
 \subsection{Non-functional requirements}
 The nonfunctional requirements for the solution are stated here.
@@ -75,11 +73,11 @@ These are the requirements the solution must fulfill to be acceptable.
 The development must be done in cooperation with the other \gls{astep} groups.
 
 \textit{User privacy}\\
-The app must respect user privacy, especially in regards to a user location data and user data in general.
-The solution should consider elements such as database storage, user management, and developers.
+The app must respect user privacy, especially in regards to a user location data and personal user data.
+The solution should consider securing elements such as database storage, user management, and developers.
 
 \textbf{Should-have requirements}\\
-Requirements that are important, but not regarded as highly critical.
+These requirements are important, but are not regarded as highly critical.
 
 \textit{Aesthetics matching other \gls{astep} project applications}\\
-The app must share design and guidelines as the other apps developed for \gls{astep}
+The app should share design and guidelines as the other apps developed for \gls{astep}.
