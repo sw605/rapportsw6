@@ -2,11 +2,11 @@
 % metatext
 The design of the implementation planned for sprint 4 is described in this chapter.
 The primary focus for the implementation is finishing the app and implementing the \gls{rs} server.
-An important part is implementation of the API calls to the \gls{astep}, as these are fundamental with regards to logging into the \gls{astep} system and to extract the route matches from \gls{astep}.
+An important part is the implementation of the API calls to the \gls{astep}, as these are fundamental with regards to logging into the \gls{astep} system and to extract the route matches from \gls{astep}.
 
 \subsection{\gls{rs} App}
-To make the \gls{rs} app acceptable by fulfilling the 'Must have' requirements, the missing features from \ref{sec:req} must be implemented.
-A list of matches needs to be implemented, so that the user interface reflects the respective users' matches.
+To make the \gls{rs} app acceptable by fulfilling the 'Must have' requirements, the missing features from Section \ref{sec:req} must be implemented.
+A list of matches needs to be implemented so that the user interface reflects the respective users' matches.
 To implement the user matches list, the app must utilize the API calls regarding route matches.
 These calls must be in the correct \gls{astep} format to be accepted and to work properly.
 The actual API call could be generalized to a single class so it can be reused for different API calls and to support potential future expansion.
@@ -24,4 +24,4 @@ In order to store the data received from \gls{astep}, a database is needed on th
 The database needs two tables to perform the required operations: one for user data and one for matched routes.
 
 As there are few tasks performed on the \gls{rs} server, a simpler implementation of the API calls can be implemented.
-Both the API calls and the connection to the app should be implemented as asynchronous, because there can be several requests to and from the server simultaneously. 
+Both the API calls and the connection to the app should be implemented as asynchronous because there can be several requests to and from the server simultaneously. 

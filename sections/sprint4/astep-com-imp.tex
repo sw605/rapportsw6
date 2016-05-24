@@ -32,7 +32,7 @@ The \texttt{AsyncTaskAPIHelper} result is then parsed to the \texttt{HttpURLConn
 Lastly, the \texttt{HttpURLConnection} is trying to perform the API call from where response codes are handled.
 
 It should be noted that passwords are not in the URL part of the API call, as these are logged in the \gls{astep} server. 
-This would be a major security issue.\todo{because of what?}
+This would be a major security issue, because potential hackers could gain access to the passwords in plain text.
 Instead, password and tokens are parsed as part of the body or header, which is used by REST. 
 This will hide the content from the URL and instead be transferred in an \texttt{OutputStream} encoded in raw bytes. 
 Two examples of API calls can be seen in Table \ref{tab:apitable}.

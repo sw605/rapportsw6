@@ -44,8 +44,8 @@ When receiving matches from \gls{astep}, the system runs the algorithms as descr
 The matches are then stored in the servers own database.
 
 %Database
-All contact to the database is handled in a class with a single instance ensured\todo{guarantee for what? - Bjørn} with the use of singleton pattern. 
-This is done as the database needs to its configurations (the username and password), which is loaded from a file.
+All contact to the database is handled in the Database class.
+Because the class needs to load the database configurations from a file on the harddisk, it implements  the singleton pattern so that the file only have to be accessed once.
 It would be inefficient if the server had to read this file every time it needs to access the database.
 
 The database is only containing two tables: user details and matches.
