@@ -10,11 +10,9 @@ However, the app needs basic functionality, according to the requirements.
 % Only vehicle
 To concentrate the app focus and to ensure that users matched by routes can transport each other, the app is decided to only track a user when in a vehicle.
 This excludes consideration of users only bicycling or walking as means of transportation.
-The app could be expanded upon later, but at the current stage, only car commuters are targeted as app users..
-
+The app could be expanded upon later, but at the current stage, only car commuters are targeted as app users.
 % User management
 To be able to separate different routes, and to assign them to their respective users, there has to be a user management system, so that each user has its own ID.
-
 % Ride matches
 The user should also be informed with relevant information of ride matches, so that the user can make a decision of sharing a ride or not.
 
@@ -38,20 +36,22 @@ The ``targetSdkVersion'' reflects the version to which the app is developed and 
 The ``maxSdkVersion'' reflects the highest API level that an app is designed to run.
 Both of these are set to the highest API level available during the start of the development, which is API version 23.
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/android-chart-march.png}
-	\caption{Android version distribution, March 2016 \cite{androidDashboard}}
-	\label{fig:dashboard}
-\end{figure}
-
 The last API level which needs to be specified is the ``minSdkVersion''.
 This entry specifies the lowest API level which an app supports.
 A cause of this is that every device with an API level lower than the specified minSdkVersion will not be compatible with the app.
 Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
 For this project we choose to target a higher API level for to simplify the development process.
 At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 (Android Lollipop) is 35,3\%.
-API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time for user interface, as API level 21 added support for Android's new material design style \cite{android5API}. Refraining from further backwards compatibility allows the project focus to be on the functionality of the app. 
+
+\begin{figure}[h]
+	\begin{center}
+	\includegraphics[width=0.78\textwidth]{figures/android-chart-march.png}
+	\end{center}
+	\caption{Android version distribution, March 2016 \cite{androidDashboard}}
+	\label{fig:dashboard}
+\end{figure}
+The version distribution as of March 2016 can be seen on Figure \ref{fig:dashboard}
+API version 21 is chosen as the minSdkVerison, the main reason for this choice is to minimize development time as API level 21 among other things added support for the material design style \cite{android5API}. Refraining from further backwards compatibility allows the focus of the project to be on the functionality of the app. 
 
 \input{sections/sprint2/periodictask.tex}
 

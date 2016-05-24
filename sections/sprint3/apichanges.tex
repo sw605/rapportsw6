@@ -1,27 +1,10 @@
 \subsection{Changes to the aSTEP API}\label{s3:apianal}
 Because the \gls{astep} is in development, there has been changes in the API since the last sprint analysis. 
-The \gls{astep} API has been updated with new functionality both regarding to user management and location based services.
-The LBS are split into indoor and outdoor locations calls, but the outdoor services are the only relevant calls for the \gls{rs} system.
+The \gls{astep} API has been updated with new functionality both regarding user management and location based services.
+The LBS are split into indoor and outdoor locations calls, where the outdoor services are the only relevant calls for the \gls{rs} system.
 %The list of all API functions as of the third sprint can been seen in the appendix\todo{add appendix reference}. %Table \ref{tab:s3api}.
 
-\iffalse
-\begin{table}[!ht]
-	\centering
-	\begin{tabular}{ll}
-		Outdoor location services & User Management    \\
-		\hline
-		\begin{tabular}[t]{@{}l@{}}
-			Get user past location\\ Get user past locations area\\ Get user past Locations radius\\ post user current location\\ Post user current route\\ Get all new route matches\\ Get all locations friends\\ Get all users in area \\ Get locations friends \\ Get subset of users area \\ Get users outside area \\Get subset of users radius \\ Get locations friend timestamp\end{tabular}
-		&
-		\begin{tabular}[t]{@{}l@{}}
-			Create group \\ Get administrated groups\\ Add administration\\ Remove administration \\ Get invited users \\ Invite user to group \\ Revoke group invitation \\ Get members of a group \\ Remove user from group \\ Create user \\ Get groups that a user is invited to \\ Decline group invitation \\ Get groups that user is member of \\ Join group \\ Leave group \\ Get outdoor-user\\ Request outdoor user \\ Delete outdoor-user \\ Validate outdoor-user\\ Change password\\ Get token \\ Issue token\end{tabular}
-	\end{tabular}
-	\caption{Currently planned aSTEP API functions.}
-	\label{tab:s3api}
-\end{table}
-\fi
-
-An overview of the relevant API calls, as of sprint 3, for the \gls{rs} system can be seen in Table \ref{tab:relevantastepapi}, while the complete set of sprint 3 outdoor location services and user management services can be seen in the appendix. \todo{fix appendix}
+An overview of the relevant API calls, as of sprint 3, for the \gls{rs} system can be seen in Table \ref{tab:relevantastepapi}, while the complete set of sprint 3 outdoor location services and user management services can be seen in appendix \ref{ch:appAlabel}.
 
 \begin{table}[h]
 	\centering
@@ -39,7 +22,7 @@ An overview of the relevant API calls, as of sprint 3, for the \gls{rs} system c
 	\label{tab:relevantastepapi}
 \end{table}
 
-For the location based services, the \gls{astep} system now offers different get requests regarding a users location history, nearby users and users based on groups or friends.
+For the location-based services, the \gls{astep} system now offers different get requests regarding a user's location history, nearby users, and users based on groups or friends.
 The services offered by the user management is also expanded since the previous sprint. 
 The implementation of the concept of groups entails multiple new API calls. 
 The group concept is implemented as an access control that restricts users access to other users data.
