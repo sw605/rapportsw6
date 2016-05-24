@@ -3,11 +3,11 @@ The implementation section contains descriptions of selected parts of the implem
 
 The main focus in this implementation is the location gathering service, which will record locations continuously while the user is driving, but not otherwise. 
 
-\subsection{Location Gathering Background service}
+\subsection{Location Gathering Background Service}
 % metatext
-This subsection will describe the contents of the implementation of the background location gathering.
-The new implementation is founded on the poor results of the location gathering method implemented in sprint 2, Section \ref{section:locationgathering}, that was not working as intended.
-The code examples in this section will not include potential logging and debugging lines as for better readability and they do not influence the functionality of the code.
+These paragraphs will describe the contents of the implementation of the background location gathering.
+The new implementation is founded on the poor results of the location gathering method implemented in sprint 2, Section \ref{section:locationgathering}, which was not working as intended.
+Code examples in this section will not include potential logging and debugging lines as for better readability and they do not influence the functionality of the code.
 
 \textbf{Implementation plan}\\
 According to the design, Section \ref{section:s3locgath}, the locations should first be requested when the user is driving.
@@ -21,7 +21,7 @@ When the confidence is lower than the threshold for a period of time, the drivin
 The location gathering should first detect that the device is in a driving activity and then begin recording locations, according to the design described in Section \ref{ssec:LocationGatherBGS}.
 To achieve the functionality, the app must connect to a Google API client and subscribe to activity recognition.
 The code for subscribing to the activity recognition is shown in Listing \ref{activityRecognitionInstantiation}.
-The activity recognition can thereafter check that the detected activity is a driving activity, and accordingly activate the location gathering.
+The activity recognition can thereafter check that the detected activity is \texttt{inVehicle}, and accordingly activate the location gathering.
 
 \begin{lstlisting}[language=Java, label=activityRecognitionInstantiation, caption=Initialization of activity recognition.]
 if(activityDetectionBroadcastReceiver == null) {
@@ -88,7 +88,7 @@ The implementation of the route-matching algorithm is delegated to the previousl
 They were given the pseudocode algorithm developed in sprint 2 and cooperated with during the implementation process.
 The implementation will not be documented here, as the actual implementation is not performed by us.
 However, the implementation should be tested, and we generated test data with accompanying result expectations.
-The test data was also handed over, but this will be described in the following test section.
+The test data was also handed over, this will be described in the following test section.
 
 In cooperation with the outdoor group, it was decided to send every variable for the algorithm as parameters in the API call.
 This was done so we would have control over the algorithm to ensure it performed as we saw fit.
