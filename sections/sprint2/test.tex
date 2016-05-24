@@ -1,10 +1,10 @@
 \section{Test} \label{sec:s2test}
-The purpose of the test section is to document the  current functionality of the implemented solution.
+The purpose of the test section is to document the current functionality of the implemented solution.
 An informal test was performed on the app to assess the behavior and precision of the location gathering as a background service.
 
 \subsection{Background Service}
-To assess the functionality of the background service, it was necessary to receive some kind of information, confirming that the service was actually running.
-The background service was tested by making a simple IDE console output, that got printed each time the \texttt{jobScheduler} executed the \texttt{PendingIntent}.
+To assess the functionality of the background service, it was necessary to receive visual information, confirming that the service was actually running.
+The background service was tested by making a IDE print a message to an debug log each time the \texttt{jobScheduler} executed the \texttt{PendingIntent}.
 
 In accordance with the implementation, the output appeared every 10 seconds, independent of the app being open, in the background or closed completely on the test device.
 This proved that the background service was functioning as intended.
