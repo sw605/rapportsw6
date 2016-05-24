@@ -7,9 +7,8 @@ This section contains descriptions of the redesign of the different parts, and a
 
 
 % data conciderations
-The \gls{astep} system still provides the functionality to store locations and route history for users.
-The \gls{rs} app continues to collect device location data.  
-For user to able to contact each other when a match is given, the solution will need additional data storage to fulfill this requirement.
+The \gls{astep} system does still provide the functionality to store locations and route history for users, and the \gls{rs} app continues to collect device location data.  
+For user to able to contact each other when a match is given, the solution will need additional data storage to save the user information, and hence fulfill the requirement.
 
 
 % btw, an RSS can be used for more! Match scores, etc.
@@ -18,13 +17,13 @@ The app specific data is information such as match scores between routes.
 
 
 % solution alternatives
-An appropriate solution for storing this extra information is using a custom \gls{rs} server, to utilize together with the \gls{rs} app and \gls{astep} system.
+An appropriate solution for storing this extra information is setting up a custom \gls{rs} server, to utilize together with the \gls{rs} app and \gls{astep} system.
 The \gls{rs} server could store the extra user data and connect the user to the \gls{astep} user ID, so that each \gls{rs} solution user has a unique \gls{astep} user, with contact information stored on the \gls{rs} server.
 
 % instanciate RSS (RideShare Server)
 The \gls{rs} server has two main purposes.
 First, to store additional information about the system users, and second to store the score for the previously assessed scores between given stable routes.
-The different purposes and responsibilities of the parts depicted in figure \ref{fig:s2systemdesign} will be elaborated in the following text.
+The different purposes and responsibilities of the parts depicted in Figure \ref{fig:s2systemdesign} will be elaborated in the following sections.
 \begin{figure}
 	\vspace{-12pt}
 	\centering
@@ -47,7 +46,7 @@ The \gls{rs} server will be used to store additional information regarding users
 The user information that will be stored, is the additional contact information.
 
 % Definition of RIDESHARE(TM) server responsibilities
-Beyond storing scores for route matches and additional user info the \gls{rs} server will also be responsibly for sending request to the \gls{astep} server, concerning calculations about stable routes and route matches.
+Beyond storing scores for route matches and additional user info, the \gls{rs} server will also be responsible for sending request to the \gls{astep} server, concerning calculations about stable routes and route matches.
 To be able to gain access to each user's location data from \gls{astep}, the \gls{rs} server has to store some sort of login information.
 The \gls{astep} system provides a login token, so that a password does not need to be stored on the \gls{rs} server.
 

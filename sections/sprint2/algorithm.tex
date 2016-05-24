@@ -4,7 +4,7 @@ This algorithm is loosely based on a simplified version of \citet{ghoseiri2011re
 In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
 The criteria are practical to some extent, but the focus of the \gls{rs} system is the time and distance criteria.
 
-A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
+This paragraph contains definitions to clarify the terms used in this section. A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
 A route is a chronological list of positions.
 A disadvantages of the algorithm presented here is that the distance is calculated as a euclidean distance rather than a road distance. 
 This would be a obvious place for future improvements to the algorithm.
@@ -44,8 +44,7 @@ To summarize, the algorithm takes a route $r$ and two positions to compare again
 The algorithm then returns a decimal value between 0 and 1.
 
 \subsubsection{Time Distance Analyser Algorithm}
-
-In the algorithm, there are two aspects to be evaluated; time and distance.
+There are two aspects to be evaluated in the algorithm: time and distance.
 These are assumed to be evaluated by two sub algorithms that both takes the route and two points as input and return a value from 0 to 1 depending on how closely they match.
 
 If either time or distance is assessed unacceptable they are being assessed a score of 0, thus the whole match is unacceptable and given the a final score of 0.
@@ -84,7 +83,7 @@ First, the distance analyser algorithm will be described, followed by the time a
 
 \subsubsection{Distance analyser}
 The distance analyser algorithm takes a route and two end points and assesses the score for the detour when only considering the distance.
-To do this, it is required to define how long the longest acceptable detour should be.
+To accomplish this, it is required to define how long the longest acceptable detour should be.
 The algorithm also needs a way of calculating the distance between two discrete locations, which can be performed by the function for euclidean distances.
 This leads to the following algorithm, where the symbol $\mathbb{L}$ is used to denote the set of all possible locations:
 

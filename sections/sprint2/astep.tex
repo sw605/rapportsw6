@@ -1,14 +1,15 @@
 \subsection{Communication with \gls{astep}}\label{ssec:communicationwithastep}
 To be able to utilize the \gls{astep} system, the communication protocol and its functions must be analyzed. 
-The analysis is based on the current development and planning of the API and other functions.
+The analysis is based on the current development and plan of the API and other functions.
 
 % \gls{astep} organization - groups
-The intended functions are established in collaboration with the other project groups responsible for the \gls{astep} system side of the development. 
+The intended functions are established in collaboration with other project groups responsible for the \gls{astep} system side of the development. 
 %We are mainly involved with the user management group and outdoor location based services groups.
 
 % What does the \gls{astep} system look like?
 The design of the \gls{astep} system is currently consisting of an API that apps and services can communicate with, and a backend with user management and location based services, which is stored in a database system.
-However, the only relevant part for the \gls{rs} solution is the API, as the lower level of the \gls{astep} core is administrated by other groups.
+However, the only relevant part for the \gls{rs} solution is the API, as the internal parts of the \gls{astep} core is administrated by other groups, and are not available through the API.
+
 % What is stored in \gls{astep}
 The \gls{astep} system will store information regarding location data, and basic user information. 
 The data stored in the \gls{astep} system, relevant to this project solution, is:
@@ -21,18 +22,20 @@ The data stored in the \gls{astep} system, relevant to this project solution, is
 The \gls{astep} user management system does not provide storage of data regarding contact information for \gls{astep} users.
 The only information stored is a username and password to keep the \gls{astep} core as simple as possible.
 Additional information that is required to make the app work as intended is each of the app groups own responsibility.
-The \gls{astep} users are made to ensure the correct permissions is giving to the correct user and thus the appropriate data is returned to each user.
-An API call can not be done without the user first being authenticated with a valid login.
+The \gls{astep} users are made to ensure the correct permissions are given to the correct user and so that the appropriate data is returned to each user.
+An API call cannot be done without the user first being authenticated with a valid login.
 
 % How to cummunicate with \gls{astep}
 The communication with \gls{astep} is done through a REST API over HyperText Transfer Protocol, decided in agreement between the \gls{astep} project groups.
-REST is an abbreviation of Representational State Transfer, and is a communications design often used in for HTTP-communication\cite{REST}.
+REST is an abbreviation of Representational State Transfer, and is a communication design often used in for HTTP-communication \cite{REST}.
 Accordingly, the communication is performed by making queries to the \gls{astep} system. 
-All communication must be done as a request from the device, where the \gls{astep} server then will respond.
-
+All communication must be done as a request from the device, to which the \gls{astep} server will respond.
 
 % api functions
-At the current stage of the development of \gls{astep}, the API functions are available form user management and location services can be seen in Table \ref{tab:sprint2-api}
+The currently available API functions at this stage of the development of \gls{astep} from user management and location services can be seen in Table \ref{tab:sprint2-api}.
+The API is providing a POST-request under the name ``PostLocationDat'', as listed in \ref{tab:sprint2-api}, which is the current method to use when sending location data to the \gls{astep} system.
+The call will accept location data as a coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
+
 \begin{table}[!ht]
 	\centering
 	\begin{tabular}{ll}
@@ -48,9 +51,5 @@ At the current stage of the development of \gls{astep}, the API functions are av
 	\label{tab:sprint2-api}
 \end{table}
 
-When using the \gls{astep} API it should be ensure to use the correct calls in the right way.
-For example does the API providing a POST-request under the name ``PostLocationDat'', as listed in \ref{tab:sprint2-api}, which is the method to use when sending location data to the \gls{astep} core.
-When using this POST it is important to ensure the correct parameters is used.
-The call will accept location data as an coordinate consisting of longitude and latitude, a precision value, and a value representing time of day in milliseconds.
 
-As both the \gls{astep} service and the devices have been analysis it is possible to establish a set of requirements for sprint 2.
+As both the \gls{astep} service and Android system have been analyzed it is possible to establish a set of requirements for the second sprint.
