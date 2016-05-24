@@ -7,17 +7,23 @@ It could be useful to consider users who are biking or walking to work, and give
 This could also lead to improving the algorithm, as to decide who can be matched against whom.
 For instance it would not make sense to see if someone who is riding a bike could pick up other users.
 
-Another aspect is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.\todo{this point totally needs more explanation. probably you are still working on it, but in general it is never a good idea to propose points and do not elaborate them. You can not assume the reader can always understand your ideas, even if you think they are very simple. - Davide. what does it even mean - Bjørn}
+When using the current version of the algorithm it is implemented so two users are matched with each other.
+But as it is now, only one of the users will receive a notification about the match.
+The user receiving the notification is the one who have the shortest detour to pick up the other, so he or she can decide if it is worth it. 
+In the future a change could be performed so users who are to be picked up could also see the matches and request a ride. \todo{læs denne para/todo og se om den er fin - Corlin}
+
+%Another aspect is that the algorithm assumes that the one who is picking up the passenger handles contacting possible passengers.
+%\todo{this point totally needs more explanation. probably you are still working on it, but in general it is never a good idea to propose points and do not elaborate them. You can not assume the reader can always understand your ideas, even if you think they are very simple. - Davide. what does it even mean - Bjørn}
 
 \subsubsection*{Registration of users}
-Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.\todo{make better, I dunno how. - 1 + Bjørn}
-As the edges described in Section \ref{subsec:usermanagement} was not implemented as they were not finished in the API.
+%Having connections between the users of the \gls{rs} app and the \gls{rs}'s \gls{astep} user does not make any difference in the current version of \gls{astep}.\todo{make better, I dunno how. - 1 + Bjørn}
+The edges described in Section \ref{subsec:usermanagement} was not implemented as they were not finished in the API.
 Implementation could be done during user registration with a few API calls to \gls{astep}.
 It could also be possible to integrate Facebook as an alternative login method and information provider.
 
 Another feature that is likely to be important in the future is allowing users to use the same \gls{astep} user for different applications.
 This could be done by exploiting tokens and improving how they are handled in the \gls{astep} system.
-In the current solution, everything you login you\todo{what does this mean? - Bjørn} are issued a new token, invalidating existing tokens.
+In the current solution, every time you log in to our app you are issued a new token, invalidating existing tokens.
 
 \subsubsection*{User interface}
 It is stated that the user interface was not in focus of this project, and it could benefit from an overhaul.
@@ -43,11 +49,11 @@ A better solution would be an instant messaging system, integrated in the app it
 
 \subsection{Algorithm}
 For the algorithm there are improvements that can be made in the search space for matches.
-The algorithm does not use any filtering of routes to compare other than a simple time cut off.
-This could be done by using geo-fences and/or some implementation of the $S^2$\todo{elaborate, explain - Bjørn} algorithm.
-A less complex solution could be to truncate the coordinate in to a lower accuracy location.
-By lowering the coordinates in accuracy, a larger margin of precision\todo{explain - Bjørn} is made, with the consequences of making a 'grid' as can be used for filtering.
-Rounding down to two\todo{cannot believe this - Bjørn} decimals, for example, has an accuracy of 1.1 kilometers.
+The algorithm does not use any filtering of routes other than a simple time comparison.
+Additional filtering could be done by using GEO-fencing.
+Another less complex solution could be to truncate the coordinate in to a lower accuracy location.
+By lowering the GPS coordinates decimals in accuracy, a larger margin of precision is made, with the consequences of making a 'grid' as can be used for filtering.
+Rounding down to two decimals as seen in \cite{gpsdecimala}, for example, has an accuracy of 1.1 kilometers.
 
 One of the most important feature improvements that the algorithm could use is maps, speed limits and terrain when calculating detours.
 This feature could increase the accuracy of the estimated detour time and distance, and hence yield more accurate scores.
