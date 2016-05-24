@@ -1,15 +1,23 @@
 \section{Analysis}
+% meta
+This analysis section will contain descriptions of the material analysed in sprint 1.
+The first topic to analyse is the description and definition of ridesharing.
+The second is to investigate the state of the art, and finding current solutions of the problem.
+The analysis will provide sufficient information and details to establish a requirement specification, defining the subproblems of the problem statement. 
+
+\subsection{Ridesharing Definition}
+%gangidet
 Ridesharing is an activity which has had phases of popularity in recent history according to \citet{doi:10.1080/01441647.2011.621557}.
 They describe the current phase as the technology-enabled ridematching phase which started back in 2004.
 In this phase, the integration of the internet, mobile phones, and social media into ridesharing services reduces the barrier to entry for new potential passengers and drivers.
-\citet{doi:10.1080/01441647.2011.621557} also lists incentives for ridesharing in the current phase, which are the following 
+\citet{doi:10.1080/01441647.2011.621557} also lists incentives for ridesharing in the current phase, which are the following points:
 
 \begin{itemize}
-  \item ``Focus on reducing climate change, growing dependence on foreign oil, and traffic congestion
-  \item Partnerships between ridematching software companies and regions and large employers
-  \item Financial incentives for green trips through sponsors
-  \item Social networking platforms that target youth
-  \item Real-time ridesharing services'' \citep{doi:10.1080/01441647.2011.621557}.
+	\item ``Focus on reducing climate change, growing dependence on foreign oil, and traffic congestion
+	\item Partnerships between ridematching software companies and regions and large employers
+	\item Financial incentives for green trips through sponsors
+	\item Social networking platforms that target youth
+	\item Real-time ridesharing services'' \citep{doi:10.1080/01441647.2011.621557}.
 \end{itemize}
 
 This presents a broad overview of why ridesharing became popular again after 2004.
@@ -21,7 +29,7 @@ The main focus of this project will be on real-time and dynamic ridesharing whic
 The problems of automating ridesharing through modern technology has already been studied with different approaches.
 The following sections account for some of which the project group found the most interesting and relevant to the problem statement. 
 
-\citet{doi:10.1080/01441647.2011.621557, amey2011real} sees technology as one of the most important factors in the present and future of dynamic ridesharing.
+\citet{doi:10.1080/01441647.2011.621557, amey2011real} sees technology as one of the most important factors in the present and future of dynamic ridesharing.\todo{intention? - Bjørn}
 
 \citet{ShuoMa2013} developed an algorithm for taxi services and improved throughput of passengers by 25\% and reduced the distance a single taxi had to drive by 13\%, at six requests for rides per taxi.
 %picking up many passengers throughout a ride is developed and presented, seeking to increase the passenger throughput as well as lowering the distance traveled per passenger served.
@@ -34,35 +42,34 @@ The preferences can be properties such as gender or pet friendliness.
 They developed functions that can assess if a passenger and driver match, based on location, preferences, passenger and/or driver detour as the most important factors \cite{ghoseiri2011real}.
 This algorithm might be useful in this project solution.
 
-Actual choices and influences regarding algorithm design for ridematching will be addressed in the later design phase in Section \ref{sprint1design}.
+Actual choices and influences regarding algorithm design for ridematching will be addressed later in the design phase, in Section \ref{sprint1design}.
 
 \subsection{Commercial Solutions}
-Corporate and community solutions are quite different from the academic field solutions.
+As corporate and community solutions are more economically motivated instead of scientifically, the solutions differs from the academic field solutions.
 The main focus seems to be centered more around taxi alternatives.
-The are plenty of services around the world, with the two biggest international services in this field as of 2015 seems to be Uber and Lyft\cite{ridehail}.
-There are also several services that operates in Denmark.
-Among those are Haxi (based in Norway) and Drivr (based in Denmark), two services that both work in a similar way: 
+The are multiple services available around the world, with the two biggest international services in this field as of 2015 seems to be Uber and Lyft\cite{ridehail}.
+There are also several services that operates in Denmark, among those are Norwegian-based Haxi and Denmark-based Drivr.
+The two services both work in a similar fashion: 
 
 \begin{enumerate}
-	\item A customer request a ride through an smartphone app or a web interface
+	\item A customer requests a ride through a smartphone app or a web interface
 	\item The backend of the service sends the request to one or more appropriate drivers
 	\item A driver accepts the request, and dispatches
 \end{enumerate}
 
 Since the mentioned services are commercial and closed-source, actual information about the service's design or architecture is not available.
-Drivr has two interesting feature in comparison to their opponents, that is a web interface for fleet management and business which provides administration and expense control of employee taxi travels.
+Drivr has two advantageous features in comparison to their opponents, and is a web interface for fleet management and business which provides administration and expense control of employee taxi travels.\todo{restructure sentence. Not clear - Bjørn}
 
-Besides these taxi-like services, there also exist services that focus on traditional ridesharing between private people, where money is not earned.
-Here exist both local and international services. 
-These services give the opportunity to either offer a lift, request a ride and the possibility to connect drivers and passengers.
-These services are usually free, but some of them charge a small fee when connecting people.
+Besides the taxi-like services, there are services that focus on traditional ridesharing between private people, where money is not earned.
+These services exist both locally and internationally and provides the opportunity to either offer a lift, request a ride and the possibility to connect drivers and passengers.
+%These services are usually free, but some of them charge a small fee when connecting people.
 %Some of the more notable are GoMore and iRideshare.\todo{source} 
 
-Most of the commercial solutions are still fairly new compared to the established norms of their competitors; the taxi services.
-With one of the best known services, Uber, being only nine years old.
-This is because the technology-enabled as described by \citet{doi:10.1080/01441647.2011.621557} that started around 2004 was the enabling factor for these companies.
+Most of the commercial solutions are still fairly new compared to the established norms of their competitors; the taxi services.\todo{source? - Bjørn}
+One of the best known services, Uber, being only nine years old.
+This is because the technology-enabled as described by \citet{doi:10.1080/01441647.2011.621557} that started around 2004 was the enabling factor for these companies.\todo{is this true - Bjørn}
 
-The technology used in these services, especially smartphone technology, has been evolving in a very fast pace.
-We believe that advancement in smartphone sensors is an opportunity that is still not used to its fullest potential.
+The technology used in these services, especially smartphone technology, has been evolving in a very fast pace.\todo{source? - Bjørn}
+We believe that advancement in smartphone sensors is an opportunity that is still not fully utilizing its potential.
 
-Based of the information gathered in this analysis a list of requirements for the solution can be formally written.
+Based of the information gathered in this analysis, a list of requirements for the solution can be established and formally written.
