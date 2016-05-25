@@ -252,6 +252,7 @@ For Time Analyzer the complexity is the same as in Distance Analyzer because of 
 The exceptions are $dist$, $time$, and $max$. 
 $time$ and $dist$, which both are described earlier, are considered to be $O(1)$ operations.
 $max$ takes two values, compares them and returns the largest of the two.
-This is also a constant operation, thus we can determine that the Time Analyzer algorithm is $O(|r|)$.
+This is also a constant operation, and hence we can determine that the Time Analyzer algorithm is $O(|r|)$.
 
-Thus we have that the main algorithm is $O(|r|)$, the number of locations in a route.
+Thus we have that the main algorithm is $O(|r|)$, the number of locations in a route, for each stable route in the \gls{astep} system.
+This algorithm design was handed over to the outdoor group that will implement it in the \gls{astep} system.
