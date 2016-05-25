@@ -117,7 +117,7 @@ This assumption does not represent the actual detour and thus this is an area fo
 
 The final score for the distance analyzer is calculated by taking the total detour length and dividing it by the length of the largest acceptable detour.
 This results in a value between 0 and 1 when the detour is less than the largest detour, and greater than one when the detour is longer.
-The value is inverted by subtracting it from 1 to make greater values better matches, as required by Algorithm \ref{alg:timedistanalyser}.
+The value is inverted by subtracting it from 1 to make better scores greater values, as required by Algorithm \ref{alg:timedistanalyser}.
 If the value is greater than the acceptable detour length, the inversion in the return statement will generate a negative value, hence causing Algorithm \ref{alg:timedistanalyser} to return a result representing no match.
 
 In the example introduced in the beginning of this chapter, the longest detour is set to be 25\% of Alice's total commute and Alice's route is modeled as the line  $y = \frac{4}{7}-\frac{2 x}{7}$.
