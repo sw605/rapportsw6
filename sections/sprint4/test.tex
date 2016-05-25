@@ -1,10 +1,10 @@
 \section{Test}\label{sec:s4test}
 % metatext
 In this final test section we will document the performed full system test.
-The test is an acceptance test, and is performed to verify that the solution complies with the established requirement specification.
-The acceptance test will be designed to test the whole system with manually generated data.
-The scope of the test is to check that the functional 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
-Some requirements are validated as working in previous tests, and these are omitted from the acceptance test. 
+The test was an acceptance test, and was performed to verify that the solution complied with the established requirement specification.
+The acceptance test was designed to test the whole system with manually generated data.
+The scope of the test was to check that the functional 'Must-have' requirements from Section \ref{sec:req} are fulfilled.
+Some requirements were validated as functional in previous tests, and these are omitted from the acceptance test. 
 First, the test is explained and described and, subsequently, the test execution and results are documented.
 
 % paragraph listing all requirements...
@@ -13,9 +13,9 @@ First, the test is explained and described and, subsequently, the test execution
 % previously tested requirements
 There have been extensive tests of the solution parts during the development, and the test results fulfilling requirements do not have to be performed again.
 'User location tracking and storage', as well as 'automatic determining regular routes' were assessed acceptable in respectively Section \ref{subsec:bgstest2} and \ref{subsec:algotest}.
-The latter is also partially accounting for the requirement 'suggesting ride partners' the only thing missing for this requirement, is to check whether the ride suggestions are displayed correctly to the user in the app. 
-The nonfunctional requirement of development cooperation is accounted for in Section \ref{sec:grouprole}. 
-The remaining requirements that needs to be accounted for and acceptance tested are the following:
+The latter is also partially accounting for the requirement 'suggesting ride partners' the only part missing for this requirement, was to check whether the ride suggestions were displayed correctly to the user in the app. 
+The nonfunctional requirement of development cooperation was accounted for in Section \ref{sec:grouprole}. 
+The remaining requirements that needed to be accounted for and acceptance tested were the following:
 \begin{itemize}
 	\item Graphical user interface
 	\item User accounts, including login and registration
@@ -27,24 +27,24 @@ The remaining requirements that needs to be accounted for and acceptance tested 
 \subsection{Acceptance Test Design}
 This section is documenting the acceptance test design, and serves to describe the test method performed on the solution to evaluate the compliance with the requirements.
 
-To make the app respond as it would in a real world test, mock test data is added to the \gls{rs} server's database. 
+To make the app respond as it would in a real world test, mock test data was added to the \gls{rs} server database. 
 The content can be seen in Appendix \ref{app:datadump}, and was consisting of user information as well as hard coded route matches.
-The data sets are a combination of data pulled form the \gls{astep} database as well as data we constructed to generate matches for the test user \texttt{test}.
-As we are using specialized mock data for the purpose of testing, only the user \texttt{test} has any matches.
+The data sets are a combination of data retrieved from the \gls{astep} database as well as data we constructed to generate matches for the test user \texttt{test}.
+As we were using specialized mock data for the purpose of testing, only the user \texttt{test} has any matches.
 The setup will consist of a computer running an instance of the \gls{rs} server and an android emulator.
-An android emulator is used in the testing instead of an actual device so that we can avoid opening ports to the \gls{rs} server.
+An Android emulator was used in the testing instead of an actual device so that we could avoid opening ports to the \gls{rs} server.
 
-The first task in the test consist of opening the app and registering a new user with username \texttt{test} and the password \texttt{test}.
-If this succeeds, the user is then logged out and then logged in with the same credentials.
+The first task in the test consisted of opening the app and registering a new user with username \texttt{test} and the password \texttt{test}.
+If this succeeded, the user should then logged out and then logged in again with the same credentials.
 When the user is logged into the app again, the appropriate matches stored in the \gls{rs} database will be fetched from the server and should be displayed in the app.
-If the lists are shown for the user \texttt{test}, but not for the newly registered user, the overall test is completed. 
+If the lists were shown for the user \texttt{test}, but not for the newly registered user, the overall test would completed and acceptable. 
 
-The GUI is tested through availability of the different functions in the app.
-The user functionality will be tested when registering an user and logging in, this will concurrently also partially test the communication with the \gls{astep} system.
+The GUI would be tested through the availability of the different functions in the app.
+The user functionality will be tested when registering a user and logging in, this will concurrently also partially test the communication with the \gls{astep} system.
 
 The rest of the requirements pertaining communication with \gls{astep} were verified in the tests performed in the previous sprints.
-If the matches are pulled correctly from the \gls{rs} server and showed to the user, will be tested when the user \texttt{test} are logged in.
-The requirement concerning user privacy is tested be seeing if location data about other users are displayed to the user currently logged in. 
+If the matches were pulled correctly from the \gls{rs} server and showed to the user, will be tested when the user \texttt{test} is logged in.
+The requirement concerning user privacy is tested by seeing if location data about other users are displayed to the user currently logged in. 
 
 
 \subsection{Performing the Test}
@@ -65,7 +65,7 @@ Some additional tests were performed to further explore this observation, and th
 	\label{tab:logintest}
 \end{table}
 
-Some additional \gls{astep} API test points to that the issue is a problem in the Android application as the special characters were working correctly when tested directly in the \gls{astep} API web interface.
+Some additional \gls{astep} API test points to that the issue was a problem in the Android application as the special characters were working correctly when tested directly in the \gls{astep} API web interface.
 
 The registering of the user \texttt{user22} was later successfully executed when using standard English letters and can be seen in the right side of Figure \ref{s4tp:numain}. 
 As expected, no matches were found to the newly registered user \texttt{user22}. 
