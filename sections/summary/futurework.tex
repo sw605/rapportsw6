@@ -57,11 +57,11 @@ One possible thing to improve upon is the search space for matches.
 The algorithm does not use any filtering of routes other than a simple time comparison.
 Additional filtering could be done by using geo-fencing.
 Another less complex solution could be to truncate the coordinate in to a lower accuracy location.
-By lowering the GPS coordinates decimals in accuracy, a larger margin of precision is expressed, with the consequences of making a `grid' as can be used for filtering.
-Rounding down to two decimals as described by \citet{gpsdecimal}, for example, has an accuracy of 1.1 kilometers.
+By lowering the number of coordinate decimals in the accuracy, a larger margin of precision is expressed, with the consequences of making a `grid' as can be used for filtering.
+Truncating the location values down to two decimals as described by \citet{gpsdecimal}, for example, yields an accuracy of 1.1 kilometers.
 
 One of the most important feature improvements to the algorithm, is to consider maps, speed limits, traffic data and terrain when calculating detours.
 This feature could increase the accuracy of the estimated detour time and distance, and hence yield more accurate scores.
 It could be implemented by utilizing the Google Maps API.
 
-The above documented possible future work does not reflect all possible directions which the project could be taken, but rather it is a reflection of the thoughts and discussions which our work on the system has fostered.
+The above documented possible future work does not reflect all possible directions which the project could take, but rather it is a reflection of the thoughts and discussions which our work on the system has fostered.

@@ -2,7 +2,7 @@
 This subsection contains an overview of the implementation of the API calls utilized to communicate with \gls{astep}.
 Both the API calls in the app and on the \gls{rs} server will be presented.
 
- \subsubsection{\gls{rs} App}
+\subsubsection{\gls{rs} App}
 In the design phase, Section \ref{sec:aSTEPCommunication.tex}, it was decided what API calls should be implemented in the app.
 A specified list of calls only to be performed on the app can be seen in Table \ref{tab:asteprequests} below.
 
@@ -68,8 +68,8 @@ In the given example the route given is only consisting of one location, for mul
 Every decision made regarding parsing data in the header or body to the \gls{astep} server was made by the \gls{astep} API groups.
 
 \subsubsection{\gls{rs} Server}
-A communication with the \gls{astep} server is implemented on the \gls{rs} server.
-The \gls{rs} server only requires two API calls to comply with our requirements to the solution.
+A communication method with the \gls{astep} server is implemented on the \gls{rs} server.
+The \gls{rs} server only requires two API calls to comply with the requirements to the solution.
 One for getting matched routes from \gls{astep} and one for checking if a user is a valid \gls{astep} user.
 Both API calls are implemented as their own \texttt{HttpURLConnection}.
 The validate user check is performed when a user registers in the app. 
@@ -82,4 +82,4 @@ The API call uses the token form the requesting user to fetch matches from the \
 \gls{astep} then returns every match for the particular user, with a score, the matched routes, and the full name of who the matches is with.
 This information is then send from the \gls{rs} server to the application to be displayed.
 %The idea is that later on the match results can be limited to the users that allowed the \gls{rs} user to access their data.
-Currently, the only limiting factor is that only matches with users that are registered in the database are saved, and \gls{rs} is currently the only app that uses the route functionality.
+Currently, the only limiting factor is that only matches with users that are registered in the database are saved, but currently \gls{rs} is the only app that uses the route functionality.
