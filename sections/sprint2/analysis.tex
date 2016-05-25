@@ -23,9 +23,9 @@ These settings are of 'Should have' priority, and not considered further until t
 
 \subsection{Android Version Selection}
 When developing Android apps, one of the first choices to consider is which API levels to target \cite{usesSDK}.
-The ``\textit{API Level is an integer value that uniquely identifies the framework API revision offered by a version of the Android platform.}'', according to Android Developers \cite{usesSDK}, and also that ``\textit{The manifest file presents essential information about your app to the Android system, information the system must have before it can run any of the app's code.}''.
+The ``\textit{API Level is an integer value that uniquely identifies the framework API revision offered by a version of the Android platform.}'', according to Android Developers \cite{usesSDK}.
 
-The manifest requires to specify the API level for three definitions: minimum, target and maximum.
+An Android application must specify the API level for three definitions: minimum, target and maximum.
 The target and max versions requires few consideration to determine.
 The ``targetSdkVersion'' reflects the version to which the app is developed and tested against, without enabling compatibility behaviors.
 The ``maxSdkVersion'' reflects the highest API level that an app is designed to run.
@@ -36,8 +36,8 @@ This entry specifies the lowest API level that the app supports.
 A consequence of this is that the app will not be compatible with any device with an API level lower than the specified ''minSdkVersion''.
 Supporting older API versions requires development efforts, typically implementing functionality though the Android Support Library \cite{androidSL}.
 
-For this project we choose to target a higher API level for to simplify the development process.
-At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 (Android Lollipop) is 35,3\%.
+For this project we choose to target a higher API level to simplify the development process.
+At the time of writing, the platform version distribution sum of API levels greater than or equal to 21 (Android Lollipop) is 35.3\%.
 The distribution of the Android version levels are shown in \ref{fig:dashboard}.
 
 \begin{figure}[h]
