@@ -20,7 +20,6 @@ This service would be kept alive when the application is closed as its own threa
 Because the main objective of the background service is to observe the current activity and transfer the route to \gls{astep}, we call it Observer.
 The structure of the class can be seen in Figure \ref{fig:classDiagramSprint1Observer}.
 The Observer's main goal is to observe what activity the user is currently performing and receive and push locations accordingly.
-There are already implementations for this kind of service in Google Play Services for Android applications and these will be utilized.
 
 \begin{figure}[h]
 	\centering
@@ -29,8 +28,7 @@ There are already implementations for this kind of service in Google Play Servic
 	\label{fig:classDiagramSprint1Observer}
 \end{figure}
 
-The API does also have features for detecting which activity is currently being performed.
-This can be used to stop and start the gathering of location data, depending on the given activity.
+The data representing the routes needs to be sent to \gls{astep}, the \gls{astep} component is documented in the following section.
 
 % The aSTEP core
 \textbf{The \gls{astep} Component}\\
@@ -41,14 +39,8 @@ If the RouteStabilityAnalyser determines that the route is stable, the route sho
 The server then uses the RouteSimilarityAnalyser to find matches for the new StableRoute.
 The matches are stored and new matches are transmitted to the appropriate devices when possible to inform the users of new matches.
 
-%\begin{figure}[h]
-%	\centering
-%	\input{figures/classDiagramSprint1Application.tex}
-%	\caption{The class structure of the application.}
-%	\label{fig:classDiagramSprint1Application}
-%\end{figure}
 
-This is the start of the \gls{astep} project that will be further developed upon and expanded in the future, emphasizing the importance of reuse in the server, to reduce the number of specialized server resources.
+This is the first semester working with the \gls{astep} project which will be further developed upon and expanded in the future, emphasizing the importance of reuse in the server, to reduce the number of specialized server resources.
 By isolating parts that are specific to the rideshare app on the server, most of this system would be reusable.
 An example of how this is achieved through object-oriented design, is the RouteAnalyser seen in Figure \ref{fig:classDiagramSprint1Server}.
 The RouteAnalyzer filter routes according to its concrete implementation.
