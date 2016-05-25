@@ -3,7 +3,7 @@ This subsection contains an overview of the implementation of the API calls util
 Both the API calls in the app and on the \gls{rs} server will be presented.
 
 \subsubsection{\gls{rs} App}
-In the design phase, Section \ref{sec:aSTEPCommunication.tex}, it was decided what API calls should be implemented in the app.
+In the design phase, Section \ref{sec:aSTEPCommunication}, it was decided what API calls should be implemented in the app.
 A specified list of calls only to be performed on the app can be seen in Table \ref{tab:asteprequests} below.
 
 \begin{table}[h]
@@ -23,7 +23,7 @@ A specified list of calls only to be performed on the app can be seen in Table \
 
 The API calls are implemented using an \texttt{HttpURLConnection} class.
 This is a \texttt{URLConnection} class for HTTP-specific data transfer.
-\texttt{HttpURLConnection} is used to send and receive streaming data whose length is not known in advance, and this is needed as every API call varies in size.
+\texttt{HttpURLConnection} is used to send and receive streaming data whose length is not known in advance, and this is needed as every API call can vary in length.
 E.g., the API call to post a route will be the one that varies the most in size as routes differ in number of locations.
 
 Using an object-oriented structure, each API call is implemented to overwrite a \texttt{AsyncTaskAPIHelper} which will handle the inputs, such as username, password, token, and routes.

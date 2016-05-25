@@ -10,7 +10,7 @@ A list of matches needs to be implemented so that the user interface reflects th
 To implement the user matches list, the app must utilize the API calls regarding route matches.
 These calls must be in the correct \gls{astep} format to be accepted and to work properly.
 The actual API call could be generalized to a single class so it can be reused for different API calls and to support potential future expansion.
-Every API call must be in their own class for building the correct URL to be used with an API client.
+Every API call is decided to be in their own class for building the correct URL to be used with an API client.
 
 It is important to make the API calls asynchronous for the user experience and to avoid user interface stalls. 
 If the functions are made synchronous, the app will wait for a response for the API calls, and hence rendering the user interface unusable.
