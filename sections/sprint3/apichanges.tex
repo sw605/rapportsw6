@@ -1,6 +1,6 @@
 \subsection{Changes to the aSTEP API}\label{s3:apianal}
 Because the \gls{astep} is in development, there has been changes in the API since the last sprint analysis. 
-The \gls{astep} API has been updated with new functionality both regarding user management and location based services.
+The \gls{astep} API has been updated with new functionality both regarding user management and location based services (LBS).
 The LBS are split into indoor and outdoor locations calls, where only outdoor services are relevant for the \gls{rs} system.
 %The list of all API functions as of the third sprint can been seen in the appendix\todo{add appendix reference}. %Table \ref{tab:s3api}.
 
@@ -23,6 +23,9 @@ An overview of the relevant API calls, as of sprint 3, for the \gls{rs} system c
 \end{table}
 
 For the location-based services, the \gls{astep} system now offers different get requests regarding a user's location history, nearby users, and users based on groups or friends.
+Based on a collaboration between us and OD, the API now supports a call to post routes directly to the \gls{astep} system.
+As an interface to the algorithm results, the ''routes/match'' returns the matches made by the algorithm.
+
 The services offered by the user management is also expanded since the previous sprint. 
 The implementation of the concept of groups entails multiple new API calls. 
 The group concept is implemented as an access control that restricts users access to other users data.
