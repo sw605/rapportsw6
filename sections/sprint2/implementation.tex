@@ -8,3 +8,12 @@ In this sprint the implementation of the location gathering as a background serv
 % Location gathering
 \input{sections/sprint2/locationgathering.tex}
 
+\subsection{Route Matching Algorithm}\label{sec:routematchingalgorith}
+The implementation of the route-matching algorithm is delegated to the previously mentioned outdoor location based service group, as they are responsible for implementation in the \gls{astep} system.
+They were given the pseudocode algorithm developed in sprint 2 and cooperated with during the implementation process.
+The implementation will not be documented here, as the actual implementation is not performed by us.
+However, the implementation should be tested, and we generated test data with accompanying result expectations.
+The test data was also handed over, this will be described in the following test section.
+
+In cooperation with the outdoor group, it was decided to send every variable for the algorithm as parameters in the API call.
+This was done so that we would have control over the algorithm to ensure it performed according to our expectations.
