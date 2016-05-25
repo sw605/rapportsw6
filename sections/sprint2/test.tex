@@ -9,7 +9,7 @@ The background service was tested by making a IDE print a message to an debug lo
 In accordance with the implementation, the output appeared every 10 seconds, independent of the app being open, in the background or closed completely on the test device.
 This proved that the background service was functioning as intended.
 
-\subsection{Location gathering} 
+\subsection{Location Gathering} 
 Location gathering was also performed in the test of the background service.
 The location test was performed by trying to access the last known location in each scheduled \texttt{PendingIntent}, and to print the result in the debug log in the IDE.
 The background service was executed regularly, but the location was only available in an insignificant number of the attempts.
