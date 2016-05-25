@@ -2,11 +2,11 @@
 When the app is installed on the device, the app needs to run a task to periodically collect location data.
 \Citet{friesen2015android} writes how this can be done in the Android API by utilizing the AlarmManager and the JobSchedular.
 
-\paragraph{AlarmManager}
+\textbf{AlarmManager}\\
 The AlarmManager was created to handle alarms, and implemented as a general class that can call any task after one or multiple given time periods.
 The alarm can be set to be reoccurring, thus gather a location with the given interval.
 
-\paragraph{JobScheduler}
+\textbf{JobScheduler}\\
 The JobScheduler was implemented in Android 5.0 (API 21) as an alternative to the AlarmManager.
 The scheduler behaves in a similar way as the AlarmManager, but tries to batch the jobs together and execute them in bundles.
 This means that the device can save power by avoiding going to sleep just to wake a short moment later, on the cost of time precision. 
@@ -37,13 +37,13 @@ This limits the backwards compatibility, but the app is already restricted to An
 	\label{fig:gapifigure}
 \end{figure}
 
-The Google Play Services will allow the application to collect location data, but it is not doing so solely by using the GPS in the device. 
+The Google Play Services will allow the app to collect location data, but it is not doing so solely by using the GPS in the device. 
 The location service utilizes both network location and GPS to estimate a position as precise as possible \cite{GapiLocation}. 
 To ensure the collected location data is relevant, locations are only collected when the user is traveling by vehicle.
 
 The Google Play Services provides a service to determine the user's activity, called Activity recognition. 
 Activity recognition is a service that utilizes several sensors on the device to determine what kind of activity the user is currently performing, therein driving, walking, etc.
-The service will return a probability level from 1 to 100, where 100 is certain that a user is performing the activity.
+The service will return a probability level from 0 to 100, where 100 is certain that a user is performing the activity.
 The activity recognition will also prevent unnecessary data will be stored on the database. 
 
 The practical design of the location tracking and activity recognition will be further explored in the following design section.

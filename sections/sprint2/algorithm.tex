@@ -2,10 +2,10 @@
 The \gls{rs} system uses a custom developed algorithm to determine whether two routes are a good match.
 This algorithm is loosely based on a simplified version of \citet{ghoseiri2011real}, with regards to the process of the evaluation of a match.
 In the paper, the algorithm considers multiple aspects when assessing matches, such as smoking, gender and age preferences.
-The criteria are practical to some extent, but the focus of the \gls{rs} system is the time and distance criteria.
+The criteria are practical to some extent, but the focus of the \gls{rs} system is the time and distance criteria, and hence the other criteria are discarded.
 
 This paragraph contains definitions to clarify the terms used in this section. A position is spatial-temporal, whereas a location is a spatial point and a time is a temporal point.
-A route is a chronological list of positions.
+A route is a chronologically sorted list of positions.
 A disadvantages of the algorithm presented here is that the distance is calculated as a euclidean distance rather than a road distance. 
 This would be a obvious place for future improvements to the algorithm.
 
@@ -251,6 +251,6 @@ For Time Analyser the complexity is the same as in Distance Analyser because of 
 The exceptions are $dist$, $time$, and $max$. 
 $time$ and $dist$, which both are described earlier, are considered to be $O(1)$ operations.
 $max$ takes two values, compares them and returns the largest of the two.
-This is also a constant operation and with that, we can determine that the Time Analyser algorithm is $O(|r|)$.
+This is also a constant operation, thus we can determine that the Time Analyser algorithm is $O(|r|)$.
 
 Thus we have that the main algorithm is $O(|r|)$, the number of locations in a route.

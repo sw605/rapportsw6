@@ -21,7 +21,7 @@ The alternatives are elaborated in the following paragraphs.
 
 \textbf{Groups}\\ 
 Groups in the \gls{astep} system exist to allow users to gain access to each others data.
-This could be utilized by making a \gls{rs} group in which all \gls{rs} users are included.
+The group functionality could be utilized by making a \gls{rs} group in which all \gls{rs} users are included.
 An issue with this solution is that all users have granted all other users access to their own location data. 
 The solution allows a malicious programmer to create a program that either copies or edits the locations of all users of the \gls{rs} app.
 The intruder would only need a registered \gls{rs} user and would thereby be included in the group.
@@ -81,7 +81,7 @@ The edges method allows edges to provide the same benefits as groups for this us
 Therefore, the edges method is selected as the user management design pattern.
 
 \textbf{Creating users}\\
-In sprint 2 it was also decided to create users through the \gls{rs} server, this has been changed to simplify the implementation and reduce design complexity.
+In sprint 2 it was also decided to create users through the \gls{rs} server, this has been changed to reduce the design complexity and simplify the implementation.
 
 When a user registers in the \gls{rs} app, the app will issue an API call directly to the \gls{astep} API, instead of performing the operation through the \gls{rs} server. 
 The username and additional information, such as phone number and full name, will still be transferred to the \gls{rs} server to enable contact information sharing with other \gls{rs} users.

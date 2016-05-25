@@ -1,7 +1,7 @@
 \subsection{Location Gathering} \label{section:locationgathering}
 % metatext
 This section covers the implementation of the location gathering part of the background service.
-To get the location of a device in a background service, the Google Play Services is utilized.
+The Google Play Services is utilized to get the location of a device in a background service.
 %The Google Play Services provides necessary location data, due to the integration on the platform.
 
 % permissions
@@ -60,7 +60,7 @@ public void onConnected(Bundle bundle) {
 % getCurrentLocation()
 \textbf{Get Location}\\
 %To get the location of the device, the \texttt{getCurrentGLocation()} is called when the \texttt{onConnected(Bundle bundle)} receives the broadcast signal\todo{what?}.
-The \texttt{getCurrentGLocation()} returns the last known location, according to the \texttt{googleApiClient}, in the Android Location format.
+The \texttt{getCurrentGLocation()} returns the last known location, according to the \texttt{googleApiClient}, in the Android location format.
 Before the location is gathered, because the target API is 23, the method needs to confirm the permissions required to acquire location data.
 This is performed on line 6 and 7 seen on \ref{lst:getCurrentLocation}.
 The device location is gathered through the \texttt{FusedLocationApi.getLastLocation()} method, using the \texttt{googleApiClient} as argument.

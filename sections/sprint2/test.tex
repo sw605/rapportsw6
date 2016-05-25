@@ -12,7 +12,7 @@ This proved that the background service was functioning as intended.
 \subsection{Location gathering} 
 Location gathering was also performed in the test of the background service.
 The location test was performed by trying to access the last known location in each scheduled \texttt{PendingIntent}, and to print the result in the debug log in the IDE.
-The background service was executed regularly, but the location was only available once in a significant number of attempts.
+The background service was executed regularly, but the location was only available in an insignificant number of the attempts.
 The missing locations seemed to be caused by the \texttt{googleApiClient} not being connected, as the location gathering is performed in the \texttt{onConnected} method.
 The missing locations seems to derive from the thread not existing long enough for the \texttt{googleApiClient} to connect to the Google Play Services.
 

@@ -1,9 +1,9 @@
 % Connections
-The server is implemented as a Java application running on a windows machine.
+The server is implemented as a Java application running on a Windows machine.
 It communicates with the \gls{astep} API by using the \texttt{HttpURLConnection} class.
-What is sent through these connections will be explained in later sections.
+The data sent through these connections will be explained in later sections.
 
-The app communicates with the server though the \texttt{ServerSocket} class and the \texttt{Socket} class.
+The app communicates with the server through the \texttt{ServerSocket} class and the \texttt{Socket} class.
 These classes provide input and output streams which can be written to and read from.
 A \texttt{BufferedStreamReader} reads the input stream as this class provides an easy to use interface for reading the input line by line.
 The server writes to the output stream using the \texttt{PrintWriter} class.
@@ -22,7 +22,7 @@ These following two messages are used on the clients.:
 	\end{tabular}
 }
 
-The server checks the received token sent through the \gls{astep} API and gets the username in both cases.
+The server checks the received token sent from the \gls{astep} API and gets the username in both cases.
 Update matches gets the updated set of matches for a user and register adds the user to the user details table in the database on the server.
 
 %Main loop
